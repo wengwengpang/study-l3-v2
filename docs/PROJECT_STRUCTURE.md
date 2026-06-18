@@ -14,6 +14,7 @@
 └── docs/
     ├── COURSE_RULES.md          课程协作规则，37 号起
     ├── PROJECT_STRUCTURE.md     本文件
+    ├── TEACHING_STYLE.md        讲课范式单一信息源，桥梁指向它
     ├── design/
     │   └── USER_RESEARCH.md     用户研究报告，真需求与 AI 假设两栏物理分开
     └── lessons/
