@@ -88,3 +88,10 @@ PROJECT_STRUCTURE.md 的更新必须是结课的最后一个文件动作，排�
 9. 开课前我读全了规则 55 列的 4 个必读文件吗（COURSE_RULES / anti-patterns / TEACHING_STYLE / PROJECT_STRUCTURE）？尤其别漏 PROJECT_STRUCTURE。
 10. 结课时我会按规则 54 的固定动作清单逐项走、逐条向学生报吗，不靠记忆？（防反模式 21：立了规则却不执行）
 11. 学生或我跑完命令后，我会拿真实输出（git status、tail、commit 行数）逐条核对吗，不轻信"成功"二字？（防反模式 4：出错编理由）
+
+## 58 · 标准图纸强制依据
+建任何角色文件，必须依据 docs/AGENT_SPEC.md，不照已有角色样品仿。
+讲任何授课段落，必须依据 docs/LESSON_TEMPLATE.md 的骨架顺序，配合 TEACHING_STYLE.md 的手感。
+桥梁格式依据调节器 H 节九节。
+新老师开课前，除规则 55 的 4 个必读文件，还须读 AGENT_SPEC.md 与 LESSON_TEMPLATE.md。
+（即开课必读升级为 6 个文件，清单见 PROJECT_STRUCTURE 的「课程标准文件清单」小节。）
