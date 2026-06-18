@@ -12,7 +12,7 @@
 ├── .gitignore
 ├── CLAUDE.md                项目宪法，三层结构，当前到第二层（方向）
 └── docs/
-    ├── COURSE_RULES.md          课程协作规则，37-56 号
+    ├── COURSE_RULES.md          课程协作规则，37-57 号
     ├── PROJECT_STRUCTURE.md     本文件
     ├── TEACHING_STYLE.md        讲课范式单一信息源，桥梁指向它
     ├── design/
