@@ -22,7 +22,7 @@
         ├── 00-cheatsheet.md     第 0 课速查卡
         ├── 01-full.md           第 1 课完整笔记
         ├── 01-cheatsheet.md     第 1 课速查卡
-        └── anti-patterns.md     反模式库，1-21 号
+        └── anti-patterns.md     反模式库，1-22 号
 
 ## CLAUDE.md 追踪（规则 56）
 
