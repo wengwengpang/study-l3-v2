@@ -10,9 +10,9 @@
 │       ├── client.md        用户研究员角色，只提问和综合，不扮用户
 │       └── persona.md       假设目标用户角色，AI 设定，未经真人验证
 ├── .gitignore
-├── CLAUDE.md                项目宪法，目前只有第一层
+├── CLAUDE.md                项目宪法，三层结构，当前到第二层（方向）
 └── docs/
-    ├── COURSE_RULES.md          课程协作规则，37-54 号
+    ├── COURSE_RULES.md          课程协作规则，37-56 号
     ├── PROJECT_STRUCTURE.md     本文件
     ├── TEACHING_STYLE.md        讲课范式单一信息源，桥梁指向它
     ├── design/
@@ -23,3 +23,14 @@
         ├── 01-full.md           第 1 课完整笔记
         ├── 01-cheatsheet.md     第 1 课速查卡
         └── anti-patterns.md     反模式库，1-21 号
+
+## CLAUDE.md 追踪（规则 56）
+
+- ~/.claude/CLAUDE.md
+  全局通用宪法，跨所有项目生效。已完整：三大信仰、AI 行为协议、输出格式、反模式、方法论参考库。通用规则只住这里。
+
+- ~/projects/study-l3-v2/CLAUDE.md
+  本项目宪法，分三层随课程演进：
+    第一层 通用协议 + 13 条陷阱（开课前已建）
+    第二层 项目事实（Lec 1 起填，当前仅"方向：团队任务协作工具"）
+    第三层 决策边界 D1-D7 + 权限（Lec 6 建）
