@@ -56,3 +56,12 @@ PROJECT_STRUCTURE.md 的更新必须是结课的最后一个文件动作，排�
 
 ## 53 · 讲课标准单一信息源
 讲课范式统一存 docs/TEACHING_STYLE.md。桥梁第 9 节不再重复讲课要求，只写「讲课标准见 TEACHING_STYLE.md」。要优化讲课方式，改 TEACHING_STYLE.md，全局生效。每课结课时若手感有新约定，更新此文件。
+
+## 54 · 结课固定动作清单
+每课结课按固定顺序逐项执行，老师逐条向学生报，不靠记忆：
+1. 新反模式入库（anti-patterns.md）
+2. 新规则入库（COURSE_RULES.md）
+3. 写两份笔记（NN-full.md、NN-cheatsheet.md）
+4. 更新目录树（PROJECT_STRUCTURE.md）← 必须排在所有文件落盘之后
+5. git 提交
+6. 发桥梁（必须是最后一步，规则 45）
