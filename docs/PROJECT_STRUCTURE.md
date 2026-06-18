@@ -12,7 +12,7 @@
 ├── .gitignore
 ├── CLAUDE.md                项目宪法，目前只有第一层
 └── docs/
-    ├── COURSE_RULES.md          课程协作规则，37 号起
+    ├── COURSE_RULES.md          课程协作规则，37-54 号
     ├── PROJECT_STRUCTURE.md     本文件
     ├── TEACHING_STYLE.md        讲课范式单一信息源，桥梁指向它
     ├── design/
@@ -22,4 +22,4 @@
         ├── 00-cheatsheet.md     第 0 课速查卡
         ├── 01-full.md           第 1 课完整笔记
         ├── 01-cheatsheet.md     第 1 课速查卡
-        └── anti-patterns.md     反模式库，1-20 号
+        └── anti-patterns.md     反模式库，1-21 号
