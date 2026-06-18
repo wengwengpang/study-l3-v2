@@ -19,4 +19,6 @@
     └── lessons/
         ├── 00-full.md           第 0 课完整笔记
         ├── 00-cheatsheet.md     第 0 课速查卡
+        ├── 01-full.md           第 1 课完整笔记
+        ├── 01-cheatsheet.md     第 1 课速查卡
         └── anti-patterns.md     反模式库，1-20 号
