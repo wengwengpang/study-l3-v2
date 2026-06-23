@@ -18,7 +18,7 @@
     ├── TEACHING_STYLE.md        讲课手感标准，与 LESSON_TEMPLATE 搭档
     ├── design/
     │   ├── USER_RESEARCH.md     用户研究报告，真需求与 AI 假设两栏物理分开
-    │   └── PRD.md               产品需求文档，九条故事全已验证，Lec 2 建（待补认证/权限/项目）
+    │   └── PRD.md               产品需求文档，九条已验证 + 八条 pm 推导基础需求（认证/权限/项目），Lec 3 前置补充
     └── lessons/
         ├── 00-full.md           第 0 课完整笔记
         ├── 00-cheatsheet.md     第 0 课速查卡
