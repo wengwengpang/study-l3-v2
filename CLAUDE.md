@@ -119,3 +119,14 @@ pm 推导的基础需求（Lec 3 前置补充 · Michael 已审定）：
 - 组件栈：Tailwind CSS + shadcn/ui。
 
 页面清单：共 10 个页面，详见 UI_DESIGN.md 第一节。
+
+## 第二层 D：技术选型关键结论（Lec 4）
+> 完整选型见 docs/arch/TECH_STACK.md，完整理由链见 docs/arch/DECISIONS.md（ADR-001~005）。本节只记 CC 每次进项目须知的结论。
+- 全栈 TypeScript；Monorepo 用 pnpm workspaces。
+- 前端 Next.js(App Router) + Tailwind + shadcn/ui；后端 NestJS。
+- 数据 PostgreSQL + Prisma；校验 Zod（前后端共享一份 schema）。
+- 部署 单 VPS + Docker Compose + Nginx。
+- 鉴权 = DB session（不是 JWT）：因 PRD 要登出立即失效 + 角色改后即时生效，需服务端可控状态。
+- Redis MVP 不引入，留可替换接口（扩展点 #2）。
+- 实时通信 MVP 不做（通知表 + 轮询）；WebSocket 留 Lec 13，属教学驱动。
+- 选型方针：MVP 先跑通，扩展留接口；不为「以后可能用」提前堆。
