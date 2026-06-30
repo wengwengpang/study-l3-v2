@@ -1,0 +1,112 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum MemberRole {
+  owner
+  executor
+}
+
+enum TaskStatus {
+  not_started
+  in_progress
+  completed
+}
+
+enum NotificationType {
+  stuck_task
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  sessions           Session[]
+  projectMemberships ProjectMembership[]
+  assignedTasks      Task[]              @relation("TaskAssignee")
+  notifications      Notification[]
+
+  @@map("users")
+}
+
+model Session {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  tokenHash String   @map("token_hash")
+  expiresAt DateTime @map("expires_at") @db.Timestamptz(6)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model Project {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  memberships ProjectMembership[]
+  tasks       Task[]
+
+  @@map("projects")
+}
+
+model ProjectMembership {
+  id        Int        @id @default(autoincrement())
+  userId    Int        @map("user_id")
+  projectId Int        @map("project_id")
+  role      MemberRole
+  createdAt DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime   @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Restrict)
+  project Project @relation(fields: [projectId], references: [id], onDelete: Restrict)
+
+  @@unique([userId, projectId])
+  @@map("project_memberships")
+}
+
+model Task {
+  id              Int        @id @default(autoincrement())
+  projectId       Int        @map("project_id")
+  title           String
+  description     String
+  assigneeUserId  Int?       @map("assignee_user_id")
+  status          TaskStatus @default(not_started)
+  statusUpdatedAt DateTime   @default(now()) @map("status_updated_at") @db.Timestamptz(6)
+  dueAt           DateTime?  @map("due_at") @db.Timestamptz(6)
+  createdAt       DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt       DateTime   @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  project       Project        @relation(fields: [projectId], references: [id], onDelete: Restrict)
+  assignee      User?          @relation("TaskAssignee", fields: [assigneeUserId], references: [id], onDelete: SetNull)
+  notifications Notification[]
+
+  @@map("tasks")
+}
+
+model Notification {
+  id              Int              @id @default(autoincrement())
+  recipientUserId Int              @map("recipient_user_id")
+  taskId          Int              @map("task_id")
+  type            NotificationType
+  readAt          DateTime?        @map("read_at") @db.Timestamptz(6)
+  createdAt       DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt       DateTime         @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  recipient User @relation(fields: [recipientUserId], references: [id], onDelete: Restrict)
+  task      Task @relation(fields: [taskId], references: [id], onDelete: Restrict)
+
+  @@map("notifications")
+}

@@ -28,3 +28,29 @@
 - 背景：项目目标是前后端共享一份类型（packages/shared 扩展点 #5）；密码等规则需两端一致校验（PRD.md:149）。
 - 决策：用 Zod 写一份 schema 前后端共享复用，而非 NestJS 默认的 class-validator 装饰器。
 - 后果：换来「写一次、两端复用」与从 schema 直接推导 TS 类型；代价是偏离 NestJS 默认范式，需自接 Zod 管道（如 ZodValidationPipe），生态示例不如 class-validator 顺手。放弃了 NestJS 官方默认校验链的开箱即用。
+
+---
+
+## ADR-DB-001 · 主键策略：自增整数
+- 背景：小型团队内部协作工具，单 VPS 部署，PRD 无公开分享链接/离线创建/跨库合并/分布式写入需求。PostgreSQL + Prisma 已定。
+- 决策：6 张表统一自增整数主键（Int @id @default(autoincrement())）。
+- 后果：换来调试简单、索引小、排查直观；放弃 UUID 的不可预测性与分布式友好，ID 可被猜到、不适合未来跨库合并。
+
+## ADR-DB-002 · 删除策略：MVP 硬删除，软删除入 BACKLOG
+- 背景：PRD 首版不做项目删除（删项目连带删任务属高风险），无删用户/删任务/移除成员故事。
+- 决策：全表不加 deleted_at，MVP 不设业务删除入口。项目主人拍板 C 方案：软删除留待将来真出现删除故事时，用 Expand-Migrate-Contract 演进（见 BACKLOG 第 8 条）。
+- 后果：换来查询不必过滤 deleted_at、避免唯一约束与软删数据冲突；放弃内建恢复/回收站，将来恢复误删需靠备份或迁移。
+- 备注：本决策曾被 architect 包装成"理所当然的技术结论"，经拆解后由主人按演进哲学重新拍板（反模式 33）。
+
+## ADR-DB-003 · 时间存储：timestamptz 带时区
+- 背景：30 天登录态、任务截止、长时间无进展判断、未读预警时间均参与业务判断。
+- 决策：所有时间字段 Prisma DateTime + @db.Timestamptz(6)，落 PostgreSQL timestamptz。
+- 后果：换来统一绝对时间语义，便于多时区转换；代价是 UI 层须明确时区/日期口径，不能把库时间直接当本地时间显示。
+
+## ADR-DB-004 · onDelete 级联策略：三类区别对待
+- 背景：MVP 无业务删除故事，onDelete 是"万一"防护栏。无脑全 Restrict 过于一刀切，局部全级联误删杀伤大。
+- 决策：按数据性质分三类——
+  - sessions.user → Cascade（会话属随人数据，人删则清）。
+  - tasks.assignee → SetNull（任务资产保全，删用户后变未认领；assignee_user_id 因此可空）。
+  - 其余业务外键（task→project、membership→user/project、notification→user/task）→ Restrict（防无声连坐删除）。
+- 后果：贴合"数据资产不无声蒸发"安全直觉；代价是将来做删除功能时，Restrict 的外键需先写清理逻辑。

@@ -1,7 +1,7 @@
 # 项目目录结构
 > 记录目录树 + 每个关键文件一句话职责。每节课结课更新（规则 50/52）。
 
-## 当前目录树（Lec 4 结课 · architect + 技术选型完成）
+## 当前目录树（Lec 5 结课 · 数据建模 schema 完成）
 .
 ├── .claude/
 │   ├── agents/
@@ -13,6 +13,8 @@
 │   └── worktrees/           CC worktrees 功能留下的空目录，git 不跟踪，无内容
 ├── .gitignore
 ├── CLAUDE.md                项目宪法，三层结构，当前到第二层 D（技术选型关键结论）
+├── prisma/
+│   └── schema.prisma       Prisma 数据模型，6 model + 3 enum + 关系 + onDelete（Lec 5 建）
 └── docs/
     ├── AGENT_SPEC.md            角色文件标准图纸，含方法论落点通则（Lec 4 加）
     ├── BACKLOG.md              跨课待办清单，开课必读第 7 个（规则 65）
@@ -33,12 +35,14 @@
         ├── 00-cheatsheet.md ~ 03-cheatsheet.md  第 0-3 课速查卡
         ├── 04-full.md           第 4 课完整笔记（architect + 选型）
         ├── 04-cheatsheet.md     第 4 课速查卡
-        └── anti-patterns.md     反模式库，1-32 号
+        ├── 05-full.md           第 5 课完整笔记（数据建模 schema）
+        ├── 05-cheatsheet.md     第 5 课速查卡
+        └── anti-patterns.md     反模式库，1-33 号
 
 ## 课程标准文件清单（图纸目录）
 新老师开课前须读，开课必读共 7 个文件（规则 58 六文件 + BACKLOG，规则 65）：
 - docs/COURSE_RULES.md          课程规则 37-65
-- docs/lessons/anti-patterns.md 反模式库 1-32
+- docs/lessons/anti-patterns.md 反模式库 1-33
 - docs/TEACHING_STYLE.md        讲课手感：语气/密度/比方
 - docs/PROJECT_STRUCTURE.md     项目结构现状（本文件）
 - docs/AGENT_SPEC.md            角色文件标准（建角色依据）
@@ -52,5 +56,5 @@
 - ~/projects/study-l3-v2/CLAUDE.md
   本项目宪法，三层随课程演进：
     第一层 通用协议 + 13 条陷阱（开课前已建）
-    第二层 项目事实：A 方向（Lec 1）+ B 已确认需求十七条（Lec 2）+ C UI 设计关键结论（Lec 3）+ D 技术选型关键结论（Lec 4）
+    第二层 项目事实：A 方向（Lec 1）+ B 已确认需求十七条（Lec 2）+ C UI 设计关键结论（Lec 3）+ D 技术选型关键结论（Lec 4）+ E 数据模型关键结论（Lec 5）
     第三层 决策边界 D1-D7 + 权限（Lec 6 建，未建）

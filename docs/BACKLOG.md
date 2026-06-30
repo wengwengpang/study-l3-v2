@@ -12,3 +12,4 @@
 5 | 收敛 | 给规则加验证机制（未验证散文的洞） | 结课收敛
 6 | 加课 | 补一节 plugin 收尾课，把 harness 抽成可移植 plugin | Lec 19 后
 7 | 下沉 | diff<100、提交格式、git status 等做成 hook | Lec 8
+8 | 下沉 | 软删除：MVP 选硬删除未预留 deleted_at，将来出现删除故事时用 Expand-Migrate-Contract 演进（加列→改查询过滤→数据迁移），注意软删除与 email/(user_id,project_id) 唯一约束的冲突 | 出现删除故事时（大概率 Lec 13 功能迭代）
