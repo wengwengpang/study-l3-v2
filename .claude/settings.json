@@ -1,11 +1,12 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "permissions": {
+    "defaultMode": "default",
     "deny": [
       "Read(./.env)",
       "Read(./.env.*)",
       "Read(./secrets/**)",
-      "Bash(rm -rf *)",
+      "Bash(rm *)",
       "Bash(sudo *)",
       "Bash(curl *)",
       "Bash(wget *)"
@@ -14,20 +15,12 @@
       "Bash(git push *)",
       "Bash(npx prisma migrate *)",
       "Bash(pnpm prisma migrate *)",
-      "Write(prisma/**)",
       "Edit(prisma/**)",
-      "Write(CLAUDE.md)",
       "Edit(CLAUDE.md)",
-      "Write(.claude/**)",
-      "Edit(.claude/**)"
+      "Edit(.claude/**)",
+      "Edit(docs/arch/**)"
     ],
     "allow": [
-      "Read(**)",
-      "Bash(git status)",
-      "Bash(git status *)",
-      "Bash(git diff *)",
-      "Bash(git log *)",
-      "Bash(ls *)",
       "Bash(pnpm test *)",
       "Bash(pnpm run *)",
       "Bash(npm run test *)",
