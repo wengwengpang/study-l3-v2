@@ -85,7 +85,7 @@ users 不依赖任何模块，是依赖图的地基。
 
 ### 待定（第 2 段前补齐）
 - 决策 6：US-04 第三条验收依赖项目级 deadline，projects 表无此字段。
-- 决策 7：TECH_STACK.md:56「任务表预留外键挂载位」措辞歧义，需修订。
+- 决策 7：已解决。措辞修订见 TECH_STACK.md 扩展点 4。
 
 ### 出处
 - 六张表与归属：prisma/schema.prisma:25-112

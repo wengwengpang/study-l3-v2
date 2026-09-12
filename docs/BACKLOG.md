@@ -18,3 +18,5 @@
 11 | 下沉 | PreToolUse hook：ask 档对 Bash 路径的覆盖范围官方文档未写死，未能查证。hook 是唯一能罩住每个工具调用、不受模式与规则影响的手段 | Lec 8（与第 9、10 条同组）
 12 | 下沉 | lint 限制跨模块 import Repository，让「一表一主」从语义层约定变成机械层的墙。Repository 本身挡不住别的模块直接注入 Prisma | Lec 8
 13 | 加课 | 角色变更后主动通知前端刷新。当前 Q1 方案下角色改动即时生效于后端，但前端入口需下次取数才更新 | Lec 13（实时/通知那节）
+14 | 收敛 | 前端除路由层外的目录组织未定。Next.js 官方对非路由文件不做规定，ARCHITECTURE 与 TECH_STACK 两份均未写 | Lec 7 建骨架前
+15 | 收敛 | KNOWLEDGE_BASE 里 backend 角色写的是 JWT 鉴权 + class-validator 校验，本项目实际是 DB session + Zod。照知识库建角色会建错 | Lec 10 建 backend 角色前

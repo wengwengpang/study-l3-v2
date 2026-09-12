@@ -13,13 +13,13 @@
 │   ├── settings.json        权限系统 defaultMode + allow/ask/deny 三档，机械层护栏（Lec 6 建，05-ARCH 修，学生亲写，规则 66）
 │   └── worktrees/           CC worktrees 空目录，git 不跟踪
 ├── .gitignore
-├── CLAUDE.md                项目宪法，三层结构，当前到第三层 A（决策边界 D1-D7）
+├── CLAUDE.md                项目宪法，三层结构，当前到第三层 A（决策边界 D1-D8）
 ├── prisma/
 │   └── schema.prisma       Prisma 数据模型，6 model + 3 enum + onDelete（Lec 5 建）
 └── docs/
     ├── AGENT_SPEC.md            角色文件标准图纸
     ├── BACKLOG.md              跨课待办清单（第 9 条 Lec 6 加）
-    ├── COURSE_RULES.md          课程协作规则，37-66 号
+    ├── COURSE_RULES.md          课程协作规则，37-69 号 （68 留空未用）
     ├── KNOWLEDGE_BASE.md        课程知识库副本
     ├── LESSON_TEMPLATE.md       段落骨架标准图纸
     ├── PROJECT_STRUCTURE.md     本文件
