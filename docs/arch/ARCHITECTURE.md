@@ -251,3 +251,187 @@ Zod 执行三处，各拦不同的东西：
 - assignee 字段与列名映射：prisma/schema.prisma:85。
 - 全表 @map / @@map：prisma/schema.prisma:28-112。
 - NestJS 请求生命周期层序、跨模块只走 Service、共享层判据四问、命名三层的推论：推导，无直接出处。
+
+
+## 三、数据流
+
+> 性质：纸上走查。目的是验证第一、二节的设计能不能走通，不是测试方案。真跑是 Lec 14 tester 的活。
+> 口径：按项目主人裁决 T1-T7 与决策 A-E 写。第二节原文尚未回写，差异见本节末「本节暴露的问题」。
+> 浏览器与后端服务之间经过什么，见第四节部署拓扑。本节从请求进入 NestJS 开始。
+> 退回结果只写性质。状态码与路径字符串属 API 契约，本节不定。
+
+### 走查公共约定
+
+- 层序：Guard → Pipe → Controller → Service → Repository → Prisma（本文第二节）。
+- 被 Guard 拒绝时后面各层都不执行。Pipe 拒绝后 Controller 不执行（文件外知识）。
+- 「无权限」与「不存在」返回同一响应（本文第二节取舍 5、PRD.md:311）。
+- 路径参数不做格式校验，非法值落入鉴权失败（T3）。查询参数走 Zod 管道。
+- 非法路径 id 的容错（决策 B）：Guard 查库前先把路径 id 转为数字，转不动即视为查不到，按「权限不足」退回。这是容错，不是格式校验，不改变 T3。
+- 会话固定 30 天，不续期，纯读请求不写 sessions（T4、PRD.md:160、PRD.md:271）。
+- 角色传递（决策 A）：AuthzGuard 查到的项目内角色放入请求上下文，供 Service 取用。Service 不再重复查询 project_memberships。此约定是 Guard 与 Service 之间的显性契约，实现时须有具体落点。
+
+### R2 读路径：执行者查看一条任务的详情
+
+输入：路径里的项目 id 与任务 id，加请求携带的会话凭据（凭据载体属 API 契约）。无请求体。
+
+#### R2-1 AuthGuard 确认会话
+- 层：Guard
+- 校验：无
+- 鉴权：用凭据哈希查 sessions.token_hash（prisma/schema.prisma:43），要求记录存在且 expires_at 晚于当前时间（:44）。查到后得到当前用户 id。不写回，不续期（T4）。
+- 退回：凭据缺失、查不到、已过期，均在本步退回「未登录」。
+- 表：读 sessions
+
+#### R2-2 AuthzGuard 确认项目成员身份
+- 层：Guard
+- 校验：无。路径项目 id 不做格式校验（T3），但先转数字，转不动视为查不到（决策 B）。
+- 鉴权：用「当前用户 id + 路径项目 id」查 project_memberships（prisma/schema.prisma:65-78，唯一键 :76）。有记录即放行，负责人与执行者都能看任务详情（PRD.md:181）。查到的角色放入请求上下文（决策 A）。
+- 退回：查不到记录（含项目不存在、项目 id 非法），本步退回「权限不足」。
+- 表：读 project_memberships
+
+#### R2-3 Zod 管道
+- 层：Pipe（T1 项目自写管道）
+- 校验：无。无请求体。本路径不设查询参数（假设，以 API 契约为准）。路径 id 不经过管道（T3）。
+- 鉴权：无
+- 退回：无
+- 表：无
+
+#### R2-4 TasksController 取参调 Service
+- 层：Controller
+- 校验：无
+- 鉴权：无。将路径项目 id、任务 id、当前用户 id 与请求上下文中的角色传给 TasksService。
+- 退回：无
+- 表：无
+
+#### R2-5 取任务记录
+- 层：Service → Repository → Prisma
+- 校验：无。路径任务 id 不做格式校验（T3），转数字规则同 R2-2。
+- 鉴权：无。本步只取数据。
+- 退回：按任务 id 查不到（含任务 id 非法），结果交回 Service，由 Service 退回「权限不足」（PRD.md:311）。
+- 表：读 tasks
+
+#### R2-6 比对任务所属项目（T2 硬要求）
+- 层：Service
+- 校验：无
+- 鉴权：取记录的 projectId（prisma/schema.prisma:82）与路径项目 id 比对，不相等即拒绝。防的是：用自己有权限的项目 id，去访问别的项目的任务 id。
+- 退回：不相等时本步退回「权限不足」，不带任何任务数据。
+- 表：无新读
+
+#### R2-7 判断任务归属
+- 层：Service
+- 校验：无
+- 鉴权：从请求上下文取角色（决策 A）。角色为执行者时，比对 assigneeUserId（prisma/schema.prisma:85）与当前用户 id；该字段为空（任务未分配）也算不相等。负责人不做此比对（PRD.md:181）。
+- 退回：不相等时本步退回「权限不足」（本文第二节）。
+- 表：无新读
+
+#### R2-8 组装负责人显示信息
+- 层：Service
+- 校验：无
+- 鉴权：无。一律显示 email（PRD.md:290 注记 4）。
+- 取数方式未定：走 UsersService 还是 Prisma 关联查询，留给 05-API 定（决策 C）。
+- 退回：无
+- 表：读 users
+
+#### R2-9 返回详情
+- 层：Controller
+- 校验：无
+- 鉴权：无。返回任务详情 DTO，类型由共享 Zod schema 推导（本文第二节）。
+- 退回：无
+- 表：无
+
+小结：四道拦截。会话拦在 R2-1，成员身份拦在 R2-2，所属项目拦在 R2-6，任务归属拦在 R2-7。全程只读，不写任何表。
+
+### W1 写路径：负责人创建任务并分配给执行者
+
+输入：路径里的项目 id，加会话凭据。请求体含标题、描述、可空 assignee、可空截止日期（prisma/schema.prisma:83-88）。
+
+#### W1-1 AuthGuard 确认会话
+- 层：Guard
+- 校验：无
+- 鉴权：同 R2-1。本路径写 tasks，但同样不写 sessions（T4）。
+- 退回：凭据缺失、查不到、已过期，均在本步退回「未登录」。
+- 表：读 sessions
+
+#### W1-2 AuthzGuard 确认是本项目负责人
+- 层：Guard
+- 校验：无。路径项目 id 转数字规则同 R2-2（决策 B）。
+- 鉴权：同 R2-2 查成员记录，并要求角色为负责人。创建与分配任务仅负责人可做（PRD.md:182-183、PRD.md:266），设置截止日期亦然（PRD.md:185），本步一并覆盖。角色放入请求上下文（决策 A）。
+- 退回：查不到记录退回「权限不足」；角色为执行者同样退回「权限不足」。
+- 表：读 project_memberships
+
+#### W1-3 Zod 管道校验请求体
+- 层：Pipe（T1 项目自写管道，内部调用共享 Zod schema）
+- 校验：请求体形状与类型。标题、描述为字符串（prisma/schema.prisma:83-84），assignee 为整数或空（:85），截止日期为时间或空（:88）。本路径不设查询参数（假设，以 API 契约为准）。路径 id 不经过管道（T3）。
+- 鉴权：无。assignee 是否本项目成员不在此判：该判断需读请求体内容，按 T6 归 Service。
+- 退回：形状或类型不符，本步退回「参数不合法」。
+- 表：无
+
+#### W1-4 TasksController 取参调 Service
+- 层：Controller
+- 校验：无
+- 鉴权：无。将路径项目 id、校验过的请求体、当前用户 id 传给 TasksService。
+- 退回：无
+- 表：无
+
+#### W1-5 校验 assignee 是本项目成员（T5）
+- 层：Service，跨模块调 ProjectsService（本文第二节：跨模块只走对方 Service）
+- 校验：业务规则。assignee 非空时必须是路径项目的成员，仅为系统用户不足。允许分配给负责人自己（T5）。assignee 为空则跳过，任务进入未认领状态（PRD.md:255）。
+- 鉴权：无。角色已在 W1-2 判过。
+- 退回：assignee 不是本项目成员（含该用户不存在）时，本步退回「参数不合法」（决策 E）。理由：项目成员名单本就是负责人可见信息，不构成枚举风险，与 PRD 对邀请邮箱的处理同思路。
+- 表：读 project_memberships
+
+#### W1-6 写入任务
+- 层：Service → Repository → Prisma
+- 校验：无
+- 鉴权：T2 的项目比对针对「已取到的记录」，创建时无旧记录可比。
+- 规则（决策 D，明文）：新任务的 projectId 只从路径参数取，禁止从请求体取。理由：W1-2 的角色鉴权依据的是路径项目 id，若写入时改用请求体中的 projectId，鉴权对象与写入对象将不一致，负责人可借此在自己无权限的项目中创建任务。鉴权用哪个 id 判，写入就必须用哪个 id。
+- 其他：status 用默认值 not_started，statusUpdatedAt 用默认值当前时间（prisma/schema.prisma:86-87）。
+- 退回：写入出错属内部错误，不暴露内部信息（PRD.md:199 同一思路）。对外形态属 API 契约。
+- 表：写 tasks。不写 notifications，该模块本版为空壳（本文第一节决策 4）。
+
+#### W1-7 返回新任务
+- 层：Controller
+- 校验：无
+- 鉴权：无。返回新建任务 DTO。
+- 退回：无
+- 表：无
+
+小结：角色拦在 W1-2（Guard），形状拦在 W1-3（Pipe），assignee 成员身份拦在 W1-5（Service）。唯一写的表是 W1-6 的 tasks。
+
+### 本节裁决汇总
+
+- T1 服务端校验用项目自写 Zod 管道（实现 PipeTransform 调共享 schema），不用内置 ValidationPipe，不引第三方集成库。
+- T2 任务类接口路由嵌套项目 id；Service 取到记录后必须比对 projectId 与路径项目 id。
+- T3 路径参数不做格式校验，非法值落入鉴权失败；查询参数走 Zod 管道。两类分开处理。
+- T4 会话固定 30 天，不滑动续期，纯读不写 sessions。
+- T5 assignee 必须是本项目成员，允许分配给负责人自己。
+- 决策 A 角色经请求上下文由 Guard 传给 Service，Service 不重复查询。
+- 决策 B 路径 id 查库前转数字，转不动视为查不到。
+- 决策 C R2-8 保留，取数方式留给 05-API。
+- 决策 D projectId 只从路径取，禁止从请求体取。
+- 决策 E W1-5 退回「参数不合法」。
+
+### 本节暴露的问题
+
+以下为走查过程中发现、第二节文字尚未跟上的差异。回写动作见结课清单。
+
+1. 第二节写 Guard「只能调 authz 模块暴露的能力」，但 AuthGuard 读的 sessions 表归 auth 模块所有，authz 职责仅写「只读 project_memberships」。按现措辞 AuthGuard 读 sessions 无合规出口。措辞待修订。
+2. 第二节仍写 ValidationPipe，与 T1 不符，待回写。
+3. 第二节写 Pipe 只管「请求体」，未提查询参数，也未写路径参数不经过管道，与 T3 不符，待回写。
+4. 第二节「两级权限的界线」仍为旧措辞，且理由「Guard 里做 IO 会让请求管道变重」与走查不符（两个 Guard 本就读表），待按 T6 回写。
+5. 第二节仍把决策 6 列为待定，而 PRD.md:295-299 已裁决本版延后，待回写。
+6. 第二节写 tasks 依赖 users 用于「assignee 存在性」、举例用 UsersService 校验 assignee；按 T5 实际走 ProjectsService 的成员校验，措辞待回写。
+
+以下问题不属本节范围，已进 BACKLOG：任务标题描述的必填与空值规则未定义；请求体多余字段剔除或拒绝未定义；sessions.token_hash 无索引；过期会话清理未定义。
+
+### 出处
+- 层序、跨模块只走 Service、取舍 5 合并响应：本文第二节。
+- 会话表结构与 token_hash、expires_at：prisma/schema.prisma:40-51。
+- 成员表与唯一键：prisma/schema.prisma:65-78。
+- tasks 字段与默认值：prisma/schema.prisma:82-88。
+- 角色可见范围：PRD.md:181-185、PRD.md:266。
+- 未认领任务：PRD.md:255。
+- 显示 email：PRD.md:290。
+- 合并响应与不暴露内部错误：PRD.md:311、PRD.md:199。
+- 会话有效期：PRD.md:160、PRD.md:271。
+- Pipe 拒绝后 Controller 不执行、路径参数原始类型、Prisma 类型不符抛异常：文件外知识（NestJS / Prisma 框架行为）。
+- 决策 A-E、T1-T7 的具体裁决：Michael 本节拍板，无文件外出处。

@@ -85,7 +85,7 @@ PROJECT_STRUCTURE.md 的更新必须是结课的最后一个文件动作，排�
 
 ## 57 · 漂移自检追加项（与调节器 K 节 8 项叠加生效）
 调节器 K 节定义自检 1-8。本条追加 9-11，每次开新窗口连同 K 节一起逐条过：
-9. 开课前我读全了规则 55 列的 4 个必读文件吗（COURSE_RULES / anti-patterns / TEACHING_STYLE / PROJECT_STRUCTURE）？尤其别漏 PROJECT_STRUCTURE。
+9. 开课前我读全了必读文件吗（数量与清单以规则 65 为准：七个）吗（COURSE_RULES / anti-patterns / TEACHING_STYLE / PROJECT_STRUCTURE）？尤其别漏 PROJECT_STRUCTURE。
 10. 结课时我会按规则 54 的固定动作清单逐项走、逐条向学生报吗，不靠记忆？（防反模式 21：立了规则却不执行）
 11. 学生或我跑完命令后，我会拿真实输出（git status、tail、commit 行数）逐条核对吗，不轻信"成功"二字？（防反模式 4：出错编理由）
 
@@ -114,7 +114,7 @@ COURSE_RULES、anti-patterns、TEACHING_STYLE、PROJECT_STRUCTURE、AGENT_SPEC�
 - AGENT_SPEC:角色标准有新约定吗?
 - LESSON_TEMPLATE:段落骨架有变化吗?
 - PROJECT_STRUCTURE:目录树/CLAUDE.md 追踪要更新吗?(排最后,规则 52)
-自检分两道闸:开课自检问"六文件读全了吗",结课自检问"六文件更新全了吗"。
+自检分两道闸:开课自检问"必读文件读全了吗"(七个,以规则 65 为准),结课自检问"六文件更新全了吗"。
 本条与规则 54 配合:54 是动作清单,60 是其中"更新文件"那步的逐文件展开。
 
 与现有自检的关系(防自相矛盾):

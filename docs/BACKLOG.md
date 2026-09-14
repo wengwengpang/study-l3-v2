@@ -20,3 +20,9 @@
 13 | 加课 | 角色变更后主动通知前端刷新。当前 Q1 方案下角色改动即时生效于后端，但前端入口需下次取数才更新 | Lec 13（实时/通知那节）
 14 | 收敛 | 前端除路由层外的目录组织未定。Next.js 官方对非路由文件不做规定，ARCHITECTURE 与 TECH_STACK 两份均未写 | Lec 7 建骨架前
 15 | 收敛 | KNOWLEDGE_BASE 里 backend 角色写的是 JWT 鉴权 + class-validator 校验，本项目实际是 DB session + Zod。照知识库建角色会建错 | Lec 10 建 backend 角色前
+16 | 收敛 | 任务标题、描述的必填与空值规则未定义。schema 两列非空（prisma/schema.prisma:83-84），但允不允许空字符串无出处；项目名称有必填规则（PRD.md:221），任务无对应条目 | 回填 PRD，05-API 前
+17 | 收敛 | 请求体多出的字段（如 projectId、status），Zod 管道是剔除还是拒绝，未定义 | 05-API
+18 | 下沉 | sessions.token_hash 无唯一约束也无索引（prisma/schema.prisma:43），但每个请求都按它查一次，等于全表扫 | Lec 9 做 migration 时
+19 | 下沉 | 过期会话的清理机制未定义。T4 定了不续期，但没定过期记录何时删 | Lec 9 或更后
+20 | 收敛 | 未认领任务（assigneeUserId 为空）执行者是否可见，PRD 无明文。第三节 R2-7 按「算不相等」即不可见处理，属推导。任务列表接口会再撞上 | 05-API
+21 | 收敛 | ARCHITECTURE.md 第二节六处措辞待回写（详见第三节末「本节暴露的问题」1-6）：Guard 可调范围 vs sessions 归属、ValidationPipe 措辞、Pipe 未提查询参数与路径参数、两级权限旧界线含假理由、决策 6 仍列待定、assignee 依赖措辞。另 UI_DESIGN 页 5 风险提示区需补延后注记（PRD 注记 5 已裁决，页 5 漏扫，属规则 69 立规之前的历史遗留） | 05-API 开课时先处理
