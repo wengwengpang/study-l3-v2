@@ -130,6 +130,7 @@ pm 推导的基础需求（Lec 3 前置补充 · Michael 已审定）：
 - Redis MVP 不引入，留可替换接口（扩展点 #2）。
 - 实时通信 MVP 不做（通知表 + 轮询）；WebSocket 留 Lec 13，属教学驱动。
 - 选型方针：MVP 先跑通，扩展留接口；不为「以后可能用」提前堆。
+- 部署容器构成（05-ARCH 第四节定）：四容器 Nginx / 前端 Next.js 服务进程 / 后端 NestJS / PostgreSQL。Nginx 只做反向代理 + TLS 终止，同域名按路径前缀分流。数据库端口开发暴露、生产不暴露。迁移人工触发，不随容器启动跑（D5）。详见 docs/arch/ARCHITECTURE.md 第四节。
 
 ### 第二层 E：数据模型关键结论（Lec 5）
 
