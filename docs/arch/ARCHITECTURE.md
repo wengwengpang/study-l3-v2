@@ -22,7 +22,7 @@
 依赖：无
 
 #### 2. auth
-职责：注册、登录、登出与会话生命周期。
+职责：注册、登录、登出与会话生命周期；会话有效性校验（AuthGuard，见第二节）。
 拥有表：sessions
 覆盖：US-A01、US-A02、US-A03
 依赖：users（建账号、校验凭据）
@@ -30,10 +30,10 @@
 理由：保住「一表一主」；projects 按邮箱找被邀请人时直接查 users，不绕认证模块；顺 NestJS 惯用结构（AuthModule imports UsersModule）。
 
 #### 3. authz（横切，不拥有表）
-职责：把「谁在哪个项目是什么角色」翻译成放行或拒绝，落在 NestJS Guard。
+职责：把「谁在哪个项目是什么角色」翻译成放行或拒绝，落在 AuthzGuard。会话有效性不归本模块，归 auth 的 AuthGuard（T12）。
 拥有表：无。只读 project_memberships。
 覆盖：US-R01
-依赖：auth（当前会话）、projects（读角色）
+依赖：projects（经 ProjectsService 读 project_memberships 取角色）。不依赖 auth：当前用户 id 经请求上下文取得（同第三节决策 A 的传递方式）。
 决策 3：authz 独立成模块，不并入 projects。
 理由：D3 定权限为安全边界，口径必须集中，加角色改权限只动一处；authz 横切，不属于任何单一业务域。
 代价：读 project_memberships 与写 project_memberships 分处两个模块，authz 需 import projects。
@@ -48,7 +48,7 @@
 职责：任务的创建、分配、状态流转、截止日期、列表与项目内汇总。
 拥有表：tasks
 覆盖：US-03、US-06、US-07、US-01、US-02a、US-04、US-08
-依赖：projects（校验成员身份与角色）、users（assignee 存在性）、authz
+依赖：projects（校验 assignee 是本项目成员，第三节 T5）、users（负责人显示 email，第三节 R2-8；取数方式待 05-API 决策 C）
 决策 5：US-04 项目汇总并入 tasks，不单开 reporting 模块。
 理由：汇总数据全部来自 tasks，单开只增加一层调用，不增加边界价值。
 备注：本模块覆盖 7 条用户故事，其余五个模块合计 6 条。工作量最重，Lec 10 排期时注意。
@@ -71,10 +71,12 @@ notifications → notifications
 6 张表全部有主。无孤儿表，无一表两主。
 
 ### 依赖方向（单向，无环）
+口径：本图只记业务依赖，即一个模块的代码调用另一模块暴露的 Service。Guard 等横切件挂在路由上，挂载关系不计入本图（T13）：某模块路由挂上 AuthGuard / AuthzGuard，不因此形成对 auth / authz 的依赖。横切件自身调用别的模块 Service 照常计入，如 authz → projects。
+
 auth → users
 projects → users
-authz → auth、projects
-tasks → projects、users、authz
+authz → projects
+tasks → projects、users
 notifications → tasks、users
 users 不依赖任何模块，是依赖图的地基。
 
@@ -82,10 +84,10 @@ users 不依赖任何模块，是依赖图的地基。
 - US-05 跨项目总览：本版延后，与 US-02b 口径拉齐（决策 5，D1 范围取舍）。tasks 模块本版不建跨项目查询路径。
 - users 表不加 name 列，界面显示 email（决策 2，D2）。PRD 需补澄清注记。
 - notifications 模块本版空壳（决策 4）。
+- US-04 第三条验收（依赖项目级 deadline）：本版延后（决策 6，PRD.md:295-299）。
 
-### 待定（第 2 段前补齐）
-- 决策 6：US-04 第三条验收依赖项目级 deadline，projects 表无此字段。
-- 决策 7：已解决。措辞修订见 TECH_STACK.md 扩展点 4。
+### 待定
+- 无。决策 6 已裁决，见上方「本版范围裁决」；决策 7 已解决，措辞修订见 TECH_STACK.md 扩展点 4。
 
 ### 出处
 - 六张表与归属：prisma/schema.prisma:25-112
@@ -95,7 +97,8 @@ users 不依赖任何模块，是依赖图的地基。
 - projects 覆盖 US-P01/P02/P03：PRD.md:213-238；邀请用邮箱 PRD.md:269
 - tasks 覆盖状态/截止/汇总：PRD.md:104-107、PRD.md:70、prisma/schema.prisma:80-97
 - notifications 覆盖 US-02b：PRD.md:94-101、prisma/schema.prisma:99-112
-- 模块依赖方向、「读不算拥有」原则、汇总并入 tasks：推导，无直接出处
+- 「读不算拥有」原则、汇总并入 tasks：推导，无直接出处
+- 模块依赖方向：推导；依赖图只记业务依赖的口径、authz 不依赖 auth：T13 主人拍板
 
 
 ## 二、分层架构
@@ -107,12 +110,13 @@ Guard → Pipe → Controller → Service → Repository → Prisma
 守卫在 Controller 之前执行。被 Guard 拒绝的请求，Controller 方法根本不会被调用。
 
 #### 1. Guard（AuthGuard → AuthzGuard）
-负责：会话有效性；项目内角色级放行判定（authz 模块，落在 Guard）。
-不做：查业务表、判记录归属、解析请求体。
-只能调：authz 模块暴露的能力。
+AuthGuard 属 auth 模块，负责会话有效性，只能调 auth 模块暴露的能力读 sessions，并把当前用户 id 放入请求上下文。
+AuthzGuard 属 authz 模块，负责项目内角色级放行判定，只能调 authz 模块暴露的能力读 project_memberships（经 ProjectsService，表仍归 projects），并把角色放入请求上下文（第三节决策 A）。
+两个 Guard 都不做：读 tasks 等业务记录、判记录归属、解析请求体。
 
-#### 2. Pipe（ValidationPipe + 共享 Zod schema）
-负责：请求体的形状与类型校验。这是服务端唯一可信的形状校验点。
+#### 2. Pipe（项目自写 Zod 管道 + 共享 Zod schema）
+负责：请求体与查询参数的形状与类型校验。这是服务端唯一可信的形状校验点。
+不经过管道：路径参数。路径参数不做格式校验，非法值落入鉴权失败（第三节 T3）；查库前转数字的容错见第三节决策 B。
 不做：业务规则、权限判断。
 
 #### 3. Controller（TasksController）
@@ -123,14 +127,14 @@ Guard → Pipe → Controller → Service → Repository → Prisma
 #### 4. Service（TasksService）
 负责：业务规则（状态流转、未认领判定、项目内汇总）；数据级权限判定（这条记录归不归当前用户）。
 不做：解析 HTTP、直接写 Prisma 查询、伸手进别的模块的 Repository。
-只能调：本模块 Repository；别的模块的 Service（如 ProjectsService 校验成员、UsersService 校验 assignee）。
+只能调：本模块 Repository；别的模块的 Service（如 ProjectsService 校验 assignee 是本项目成员，第三节 T5）。
 
 #### 5. Repository（TasksRepository）
 负责：tasks 表的唯一读写出口，对应第一节「一表一主」。
 不做：任何业务规则、任何权限判断。
 只能调：Prisma。
 
-依赖方向单向不回头。跨模块只走对方 Service，不许直接调对方 Repository。
+依赖方向单向不回头。跨模块只走对方 Service，不许直接调对方 Repository。此处指层间调用方向；模块之间的依赖图及其口径见第一节「依赖方向」。
 
 决策 Q3：Repository 层每个模块都写，不按模块复杂度区分。
 理由：一，给「一表一主」一个文件级落点，Lec 8 加 lint 限制跨模块 import 时有具体路径可约束；二，Service 抽离后可脱离数据库单独测试；三，「只在复杂模块写」没有判据，会退化成随意。
@@ -163,23 +167,24 @@ Guard → Pipe → Controller → Service → Repository → Prisma
 
 Zod 执行三处，各拦不同的东西：
 1. 前端提交前 —— 拦格式错，给即时反馈。UI_DESIGN 要求「阻止提交」，阻止只能发生在前端。
-2. 服务端 ValidationPipe —— 拦形状与类型错。这是唯一可信的一道。
+2. 服务端 Zod 管道（项目自写，实现 PipeTransform 调共享 schema，不用内置 ValidationPipe，第三节 T1）—— 拦请求体与查询参数的形状与类型错。这是唯一可信的一道。
 3. Service 内业务不变量 —— 如状态流转的合法性。
 为什么不能只在一处：只在前端，绕过界面直接打接口就穿了（US-R01 要求强制触发被拒）；只在后端，用户每个错字都要一次往返，且做不到「阻止提交」。
 
-两级权限的界线（决策 Q2）：
-- 角色级 → Guard。只看「当前会话 + 路由 + 项目内角色」就能判，数据只需 project_memberships。
-- 数据级 → Service。必须先取到那条记录才能判，归属信息在 tasks.assigneeUserId，Guard 阶段还没查库。
-- 界线一句话：不查业务表就能判的归 Guard，必须先拿到记录才能判的归 Service。
-- 不选「查库 Guard」的理由：同一条记录会被查两遍，且 Guard 里做 IO 会让请求管道变重。
+两级权限的界线（决策 Q2，按第三节 T6 回写）：
+- 角色级 → Guard。只凭「会话凭据 + 路径项目 id」就能判。AuthGuard 读 sessions，AuthzGuard 读 project_memberships。
+- 数据级 → Service。要读请求体内容才能判的（如 assignee 是否本项目成员），或者要先取到业务记录才能判的（如 tasks.projectId、tasks.assigneeUserId），都归 Service。
+- 界线一句话：只凭会话和路径就能判的归 Guard；要读请求体或业务记录才能判的归 Service。
+- 界线不按「查不查库」划：两个 Guard 本来就读表。不在 Guard 里取业务记录的理由：同一条记录会被 Guard 和 Service 各查一遍。
 
 例子 · 执行者尝试修改不属于自己的任务：
-1. AuthGuard：会话有效吗？无效 → 未登录处理，重定向登录页。
+1. AuthGuard：会话有效吗？无效 → 退回「未登录」。跳转登录页是前端收到该响应后的行为，不由 Guard 执行。
 2. AuthzGuard：他是本项目成员吗？不是 → 权限不足。是执行者 → 放行，因为执行者本来就能更新自己任务的状态。
-3. ValidationPipe：请求体形状合法吗？
+3. Zod 管道：请求体形状合法吗？
 4. Controller：调 TasksService。
-5. TasksService：取任务，比对 assigneeUserId 与当前用户 id。不等 → 拒绝。
-拦在第 5 步 Service。Guard 拦不住，它不知道那条任务的 assignee 是谁。
+5. TasksService：取任务，先比对记录的 projectId 与路径项目 id（第三节 T2）。不等 → 权限不足。
+6. TasksService：再比对 assigneeUserId 与当前用户 id（第三节 R2-7）。不等 → 权限不足。
+拦在第 5、6 步 Service。Guard 拦不住，它既不知道那条任务属于哪个项目，也不知道 assignee 是谁。
 
 决策（取舍 5，属 D3 权限与安全口径）：
 「无权限」与「不存在」合并为同一响应，不区分。
@@ -256,7 +261,7 @@ Zod 执行三处，各拦不同的东西：
 ## 三、数据流
 
 > 性质：纸上走查。目的是验证第一、二节的设计能不能走通，不是测试方案。真跑是 Lec 14 tester 的活。
-> 口径：按项目主人裁决 T1-T7 与决策 A-E 写。第二节原文尚未回写，差异见本节末「本节暴露的问题」。
+> 口径：按项目主人裁决 T1-T7 与决策 A-E 写。第一、二节原文已按本节口径回写完毕（05-API 开课时执行），原差异记录保留在本节末「本节暴露的问题」。
 > 浏览器与后端服务之间经过什么，见第四节部署拓扑。本节从请求进入 NestJS 开始。
 > 退回结果只写性质。状态码与路径字符串属 API 契约，本节不定。
 
@@ -404,6 +409,8 @@ Zod 执行三处，各拦不同的东西：
 - T3 路径参数不做格式校验，非法值落入鉴权失败；查询参数走 Zod 管道。两类分开处理。
 - T4 会话固定 30 天，不滑动续期，纯读不写 sessions。
 - T5 assignee 必须是本项目成员，允许分配给负责人自己。
+- T6 两级权限界线：只用「会话 + 路径参数 + project_memberships」能判的归 Guard；需读业务表记录或读请求体内容才能判的归 Service。
+- T7 决策 6（US-04 第三条验收依赖项目级 deadline）已裁决本版延后，依据 PRD.md:295-299。
 - 决策 A 角色经请求上下文由 Guard 传给 Service，Service 不重复查询。
 - 决策 B 路径 id 查库前转数字，转不动视为查不到。
 - 决策 C R2-8 保留，取数方式留给 05-API。
@@ -411,6 +418,9 @@ Zod 执行三处，各拦不同的东西：
 - 决策 E W1-5 退回「参数不合法」。
 
 ### 本节暴露的问题
+
+> 状态：以下 1-6 条已于 05-API 开课时全部回写完毕，原文保留作为演进记录，不再是待办。
+> 更正：第 5 条说「第二节仍把决策 6 列为待定」，位置记错。该待定块实际在第一节。
 
 以下为走查过程中发现、第二节文字尚未跟上的差异。回写动作见结课清单。
 
@@ -563,8 +573,16 @@ Zod 执行三处，各拦不同的东西：
 - T21 数据库迁移人工触发，不随容器启动执行。
 - T22 画出数据卷。备份进 BACKLOG 留 Lec 15。显式记录 ADR-DB-002 恢复前提暂无落地方案。
 - T23 TECH_STACK.md:29"环境一致"读作镜像与运行时一致、配置按环境不同。
+- T24 删掉依赖图里 tasks → authz 这条边。TasksService 不调 authz，该边仅因路由挂 AuthzGuard 而存在，按 T13 口径不计入。
+- T25 tasks 依赖行两处理由改写：projects 改为「校验 assignee 是本项目成员」（T5），users 改为「负责人显示 email」（R2-8）。原措辞与第三节走查对不上。
+- T27 architect 顺带报出的四处一并回写，不进 BACKLOG：例子块缺 T2 比对项目一步、重定向措辞属前端行为、第一节 auth 职责补 AuthGuard、第一节 authz 职责精确成 AuthzGuard。
+- T26 不在本序列。该编号拍的是课程规则决定（规则 69 追加段），不是本项目架构裁决，已落在 docs/COURSE_RULES.md。此处仅作编号去向登记。
 
 本节暴露的问题
+
+> 状态（05-API 开课时核定）：第 1、2、8 条已完成——第 1、2 条的 TECH_STACK 回写与第 8 条的第三节同步，均于本窗口 24 处回写中执行完毕。
+> 第 3-7 条未完，各有去向：第 3 条本地不同源（BACKLOG 23）、第 4 条 Nginx 前缀保留（BACKLOG 24，指向 05-API）、第 5 条人工迁移流程（BACKLOG 25）、第 6 条 ADR-DB-002 恢复前提（BACKLOG 22，留 Lec 15）、第 7 条 SSR 转发凭据（待 05-API 定凭据载体）。
+> 第 8 条原文引用了第三节旧措辞「尚未回写」，保留不改：该句是演进记录，不是待办。
 
 1. TECH_STACK.md:30 写 Nginx 负责"静态托管"，和 T9 冲突。T23 只覆盖 :29，:30 的回写尚未指派。按 D8 只报不改，以谁为准待主人确认。
 2. TECH_STACK.md:29 要按 T23 加一句澄清，回写文本本轮未要求出。

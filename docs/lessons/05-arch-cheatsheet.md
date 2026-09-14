@@ -106,3 +106,12 @@ authz 不依赖 auth，用户 id 经请求上下文取得。
 产出短不等于决策少，估重量要数未决项。
 拆两轮买的是选择权，一轮跑完 AI 会替你把取舍填掉。
 立口径要回扫自己的过去，定义类裁决的传播面包含它的历史条目。
+
+## 补记 · 回写执行
+
+- 25 处回写全过，7 条验证通过。PENDING-REWRITES.md 已删。
+- Guard 归属：AuthGuard 属 auth 读 sessions；AuthzGuard 属 authz 读 project_memberships。
+- 依赖图口径：只记业务依赖（代码调 Service），路由挂 Guard 不计入。
+- 两级权限尺子：只凭会话+路径+project_memberships 能判的归 Guard，要读请求体或业务记录的归 Service。
+- 批量回写的做法：Edit 按内容匹配、一处一改一验、ask 弹窗审 diff。不用 sed（绕开护栏）。
+- 验收预期写「逐行判，不得残留什么」，不写「应剩 N 行」（反模式 42 延伸）。

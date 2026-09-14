@@ -18,16 +18,15 @@
 │   └── schema.prisma       Prisma 数据模型，6 model + 3 enum + onDelete（Lec 5 建）
 └── docs/
     ├── AGENT_SPEC.md            角色文件标准图纸
-    ├── BACKLOG.md              跨课待办清单（第 9 条 Lec 6 加）
+    ├── BACKLOG.md              跨课待办清单（1-29 条，21 条已收窄，26-29 为 05-API 窗口加）
     ├── COURSE_RULES.md          课程协作规则，37-70 号（68 留空未用）
     ├── KNOWLEDGE_BASE.md        课程知识库副本
     ├── LESSON_TEMPLATE.md       段落骨架标准图纸
     ├── PROJECT_STRUCTURE.md     本文件
     ├── TEACHING_STYLE.md        讲课手感标准，一至八节
     ├── arch/
-    │   ├── ARCHITECTURE.md      系统架构：一模块划分 + 二分层 + 三数据流 + 四部署拓扑（补课 05-ARCH 建，四节齐；前三节有 24 处回写待执行，见 PENDING-REWRITES.md）
+    │   ├── ARCHITECTURE.md      系统架构：一模块划分 + 二分层 + 三数据流 + 四部署拓扑（补课 05-ARCH 建，四节齐；25 处回写已于 05-API 窗口执行完毕，四节口径已对齐）
     │   ├── DECISIONS.md         ADR-Lite 决策记录 ADR-001~005
-    │   ├── PENDING-REWRITES.md  待执行回写清单，24 处，05-API 开课第一件事执行完即删（规则 70）
     │   └── TECH_STACK.md        技术栈选型 + 四象限
     ├── design/
     │   ├── PRD.md               产品需求文档
@@ -67,10 +66,10 @@
 Lec 5 只做了数据库 schema，architect 其余四件架构产物拆出延后，随后先上了 Lec 6 宪法课。
 补课链四节，回头补齐 architect 架构收尾：
 - 05-ARCH  系统架构   ✓ 四节齐：一模块划分 + 二分层架构 + 三数据流 + 四部署拓扑
-  说明：05-ARCH 是一节课拆成三个窗口上的（上半场一二节 / 下半场第三节 / 第三窗口第四节），不是三节课。笔记仍只有 05-arch-full.md 与 05-arch-cheatsheet.md 两份，按课分不按窗口分。
+  说明：05-ARCH 是一节课拆成四个窗口上的（上半场一二节 / 下半场第三节 / 第三窗口第四节 / 第四窗口执行 25 处回写），不是四节课。笔记仍只有 05-arch-full.md 与 05-arch-cheatsheet.md 两份，按课分不按窗口分，第四窗口的记录以「补记」形式追加在这两份内。
 - 05-API   API 契约   待开
 - 05-类型  共享类型   待开
 - 05-环境  环境设计   待开
 补完后重开 Lec 7 Monorepo 初始化（含 SG-1）。
 注意区分：逻辑顺序上补课链排在 Lec 6 之前，实际执行在 Lec 6 之后（反模式 34）。
-ARCHITECTURE.md 四节已齐。但第一、二、三节与 TECH_STACK 共 24 处回写待执行，文本见 docs/arch/PENDING-REWRITES.md，05-API 开课第一件事执行，执行完即删该文件（规则 70）。
+ARCHITECTURE.md 四节已齐，且第一、二、三节与 TECH_STACK 的回写已于 05-API 窗口执行完毕（原定 24 处，实际 25 处，7 条验证全过）。PENDING-REWRITES.md 已按规则 70 删除。四节口径现已对齐，可直接作为 05-API 的依据。

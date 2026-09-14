@@ -26,8 +26,8 @@
 - Prisma（ORM）—— 甜区。类型安全直通 TS；migration 支持 EMC 演进。
 
 部署
-- Docker + Docker Compose —— 甜区。单 VPS 多服务编排，环境一致。
-- Nginx —— 甜区。反向代理 + 静态托管 + TLS 终止。
+- Docker + Docker Compose —— 甜区。单 VPS 多服务编排，环境一致。此处「环境一致」指镜像与运行时一致，配置按环境不同（05-ARCH T23）。
+- Nginx —— 甜区。反向代理 + TLS 终止。不托管静态资源，静态资源由前端 Next.js 服务进程自身发出（05-ARCH T9，原定三职责已收窄为两项）。
 
 ## 二、四个分叉的裁决（Michael 拍板，已验证）
 

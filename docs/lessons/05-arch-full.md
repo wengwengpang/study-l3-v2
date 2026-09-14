@@ -192,3 +192,28 @@ Nginx = 大门传达室，外面所有人只能从这进，它看你找谁再带
 落盘：ARCHITECTURE.md 第四节（grep -c "^## " 验证为 4）。
 未落盘但已成文：24 处回写文本，存 docs/arch/PENDING-REWRITES.md，05-API 开课第一件事执行。
 回写为什么不当场做：24 处不能按行号改，改一处后面全漂，必须按内容匹配、一处一改一验。量超出本窗口余量，按规则 48 主动拆窗口。
+
+## 补记 · 回写执行（05-API 窗口第一件事）
+
+本节不含新知识点，只记执行结果。05-ARCH 三个窗口留下的文档回写，于 05-API 窗口开课时集中执行。
+
+执行量：原定 24 处，实际 25 处（第 25 处为第四节「本节暴露的问题」状态行，原清单漏列）。
+分布：第一节 10、第二节 8、第三节 3、第四节 2、TECH_STACK 2。
+方式：CC 用 Edit 工具按内容匹配，一处一改一验，每处经 ask 弹窗人工审 diff。
+      不用 sed/heredoc——那两者走 Bash，绕开 Edit(docs/arch/**) 的 ask 护栏。
+
+三件实质变化：
+一、两个 Guard 归属分清。AuthGuard 属 auth 读 sessions，AuthzGuard 属 authz 读 project_memberships。
+   原措辞「只能调 authz 模块暴露的能力」罩住全块，导致 AuthGuard 读 sessions 无合规出口。
+二、依赖图立了口径并按口径收边。只记业务依赖（代码调 Service），路由挂 Guard 不计入。
+   据此删掉 tasks → authz，authz → auth 收为 authz → projects。
+三、两级权限界线换了尺子。从「查不查库」改为「判断需要哪些输入」：
+   只凭会话 + 路径 + project_memberships 能判的归 Guard，要读请求体或业务记录的归 Service。
+   删掉假理由「Guard 里做 IO 会让管道变重」——两个 Guard 本来就读表（反模式 40）。
+
+验证：7 条命令全过。其中 3 条须逐行判，不能机械看空不空——回写后必然残留否定式表述
+（「不用内置 ValidationPipe」）与引用式记录（演进记录引着旧措辞）。
+
+入库：反模式 42 号 + 补案例、规则 70 追加段。三样此前只活在待删文件里（反模式 24）。
+BACKLOG：21 条改写，新增 26-29。
+PENDING-REWRITES.md 已删（规则 70：执行完即删）。
