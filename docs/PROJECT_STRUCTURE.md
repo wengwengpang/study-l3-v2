@@ -18,14 +18,15 @@
 │   └── schema.prisma       Prisma 数据模型，6 model + 3 enum + onDelete（Lec 5 建）
 └── docs/
     ├── AGENT_SPEC.md            角色文件标准图纸
-    ├── BACKLOG.md              跨课待办清单（1-29 条，21 条已收窄，26-29 为 05-API 窗口加）
+    ├── BACKLOG.md              跨课待办清单（1-35 条，30-35 为 05-API 第一窗口加）
     ├── COURSE_RULES.md          课程协作规则，37-70 号（68 留空未用）
     ├── KNOWLEDGE_BASE.md        课程知识库副本
     ├── LESSON_TEMPLATE.md       段落骨架标准图纸
     ├── PROJECT_STRUCTURE.md     本文件
     ├── TEACHING_STYLE.md        讲课手感标准，一至八节
     ├── arch/
-    │   ├── ARCHITECTURE.md      系统架构：一模块划分 + 二分层 + 三数据流 + 四部署拓扑（补课 05-ARCH 建，四节齐；25 处回写已于 05-API 窗口执行完毕，四节口径已对齐）
+    │   ├── API_CONTRACT.md      接口契约：管辖范围 + 全局约定 + 接口清单（05-API 建，骨架已立，正文待续）
+    │   ├── ARCHITECTURE.md      系统架构：一模块划分 + 二分层 + 三数据流 + 四部署拓扑（补课 05-ARCH 建，四节齐；25 处回写已于 05-ARCH 第四窗口执行完毕，四节口径已对齐）
     │   ├── DECISIONS.md         ADR-Lite 决策记录 ADR-001~005
     │   └── TECH_STACK.md        技术栈选型 + 四象限
     ├── design/
@@ -39,11 +40,13 @@
         ├── 06-cheatsheet.md     第 6 课速查卡
         ├── 05-arch-full.md      补课 05-ARCH 完整笔记（模块划分 + 分层）
         ├── 05-arch-cheatsheet.md 补课 05-ARCH 速查卡
-        └── anti-patterns.md     反模式库，1-41 号
+        ├── 05-api-full.md      补课 05-API 完整笔记（第一窗口）
+        ├── 05-api-cheatsheet.md 补课 05-API 速查卡（第一窗口）
+        └── anti-patterns.md     反模式库，1-43 号
 
 ## 课程标准文件清单（开课必读 7 个，规则 58 六文件 + BACKLOG）
-- docs/COURSE_RULES.md          课程规则 37-70（68 留空未用）；新规则从 71 起
-- docs/lessons/anti-patterns.md 反模式库 1-41
+- docs/COURSE_RULES.md          课程规则 37-72（68 留空未用）；新规则从 73 起
+- docs/lessons/anti-patterns.md 反模式库 1-43
 - docs/TEACHING_STYLE.md        讲课手感（一至八节）
 - docs/PROJECT_STRUCTURE.md     项目结构现状（本文件）
 - docs/AGENT_SPEC.md            角色文件标准
@@ -67,9 +70,11 @@ Lec 5 只做了数据库 schema，architect 其余四件架构产物拆出延后
 补课链四节，回头补齐 architect 架构收尾：
 - 05-ARCH  系统架构   ✓ 四节齐：一模块划分 + 二分层架构 + 三数据流 + 四部署拓扑
   说明：05-ARCH 是一节课拆成四个窗口上的（上半场一二节 / 下半场第三节 / 第三窗口第四节 / 第四窗口执行 25 处回写），不是四节课。笔记仍只有 05-arch-full.md 与 05-arch-cheatsheet.md 两份，按课分不按窗口分，第四窗口的记录以「补记」形式追加在这两份内。
-- 05-API   API 契约   待开
+- 05-API   API 契约   进行中（第一窗口已上，未完）
+  说明：第一窗口拍了 API-1 字段真相归 schema、API-2 创建项目不依赖角色，落盘 API_CONTRACT.md 骨架。
+        待决议题 19 项未拍完，续窗口继续。笔记按窗口分：05-api-full.md 与 05-api-cheatsheet.md 标第一窗口。
 - 05-类型  共享类型   待开
 - 05-环境  环境设计   待开
 补完后重开 Lec 7 Monorepo 初始化（含 SG-1）。
 注意区分：逻辑顺序上补课链排在 Lec 6 之前，实际执行在 Lec 6 之后（反模式 34）。
-ARCHITECTURE.md 四节已齐，且第一、二、三节与 TECH_STACK 的回写已于 05-API 窗口执行完毕（原定 24 处，实际 25 处，7 条验证全过）。PENDING-REWRITES.md 已按规则 70 删除。四节口径现已对齐，可直接作为 05-API 的依据。
+ARCHITECTURE.md 四节已齐，且第一、二、三节与 TECH_STACK 的回写已于 05-ARCH 第四窗口执行完毕（原定 24 处，实际 25 处，7 条验证全过）。PENDING-REWRITES.md 已按规则 70 删除。四节口径现已对齐，可直接作为 05-API 的依据。
