@@ -19,7 +19,7 @@
 └── docs/
     ├── AGENT_SPEC.md            角色文件标准图纸
     ├── BACKLOG.md              跨课待办清单（1-35 条，30-35 为 05-API 第一窗口加）
-    ├── COURSE_RULES.md          课程协作规则，37-70 号（68 留空未用）
+    ├── COURSE_RULES.md          课程协作规则，37-72 号（68 留空未用）
     ├── KNOWLEDGE_BASE.md        课程知识库副本
     ├── LESSON_TEMPLATE.md       段落骨架标准图纸
     ├── PROJECT_STRUCTURE.md     本文件
