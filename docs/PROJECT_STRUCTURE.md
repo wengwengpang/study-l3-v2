@@ -19,8 +19,12 @@
 └── docs/
     ├── AGENT_SPEC.md            角色文件标准图纸
     ├── BACKLOG.md              跨课待办清单（1-35 条，30-35 为 05-API 第一窗口加）
-    ├── COURSE_RULES.md          课程协作规则，37-72 号（68 留空未用）
-    ├── KNOWLEDGE_BASE.md        课程知识库副本
+    ├── COURSE_RULES.md          课程规则唯一正本，1-76 号（21、68 留空未用）
+    ├── COURSE_TUNER.md          课程调节器（开课资料，重构中，规则已下沉至 COURSE_RULES）
+    ├── HARNESS.md               框架中枢规格（骨架，重构第一窗口建）
+    ├── PENDING-TUNER-REFACTOR.md 开课资料重构待执行清单兼交接（执行完删除）
+    ├── BRIDGE-05-api-w2.md      05-API 第二窗口暂存桥梁（学生确认后删除）
+    ├── KNOWLEDGE_BASE.md        课程知识库（唯一真相，粘贴版已作废）
     ├── LESSON_TEMPLATE.md       段落骨架标准图纸
     ├── PROJECT_STRUCTURE.md     本文件
     ├── TEACHING_STYLE.md        讲课手感标准，一至八节
@@ -42,17 +46,17 @@
         ├── 05-arch-cheatsheet.md 补课 05-ARCH 速查卡
         ├── 05-api-full.md      补课 05-API 完整笔记（第一窗口）
         ├── 05-api-cheatsheet.md 补课 05-API 速查卡（第一窗口）
-        └── anti-patterns.md     反模式库，1-43 号
+        └── anti-patterns.md     反模式库，1-45 号
 
 ## 课程标准文件清单（开课必读 7 个，规则 58 六文件 + BACKLOG）
-- docs/COURSE_RULES.md          课程规则 37-72（68 留空未用）；新规则从 73 起
-- docs/lessons/anti-patterns.md 反模式库 1-43
+- docs/COURSE_RULES.md          课程规则唯一正本 1-76（21、68 留空未用）；新规则从 77 起
+- docs/lessons/anti-patterns.md 反模式库 1-45；新反模式从 46 起
 - docs/TEACHING_STYLE.md        讲课手感（一至八节）
 - docs/PROJECT_STRUCTURE.md     项目结构现状（本文件）
 - docs/AGENT_SPEC.md            角色文件标准
 - docs/LESSON_TEMPLATE.md       授课段落骨架
 - docs/BACKLOG.md               跨课待办清单
-- 桥梁格式                     见调节器 H 节
+- 桥梁格式                     见调节器 H 节（重构中，该节待改）
 
 ## CLAUDE.md 追踪（规则 56）
 - ~/.claude/CLAUDE.md
