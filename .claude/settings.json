@@ -9,7 +9,9 @@
       "Bash(rm *)",
       "Bash(sudo *)",
       "Bash(curl *)",
-      "Bash(wget *)"
+      "Bash(wget *)",
+      "Edit(.claude/settings.json)",
+      "Edit(.claude/settings.local.json)"
     ],
     "ask": [
       "Bash(git push *)",
@@ -18,13 +20,17 @@
       "Edit(prisma/**)",
       "Edit(CLAUDE.md)",
       "Edit(.claude/**)",
-      "Edit(docs/arch/**)"
+      "Edit(docs/arch/**)",
+      "Edit(docs/**)"
     ],
     "allow": [
       "Bash(pnpm test *)",
       "Bash(pnpm run *)",
       "Bash(npm run test *)",
-      "Bash(npm run lint *)"
+      "Bash(npm run lint *)",
+      "Bash(git status)",
+      "Bash(git log *)",
+      "Bash(git diff *)"  
     ]
   }
 }

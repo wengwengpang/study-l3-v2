@@ -1,3 +1,6 @@
+> 临时：开课资料重构期间导入工作约定。重构完成、PENDING 删除时，删除本行和下一行。
+@docs/REFACTOR-BRIEF.md
+
 # CLAUDE.md 项目宪法
 
 > 本文件分三层，随课程演进。
