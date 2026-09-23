@@ -258,7 +258,7 @@ COURSE_RULES、anti-patterns、TEACHING_STYLE、PROJECT_STRUCTURE、AGENT_SPEC�
 
 ## 69 · 拍板即扫传播面
 凡在主对话拍板一条影响文档的决策（范围取舍、字段增删、口径变更），老师当场列出该决策的传播面，不凭印象。
-传播面至少过这五类：PRD / UI_DESIGN / ARCHITECTURE 或契约 / CLAUDE.md 相应层 / PROJECT_STRUCTURE。
+传播面至少过这五类：PRD / UI_DESIGN / ARCHITECTURE 或契约 / CLAUDE.md 相应层 / PROJECT_STRUCTURE。另加一类：这条裁决进不进 HARNESS（规则 77）。
 逐类写「要改」或「不影响」，两者都要显式写出，不许留空。
 执行方式：必须真的打开文件核，不许靠回忆推断。
 背景：05-ARCH 决策 5（US-05 延后）只列了 PRD 注记，漏掉 UI_DESIGN 的跨项目总览区，由 architect 反过来抓出。老师随后又在未打开 UI_DESIGN 的情况下推出「页面数变成 9 个」，读原文后发现页 3 承载登出入口不能删，页面数仍为 10。同一形状连错两次，故本条强制「打开文件核」而非「想一遍」。
