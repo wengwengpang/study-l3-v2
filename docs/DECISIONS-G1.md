@@ -340,4 +340,26 @@ REFACTOR-BRIEF 第六节写：引用任何内容给出处，「文件路径 + �
 教训：拍补遗 5 时凭印象列传播面，没当场打开文件核。规则 69「拍板即扫传播面」
   写着「必须真的打开文件核，不许靠回忆推断」——本窗口自己犯了这一条。
   本条同时是第十节新清单第一次在收尾阶段抓到东西。
+
+--- 补遗 14 · 删文件用 git rm（本窗口收尾时核出，学生已拍）---
+结论：G10 删临时文件一律用 git rm，不用 rm。
+三条依据（CC 当场核过 .claude/settings.json）：
+  一，deny 里是 Bash(rm *)，匹配以 rm 开头的命令。git rm 以 git 开头，不命中。
+  二，allow 里的 git 条目只有五条：git status、git log *、git diff *、
+    git add *、git commit *。无 git rm，也无通配的 git *。
+    不在 allow、不在 deny、defaultMode 为 default，落到默认，弹窗问学生。
+  三，删了能捞回来。条件是该文件此前已提交过，本次要删的都满足。
+更正（学生原说法，本窗口修正）：G7「删四节」不涉及删文件。
+  B、D、G、N 是 COURSE_TUNER.md 内部的四个小节，删它们是 Edit 删段落。
+  真正删文件的只有 G10：删 REFACTOR-BRIEF.md、删 PENDING-TUNER-REFACTOR.md。
+  调节器改名走 git mv，是改名不是删。
+边界一：弹窗不能代替 CONFIRM-RISK。
+  弹窗问的是「这条命令让不让跑」；宪法 D5 要的是「先列影响范围与回滚方案，
+  学生回 CONFIRM 才执行」。两件事。删文件前照样走 D5，弹窗只是最后一道机械闸。
+边界二：git rm 对未跟踪文件无效。
+  例：settings.local.json 被用户全局 gitignore 挡住，git 不认它，git rm 会报错。
+  这类文件只能学生在终端删。
+捞回来的命令（写下免得到时候现查）：
+  还没提交：git restore --staged --worktree -- docs/X.md
+  已经提交：git checkout <删除那次提交>^ -- docs/X.md
 === 第五窗口补遗结束 ===
