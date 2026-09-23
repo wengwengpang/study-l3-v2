@@ -84,7 +84,7 @@
 
 ## 42 · 模式归属在 prompt 外
 每个动手步骤，老师在 prompt 外用大白话注明"这步要不要切 Plan Mode、谁来切（学生按键盘）"。prompt 正文永远不含模式描述。
-背景：Plan Mode 是键盘快捷键控制的状态（Shift+Tab 两次 / Windows 下 Alt+M / 打 /plan），不是 prompt 文字能切的。新建文件用默认模式，改已有代码切 Plan Mode。
+背景：Plan Mode 怎么切、为什么 prompt 文字切不了，见 KNOWLEDGE_BASE 第六块 Plan Mode 条。什么时候切，见规则 28。
 
 ## 43 · 任务要有停止条件
 给 CC 的任务必须有明确停止条件，禁止"反复优化直到满意"这类无终点指令（防死循环）。
