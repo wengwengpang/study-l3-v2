@@ -228,7 +228,7 @@ COURSE_RULES、anti-patterns、TEACHING_STYLE、PROJECT_STRUCTURE、AGENT_SPEC�
 ## 64 · 信息分层落盘（产生即定层）
 任何一条新信息产生时，老师当场判定它的寿命与范围，决定落点，不许默认留在对话/prompt 里靠人记。
 三层落点：
-- A 跨项目通用（方针/协议/模板）→ ~/.claude/ 全局 或 COURSE_RULES。判据：换个项目还用得上。
+- A 跨项目通用（方针/协议/模板）→ ~/.claude/ 全局 或 COURSE_RULES 或 docs/HARNESS.md。判据：换个项目还用得上。进不进 HARNESS 的判据与留痕见规则 77。
 - B 本项目事实裁决（需求口径、设计决策、字段约定）→ 项目事实文件（PRD / CLAUDE.md 第二层）。判据：只属于本项目，但要长期生效，CC 每次进项目要知道。
 - C 一次性交接状态 → 桥梁 prompt。判据：下一课用完即弃。
 配套动作：凡在主对话里拍板了一条 B 类裁决（如 Lec 3「权限口径以矩阵为准」），当课必须把它落进至少一个 B 类持久文件，结课自检逐条确认。
