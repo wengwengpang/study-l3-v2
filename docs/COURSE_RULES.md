@@ -371,12 +371,13 @@ settings.json 必须显式声明 defaultMode，不许留空靠厂商默认值。
 ## 74 · 课程文件的传播面与开课对账
 分两半，一半事前，一半事后。
 
-事前（扩规则 69）：改动任一课程文件时，传播面至少过这五类，逐类写「要改」或「不影响」，两者都要显式写出，必须真的打开文件核：
+事前（扩规则 69）：改动任一课程文件时，传播面至少过下面各类，逐类写「要改」或「不影响」，两者都要显式写出，必须真的打开文件核：
 一，开课资料：KNOWLEDGE_BASE.md、调节器 COURSE_TUNER.md。
 二，规则与反模式：COURSE_RULES.md、lessons/anti-patterns.md。
 三，讲课标准：TEACHING_STYLE.md、LESSON_TEMPLATE.md、AGENT_SPEC.md。
 四，现状与待办：PROJECT_STRUCTURE.md、BACKLOG.md。
 五，在用的桥梁。
+六，在用的临时文件：待执行清单、工作约定、决策记录。
 另加一类：docs/HARNESS.md。本次改动要不要进 HARNESS、要不要改已有原则，按规则 77 判。
 凡一处内容在两个文件都写了正本，一律留一份正本、另一处改成指针，不留副本（做法见规则 53、72）。
 
