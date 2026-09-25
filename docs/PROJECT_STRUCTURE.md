@@ -18,7 +18,7 @@
 │   └── schema.prisma       Prisma 数据模型，6 model + 3 enum + onDelete（Lec 5 建）
 └── docs/
     ├── AGENT_SPEC.md            角色文件标准图纸
-    ├── BACKLOG.md              跨课待办清单（1-47 条）
+    ├── BACKLOG.md              跨课待办清单
     ├── COURSE_RULES.md          课程规则唯一正本，1-79 号（21、68 留空未用）
     ├── COURSE_TUNER.md          课程调节器（开课资料，重构中，规则已下沉至 COURSE_RULES）
     ├── HARNESS.md               框架中枢规格（骨架，重构第一窗口建）
