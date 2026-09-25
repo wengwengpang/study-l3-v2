@@ -19,7 +19,7 @@
 └── docs/
     ├── AGENT_SPEC.md            角色文件标准图纸
     ├── BACKLOG.md              跨课待办清单（1-35 条，30-35 为 05-API 第一窗口加）
-    ├── COURSE_RULES.md          课程规则唯一正本，1-78 号（21、68 留空未用）
+    ├── COURSE_RULES.md          课程规则唯一正本，1-79 号（21、68 留空未用）
     ├── COURSE_TUNER.md          课程调节器（开课资料，重构中，规则已下沉至 COURSE_RULES）
     ├── HARNESS.md               框架中枢规格（骨架，重构第一窗口建）
     ├── PENDING-TUNER-REFACTOR.md 开课资料重构待执行清单兼交接（执行完删除）
@@ -49,7 +49,7 @@
         └── anti-patterns.md     反模式库，1-45 号
 
 ## 课程标准文件清单（开课必读 7 个，规则 58 六文件 + BACKLOG）
-- docs/COURSE_RULES.md          课程规则唯一正本 1-78（21、68 留空未用）；新规则从 79 起
+- docs/COURSE_RULES.md          课程规则唯一正本 1-79（21、68 留空未用）；新规则从 80 起
 - docs/lessons/anti-patterns.md 反模式库 1-45；新反模式从 46 起
 - docs/TEACHING_STYLE.md        讲课手感（一至八节）
 - docs/PROJECT_STRUCTURE.md     项目结构现状（本文件）
