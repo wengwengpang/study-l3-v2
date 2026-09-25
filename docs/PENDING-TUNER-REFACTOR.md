@@ -350,6 +350,7 @@ G5 注（补遗 36、27）：撞规则 44 的共四处——L 节「假装老师
 - 第七块 19 课骨架 Lec 5 写「架构 + 数据库 + API 契约 + 共享类型 + 环境设计」五件事，实际只做了数据库，其余四件拆成补课链且排在 Lec 6 之后执行。**学生已定本次改这一处。** 现成正确内容在 PROJECT_STRUCTURE「补课链进度」小节，含「逻辑顺序排在 Lec 6 之前，实际执行在 Lec 6 之后（反模式 34）」一句。
 - 第八块 TaskFlow 规格去留（待判）。减分项：其技术栈写 Passport-JWT / class-validator，而本项目实际是 DB session + Zod（BACKLOG 15），**不只是旧参考，会主动误导**，与它自我定位「只当结构参考」冲突。
 - 第三块 backend 角色与第八块技术栈的 JWT/class-validator 过期：**学生已定本次不改**，留 BACKLOG 15（落点 Lec 10）。理由：本项目 backend 用什么尚未完全定（BACKLOG 17、23 未决），现在改可能改完又过期。
+- 小项八（HANDOFF 第 3 节补）：第一块按「熟练 / 有基础 / 入门」分三档。现标题写「已熟练」却含「PostgreSQL 入门」；HANDOFF 另记它装着 Next.js/NestJS/Prisma/Docker/Nginx。须在删 B 节之前做（6.0 依赖表）。
 
 ### 11. 本窗口挂账（收编后留下的重复）
 
