@@ -2467,3 +2467,21 @@ HARNESS 候选：「句子指向临时文件要带失效条件，删临时文件
 五，下一步：G10（PENDING 6.0.2 G10 行，含本次加的七件零碎）。
 六，收尾清单（约定第十节）：没落盘的裁决，无；没落盘的核查结果，无；半截的活，无；新发现，无。
 不判进不进 HARNESS：记账，不是拍板。
+
+--- 补遗 130 · G10 开工前学生六问；答 1A、2A，G10 加三件 ---
+一，G10 开工前学生问六题（摘要，非逐字）：这是新重构吗、能否做成下次可复用；重构后的具体步骤；中枢重做可吸收什么；上课环境；文件要不要归类；其他改进。
+  学生纠正：第一问针对整场重构，不只 G10。CC 已按整场重答：四段流程、各段产出文件、本场教训。
+二，CC 核出 G10 清单两个漏洞：
+  1. 第九件只扫指向 REFACTOR-BRIEF 的引用。常驻文件指向 PENDING-TUNER-REFACTOR 有 2 处（BACKLOG 1、PROJECT_STRUCTURE 1），第八件删 PENDING 后悬空。
+  2. HANDOFF-refactor-w2、DECISIONS-G1、BACKLOG-重构窗口交接三份，无人定去留。DECISIONS-G1 被常驻文件引用 50 处（COURSE_RULES 12、BACKLOG 19、HARNESS 16、TEACHING_STYLE 3），不能直接删。
+  核法：grep -c 各文件名，范围 COURSE_RULES、BACKLOG、HARNESS、KNOWLEDGE_BASE、TEACHING_STYLE、LESSON_TEMPLATE、PROJECT_STRUCTURE、COURSE_TUNER、anti-patterns 九份。
+三，学生原话：「问 1 选 A，问 2 选 A」。
+  1A：删 REFACTOR-BRIEF、PENDING 之前，提炼一份《重构手册》：四段流程、各文件模板、本场教训。CC 先写在 docs/ 下送审。要跨项目用时，学生亲手复制到 ~/.claude/templates/（约定补丁五：CC 只扫不改）。
+  2A：G10 第九件扩为也扫指向 PENDING 的引用；G10 新增一件「定三份重构文件去留」。
+  以上三件排进 PENDING 6.0.2 G10 行，走对照。
+四，学生新提两问，未答：
+  1. 做项目过程中要不要开始建中枢（HARNESS 第一、二节，及可运行的实物）。
+  2. 重构完成后，再专门分析一次上课环境：照原计划（网页版老师 + CC 执行）、全在 CC、或其他。现定案见约定补丁一。
+  去向：问 1 当场答；问 2 排在 G10 之后、复课之前。两问须在删 PENDING 前记进 BACKLOG，否则随 PENDING 断线。
+五，手册候选教训（写手册时再判进不进 HARNESS）：临时文件立项时定去留；决策记录按组拆；独立审查者起步就建；待记事项拍板时就定落点。
+进 HARNESS：否（拍板记录本身不是框架层）。手册落盘时，其中教训逐条判。
