@@ -93,7 +93,7 @@ ARCHITECTURE.md 四节已齐，且第一、二、三节与 TECH_STACK 的回写�
 工作目录在 WSL 里面，路径是 ~/projects/。不要用 /mnt/c。
 Node.js 是 22 版（LTS），用 nvm 管理。
 pnpm 是 11 版。
-Docker Desktop 是 29 版，装在 Windows 侧。WSL 里还不能用 docker 命令（WSL 集成没开），见 BACKLOG 49。
+Docker Desktop 是 29 版，装在 Windows 侧，已开 WSL 集成。Docker Desktop 没启动时，WSL 里的 docker 命令用不了，见 BACKLOG 49。
 Git：WSL 里是 2.34，项目用这个，autocrlf 设成了 input。Windows 侧另装了 2.45，项目不用。
 Claude Code 是 2.1 版。
 
