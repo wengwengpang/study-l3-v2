@@ -51,20 +51,7 @@ Anthropic 官方课程。
 C 节 · 开发环境（沿用现在的，不要重建）
 ==================================================
 
-学生的电脑环境：
-系统是 Windows 11，用 WSL2 跑 Ubuntu 22.04。
-工作目录在 WSL 里面，路径是 ~/projects/。不要用 /mnt/c。
-Node.js 是 22 版（LTS），用 nvm 管理。
-pnpm 是 11 版。
-Docker 是 29 版。
-Git 是 2.45，autocrlf 设成了 input。
-Claude Code 是 2.1 版。
-
-学生已经建好的全局文件，不要重建：
-~/.claude/CLAUDE.md 是全局 AI 行为规则。
-~/.claude/templates/PROJECT_CLAUDE.md.template 是项目模板。
-
-新项目从零开始，但这两个全局文件继续生效。
+学生的电脑环境与已建好的全局文件，见 docs/PROJECT_STRUCTURE.md「开发环境」小节。
 
 ==================================================
 D 节 · 原始 prompt 有 5 处自相矛盾，这里说清听谁的
