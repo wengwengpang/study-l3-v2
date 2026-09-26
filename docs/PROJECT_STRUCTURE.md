@@ -49,7 +49,7 @@
         └── anti-patterns.md     反模式库，1-46 号
 
 ## 课程标准文件清单（开课必读 7 个，规则 58 六文件 + BACKLOG）
-- docs/COURSE_RULES.md          课程规则唯一正本 1-80（21、68 留空未用）；新规则从 81 起
+- docs/COURSE_RULES.md          课程规则唯一正本 1-83（21、68 留空未用）；新规则从 84 起
 - docs/lessons/anti-patterns.md 反模式库 1-46；新反模式从 47 起
 - docs/TEACHING_STYLE.md        讲课手感（一至九节）
 - docs/PROJECT_STRUCTURE.md     项目结构现状（本文件）
