@@ -56,7 +56,7 @@
 - docs/AGENT_SPEC.md            角色文件标准
 - docs/LESSON_TEMPLATE.md       授课段落骨架
 - docs/BACKLOG.md               跨课待办清单
-- 桥梁格式                     见调节器 H 节（重构中，该节待改）
+- 桥梁格式                     见 docs/COURSE_RULES.md 规则 82
 
 ## CLAUDE.md 追踪（规则 56）
 - ~/.claude/CLAUDE.md
