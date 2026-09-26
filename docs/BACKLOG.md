@@ -53,4 +53,4 @@
 46 | 收敛 | 长远应在 CC 里建一个独立上下文的 reviewer subagent 做审查，替代回网页版。来源 REFACTOR-BRIEF 第二节「待记 BACKLOG」 | 开课资料重构全部完成后
 47 | 收敛 | 观察项·规则生规则的繁殖率。C1 正文 3 处 5 行，后续产生 6 条补遗、2 次审查、12 行判定、规则 77 改 3 处、HARNESS 新开 2 条改 2 处（DECISIONS-G1 补遗 27–32）。根因是两件一次性的事（27、28 漏判；判据四缺口），都已处理。兜住它的是判据四与 HARNESS 第五节整体读，两样都刚立。观察：D0、D1 收尾各记一次同样的账（正文改动数 vs 后续判定行、补遗数），三组数据出来再判要不要调规则 77。现在只有一组，还带一次性成本，数字说明不了问题。与 BACKLOG 4（规则只增不减）同族 | D1 收尾时
 48 | 收敛 | 桥梁在「换窗口不结课」时的口径未定（CLAUDE.md D8，只报未裁）。甲方：规则 81 第 5 条「一节课也可以跨多个窗口……换窗口和结课都出桥梁」。乙方：规则 48「七八成主动喊停建议结课」、规则 45「桥梁 prompt 必须是全课最后一个产出」、规则 82 第 2 节「现在在第几课开课前」。以哪边为准由学生裁。来源 DECISIONS-G1 补遗 100、104 | G10 桥梁再核时
-49 | 收敛 | WSL 里用不了 docker：Docker Desktop 29 版装在 Windows 侧，WSL 集成没开，WSL 里敲 docker 提示找不到命令（2026-09-26 实测）。项目部署用 Docker Compose（CLAUDE.md 第二层 D），用到 Docker 的课之前，学生在 Docker Desktop 里开 WSL 集成，再在 WSL 里跑 docker -v 核。来源 DECISIONS-G1 补遗 106、107 | 用到 Docker 的第一课开课前
+49 | 收敛 | WSL 里的 docker 要先启动 Docker Desktop：2026-09-26 实测，WSL 集成已开（Ubuntu-22.04），但 Docker Desktop 没在运行，WSL 里敲 docker 报找不到命令。那句「建议开 WSL 集成」是通用提示，不是原因。项目部署用 Docker Compose（CLAUDE.md 第二层 D），用到 Docker 的课之前，学生先启动 Docker Desktop，再在 WSL 里跑 docker -v 核。来源 DECISIONS-G1 补遗 106 到 109 | 用到 Docker 的第一课开课前
