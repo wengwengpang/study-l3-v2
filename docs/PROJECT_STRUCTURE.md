@@ -27,7 +27,7 @@
     ├── KNOWLEDGE_BASE.md        课程知识库（唯一真相，粘贴版已作废）
     ├── LESSON_TEMPLATE.md       段落骨架标准图纸
     ├── PROJECT_STRUCTURE.md     本文件
-    ├── TEACHING_STYLE.md        讲课手感标准，一至八节
+    ├── TEACHING_STYLE.md        讲课手感标准，一至九节
     ├── arch/
     │   ├── API_CONTRACT.md      接口契约：管辖范围 + 全局约定 + 接口清单（05-API 建，骨架已立，正文待续）
     │   ├── ARCHITECTURE.md      系统架构：一模块划分 + 二分层 + 三数据流 + 四部署拓扑（补课 05-ARCH 建，四节齐；25 处回写已于 05-ARCH 第四窗口执行完毕，四节口径已对齐）
@@ -51,7 +51,7 @@
 ## 课程标准文件清单（开课必读 7 个，规则 58 六文件 + BACKLOG）
 - docs/COURSE_RULES.md          课程规则唯一正本 1-80（21、68 留空未用）；新规则从 81 起
 - docs/lessons/anti-patterns.md 反模式库 1-46；新反模式从 47 起
-- docs/TEACHING_STYLE.md        讲课手感（一至八节）
+- docs/TEACHING_STYLE.md        讲课手感（一至九节）
 - docs/PROJECT_STRUCTURE.md     项目结构现状（本文件）
 - docs/AGENT_SPEC.md            角色文件标准
 - docs/LESSON_TEMPLATE.md       授课段落骨架
