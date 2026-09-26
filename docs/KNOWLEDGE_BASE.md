@@ -313,7 +313,7 @@ Phase 0 · 立项准备（不写代码）· Lec 0-6
 - Lec 2：pm 角色，PRD（用户故事 / 验收标准 / Out of Scope / 假设账本）。
 - Lec 3：designer 角色，UI 设计（页面结构 / 主流程 / 异常流程 / 三态 UI / 视觉规范）。
 - Lec 4：architect 角色，技术选型 + 决策（约束分析 / 6 必问 / 四象限 / ADR）。
-- Lec 5：architect 角色，架构 + 数据库 + API 契约 + 共享类型 + 环境设计。
+- Lec 5：architect 角色，架构 + 数据库 + API 契约 + 共享类型 + 环境设计。实际拆成补课链，见 PROJECT_STRUCTURE「补课链进度」。
 - Lec 6：CLAUDE.md 宪法（灵魂课）+ 会话简报 + prompt 模板 + 剩余五角色。
 
 Phase 1 · 环境搭建 · Lec 7-9 —— SG-1 在 Lec 7
