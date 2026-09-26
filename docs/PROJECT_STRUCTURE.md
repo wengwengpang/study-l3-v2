@@ -47,7 +47,7 @@
         ├── 05-arch-cheatsheet.md 补课 05-ARCH 速查卡
         ├── 05-api-full.md      补课 05-API 完整笔记（第一窗口）
         ├── 05-api-cheatsheet.md 补课 05-API 速查卡（第一窗口）
-        └── anti-patterns.md     反模式库，1-46 号
+        └── anti-patterns.md     反模式库，号段见 anti-patterns 文件头
 
 ## 课程标准文件清单（开课必读 7 个，规则 58 六文件 + BACKLOG）
 - docs/COURSE_RULES.md          课程规则唯一正本；号段见 COURSE_RULES 文件头
