@@ -82,3 +82,31 @@ Lec 5 只做了数据库 schema，architect 其余四件架构产物拆出延后
 补完后重开 Lec 7 Monorepo 初始化（含 SG-1）。
 注意区分：逻辑顺序上补课链排在 Lec 6 之前，实际执行在 Lec 6 之后（反模式 34）。
 ARCHITECTURE.md 四节已齐，且第一、二、三节与 TECH_STACK 的回写已于 05-ARCH 第四窗口执行完毕（原定 24 处，实际 25 处，7 条验证全过）。PENDING-REWRITES.md 已按规则 70 删除。四节口径现已对齐，可直接作为 05-API 的依据。
+
+## 开发环境（核对日期 2026-09-26）
+> 原调节器 C 节搬来（开课资料重构 G6）。沿用现在的，不要重建。
+> 版本号会过期，以核对日期为准。开课发现对不上，照文末「核对命令」重跑，改数字和日期。
+
+学生的电脑环境：
+系统是 Windows 11，用 WSL2 跑 Ubuntu 22.04。
+工作目录在 WSL 里面，路径是 ~/projects/。不要用 /mnt/c。
+Node.js 是 22 版（LTS），用 nvm 管理。
+pnpm 是 11 版。
+Docker Desktop 是 29 版，装在 Windows 侧。WSL 里还不能用 docker 命令（WSL 集成没开），见 BACKLOG 49。
+Git：WSL 里是 2.34，项目用这个，autocrlf 设成了 input。Windows 侧另装了 2.45，项目不用。
+Claude Code 是 2.1 版。
+
+学生已经建好的全局文件，不要重建：
+~/.claude/CLAUDE.md 是全局 AI 行为规则。
+~/.claude/templates/PROJECT_CLAUDE.md.template 是项目模板。
+
+新项目从零开始，但这两个全局文件继续生效。
+
+核对命令（在 WSL 里跑）：
+grep VERSION= /etc/os-release
+node -v
+pnpm -v
+git --version
+git config --get core.autocrlf
+claude --version
+docker -v（WSL 里不通时，用 docker.exe --version 看 Windows 侧）
