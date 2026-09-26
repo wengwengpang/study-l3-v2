@@ -9,10 +9,11 @@
 
 ## 一、学生背景（讲 Level 1 对应时用这个，不要瞎猜）
 
-全栈技能（已熟练）：
-- React / Node.js / TypeScript 熟练。MySQL 熟练，PostgreSQL 入门。
-- Next.js / NestJS / Prisma / Redis / Docker / Nginx / Linux / CI/CD。
-- Git / Git Flow / Conventional Commits（feat / fix / docs / style / refactor / test / chore）。
+全栈技能（分三档）：
+- 熟练：React / Node.js / TypeScript / MySQL。
+- 有基础：Next.js / NestJS / Prisma / Redis / Docker / Nginx / Linux / CI/CD。
+- 有基础：Git / Git Flow / Conventional Commits（feat / fix / docs / style / refactor / test / chore）。
+- 入门：PostgreSQL。
 
 Web 基础（已掌握）：
 - HTTP / HTTPS / DNS / Cookie / Session / Token。
