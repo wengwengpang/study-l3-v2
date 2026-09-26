@@ -2090,3 +2090,30 @@ HARNESS 候选：「句子指向临时文件要带失效条件，删临时文件
   本次动 BACKLOG 只记了学生点名的 D8 一条。补遗 89、92、94、96 挂的待记项没一并记：它们没有学生同意过的条目文字，按规则 79 属清单外。
 五，收尾清单（约定第十节）：没落盘的裁决，无；没落盘的核查结果，无；半截的活，无；新发现，有，见第四点。
 不判进不进 HARNESS：记账与登记，不是拍板（同补遗 30「不判的」）。
+
+--- 补遗 106 · G6 进组：回核、环境实测、G5 漏改三处、第一轮三问 ---
+一，学生原话：「开始 G6」。组基线 ee7fc24（工作区干净）。授权沿用补遗 90 第三点第 2 项。
+二，回核（约定补丁四）：第 17 条依据 HANDOFF 第 2 节「C→PROJECT_STRUCTURE（加核对日期）」与「留……C 指针」，原文都在。仍成立。
+  另：HANDOFF 第 1 节「顺手修偏向修：C 节版本号……本批做掉」。加核对日期要先真核，故本次实测。
+三，环境实测（2026-09-26，CC 在 WSL 里跑，Windows 侧用 .exe 调）：
+  成立：Windows 11（build 10.0.26200）；WSL2 Ubuntu 22.04.5；工作目录 ~/projects/；Node v22.22.2，~/.nvm 在；pnpm 11.1.0；WSL git autocrlf=input；Claude Code 2.1.283；~/.claude/CLAUDE.md 与 templates/PROJECT_CLAUDE.md.template 都在。
+  不成立：
+  1. Git：WSL 里是 2.34.1；2.45.1 是 Windows 侧的 git.exe。C 节写「Git 是 2.45」，指的是项目不用的那个。
+  2. Docker：WSL 里 docker 命令不存在，提示开 Docker Desktop 的 WSL 集成；Windows 侧 docker.exe 是 29.1.2。C 节写「Docker 是 29 版」，没说 WSL 里用不了。
+四，G5 漏改三处（清单外，规则 79，出对照问）：G5 传播面只扫了「H/I/M/O 节」，没扫规则总数。子代理审查也没扫到。
+  1. PROJECT_STRUCTURE 目录树「COURSE_RULES.md 课程规则唯一正本，1-80 号」。
+  2. PROJECT_STRUCTURE 课程标准文件清单「1-80……新规则从 81 起」。
+  3. PENDING 第七节第 2 件「现为 1-80」。
+五，细目（一处一提交）：
+  1. PROJECT_STRUCTURE 末尾新开「开发环境」小节，带核对日期，C 节内容搬入。Git、Docker 两行等问 1、2。
+  2. 调节器 C 节正文改指针，等问 3。改前子代理审第二个家，与组末审查合并。
+  3. 组末：子代理审，记账。
+六，传播面（规则 74）：BACKLOG 41 写「调节器 C 节写死 Node 22……Git 2.45」，C 节那半搬完有核对日期，KB 第六块那半未动，条目不关，登记。PROJECT_STRUCTURE 文件头「记录目录树 + 每个关键文件一句话职责」，加小节后不全，随细目 1 出对照。两份 CLAUDE.md、.claude/agents、~/.claude/templates 0 命中。
+七，第一轮三问（取舍，等学生当场答字母）：
+  问 1，Git 怎么写：A 两个都写，WSL 里 2.34（项目用这个），Windows 侧另有 2.45（项目不用）；B 只写 WSL 的 2.34；C 照旧 2.45。CC 推荐 A。
+    理由：BACKLOG 41 等处还写着 2.45，两个都写，后来的人看到 2.45 知道是哪来的。
+  问 2，Docker 怎么写：A 写实情（Windows 侧 29 版，WSL 里还不能用），另记一条 BACKLOG「用到 Docker 的课前开 WSL 集成」；B 照旧只写 29 版；C 写实情，不记 BACKLOG。CC 推荐 A。
+    理由：项目部署用 Docker Compose（CLAUDE.md 第二层 D），到那课才发现用不了会卡住。开不开集成是环境操作，归学生做，只记不做。
+  问 3，调节器 C 节留什么：A 标题留着，正文只剩一句指向 PROJECT_STRUCTURE「开发环境」小节；B 指针加留「不要重建全局文件」两句；C 整节删，靠 A 节索引指。CC 推荐 A。
+    理由：HANDOFF 终局图定 SESSION_START 留「C 指针」；B 两处各一份，正本改了副本不跟。
+进 HARNESS：否（进组记账与核查登记，不是拍板）。
