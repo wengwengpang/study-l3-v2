@@ -2603,3 +2603,21 @@ HARNESS 候选：「句子指向临时文件要带失效条件，删临时文件
   新写处直接用新名 SESSION_START（补遗 11「或随改名直接指向新落点」），第 5 步改名前短暂悬空，同一会话内补上。
   传播面：规则 67 被引 9 处（调节器 J 节两处、规则 45 追加、规则 74 三处、HARNESS 第三节、BRIDGE 两处），引的都是保留不动的三句或案例，不影响。BRIDGE 第 1 节那条旧直线归第 6 步。
 进 HARNESS：否（拍板记录本身不是框架层）。
+
+--- 补遗 137 · 第 1、2、4、5 步已落 ---
+一，已落，文字照补遗 134、136 细目，每处新文 1、旧文 0：
+  第 1 步：桥梁读哪份 2238283；「做这类事，读这几份」十行 8b938b1。
+  第 2 步：规则 67 标题与新第一段 + 来历句 8e5aaff；A 节链改指针 bfd1493。
+    规则 67 第一段第一条写成「本课临时状态听桥梁」，括号里的例子放在下一句原文里，没重复写。
+  第 4 步：删 K 节 + 第 4 件指针 5cbc289。
+  第 5 步：git mv ff04d63；SESSION_START 自称五处 0524a61（含 A 节分环境一句「知识库、调节器、桥梁」，属细目第 1 项「调节器本身」）；
+    规则 45 f8e1673；规则 57 三处 086385b；规则 60 三处 b685808；规则 74 两处 34ad922；规则 82 三处 7abf838；
+    KB 开头 4af9125；KB 文件尾 b28e660；BACKLOG 41、42 2ecea19；PROJECT_STRUCTURE 目录树 7a4ce60。
+二，改完回扫（常驻文件，当场数）：
+  SESSION_START、KNOWLEDGE_BASE、HARNESS、LESSON_TEMPLATE、AGENT_SPEC、CLAUDE.md：「调节器」0、「COURSE_TUNER」0、「K 节」0。
+  COURSE_RULES「调节器」16 处，逐行看过，全是补遗 134 第三点列的历史行；「K 节」1 处在规则 74 背景，历史。
+  BACKLOG 7 处、TEACHING_STYLE 3 处、PROJECT_STRUCTURE 2 处、anti-patterns 2 处（「调节器」1、「K 节」1，都是现象段），全是历史。
+  .claude/、~/.claude/CLAUDE.md、~/.claude/templates/：0（只扫不改）。
+  意思上的指针（BACKLOG 59 第二条那种）：搜「8 项」，只剩规则 57、60 与 SESSION_START 本身，已是新写法。
+三，KB 文件尾「这节课具体怎么上」一句，照 A 节索引补「每段怎么讲看 LESSON_TEMPLATE 与 TEACHING_STYLE」，兑现补遗 127 第二点第 7 项。
+进 HARNESS：否（执行记账）。
