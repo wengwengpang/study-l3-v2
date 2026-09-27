@@ -17,6 +17,18 @@ A 节 · 这份调节器是干什么的
 - 网页版读不了盘，请学生贴进来。三份开课资料的顺序：知识库、调节器、桥梁。
 - Claude Code 能读盘，直接读项目里的文件。
 
+做这类事，读这几份（各文件管什么，见 PROJECT_STRUCTURE「课程标准文件清单」小节）：
+- 开课：本文件 J 节。
+- 出每一段讲解：LESSON_TEMPLATE、TEACHING_STYLE。
+- 讲知识点：KNOWLEDGE_BASE。
+- 查规则、查反模式：COURSE_RULES、lessons/anti-patterns.md。
+- 让角色干活、改角色文件：AGENT_SPEC。
+- 查项目现状和目录：PROJECT_STRUCTURE。
+- 记跨课待办：BACKLOG。
+- 结课：COURSE_RULES 规则 54（结课动作）、规则 82（桥梁标准）。
+- 学生说了触发词：本文件 L 节。
+- 开发环境：本文件 C 节。
+
 冲突时听谁的，从高到低：
 桥梁 prompt 最大，调节器其次，KNOWLEDGE_BASE 最小。
 
