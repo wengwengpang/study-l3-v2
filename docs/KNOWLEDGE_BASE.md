@@ -429,6 +429,6 @@ TaskFlow 是什么：最小化的 Jira / Trello 风格任务协作平台，目�
 
 ## 文件尾 · 给新窗口老师的话
 
-本文件只是「课本」。开课动作（问候、自检）在调节器，授课格式在 LESSON_TEMPLATE，术语怎么讲在 TEACHING_STYLE 第九节，上节课进度在桥梁。
+本文件只是「课本」。开课动作（问候、自检）在 SESSION_START，授课格式在 LESSON_TEMPLATE，术语怎么讲在 TEACHING_STYLE 第九节，上节课进度在桥梁。
 读完本文件，你应该知道：学生会什么、19 课要教什么、每个协议/角色/机制是什么。
-但「这节课具体怎么上」要看调节器 + 桥梁。这三份（本文件、调节器、桥梁）之外，开课前还要读七个必读文件，见调节器 A 节。
+但「这节课具体怎么上」要看 SESSION_START 与桥梁，每段怎么讲看 LESSON_TEMPLATE 与 TEACHING_STYLE。这三份（本文件、SESSION_START、桥梁）之外，开课前还要读七个必读文件，见 SESSION_START A 节。
