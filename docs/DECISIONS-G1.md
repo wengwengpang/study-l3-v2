@@ -2662,3 +2662,20 @@ HARNESS 候选：「句子指向临时文件要带失效条件，删临时文件
   6 同意：补遗 138 第三点问 6 五处照改。
 二，一处一提交，文字照补遗 138 第三点与本条第一点。
 进 HARNESS：否（拍板记录本身不是框架层）。
+
+--- 补遗 140 · 桥梁五处已落，启动指令停在一句无家；手册初稿已建送审；第 9 步事实 ---
+一，问 6 五处已落，每处新文与旧文当场数过：第 1 节两句 1bab86c；前置状态 cdbfaff；变更提醒二 3470b01；第 7 节 075d387；第 9 节一 2f5cdfc。
+  第 7 节写时曾把「它现在是」顺手写成「它是」，提交前改回原文，未入提交。
+二，5A 启动指令未落。删前核第二个家（规则 75），有一句无家：
+  第 2 件「architect 只有 Read 权限，产文本，学生用 cat 落盘」。「只有 Read」在 .claude/agents/architect.md 有家；「学生用 cat 落盘」在桥梁别处、规则、SESSION_START 都没有。
+  其余都有家：复述背景在第 0、3 节；额外两份文档在第 9 节二；「cat -A」在反模式 22；自检在 SESSION_START J 节第 4 件；「不要问权限模式」在变更提醒一；先问从哪一组开始在第 5 节；规则 44 在第 2 节；末尾三句在规则 60 追加、54、63。
+  补遗 138 问 5 写「本课特有的动作已在第 0、5、9 节」，对这一句不成立，是 CC 核漏。停下问，见第四点问 7。
+三，第 8 步：docs/REFACTOR-HANDBOOK.md 初稿 196ceda，84 行。七节：何时停下修、四段流程、四份临时文件、每条改动节奏、硬做法、模板、本场教训六条（各带进 HARNESS 判定：并入三条、否三条）。已开子代理审，判「并入」的按约定第九节送审。
+  传播面：PROJECT_STRUCTURE 目录树要加一行，与第 10 步扫引用后一起改（规则 52 目录树放最后）。
+四，第 9 步事实（常驻文件引用数，当场 grep -c）：
+  DECISIONS-G1：BACKLOG 20、HARNESS 16、COURSE_RULES 13、TEACHING_STYLE 3、REFACTOR-HANDBOOK 2。
+  HANDOFF-refactor-w2、BACKLOG-重构窗口交接：0。
+  PENDING-TUNER-REFACTOR：BACKLOG 1、PROJECT_STRUCTURE 1。REFACTOR-BRIEF：COURSE_RULES 2、BACKLOG 2、CLAUDE.md 1。
+  另：PROJECT_STRUCTURE 目录树没列 DECISIONS-G1、HANDOFF、BACKLOG-重构窗口交接、REFACTOR-BRIEF 四份。
+  问 7 与第 9 步问题见下一条回复，学生答后落。
+进 HARNESS：否（执行记账与核查记录）。
