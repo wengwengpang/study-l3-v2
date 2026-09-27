@@ -21,7 +21,7 @@
     ├── AGENT_SPEC.md            角色文件标准图纸
     ├── BACKLOG.md              跨课待办清单
     ├── COURSE_RULES.md          课程规则唯一正本，号段见 COURSE_RULES 文件头
-    ├── COURSE_TUNER.md          课程调节器（开课资料，重构中，规则已下沉至 COURSE_RULES）
+    ├── SESSION_START.md         开课入口：读哪些文件、开课动作、触发词、环境指针（原课程调节器，重构 G10 改名）
     ├── HARNESS.md               框架中枢规格（骨架，重构第一窗口建）
     ├── PENDING-TUNER-REFACTOR.md 开课资料重构待执行清单兼交接（执行完删除）
     ├── BRIDGE-05-api-w2.md      05-API 第二窗口暂存桥梁（学生确认后删除）
