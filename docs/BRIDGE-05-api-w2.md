@@ -199,10 +199,8 @@ docs/arch/ 现有四个文件：API_CONTRACT.md、ARCHITECTURE.md、DECISIONS.md
 
 ## 第 9 节 · 本窗口特别要注意的
 
-一、开场顺序必须是：先请学生贴七文件 → 读完做自检 → 再出大纲和任何项目内容。
+一、开场顺序必须是：先读全开课必读文件（怎么拿照 SESSION_START A 节） → 读完做自检 → 再出大纲和任何项目内容。
 规则 60 追加段：读完前只讲课程层地图，不出任何项目具体内容，举例也算（反模式 37）。
-七文件之外，若开课资料重构尚未全部完成，还须读 docs/PENDING-TUNER-REFACTOR.md，
-知道调节器哪几节还是旧的。
 
 二、本窗口额外需读：docs/arch/ARCHITECTURE.md（四节全文）与 docs/arch/API_CONTRACT.md。
 后者是本课已有产物，篇幅短。
