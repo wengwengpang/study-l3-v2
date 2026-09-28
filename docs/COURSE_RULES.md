@@ -141,7 +141,7 @@ PROJECT_STRUCTURE.md 的更新必须是结课的最后一个文件动作，排�
 1. 新反模式入库（anti-patterns.md）——每条同时判定进不进自检，写进条目末尾（规则 73）
 2. 新规则入库（COURSE_RULES.md）——每条同时判定进不进自检，写进条目末尾（规则 73）
 3. 写两份笔记（NN-full.md、NN-cheatsheet.md）
-4. 更新目录树（PROJECT_STRUCTURE.md）← 必须排在所有文件落盘之后
+4. 更新目录树（PROJECT_STRUCTURE.md）← 必须排在所有文件落盘之后。桥梁除外：它排在第 6 项，这里先把它的文件名登记进目录树。
 5. git 提交
    第 5、6 项之间送审，照 SESSION_START M 节。
 6. 发桥梁：存成 docs/ 下的 BRIDGE 文件并单独提交（必须是最后一步，规则 45）。文件名已在第 4 项登记进目录树。
