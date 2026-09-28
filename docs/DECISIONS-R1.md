@@ -455,3 +455,10 @@ grep -rn "贴回\|粘贴\|网页版\|老师" docs/
 三，冲突：第二次学生说答了 No，工具记录是写入成功。同一轮里 git commit 与 git checkout 两条 Bash 也都执行了。CC 分不出是弹窗答 No 没拦住，还是答的那一下不是这次 Edit 的弹窗。不下结论。
 四，已查：.claude/settings.local.json 的 allow 为空，没有放行 docs 的规则。
 五，下个会话从这里接：先查清第二次，再答问 46。第四次测只做 Edit 一件事，学生答 No 前把弹窗上写的工具名、文件名、所选选项原文告诉 CC。
+
+--- R1-29 · 弹窗测试第四次：拦住；第二次按学生说明结案 ---
+一，第四次测：只做一次 Edit，不跑 Bash。学生贴回弹窗原文：「Editing docs/COURSE_RULES.md」「Do you want to make this edit to COURSE_RULES.md? ❯ 1. Yes 2. No」，并有「Opened changes in Visual Studio Code」「Save file to continue…」。学生选 No，Edit 被拒，文件未动，原句数 1，改后数 0。
+二，第二次结案：学生原话：「我前面是没有细心看」。按答错弹窗记，不算锁失效。
+三，结论：auto mode 开着时，Edit(docs/**) 弹窗，答 No 拦得住。问 46 推荐 A 的机械锁成立。
+四，新发现，两处易误放行：光标默认停在「1. Yes」，直接回车即放行；弹窗同时在 VS Code 打开改动并提示「Save file to continue」，[假设] 在 VS Code 里保存也会放行，未测。
+五，下个会话从这里接：答问 46。
