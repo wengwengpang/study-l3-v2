@@ -3112,3 +3112,15 @@ HARNESS 候选：「句子指向临时文件要带失效条件，删临时文件
      「    ├── REFACTOR-HANDBOOK.md     重构手册：从本次重构提炼、换项目可用的做法（学生复制到 ~/.claude/templates/）」
   传播面：目录树只 PROJECT_STRUCTURE 一处；七文件清单不含这两份，不影响。
 进 HARNESS：否（执行记账）。
+
+--- 补遗 163 · PENDING 收尾第一批已落；删两份重构文件：D5 影响与回滚 ---
+一，学生原话：「24 到 28 同意」。已落，文字照补遗 162 第三点一字不差，新各 1、旧各 0：
+  PENDING 第六节两行 4a6b53d、da3b1c9；第十节末句 94a23be；目录树 PENDING 说明 4ac5a5c；目录树加两行 626eb1f（两行各 1，下一行桥梁锚点仍 1）。
+二，删 HANDOFF-refactor-w2.md（96 行）、BACKLOG-重构窗口交接.md（252 行），D5 双确认。当场扫描：
+  1. 谁指着它们（grep 文件名）：HANDOFF 被 PENDING 1 处、REFACTOR-BRIEF 3 处、DECISIONS-G1 15 处引；交接文件被 PENDING 2 处、DECISIONS-G1 21 处引。常驻文件（COURSE_RULES、HARNESS、BACKLOG、手册、SESSION_START、KNOWLEDGE_BASE、TEACHING_STYLE、LESSON_TEMPLATE、PROJECT_STRUCTURE、桥梁）、CLAUDE.md、.claude/、~/.claude/templates/、~/.claude/CLAUDE.md 0 处。
+     PENDING、DECISIONS-G1 是只查不追加的档案，引用留作历史，不改（补遗 143 第三点）。REFACTOR-BRIEF 随后删。
+     BACKLOG 45（已关）提「HANDOFF 第 2 节」、BACKLOG 67 提「原交接文件第四节」，都带 DECISIONS-G1 出处，留作来历。
+  2. 内容第二个家：补遗 157 初核、158 子代理审、158 到 161 补完。
+  3. 回滚：两份都在 git 里，最后一次改动 HANDOFF 在 dae7fb2，交接文件在 da67489。删后要恢复，跑 git revert <删除提交号>，或 git checkout <删除提交号>^ -- <文件路径>。
+  4. 做法：git rm，一份一提交。删后验证：文件不存在；git log 能查到删除提交。
+进 HARNESS：否（执行记账与 D5 影响清单）。
