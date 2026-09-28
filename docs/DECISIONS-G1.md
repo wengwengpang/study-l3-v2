@@ -3183,3 +3183,17 @@ HARNESS 候选：「句子指向临时文件要带失效条件，删临时文件
 二，发现：PROJECT_STRUCTURE 有一处未提交的改动，不是 CC 改的。配套机械层一行被截在「加 Edit(docs/arch/**)、」，对照 34 的新文「显式声明 defaultMode；……）✓」落到了文件最末一行（在环境命令 docker -v 之后），文件末尾换行也没了。看着像对照 34 手改时粘错了位置。
   按工具提示，CC 不自行撤销，先报学生。未提交，git 里的版本仍完好。
 进 HARNESS：否（执行记账）。
+
+--- 补遗 169 · PROJECT_STRUCTURE 已恢复并落对照 34；删约定：D5 影响与回滚，两句对照 ---
+一，学生原话：「恢复后你来改」。CC 跑 git checkout -- docs/PROJECT_STRUCTURE.md 恢复已提交版本（工作区回到干净，配套机械层一行完整，文件末尾换行在），再按对照 34 改，540bd69。新 1、旧 0，末行仍是 docker -v 一行。
+二，第 12 步删 docs/REFACTOR-BRIEF.md（298 行），D5 双确认。执行：CC 跑 git rm（补遗 16 第七件）。当场扫描：
+  1. 谁指着它：常驻文件只剩 COURSE_RULES 两句（规则 28、77，各自带「REFACTOR-BRIEF 删除时本句一并删」），同批删，见第三点；BACKLOG 45（已关）、46 提来源，46 已改指补遗 127（7fb0cd9），45 留作历史。CLAUDE.md 已 0 处（0a99814）；.claude/、~/.claude/CLAUDE.md、~/.claude/templates/ 0 处。PENDING、DECISIONS-G1 是档案，不改。CC 自动记忆已改指手册（补遗 166 第二点第 7 项）。
+  2. 只住约定的句子：补遗 143 第四点、161 第二点、162 第一点，都已有家或判不需要，经补遗 148 组末审查。
+  3. 删后的影响：新会话不再有重构工作约定；规则 28 恢复「改已有文件强制用 Plan Mode」原样生效；规则 77 的课程笔记禁改临时边界解除。
+  4. 回滚：约定最后一次改动在 b7e38ca。删后要恢复，git revert <删除提交号>，或 git checkout <删除提交号>^ -- docs/REFACTOR-BRIEF.md；CLAUDE.md 导入行另从 0a99814^ 取回。
+  5. 做法：先删规则 28、77 两句（一句一提交），再 git rm 约定（一提交）。
+三，对照（两句整行删）：
+  35. 规则 28 删整行「    重构期间，REFACTOR-BRIEF 第四节的对照流程等效替代 Plan Mode，不叠加（REFACTOR-BRIEF 删除时本句一并删）。」
+  36. 规则 77 删整行「临时边界：重构期间 docs/lessons/ 下的课程笔记禁 CC 改（anti-patterns.md 是反模式正本，不在此列），拍板类判定行改写在补遗里。上课时笔记由老师写，不受此限（REFACTOR-BRIEF 删除时本句一并删）。」
+  两句别处无人引用（grep「等效替代」「临时边界」常驻文件各只 1 处，就是它们自己）。
+进 HARNESS：否（执行记账与 D5 影响清单）。
