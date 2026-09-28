@@ -21,7 +21,7 @@
     ├── AGENT_SPEC.md            角色文件标准图纸
     ├── BACKLOG.md              跨课待办清单
     ├── COURSE_RULES.md          课程规则唯一正本，号段见 COURSE_RULES 文件头
-    ├── SESSION_START.md         开课入口：读哪些文件、开课动作、触发词、环境指针（原课程调节器，重构 G10 改名）
+    ├── SESSION_START.md         开课入口：读哪些文件、开课动作、触发词、环境指针、送审（原课程调节器，重构 G10 改名）
     ├── HARNESS.md               框架中枢规格（骨架，重构第一窗口建）
     ├── PENDING-TUNER-REFACTOR.md 开课资料重构待执行清单兼交接（重构结束后只查不追加，不删）
     ├── DECISIONS-G1.md          开课资料重构决策记录（重构结束后只查不追加，常驻文件拿补遗号当出处）
