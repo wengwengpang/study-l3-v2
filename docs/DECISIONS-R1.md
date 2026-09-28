@@ -390,3 +390,11 @@ grep -rn "贴回\|粘贴\|网页版\|老师" docs/
 三，学生答 40A（D8）：以第 8 块新写法为准，规则 5 随改。
 四，挪到第 11 条：COURSE_RULES「规则 1 到 7，是老师的行为底线」整组按乙写（规则 2 画框投屏、3 不替学生建文件、4 老师写 prompt 学生粘贴、5 同上），与 LESSON_TEMPLATE 第一节标题「执行 prompt」及第 4 到 7 块（CC prompt 那几块）一起处理，先改正本再改模板。规则 4 藏着一个学生要拍的取舍：丙里学生还学不学写 prompt。规则 31「由老师出文本，CC 只负责落地」也在第 11 条。第 10 条除这些外做完。
 五，下个会话从这里接：C 组第 11 条。先按 R1-17 第三点的搜索词（贴回 / 粘贴 / 粘 / 网页版 / prompt / 老师）在常驻文件里搜，列出全部命中，再从规则 1 到 7 起逐处出对照。
+
+--- R1-20 · 学生答 41A；第 11 条范围与命中 ---
+一，学生原话：「41A」。
+二，命中数命令：grep -ciE '贴回|粘|网页版|prompt|老师' <文件>，按行计，一行多词算一次，不分大小写。
+  逐处判 12 份：COURSE_RULES 57；BRIDGE-05-api-w2 16；KNOWLEDGE_BASE 16；SESSION_START 15；BACKLOG 10；TEACHING_STYLE 9；LESSON_TEMPLATE 9；HARNESS 6；CLAUDE.md 3；AGENT_SPEC 2；REFACTOR-HANDBOOK 2；PROJECT_STRUCTURE 1。共 146 行。
+  整类不影响：DECISIONS 两份；PENDING-TUNER-REFACTOR（文件头写「只查不追加」）；lessons/ 各课 full 与 cheatsheet（已上完的课的记录）；anti-patterns（案例库，记已发生的事）。理由：这几类记的是按乙发生过的事，改了等于改历史。R1-10 已同样处理 PENDING-TUNER-REFACTOR。
+三，做法：逐处判不等于逐处改。判「不影响」的按文件分组列给学生过目；要改的一处一个对照。HARNESS 第一节「三种模式」的命中只标不改，归第 2 步。CLAUDE.md 要改即改宪法，单独停下问。
+四，下个会话从这里接：从 COURSE_RULES 规则 1 到 7 起逐处出对照。
