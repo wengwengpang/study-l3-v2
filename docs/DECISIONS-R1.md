@@ -514,3 +514,10 @@ grep -rn "贴回\|粘贴\|网页版\|老师" docs/
 二，CC 推荐顺序，按「CC 上课多早读到、读错影响多大」排：1 SESSION_START；2 TEACHING_STYLE；3 LESSON_TEMPLATE；4 KNOWLEDGE_BASE（[假设] 多为 Level 1 历史知识）；5 AGENT_SPEC、PROJECT_STRUCTURE、REFACTOR-HANDBOOK；6 BACKLOG；7 HARNESS（只标不改）；8 CLAUDE.md（改宪法单独问）；9 BRIDGE-05-api-w2（先整份问留不留，删走双确认）。
 三，学生未当场选，贴的是同一段笼统授权（同 R1-30 第五点）。顺序可逆、只定先后，按推荐项暂定入库；下次开场先请学生过目，可调。
 四，下个会话从这里接：学生过目顺序后，从 SESSION_START 起。读命中所在整条，按 R1-24 第三点分「不影响」「要改」两组，先给学生过目，再逐处出对照。本会话已长，按手册第五节换新会话。
+
+--- R1-37 · 丙的状态口径；回退范围更正 ---
+一，学生问「丙是不是可能改不成」「之前不是说能做出丙吗」。缘由：CC 开场讲整体时写「这一轮定下的新方案：丙」，下一行又写「暂定」，前后打架，是 CC 用词错。
+二，口径：丙能做（CC 能读盘，R1-2；弹窗拦得住，R1-29；网页版判纸面成立，R1-3）。要不要正式定，按 32A 试头两节课，看 R1-6 第四点 A 三样，由学生拍板。学生复述原话：「到时我可以选择」。
+三，回退范围更正：CC 说「不行就一步退回乙」，说轻了。命令 git diff --stat pre-trial-c -- docs/，截至 a22e8f0，tag 后 docs/ 改 8 份：说明书 7 份（COURSE_RULES、SESSION_START、LESSON_TEMPLATE、TEACHING_STYLE、KNOWLEDGE_BASE、AGENT_SPEC、PROJECT_STRUCTURE），记录 1 份（DECISIONS-R1，加 190 行）。整个 docs/ 退回会丢 R1-11 起的记录。退回时只退说明书，保留 DECISIONS-R1；退回走双确认。
+四，未定义：两节课后不合格，是全退回乙，还是在丙上补洞，记录只写「再正式定」。届时由学生定，CC 不预设。
+五，下个会话从这里接：同 R1-36 第四点。学生过目 11 份顺序后，从 SESSION_START 起。
