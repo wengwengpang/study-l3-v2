@@ -473,3 +473,10 @@ grep -rn "贴回\|粘贴\|网页版\|老师" docs/
   KNOWLEDGE_BASE 第六块 Plan Mode 条：「什么时候切，见 COURSE_RULES 规则 28」随 46A 已不对，待出对照。
   另：弹窗一律按建议放行，与规则 30 和规则 28 新文「弹窗看清再答」相冲，CC 不据此改做法，弹窗仍请学生逐个看。
 六，下个会话从这里接：先答 LESSON_TEMPLATE 第 4 块留空还是重排，再出 KNOWLEDGE_BASE Plan Mode 条对照；之后 R1-25 第二点第 3 处，规则 51。
+
+--- R1-31 · 46A 清单做完 ---
+一，LESSON_TEMPLATE 第一节第 4 块：学生回「帮我改」，所对的选项写明按留空改，b8ea959。编号留空不重排，第 5 到 9 块及别处块号引用不动。第 5 到 7 块仍按乙写，留 C 组第 11 条（R1-23 第三点）。
+二，KNOWLEDGE_BASE 第六块 Plan Mode 条：学生说「帮我改」，949c0df。「什么时候切，见规则 28」改为「本课程上课改已有文件不切，走对照加「帮我改」，见规则 28」；「键盘切、打字切不了」一句保留，规则 42 废后这是它唯一的家。BACKLOG 41（快捷键写死）不影响。
+三，46A 清单五处做完：规则 28、规则 42（连带文件头两处）、TEACHING_STYLE 第四节、LESSON_TEMPLATE 第 4 块、KNOWLEDGE_BASE Plan Mode 条。R1-25 第二点第 2 处做完。
+四，本段改过的说明书：COURSE_RULES、TEACHING_STYLE、LESSON_TEMPLATE、KNOWLEDGE_BASE，复课第一节送审一并带上。
+五，下个会话从这里接：R1-25 第二点第 3 处，规则 51「禁止长文件整块甩出让学生直接粘」。
