@@ -108,6 +108,14 @@ M 节 · 送审（网页版独立审查）
 2. 原文一律用命令导出，不经 CC 转述。先写命令，再贴命令的原样输出。常用 cat、sed -n、git show、git diff。
 3. 包末尾留一栏「我想问的」，由学生自己填。
 
+什么时候送审（依据 DECISIONS-R1 R1-3 第 1-3 条）：
+由学生查，不由 CC 判断。中一条就送。
+1. 本节改了说明书、宪法、权限或角色文件。结课前学生在 CC 里跑下面的命令，有输出就中：
+   ! git diff --stat <开课提交号> -- docs/COURSE_RULES.md docs/lessons/anti-patterns.md docs/TEACHING_STYLE.md docs/LESSON_TEMPLATE.md docs/AGENT_SPEC.md docs/SESSION_START.md docs/KNOWLEDGE_BASE.md docs/HARNESS.md CLAUDE.md .claude/settings.json .claude/agents/
+2. 本节是一个阶段的最后一节。阶段划分见 KNOWLEDGE_BASE 第七节。
+3. 学生说「请反方」。
+开课提交号：开课时 CC 跑 git log --oneline -1，报给学生记下。
+
 ==================================================
 SESSION_START 结束
 ==================================================
