@@ -3165,3 +3165,13 @@ HARNESS 候选：「句子指向临时文件要带失效条件，删临时文件
   B：三处退回重构前，学生亲手改。
   C：先不动，进 BACKLOG，复课前定。
 进 HARNESS：否（审查登记与待答问题）。
+
+--- 补遗 167 · 对照 31 到 33 已落；29A；一次验证数不对仍提交 ---
+一，学生原话：「31 到 33 同意，29A」。已落，文字照补遗 166 第三点一字不差：HARNESS 第五节 fa6bcc5；BACKLOG 67 1cf818d；BACKLOG 46 7fb0cd9。新各 1、旧各 0。
+  BACKLOG 67 那条「git show 295248a^:docs/BACKLOG-重构窗口交接.md」当场跑过，第四节标题 1 处，命令可用。
+二，程序失误（CC 认）：BACKLOG 67 提交时，验证命令用了正则 grep，新文计数显示 0，CC 没停下就提交了。事后用 grep -F 重数为 1，内容无误；0 是正则把「^」「|」当特殊字符造成的。按约定第四节第 7 步与手册「验证数不对」应先停。此后含特殊字符的验证一律用 grep -F。
+三，29A 细目：
+  1. 三处权限都留（.claude/settings.json 不动）。
+  2. 学生亲手删 .claude/settings.local.json 里 allow 唯一一条「Bash(grep -c \"^=== 第六窗口补遗结束 ===$\" docs/DECISIONS-G1.md)」（该文件被全局 gitignore，不进提交）。
+  3. 对照 34：PROJECT_STRUCTURE「CLAUDE.md 追踪」配套机械层一行，「显式声明 defaultMode）✓」改为「显式声明 defaultMode；开课资料重构迁入 CC 时加：Edit(docs/**) 进 ask、两份 settings 的 Edit 进 deny、git status/log/diff 进 allow）✓」。
+进 HARNESS：否（执行记账）。
