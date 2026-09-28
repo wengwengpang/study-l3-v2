@@ -248,7 +248,7 @@ COURSE_RULES、anti-patterns、TEACHING_STYLE、PROJECT_STRUCTURE、AGENT_SPEC�
 与反模式关系：反模式 24（重要意图只记桥梁不进持久层）、25（制度只保证本次不保证传承）是「没分层/没传承」的病，本条是药方。
 
 ## 65 · BACKLOG 跨课待办纳入开课必读与结课动作
-开课必读升级为 7 个：规则 58 的六文件 + docs/BACKLOG.md。清单见 docs/PROJECT_STRUCTURE.md 的「课程标准文件清单」小节。请学生贴回，禁止凭印象编（反模式 1）。
+开课必读升级为 7 个：规则 58 的六文件 + docs/BACKLOG.md。清单见 docs/PROJECT_STRUCTURE.md 的「课程标准文件清单」小节。读法见规则 55。
 结课固定动作（规则 54）追加一项：逐条问学生本课有无该进 backlog 的待办。
 落点判据见规则 64：BACKLOG 装「该做但本课不做」的跨课待办，与桥梁（一次性用完即弃）、COURSE_RULES（已生效规则）区分。
 与规则 54/58 关系：叠加扩充，不替代。
