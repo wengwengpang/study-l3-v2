@@ -1309,3 +1309,18 @@ CC 推荐 76B 的理由，是四项边界多半未定，所以判据要等核心
 - **F5 的出处部分**：我撤回。
 
 （R1-79 原文完）
+
+--- R1-80 · R1-79 逐条认不认；F33 重跑；问 80 到 82 ---
+一，核过再判：F34 属实，依赖判据四的否类行不截断重数是 66 行（R1-69 记 64，因分类命令按「，」截断且 head -25 截尾），新开并入 33 行；另核出 R1-70、R1-77 所说「抽到补遗 30 的 27-甲」是 CC 认错了行：抽到的 G1 761 行是 27-乙「并入（原则 3）」，27-乙 终判同在补遗 31 改判「否（不是框架层）」，结论不变，认错的是名字。F39 第一点属实，并入判定写在 R1-78 第三点，不在 R1-74。F42 第二点属实，原则 10、14 各只写与 8 分开立。
+二，认不认：F32 至 F45 全认；F42 留第 3 步资料管理员（随 BACKLOG 58）；F45 为备查，记为「中枢何时自己拍」的实例：CC 在 R1-74 第五点替学生在 F7、F9 的两种写法里各选了一种，R1-76 第二点把两问捆成一问。今后审查给了两种以上写法的，也按 A/B/C 问；不为凑每轮三问捆题。
+三，F33 重跑（定向核是回校的主证据，原样存档于此）。命令：对下面 66 行逐行取判定行上 12 行至下 3 行（含判定行本身），用 grep -oE 搜关键词，去重列出。
+  $ git grep -n "进 HARNESS：否（不是框架层\|进 HARNESS：否（拍板记录本身\|进 HARNESS：否（本次工作方式" -- docs | grep -v DECISIONS-R1
+  关键词：写代码|会写代码|代码|终端|命令行|命令|技术门槛|不懂技术|技术|小白|看不懂|git |cat |grep
+  原样输出（文件:行 [命中]，前缀 docs/ 省去）：
+  COURSE_RULES.md:196 [];COURSE_RULES.md:459 [];COURSE_RULES.md:505 [代码 ];COURSE_RULES.md:546 [];COURSE_RULES.md:572 [];COURSE_RULES.md:586 [];DECISIONS-G1.md:792 [];DECISIONS-G1.md:793 [];DECISIONS-G1.md:800 [];DECISIONS-G1.md:845 [grep ];DECISIONS-G1.md:863 [];DECISIONS-G1.md:887 [];DECISIONS-G1.md:901 [];DECISIONS-G1.md:918 [];DECISIONS-G1.md:958 [];DECISIONS-G1.md:986 [];DECISIONS-G1.md:992 [];DECISIONS-G1.md:1041 [];DECISIONS-G1.md:1096 [];DECISIONS-G1.md:1116 [];DECISIONS-G1.md:1117 [];DECISIONS-G1.md:1190 [终端 ];DECISIONS-G1.md:1238 [];DECISIONS-G1.md:1266 [];DECISIONS-G1.md:1288 [];DECISIONS-G1.md:1309 [];DECISIONS-G1.md:1352 [];DECISIONS-G1.md:1411 [];DECISIONS-G1.md:1437 [];DECISIONS-G1.md:1476 [];DECISIONS-G1.md:1477 [];DECISIONS-G1.md:1478 [];DECISIONS-G1.md:1493 [];DECISIONS-G1.md:1506 [];DECISIONS-G1.md:1507 [];DECISIONS-G1.md:1574 [grep ];DECISIONS-G1.md:1575 [grep ];DECISIONS-G1.md:1590 [];DECISIONS-G1.md:1685 [];DECISIONS-G1.md:1733 [];DECISIONS-G1.md:1769 [命令 ];DECISIONS-G1.md:1806 [];DECISIONS-G1.md:1865 [];DECISIONS-G1.md:1878 [];DECISIONS-G1.md:1939 [git  ];DECISIONS-G1.md:2002 [];DECISIONS-G1.md:2008 [];DECISIONS-G1.md:2058 [];DECISIONS-G1.md:2131 [命令 ];DECISIONS-G1.md:2137 [git  命令 ];DECISIONS-G1.md:2226 [];DECISIONS-G1.md:2276 [];DECISIONS-G1.md:2333 [技术 ];DECISIONS-G1.md:2459 [];DECISIONS-G1.md:2488 [grep ];DECISIONS-G1.md:2498 [];DECISIONS-G1.md:2606 [];DECISIONS-G1.md:2665 [];DECISIONS-G1.md:2717 [cat  ];DECISIONS-G1.md:2774 [];DECISIONS-G1.md:2799 [];DECISIONS-G1.md:2883 [];DECISIONS-G1.md:2917 [命令 ];DECISIONS-G1.md:2954 [grep 命令 ];REFACTOR-HANDBOOK.md:114 [git  ];REFACTOR-HANDBOOK.md:120 [git  命令 ];
+  逐行读命中的 16 行：原 10 行同 R1-74 第三点；新增 6 行，COURSE_RULES 505（「不自动跑代码」是上方规则 66 理由原话）、G1 1769（验证命令）、2131 与 2137（核对命令）、2333（「技术栈与数据库决策」）、2917（「跑一条命令拼成开课包」）。全部是过程描述或别的条目顺带出现，判否理由都不靠「用户不懂技术」。按新口径无翻案。限度：仍是关键词搜，意思相近而不含这些词的说法会漏。
+四，F34 处理：导出的抽样命令复现不出 R1-70 的样本，抽样不再作证据。回校的依据只留两样：口径论证（R1-70 第二点）与本条第三点的定向核。
+五，问 80（F32 中枢为什么不能隔开干活）：A 补理由「中枢要边问边等用户拍板，隔开干活的一方中途接不了用户的话」，标「出处待补」；B 把原来那句理由改成「中枢为什么不能隔开：理由待补」。CC 推荐 B：A 那条理由项目文件里没有出处，HARNESS 开头要求不凭空设计；B 不丢事实，理由等找到出处再写。
+六，问 81（F36 原则 17 管不管长会话）：A 算，加进去，标题改「失忆或长会话后，先重读行为标准」，并把「开新会话」「换窗口」合成「换会话（含换窗口）」，写成三种：长会话、上下文被压缩、换会话；B 不算，写理由「长会话由规则 48 七八成结课预防」，会话与窗口同样合一，写成两种。CC 推荐 A：反模式 17 的标题就是「长会话后角色漂移」，修复段也列了长会话；规则 48 管的是别拖到压缩，七八成之前的稀释它不管。
+七，问 82（F38 原则 17 指向问题 3 落空）：A 问题 3 下加一行「谁来发现主体失忆、怎么查（原则 17，审查 F21）」；B 另编问题 9。CC 推荐 A：发现和验证都是「失忆的主体接没接上」同一件事的两头，放一起读得顺；另编 9 会把一件事拆两处。
+八，其余认的项：F35、F37、F39、F40 审查只给了一种写法，照写；F41（问题 6 还是 BACKLOG 61）、F43（去名单还是注明出处）、F44（第五节加一句还是开 BACKLOG）各有两种写法，第二轮问 83 到 85。
