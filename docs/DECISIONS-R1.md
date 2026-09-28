@@ -508,3 +508,9 @@ grep -rn "贴回\|粘贴\|网页版\|老师" docs/
 三，传播面（搜 发桥梁、桥梁最后一步、所有文件落盘之后、目录树最后）：SESSION_START M 节「第 6 项发桥梁之前」、规则 45 追加「桥梁写完交学生确认前」均不影响。R1-15 第二点小缝（送审结论让 CC 新建文件时目录树漏登）未处理，另一件事。
 四，R1-25「要改」组六处全完：规则 31、42 与 28、51、55、65、82（连带规则 54 两项、规则 52）。COURSE_RULES 命中做完。
 五，下个会话从这里接：R1-20 其余 11 份文件逐处判。先列 11 份处理顺序给学生定。已挂着的：SESSION_START J 节第 3 件分工段（R1-33）；TEACHING_STYLE、LESSON_TEMPLATE 第一节第 5 到 7 块（R1-23 第三点）；HARNESS 第一节三种模式只标不改，归第 2 步；CLAUDE.md 要改即改宪法，单独停下问（R1-20 第三点）；BRIDGE-05-api-w2 是暂存桥梁，目录树写「学生确认后删除」，删文件走双确认。
+
+--- R1-36 · 其余 11 份处理顺序（暂定） ---
+一，重数命中（命令同 R1-20 第二点），共 86 行：BRIDGE-05-api-w2 16；KNOWLEDGE_BASE 16；SESSION_START 15；BACKLOG 10；LESSON_TEMPLATE 9；TEACHING_STYLE 7（原 9）；HARNESS 6；CLAUDE.md 3；REFACTOR-HANDBOOK 2；AGENT_SPEC 1（原 2）；PROJECT_STRUCTURE 1。
+二，CC 推荐顺序，按「CC 上课多早读到、读错影响多大」排：1 SESSION_START；2 TEACHING_STYLE；3 LESSON_TEMPLATE；4 KNOWLEDGE_BASE（[假设] 多为 Level 1 历史知识）；5 AGENT_SPEC、PROJECT_STRUCTURE、REFACTOR-HANDBOOK；6 BACKLOG；7 HARNESS（只标不改）；8 CLAUDE.md（改宪法单独问）；9 BRIDGE-05-api-w2（先整份问留不留，删走双确认）。
+三，学生未当场选，贴的是同一段笼统授权（同 R1-30 第五点）。顺序可逆、只定先后，按推荐项暂定入库；下次开场先请学生过目，可调。
+四，下个会话从这里接：学生过目顺序后，从 SESSION_START 起。读命中所在整条，按 R1-24 第三点分「不影响」「要改」两组，先给学生过目，再逐处出对照。本会话已长，按手册第五节换新会话。
