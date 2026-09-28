@@ -675,3 +675,4 @@ grep -rn "贴回\|粘贴\|网页版\|老师" docs/
 二，本步改过的说明书（SESSION_START、HARNESS、TEACHING_STYLE、LESSON_TEMPLATE、KNOWLEDGE_BASE、COURSE_RULES 等）复课第一节送审一并带上（R1-30 第四点），第一次送审另附 git diff pre-trial-c -- docs/（M 节试行期段）。
 三，余下复课前的活（均标「复课前」）：BACKLOG 60 第一件填 HARNESS 第一、二节（即第 2 步，多处判定挂在「第 2 步填 HARNESS 时一并判」）；BACKLOG 68 资料管理员；BACKLOG 69 带学生读手册。三件先后待学生定。
 四，下个会话从这里接：学生定余下三件先后。
+五，学生原话：「先做甲」。先做第 2 步填 HARNESS 第一、二节；乙、丙先后待甲做完再定。
