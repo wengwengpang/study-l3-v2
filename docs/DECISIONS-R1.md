@@ -442,3 +442,9 @@ grep -rn "贴回\|粘贴\|网页版\|老师" docs/
 一，学生答 45A：课程私有知识以 KNOWLEDGE_BASE 为准，不许编；角色文件由 CC 按 AGENT_SPEC 起草，学生看过说「帮我改」才落盘。理由：乙里老师出文本、CC 落地是两道关，丙里合成一道；知识靠 KNOWLEDGE_BASE 兜，角色文件靠学生当场看，加 M 节送审（.claude/agents/ 在送审命令里）。规则 31 改写 b320dc9。
 二，连带（搜「规则 31 / 老师出文本 / CC 只负责落地 / cat 由老师 / CC 不参与编写」），学生逐处说「帮我改」：规则 66「与规则 31 关系」行 daa4fed（末尾加一句，分清角色文件与配置文件）；AGENT_SPEC 落盘方式 dce8afa。LESSON_TEMPLATE 红线行已是丙版，不改。
 三，下个会话从这里接：R1-25 第二点第 2 处，规则 42 与规则 28（问 46：丙里改已有文件用 Plan Mode，还是对照加「帮我改」）。
+
+--- R1-27 · 问 46 前弹窗测试：第一次 ---
+一，缘由：会话系统提示显示 auto mode 开着；.claude/settings.json 的 defaultMode 是 default，Edit(docs/**) 在 ask。疑 auto mode 下 Edit 不弹窗，问 46 推荐 A 靠的锁不成立（上个会话提出，未落盘）。
+二，第一次测：CC 把 COURSE_RULES 规则 36「句子写短。」改成「句子写短！」。学生原话：「弹了，我点了 Yes」。文件被改，CC 用 git checkout 撤回，原句数 1，改后数 0。结论：auto mode 下 Edit(docs/**) 仍弹窗。
+三，未核：撤回用的 git checkout 不在 allow 清单，弹没弹窗学生未答。用 Bash 改文件是否经 Edit 的 ask 规则，[假设] 不经；现靠手册第五节「不用脚本改文件」管。
+四，下个会话从这里接：重测一次，学生答 No，确认拦得住；之后答问 46。
