@@ -24,6 +24,8 @@
     ├── SESSION_START.md         开课入口：读哪些文件、开课动作、触发词、环境指针（原课程调节器，重构 G10 改名）
     ├── HARNESS.md               框架中枢规格（骨架，重构第一窗口建）
     ├── PENDING-TUNER-REFACTOR.md 开课资料重构待执行清单兼交接（重构结束后只查不追加，不删）
+    ├── DECISIONS-G1.md          开课资料重构决策记录（重构结束后只查不追加，常驻文件拿补遗号当出处）
+    ├── REFACTOR-HANDBOOK.md     重构手册：从本次重构提炼、换项目可用的做法（学生复制到 ~/.claude/templates/）
     ├── BRIDGE-05-api-w2.md      05-API 第二窗口暂存桥梁（学生确认后删除）
     ├── KNOWLEDGE_BASE.md        课程知识库（唯一真相，粘贴版已作废）
     ├── LESSON_TEMPLATE.md       段落骨架标准图纸
