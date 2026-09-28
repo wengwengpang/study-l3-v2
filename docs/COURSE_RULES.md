@@ -142,6 +142,7 @@ PROJECT_STRUCTURE.md 的更新必须是结课的最后一个文件动作，排�
 3. 写两份笔记（NN-full.md、NN-cheatsheet.md）
 4. 更新目录树（PROJECT_STRUCTURE.md）← 必须排在所有文件落盘之后
 5. git 提交
+   第 5、6 项之间送审，照 SESSION_START M 节。
 6. 发桥梁（必须是最后一步，规则 45）
 
 ## 55 · 开课必读文件唯一清单（取代规则 47）
