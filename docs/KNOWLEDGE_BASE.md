@@ -287,7 +287,7 @@ Level 1 阶段（在 Claude 网页版）已学完：本文件第二到第六块�
 
 ## 六、Claude Code CLI 全部机制（Level 1 已学）
 
-- Plan Mode：计划模式，用键盘切换（Shift+Tab 两次 / 部分环境 Alt+M / 打 /plan）。切了之后先列计划再动手。什么时候切，见 COURSE_RULES 规则 28。注意：模式是键盘控制的状态，不是 prompt 文字能切的（反模式 15）。
+- Plan Mode：计划模式，用键盘切换（Shift+Tab 两次 / 部分环境 Alt+M / 打 /plan）。切了之后先列计划再动手。本课程上课改已有文件不切，走对照加「帮我改」，见 COURSE_RULES 规则 28。注意：模式是键盘控制的状态，不是 prompt 文字能切的（反模式 15）。
 - Skills：技能，放在 .claude/skills/<name>/SKILL.md，封装可复用的能力。
 - Subagents：子代理，放在 .claude/agents/<name>.md，每个是一个独立 context 的角色。本课程九角色就是用它实现。
 - Hooks：钩子，放在 .claude/hooks/，在特定事件触发时自动跑脚本。
