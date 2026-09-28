@@ -394,6 +394,7 @@ settings.json 必须显式声明 defaultMode，不许留空靠厂商默认值。
 四，现状与待办：PROJECT_STRUCTURE.md、BACKLOG.md。
 五，在用的桥梁。
 六，在用的工作文件：待执行清单、工作约定、决策记录。工作结束、标了「只查不追加」的不扫。
+七，CLAUDE.md 两份（项目根目录与 ~/.claude/）、.claude/agents/*.md、~/.claude/templates/ 下的项目模板。只扫出来报：CLAUDE.md 谁来改照规则 78，其余改不改停下问学生。
 另加一类：docs/HARNESS.md。本次改动要不要进 HARNESS、要不要改已有原则，按规则 77 判。
 凡一处内容在两个文件都写了正本，一律留一份正本、另一处改成指针，不留副本（做法见规则 53、72）。
 扫出的要改之处，改不改、要不要停下问，见规则 79。
