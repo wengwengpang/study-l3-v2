@@ -3175,3 +3175,11 @@ HARNESS 候选：「句子指向临时文件要带失效条件，删临时文件
   2. 学生亲手删 .claude/settings.local.json 里 allow 唯一一条「Bash(grep -c \"^=== 第六窗口补遗结束 ===$\" docs/DECISIONS-G1.md)」（该文件被全局 gitignore，不进提交）。
   3. 对照 34：PROJECT_STRUCTURE「CLAUDE.md 追踪」配套机械层一行，「显式声明 defaultMode）✓」改为「显式声明 defaultMode；开课资料重构迁入 CC 时加：Edit(docs/**) 进 ask、两份 settings 的 Edit 进 deny、git status/log/diff 进 allow）✓」。
 进 HARNESS：否（执行记账）。
+
+--- 补遗 168 · 第 11 步已做；settings.local.json 已改；PROJECT_STRUCTURE 出现未提交的手改 ---
+一，学生原话：「两件改好了，34 同意」。
+  1. CLAUDE.md 学生亲手删前三行。CC 核：第 1 行为「# CLAUDE.md 项目宪法」，REFACTOR-BRIEF 0 处，diff 只删三行。CC 只 add CLAUDE.md 提交，0a99814。
+  2. .claude/settings.local.json：allow 已为空，JSON 解析通过。该文件被全局 gitignore，不提交。
+二，发现：PROJECT_STRUCTURE 有一处未提交的改动，不是 CC 改的。配套机械层一行被截在「加 Edit(docs/arch/**)、」，对照 34 的新文「显式声明 defaultMode；……）✓」落到了文件最末一行（在环境命令 docker -v 之后），文件末尾换行也没了。看着像对照 34 手改时粘错了位置。
+  按工具提示，CC 不自行撤销，先报学生。未提交，git 里的版本仍完好。
+进 HARNESS：否（执行记账）。
