@@ -1782,3 +1782,14 @@ F47 第二点我给了两种写法：可以不管；要管，就在两句后加�
 三，R1-89 认的各条，除问 97A 的外部出处待查外，已全落。
 四，下个会话从这里接：问 97A，CC 查 Claude Code 官方 subagent 说明，贴原文与链接给学生认；认了补 HARNESS 第一节「形态」、删第五节那行。之后进第 3 步本体：资料管理员（BACKLOG 68；R1-8 学生加的三条建议并入）。
 进 HARNESS：本条为记账，不判。
+
+--- R1-96 · 问 97A 查官方 subagent 说明（外部，待学生认）---
+一，学生原话：「查 97A」。2026-09-29 用 WebFetch 查 https://code.claude.com/docs/en/sub-agents（及其 .md 版）。WebFetch 经小模型转出，原文以页面为准，学生认之前须自己点开核。
+二，摘出的原文（英文照录）：
+  1. 「Manage subagent context」：Each subagent starts with a fresh, isolated context window. It doesn't see your conversation history, the skills you've already invoked, or the files Claude has already read.
+  2. 「Available tools」：The first filter removes these tools, even when listed in the `tools` field: …… `AskUserQuestion` ……（同列还有 EnterPlanMode、EndConversation 等）。
+  3. 「Let subagents spawn their own subagents」：By default, a subagent can spawn subagents of its own, up to three layers below the main conversation.
+三，CC 的读法：第 1、2 条支撑「中枢不能做成隔开干活的角色」。中枢的活是跟用户来回问答（引导、解答），subagent 看不到对话历史，也被拿掉了向用户提问的工具。「做不了来回对话」是 CC 从这两条推出来的，官方原文没这么写。
+  第 3 条是反面提醒：「subagent 不能再派 subagent，所以中枢只能在主对话」这条理由现在不成立，不能拿来用。
+四，待学生认：认了出对照 K1（HARNESS 第一节「形态」补理由）、K2（删第五节该行）。
+进 HARNESS：本条为记账，不判。
