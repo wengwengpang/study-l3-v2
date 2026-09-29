@@ -2082,3 +2082,11 @@ Sources:
 二，F66 引文 CC 再用 WebFetch 核（2026-09-29，同页 .md 版）：「Choose between subagents and main conversation」有「The task needs frequent back-and-forth or iterative refinement」；「Fork the current conversation」有「A fork is a subagent that inherits the entire conversation so far instead of starting fresh.」；「Available tools」有「Forks skip both filters and receive the main conversation's exact tool pool.」；「Resume subagents」有「Claude uses the `SendMessage` tool with the agent's ID or name as the `to` field to resume it.」。与审查所说一致。
 三，问 114（F68 范围分三列）、问 115（F66 K1 措辞）、问 116（F65 BACKLOG 60 指针）见本会话，待学生答。答完一条消息列全落盘前一批对照。
 进 HARNESS：本条为记账，不判。
+
+--- R1-108 · 问 114B、115B、116A ---
+一，学生原话：「问 114 选 B，问 115 选 B，问 116 选 A」。三问均为 CC 推荐项。
+  问 114 B：S3、S4 引用来源分三列。常驻：其余文件（含 BRIDGE-05-api-w2，复课要用，与审查分法不同）；历史：docs/lessons/、PENDING-TUNER-REFACTOR.md；产品：docs/arch/、docs/design/。只有常驻列零引用的规则才进删并候选。否决 A（维持一列）。
+  问 115 B：K1 照审查 F66 内容，拆短句分行（宪法第一层 C 第 4 条）。否决 A（照审查原文一段）。
+  问 116 A：BACKLOG 60 指针改「R1-56 到 R1-92」。否决 B（不改）。
+二，下一步：落盘前一批对照，分组出（脚本 N 组；定义文件；规则 85、M 节、K1、BACKLOG 60；AGENT_SPEC、落盘、目录树）。
+进 HARNESS：本条为记账，不判。
