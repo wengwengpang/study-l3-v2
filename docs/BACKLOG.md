@@ -11,7 +11,7 @@
 4 | 收敛 | 给 harness 加减法机制（规则只增不减的洞） | 结课收敛
 5 | 收敛 | 给规则加验证机制（未验证散文的洞） | 结课收敛
 6 | 加课 | 补一节 plugin 收尾课，把 harness 抽成可移植 plugin | Lec 19 后
-7 | 下沉 | diff<100、提交格式、git status 等做成 hook | Lec 8
+7 | 下沉 | diff<100、提交格式、git status 等做成 hook；压缩后提醒重读行为标准（HARNESS 原则 17，DECISIONS-R1 R1-18 第四点） | Lec 8
 8 | 下沉 | 软删除：MVP 选硬删除未预留 deleted_at，将来出现删除故事时用 Expand-Migrate-Contract 演进（加列→改查询过滤→数据迁移），注意软删除与 email/(user_id,project_id) 唯一约束的冲突 | 出现删除故事时（大概率 Lec 13 功能迭代）
 9 | 下沉 | 配置文件是攻击面：settings.json / hooks 能在同意前自动跑代码（见 CVE、PyPI 蠕虫经 SessionStart hook）。上 hooks 时加防护，settings.json 权限文件纳入 code review | Lec 8（上 hooks 时）
 10 | 下沉 | 沙箱（sandboxing）：权限规则管得住 CC 的文件工具与 Bash 重定向，管不住自己打开文件的子进程（如 python 脚本）。OS 级封堵需启用沙箱 | Lec 8（与第 9 条同组）
