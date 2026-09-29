@@ -2054,3 +2054,15 @@ Sources:
 - [Create custom subagents · Claude Code Docs](https://code.claude.com/docs/en/sub-agents.md)
 
 （R1-104 原文完）
+
+--- R1-105 · R1-104 逐条认不认；补材料已导出；问 110 ---
+一，认不认（CC 意见，学生可推翻）：F63 到 F77 全认。须处理 F67、F71、F72 在定义文件落盘、管理员首跑之前做完。
+  F63：规则 70 三段已导出（本条第三点）。CC 读法：原则 5 的三道关是规则 70 三段（会丢＝待执行动作不塞一次性载体；对不上＝覆盖核对；过期＝依据回核）。教训 4 的「待记攒在临时文件里」落在「会丢」那道关；「拍板时就定」这个时机是规则 64 的，不在原则 5。J6 的「已覆盖」只盖住一半，与 F58 同形。改不改判等审查看过材料、学生拍。
+  F65：edbdfcf 到 37d4da6 只动 DECISIONS-R1（导出为证）。BACKLOG 60「R1-56 到 R1-90」该不该改 R1-92，随下一批问。
+  F66：K1 措辞按 F77 由学生定，随下一批问。另：R1-96 写引文 1 出自「Manage subagent context」，审查写所在小节为「What loads at startup」，CC 未再核，备查。
+  F74：原则 15（规则 85）与报告覆盖写打架，属 D8，例外写哪由学生拍。
+  F77：认。本条问 110。
+二，CC 另核出一处（F72 相关）：项目 settings.json 的 allow 含「Bash(git add *)」「Bash(git commit *)」，不弹窗。子代理若 add 加 commit，工作区仍干净，F72 兜底一的 git status 查不出。兜底要同时比跑前跑后的提交号（git log -1）。
+三，补材料 review-step3-r1-supplement.md 已由生成脚本导出（规则 70 全文；R1-4、R1-6、R1-7 整条；两条 diff --stat；arch、design 的「规则 N」命中 4 行，都指课程规则；settings 三层），待学生贴给审查者。
+四，问 110（F77）见本会话，CC 按 F77 不标推荐。答了再出下一批问：F71 删并选择记哪、F74 例外写哪、F76 验证标准落点、F68 范围分三列（问 105 重议）、F66 与 F65 措辞。
+进 HARNESS：本条为记账，不判。
