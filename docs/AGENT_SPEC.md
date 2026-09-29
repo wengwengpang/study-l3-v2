@@ -16,7 +16,8 @@
 - 文档类角色（client / persona / pm / designer / architect）：只给 Read。
   它们只产出内容，落盘交主对话或 cat，角色本身不碰文件系统。
 - 写码类角色（backend / frontend 等，Lec 10+）：给 Read, Write, Edit。
-- 任何角色都不默认给 Bash，需要才显式加并说明理由。
+- 检查类角色（librarian 等，只查不改）：给 Read, Grep, Glob, Bash。Bash 只用来跑只读检查脚本和只读命令（DECISIONS-R1 R1-102 问 109A）。
+- 除检查类外，任何角色都不默认给 Bash，需要才显式加并说明理由；检查类的 Bash 理由写进角色文件硬规则。
 
 ## 正文段落（五段，顺序固定，人称统一用「你」）
 1. 你是谁：背景 + 核心信念一句话。
