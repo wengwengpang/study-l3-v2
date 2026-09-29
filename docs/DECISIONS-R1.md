@@ -2073,3 +2073,12 @@ Sources:
   续 R1-90 第五点，判丙第三样用：F77 指出的「推荐项是利益冲突入口」，学生知情后选维持推荐。只记事实。
 三，问 111（F71 删并选择记哪）、问 112（F74 覆盖写例外写哪）、问 113（F76 验证标准落点）见本会话，待学生答。其后：F68 范围分三列（问 105 重议）、F66 与 F65 措辞；F63 等审查看补材料。
 进 HARNESS：本条为记账，不判。
+
+--- R1-107 · 问 111A、112A、113A；F66 引文已核；问 114 到 116 ---
+一，学生原话：「问 111 选 A，问 112 选 A，问 113 选 A」。三问均为 CC 推荐项。
+  问 111 A：学生的删并选择记在 docs/LIBRARIAN_REPORT.md 末尾「学生选择」栏，CC 照学生原话写；下次管理员先读这份报告再覆盖写。否决 B（另开只增文件）：资料多一份；C（DECISIONS-R1）：复课后停写。
+  问 112 A：规则 85 加一句例外，只点名 docs/LIBRARIAN_REPORT.md，写理由（生成物，历史在 git）。否决 B（只写报告开头）：读规则 85 的人不知道；C（两处）：正本一处（原则 1）。
+  问 113 A：验证标准写进 SESSION_START M 节试行期那段，照审查 2-2 三条，加「真问题由学生或网页版确认」。否决 B（BACKLOG 68）：判丙时照做的那段看不到（F59 同理）。
+二，F66 引文 CC 再用 WebFetch 核（2026-09-29，同页 .md 版）：「Choose between subagents and main conversation」有「The task needs frequent back-and-forth or iterative refinement」；「Fork the current conversation」有「A fork is a subagent that inherits the entire conversation so far instead of starting fresh.」；「Available tools」有「Forks skip both filters and receive the main conversation's exact tool pool.」；「Resume subagents」有「Claude uses the `SendMessage` tool with the agent's ID or name as the `to` field to resume it.」。与审查所说一致。
+三，问 114（F68 范围分三列）、问 115（F66 K1 措辞）、问 116（F65 BACKLOG 60 指针）见本会话，待学生答。答完一条消息列全落盘前一批对照。
+进 HARNESS：本条为记账，不判。
