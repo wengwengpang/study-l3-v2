@@ -17,6 +17,8 @@
 ├── CLAUDE.md                项目宪法，三层结构，当前到第三层 A（决策边界 D1-D8）
 ├── prisma/
 │   └── schema.prisma       Prisma 数据模型，6 model + 3 enum + onDelete（Lec 5 建）
+├── scripts/
+│   └── doc-check.sh        资料体检脚本，只读，查编号清单缺号重号、指空引用、零引用、行数（复课前第 3 步建，DECISIONS-R1 R1-100）
 └── docs/
     ├── AGENT_SPEC.md            角色文件标准图纸
     ├── BACKLOG.md              跨课待办清单
