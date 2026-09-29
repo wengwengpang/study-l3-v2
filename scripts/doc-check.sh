@@ -9,7 +9,7 @@ cd "$(git rev-parse --show-toplevel)" || exit 1
 
 files=$(git ls-files 'docs/*.md' 'CLAUDE.md' '.claude/agents/*.md' | grep -v '^docs/DECISIONS-' | grep -vx 'docs/LIBRARIAN_REPORT.md')
 
-col() {  # 文件归哪列
+col() {  # 文件归哪列。BRIDGE 复课要用，暂归常驻；用完改归历史，以后新的 BRIDGE 同理（审查 F83）
   case "$1" in
     docs/lessons/*|docs/PENDING-TUNER-REFACTOR.md) echo 历史 ;;
     docs/arch/*|docs/design/*) echo 产品 ;;
@@ -32,18 +32,26 @@ d_ids()         { grep -oE '^D[0-9]+ ' CLAUDE.md | grep -oE '[0-9]+'; }
 check57_ids()   { awk '/^## 57 · /{b=1; next} /^## /{b=0} b && /^[0-9]+\. /{sub(/\..*/,""); print}' docs/COURSE_RULES.md; }
 r1_ids()        { grep -oE '^--- R1-[0-9]+ ' docs/DECISIONS-R1.md | grep -oE '[0-9]+ $' | tr -d ' '; }
 g1_ids()        { grep -oE '^--- 补遗 [0-9]+ ' docs/DECISIONS-G1.md | grep -oE '[0-9]+'; }
+placeholder_ids() {  # 规则里的占位行：号还在，正文写「（已废」「（不存在」「（留空」
+  awk '/^## 1-36 · /{b=1; next} /^## [0-9]+ · /{b=0} b && /^[0-9]+\. （(已废|不存在|留空)/{sub(/\..*/,""); print}' docs/COURSE_RULES.md
+}
+active_rule_ids() { rule_ids | grep -vxF -f <(placeholder_ids); }  # 删并候选只看在用的规则
 
-# 引用：前缀后跟号；「45、61」逐个取，「18 到 20」「1-36」展开；输出「号<TAB>列<TAB>文件:行」
+# 引用：前缀后跟号；「45、61」逐个取，「18 到 20」展开；输出「号<TAB>列<TAB>文件:行」
+# 以 # 开头的标题行不算引用（分组小标题只是结构，审查 F81）
+# 跨度超过 10 的区间（如「1-36」指整块）不逐条算；倒序（如「补遗 26-7」指第 7 项）只取前一个号（审查 F82）
 refs() {
   for f in $files; do
-    awk -v pre="$1" -v c="$(col "$f")" '{
+    awk -v pre="$1" -v c="$(col "$f")" '/^#/{next} {
       s = $0
       while (match(s, pre "[0-9]+( ?(、|到|-) ?[0-9]+)*")) {
         m = substr(s, RSTART, RLENGTH); s = substr(s, RSTART + RLENGTH)
         sub("^" pre, "", m); gsub(/ /, "", m)
         n = split(m, part, "、")
         for (i = 1; i <= n; i++)
-          if (split(part[i], r, /到|-/) == 2 && r[2] - r[1] < 100) for (k = r[1]; k <= r[2]; k++) print k "\t" c "\t" FILENAME ":" FNR
+          if (split(part[i], r, /到|-/) == 2 && r[2] + 0 >= r[1] + 0) {
+            if (r[2] - r[1] <= 10) for (k = r[1]; k <= r[2]; k++) print k "\t" c "\t" FILENAME ":" FNR
+          }
           else print r[1] "\t" c "\t" FILENAME ":" FNR
       }
     }' "$f"
@@ -61,11 +69,24 @@ list_stats() {  # $1 名称，$2 取号函数，$3 起始号（缺省 1）
   echo "  $1：共 $(echo "$ids" | grep -c .) 条，最大号 $max；缺号：${gap:-无}；重号：${dup:-无}"
 }
 
+# 分组小标题漂移：1-36 块里「### 规则 N 到 M」下面实有的号，和 N 到 M 对不对得上（问 124A）
+heading_drift() {
+  awk 'function chk(  e, k) { if (h == "") return; e = ""; for (k = lo; k <= hi; k++) e = e k " "
+         if (e != got) print "  " h "：标题写 " lo " 到 " hi "，下面实有 " (got == "" ? "无" : got) }
+       /^## 1-36 · /{b=1; next}
+       b && /^## /{chk(); b=0; h=""}
+       b && /^### 规则 /{chk(); h=$0; s=$0; sub(/^### 规则 /, "", s); split(s, a, /[^0-9]+/)
+                        lo=a[1]; hi=(s ~ /^[0-9]+ ?到 ?[0-9]+/) ? a[2] : a[1]; got=""; next}
+       b && /^[0-9]+\. /{n=$0; sub(/\..*/, "", n); got=got n " "}
+       END{if (b) chk()}' docs/COURSE_RULES.md
+}
+
 # S3：引用了但清单里没有的号
-dangling() {  # $1 名称，$2 引用前缀，$3 取号函数
+dangling() {  # $1 名称，$2 引用前缀，$3 取号函数，$4 填「常驻」则只看常驻列（撞名风险大的清单，审查 F82）
   local ids out
   ids=" $($3 | tr '\n' ' ') "
   out=$(refs "$2" | sort -u | while IFS=$'\t' read -r n c loc; do
+    [ -n "${4:-}" ] && [ "$c" != "$4" ] && continue
     case "$ids" in *" $n "*) ;; *) echo "  $1 $n ← $loc（$c）" ;; esac
   done)
   echo "${out:-  $1：无}"
@@ -90,6 +111,10 @@ echo "== 范围：$(echo "$files" | grep -c .) 份文件"
 echo
 echo "== S1、S2 编号清单"
 list_stats "规则（COURSE_RULES）" rule_ids
+echo "  其中占位（已废、不存在、留空）：$(placeholder_ids | tr '\n' ' ')"
+drift=$(heading_drift)
+echo "  1-36 块分组小标题漂移：${drift:+
+$drift}${drift:-无}"
 list_stats "反模式（anti-patterns）" anti_ids
 list_stats "BACKLOG" backlog_ids
 list_stats "原则（HARNESS 第四节）" principle_ids
@@ -103,14 +128,14 @@ echo "== S3 指空的引用（写了号，清单里没有）"
 dangling "规则" "规则 ?" rule_ids
 dangling "反模式" "(反模式|anti-patterns) ?" anti_ids
 dangling "BACKLOG" "BACKLOG ?" backlog_ids
-dangling "原则" "原则 ?" principle_ids
-dangling "问题" "问题 ?" question_ids
+dangling "原则" "原则 ?" principle_ids 常驻
+dangling "问题" "问题 ?" question_ids 常驻
 dangling "R1" "R1-" r1_ids
 dangling "补遗" "补遗 ?" g1_ids
-echo "  （D 号不查指空：PRD 审定决策也叫 D1 到 D9，同名）"
+echo "  （原则、问题两份只看常驻列：常用词会撞名。D 号不查：常驻文件里 PRD 审定决策 D1 到 D9、重构分组 D0 也叫 D，只看常驻列也撞）"
 echo
 echo "== S4 常驻文件里从没被引用过的号"
-unreferenced "规则" "规则 ?" rule_ids "（删并候选，删不删学生判）"
+unreferenced "规则" "规则 ?" active_rule_ids "（删并候选，不含占位，删不删学生判）"
 unreferenced "反模式" "(反模式|anti-patterns) ?" anti_ids "（参考，不是删并信号）"
 unreferenced "BACKLOG" "BACKLOG ?" backlog_ids "（参考，不是删并信号）"
 unreferenced "原则" "原则 ?" principle_ids "（参考，不是删并信号）"
