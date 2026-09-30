@@ -39,10 +39,10 @@ active_rule_ids() { rule_ids | grep -vxF -f <(placeholder_ids); }  # 删并候�
 
 # 引用：前缀后跟号；「45、61」逐个取，「18 到 20」展开；输出「号<TAB>列<TAB>文件:行」
 # 以 # 开头的标题行不算引用（分组小标题只是结构，审查 F81）
-# 跨度超过 10 的区间（如「1-36」指整块）不逐条算；倒序（如「补遗 26-7」指第 7 项）只取前一个号（审查 F82）
-refs() {
+# 跨度超过 10 的区间（如「1-36」指整块）不算进引用次数，另在 S3 附栏列出；倒序（如「补遗 26-7」指第 7 项）只取前一个号（审查 F82、F109-1、F112）
+refs() {  # $2 填「大」则只出跨度超过 10 的区间，号那列写「首-尾」
   for f in $files; do
-    awk -v pre="$1" -v c="$(col "$f")" '/^#/{next} {
+    awk -v pre="$1" -v c="$(col "$f")" -v wide="${2:-}" '/^#/{next} {
       s = $0
       while (match(s, pre "[0-9]+( ?(、|到|-) ?[0-9]+)*")) {
         m = substr(s, RSTART, RLENGTH); s = substr(s, RSTART + RLENGTH)
@@ -50,9 +50,10 @@ refs() {
         n = split(m, part, "、")
         for (i = 1; i <= n; i++)
           if (split(part[i], r, /到|-/) == 2 && r[2] + 0 >= r[1] + 0) {
-            if (r[2] - r[1] <= 10) for (k = r[1]; k <= r[2]; k++) print k "\t" c "\t" FILENAME ":" FNR
+            if (r[2] - r[1] > 10) { if (wide != "") print r[1] "-" r[2] "\t" c "\t" FILENAME ":" FNR }
+            else if (wide == "") for (k = r[1]; k <= r[2]; k++) print k "\t" c "\t" FILENAME ":" FNR
           }
-          else print r[1] "\t" c "\t" FILENAME ":" FNR
+          else if (wide == "") print r[1] "\t" c "\t" FILENAME ":" FNR
       }
     }' "$f"
   done
@@ -89,6 +90,13 @@ dangling() {  # $1 名称，$2 引用前缀，$3 取号函数，$4 填「常驻�
     [ -n "${4:-}" ] && [ "$c" != "$4" ] && continue
     case "$ids" in *" $n "*) ;; *) echo "  $1 $n ← $loc（$c）" ;; esac
   done)
+  echo "${out:-  $1：无}"
+}
+
+# S3 附：跨度超过 10 的区间不静默丢，逐条列出，首尾号在不在人工看（审查 F109-1）
+wide_spans() {  # $1 名称，$2 引用前缀
+  local out
+  out=$(refs "$2" 大 | sort -u | while IFS=$'\t' read -r n c loc; do echo "  $1 $n ← $loc（$c）"; done)
   echo "${out:-  $1：无}"
 }
 
@@ -133,6 +141,15 @@ dangling "问题" "问题 ?" question_ids 常驻
 dangling "R1" "R1-" r1_ids
 dangling "补遗" "补遗 ?" g1_ids
 echo "  （原则、问题两份只看常驻列：常用词会撞名。D 号不查：常驻文件里 PRD 审定决策 D1 到 D9、重构分组 D0 也叫 D，只看常驻列也撞）"
+echo
+echo "== S3 附：跨度超过 10 的区间（只是不算进引用次数，不是不查；首尾号在不在请人工看）"
+wide_spans "规则" "规则 ?"
+wide_spans "反模式" "(反模式|anti-patterns) ?"
+wide_spans "BACKLOG" "BACKLOG ?"
+wide_spans "原则" "原则 ?"
+wide_spans "问题" "问题 ?"
+wide_spans "R1" "R1-"
+wide_spans "补遗" "补遗 ?"
 echo
 echo "== S4 常驻文件里从没被引用过的号"
 unreferenced "规则" "规则 ?" active_rule_ids "（删并候选，不含占位，删不删学生判）"
