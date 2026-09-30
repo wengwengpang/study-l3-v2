@@ -1,9 +1,11 @@
-**资料体检报告**（首次体检：`docs/LIBRARIAN_REPORT.md` 不存在，`git log --oneline -- docs/LIBRARIAN_REPORT.md` 无输出。）
+**资料体检报告（第二次体检）**
+
+上一份报告已存在：`git log --oneline -- docs/LIBRARIAN_REPORT.md` 输出 `fea47ef docs(复课前-324): 资料管理员首跑报告存档`。
 
 ## 栏 1　脚本原样输出
 
 ```
-== 资料体检 2026-10-01 00:19:12  提交 126cc23  未提交改动 0 处
+== 资料体检 2026-10-01 01:12:49  提交 a63e94f  未提交改动 0 处
 == 范围：45 份文件
 
 == S1、S2 编号清单
@@ -16,7 +18,7 @@
   问题（HARNESS 第三节）：共 9 条，最大号 9；缺号：无；重号：无
   决策边界 D（CLAUDE.md）：共 8 条，最大号 8；缺号：无；重号：无
   规则 57 自检项（9 起，1 到 8 在 SESSION_START J 节）：共 10 条，最大号 18；缺号：无；重号：无
-  DECISIONS-R1 条目：共 126 条，最大号 126；缺号：无；重号：无
+  DECISIONS-R1 条目：共 131 条，最大号 131；缺号：无；重号：无
   DECISIONS-G1 补遗：共 170 条，最大号 170；缺号：无；重号：无
 
 == S3 指空的引用（写了号，清单里没有）
@@ -48,7 +50,7 @@
   原则（参考，不是删并信号）：无
 
 == S5 各文件行数
-    5804 total
+    5806 total
      617 docs/arch/ARCHITECTURE.md
      613 docs/COURSE_RULES.md
      521 docs/PENDING-TUNER-REFACTOR.md
@@ -62,7 +64,7 @@
      169 CLAUDE.md
      154 docs/SESSION_START.md
      124 docs/REFACTOR-HANDBOOK.md
-     119 docs/PROJECT_STRUCTURE.md
+     121 docs/PROJECT_STRUCTURE.md
      117 docs/lessons/05-arch-cheatsheet.md
       92 docs/lessons/00-full.md
       76 docs/BACKLOG.md
@@ -92,62 +94,64 @@
       27 .claude/agents/persona.md
       26 docs/lessons/03-cheatsheet.md
       21 docs/lessons/02-cheatsheet.md
+      17 docs/lessons/06-cheatsheet.md
       14 docs/lessons/04-cheatsheet.md
 ```
 
 ## 栏 2　和上次比
 
-- 规则总数：首次体检，无上一份报告可比。基线是脚本的 83 条，含占位 3 条，即 80 条实际规则。这个数和 docs/COURSE_RULES.md:9 写的「实际条数：80 条」一致。
-- 各文件行数：无基线，不写增减。
-- 上一份「学生选择」复查：无上一份报告，本栏无可复查项。
+- 规则总数：83 条，与上次相同。没有新增规则，所以无需核对对应的删并。
+- 其他清单变化只有一项：DECISIONS-R1 条目从 126 增到 131。这是历史记录文件，按规则不查旧号。
+- 各文件行数变化：
+  - docs/PROJECT_STRUCTURE.md 由 119 增到 121，增 2 行（git diff fea47ef HEAD，加了 report-check.sh 和 LIBRARIAN_REPORT.md 两条目录树）。
+  - 总行数由 5804 增到 5806，与上一条对得上。
+  - docs/SESSION_START.md 行数不变（154），但 docs/SESSION_START.md:60 的 J 节第四步改了一行，加了 report-check.sh 核对。
+  - docs/DECISIONS-R1.md 的 git diff 增 1531 行。它不在脚本的 45 份范围内。
+  - scripts/report-check.sh 是新增文件，69 行，不在 45 份范围内。
+- 上一份「学生选择」复查：上一份栏 6 是空的（docs/LIBRARIAN_REPORT.md:152-154，只有一句「空着，由 CC 照学生原话填」）。没有选择可复查，无「已落」也无「没落」。
 
 ## 栏 3　发现
 
-1. 规则 42 被两处提到，脚本标为「指空」。判断：这是误报，不是真悬空。
-   - docs/COURSE_RULES.md:8 和 docs/COURSE_RULES.md:92 都明写「42 号已废，编号留空」。
-   - docs/LESSON_TEMPLATE.md:22 写的是「规则 42 已废」。
-   - docs/PENDING-TUNER-REFACTOR.md:196 是历史文件里的说明。
-   - 指向废号本身没有打架。
-2. docs/COURSE_RULES.md 的文件头没有单列规则 68 的空号说明段落，但 docs/COURSE_RULES.md:8 已把 68 列入「留空」（并入规则 66）。这与脚本的缺号 42、68 对得上，没有问题。
-3. CLAUDE.md 内部措辞不一致，符合 D8「文档口径冲突」的报告条件。只报双方出处，不给结论。
-   - 一方：CLAUDE.md:144 的小节标题和 CLAUDE.md:147 的正文写「D1-D7」。
-   - 另一方：CLAUDE.md:164 有 D8。docs/PROJECT_STRUCTURE.md:18 和 docs/PROJECT_STRUCTURE.md:75 写「D1-D8」。
-   - 另外 docs/KNOWLEDGE_BASE.md:236、docs/KNOWLEDGE_BASE.md:401 和 docs/HARNESS.md:103 仍写「D1-D7」。
-   - 冲突点：D 的总数到底算 7 条还是 8 条。脚本的 D 清单显示 CLAUDE.md 里共 8 条。
-   - 提示：docs/PROJECT_STRUCTURE.md:77 把「语义层 D1-D7」和「D1-D8」并写。这可能是「Lec 6 建的是 D1-D7」的历史口径，我不做结论。
-4. S4 列出 12 条常驻文件零引用的规则。脚本没有做内容判断，判断放在栏 4。
-   - 8、9、13、23、26、30、63：历史 0，产品 0。
-   - 34、38、39、40、43：只有历史引用。
-5. 与 CLAUDE.md 或全局规则文字重叠的规则，逐条读了原文。
-   - 规则 26（docs/COURSE_RULES.md:61）与 CLAUDE.md:22 的第一层 B 第 6 条，意思几乎逐字相同。全局 ~/.claude/CLAUDE.md 的 2.6 也是同一意思。
-   - 规则 30（docs/COURSE_RULES.md:69）与规则 28 的第三行（docs/COURSE_RULES.md:65，「弹窗先看清文件名再答」）在同一件事上有交叠。
-   - 规则 34（docs/COURSE_RULES.md:73）只是指向规则 82（docs/COURSE_RULES.md:552）。
-6. 规则 8、9 与规则 62 有部分交叠。
-   - 规则 8、9（docs/COURSE_RULES.md:31、docs/COURSE_RULES.md:32）要求每步讲「为什么」和「怎么做」。
-   - 规则 62（docs/COURSE_RULES.md:228 起）的 3a 原理、3b 操作，覆盖的是复杂步骤。
-   - 规则 8、9 的范围是「每步」，比规则 62 宽。
-7. 反模式和 BACKLOG 的零引用清单较长，脚本已标明「参考，不是删并信号」，我不据此提删并。
+1. 上一份存档的栏 1 比脚本原样输出少一行。
+   - 上次存档 docs/LIBRARIAN_REPORT.md 的 S5 段在 docs/LIBRARIAN_REPORT.md:94-95 之间，没有 `17 docs/lessons/06-cheatsheet.md` 这一行。
+   - 本次脚本输出有该行。docs/lessons/06-cheatsheet.md 现在 17 行，最近一次改它的提交是 2ce5304（lec6），早于上次体检。
+   - 上次的 total 5804 加上该 17 行才与各文件之和对得上，所以文件当时就在。
+   - 判断：上次存档漏抄了一行，不是文件变化。scripts/report-check.sh:1-3 说明它就是查这种问题（栏 1 与原样输出是否一致）。
+   - 我没有跑 report-check.sh。它会写记录读取，且核对的是本次返回，要等报告存档后由主对话跑。
+   - 出处：docs/LIBRARIAN_REPORT.md:94-95、scripts/report-check.sh:1-8。
+2. 规则 42 的指空引用仍在，脚本报告与上次相同，两处都写明 42 已废。
+   - 一方：docs/LESSON_TEMPLATE.md:22 写「规则 42 已废」。
+   - 另一方：docs/COURSE_RULES.md:8 把 42 列入「留空」。
+   - 判断：这是误报，不是真悬空。
+3. CLAUDE.md 内的 D 总数口径不一致，这一条上次已报，仍没改。只报出处，不给结论。
+   - 写「D1-D7」的：CLAUDE.md:144、CLAUDE.md:147、docs/KNOWLEDGE_BASE.md:236、docs/KNOWLEDGE_BASE.md:401、docs/HARNESS.md:103、docs/PROJECT_STRUCTURE.md:79。
+   - 写「D1-D8」的：docs/PROJECT_STRUCTURE.md:18、docs/PROJECT_STRUCTURE.md:77。
+   - 脚本显示 CLAUDE.md 有 D1 到 D8 共 8 条（D8 在 CLAUDE.md:164）。
+   - 冲突点：总数算 7 还是 8，以及「语义层」一词指哪个范围。
+   - docs/PROJECT_STRUCTURE.md:77 自己写了「Lec 6 建 D1-D7，补课 05-ARCH 加 D8」，这可能是历史口径。我不做结论。
+4. S4 规则零引用清单与上次完全相同，共 12 条（8、9、13、23、26、30、34、38、39、40、43、63）。本次没有新增零引用，也没有消失的。
 
 ## 栏 4　可删/可并
 
-以下每条都是判断，删不删由学生拍板。
+以下每条都是判断，删不删由学生拍板。我没有逐条重读全部 12 条原文，只重读了栏 5 所列的几条。其余沿用上一份报告的判断。
 
 | 候选 | 出处 | 判断 | 该留的理由 |
 |---|---|---|---|
-| 规则 34 | docs/COURSE_RULES.md:73 | 可删。它被规则 82 完全盖住，34 自己写着「标准见规则 82」。 | 它在 1-36 块里是原 TaskFlow 继承条，规则 35（docs/COURSE_RULES.md:74）和别处可能按号引用它。脚本显示常驻文件引用 0，历史文件引用 1。 |
-| 规则 26 | docs/COURSE_RULES.md:61 | 可删。它被 CLAUDE.md:22 完全盖住，是同一句话的重复。 | 这份规则是给「老师」用的课程规则正本。CLAUDE.md 是给 CC 读的宪法。两份读者不同，删掉后课程规则正本会少一条。 |
-| 规则 30 | docs/COURSE_RULES.md:69 | 可并。它是规则 28 第三行「弹窗先看清」的一层补充，可并入规则 28。 | 规则 30 管「权限请求」，规则 28 管「改文件时的弹窗」，场景不完全一样。DECISIONS-G1.md:231 到 DECISIONS-G1.md:241（补遗 9）记过它被专门裁决改写过。 |
-| 规则 8、9 | docs/COURSE_RULES.md:31、docs/COURSE_RULES.md:32 | 可并。两条可并成一条，或并入规则 62 的 3a、3b。 | 规则 8、9 的范围是「每步」，规则 62 只管复杂步骤，范围不同。所在分组小标题「规则 8 到 12，是讲解的必做项」（docs/COURSE_RULES.md:29）是成组的，拆开会影响规则 10 到 12。 |
-| 规则 13、23、38、39、40、43、63 | 见栏 3 第 4 条 | 留。它们都是独立的具体规则，没有被别的条完全盖住，也不是别的条的补充。零引用不等于重复。 | 规则 63 的 git status 检查（docs/COURSE_RULES.md:238）在别处没有同类条。规则 40、43 是给 CC 的任务写法约束。 |
+| 规则 34 | docs/COURSE_RULES.md:73 | 可删。它被规则 82 完全盖住，上次报告已记它只是指向规则 82。 | 它在 1-36 块里是继承条。常驻引用为 0，历史引用 1。 |
+| 规则 26 | docs/COURSE_RULES.md:61 | 可删。它与 CLAUDE.md:22 的第一层 B 第 6 条意思相同。 | 课程规则是老师读的正本，CLAUDE.md 是 CC 读的宪法，读者不同。 |
+| 规则 30 | docs/COURSE_RULES.md:69 | 可并。它是规则 28 第三行「弹窗先看清」的一层补充。 | 规则 30 管权限请求，规则 28 管改文件时的弹窗，场景不完全一样。 |
+| 规则 8、9 | docs/COURSE_RULES.md:31、docs/COURSE_RULES.md:32 | 可并。两条可并成一条，或并入规则 62 的 3a、3b。 | 规则 8、9 管每步，规则 62 只管复杂步骤，范围不同。 |
+| 规则 13、23、38、39、40、43、63 | 见栏 3 第 4 条 | 留。零引用不等于重复。 | 各自是独立的具体规则，我没发现被别的条盖住。 |
 
 ## 栏 5　我拿不准的
 
-1. 规则 26 与 CLAUDE.md:22 的关系，套不进规则 77 判据三的三分法。两条一字不差的「相同」，但一在课程规则、一在宪法，读者和生效层不同。要不要算「完全盖住」，我说不准。
-2. 规则 8、9 的「每步」和规则 62 的「复杂步骤」范围不同，我不确定该算「补充」还是「都不是」。
-3. 「形状相同」的判断（HARNESS 第五节：同触发点、同动作、同留痕），我在本次没有逐条套用。原因：没读 HARNESS 第五节全文，只确认了它在 docs/HARNESS.md:276。
-4. 规则 42 被 docs/LESSON_TEMPLATE.md:22 引用，我判断是合理的历史说明。要不要让脚本对「已废号被写明已废」的引用免报，是学生要考虑的事。
-5. 本次没有逐条读 46 条反模式和 69 条 BACKLOG 的内容，只看了脚本的零引用数。
-6. 没有系统检查其他文件之间的矛盾，例如 PRD 与 UI_DESIGN、ARCHITECTURE 与 TECH_STACK 之间。栏 3 第 3 条是顺手核对时发现的，不是全面比对。
+1. 规则 26 与 CLAUDE.md:22 的关系，套不进规则 77 判据三的三分法。意思相同，但一份是课程规则，一份是宪法，读者和生效层不同。
+2. 规则 8、9 的范围是「每步」，规则 62 只管复杂步骤，我不确定该算「补充」还是「都不是」。
+3. 「形状相同」的判断，我本次没有逐条套用。我没读 HARNESS 第五节全文。
+4. 本次没有逐条读 46 条反模式和 69 条 BACKLOG 的内容，只看了脚本的零引用数。
+5. 没有系统比对 PRD 与 UI_DESIGN、ARCHITECTURE 与 TECH_STACK 之间的矛盾。栏 3 第 3 条是顺手核对发现的。
+6. 栏 4 的规则 34、26、30、8、9 沿用上次判断，本次没有重新逐条读原文。原因是两次之间 docs/COURSE_RULES.md 行数不变（613 行），我判断原文没改。
+7. 栏 3 第 1 条的「漏抄一行」是我对比两份文本得出的判断。至于漏在管理员返回还是漏在 CC 存档，我没法分辨，也没读子代理记录。
 
 ## 栏 6　学生选择
 
@@ -155,7 +159,8 @@
 
 相关文件：
 - /home/michael/projects/study-l3-v2/.claude/agents/librarian.md
+- /home/michael/projects/study-l3-v2/docs/LIBRARIAN_REPORT.md
 - /home/michael/projects/study-l3-v2/docs/COURSE_RULES.md
 - /home/michael/projects/study-l3-v2/CLAUDE.md
 - /home/michael/projects/study-l3-v2/docs/PROJECT_STRUCTURE.md
-- /home/michael/projects/study-l3-v2/docs/LESSON_TEMPLATE.md
+- /home/michael/projects/study-l3-v2/scripts/report-check.sh
