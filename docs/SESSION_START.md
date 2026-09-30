@@ -57,7 +57,7 @@ J 节 · 新窗口老师的启动动作
    ! { git rev-parse HEAD; git status --porcelain; git stash list; sha256sum .claude/settings.local.json ~/.claude/settings.json ~/.claude/CLAUDE.md 2>/dev/null; } | sha256sum
 二，CC 派资料管理员，派单原文只写：「按 .claude/agents/librarian.md 做一次完整体检，不加别的要求。」弹窗只点单次放行，看清命令就是 bash scripts/doc-check.sh 再批。
 三，报告交回后，学生再跑一次第一步那条命令。指纹和第一步不同，就停下，由学生决定怎么查。
-四，指纹相同，CC 把报告原样存进 docs/LIBRARIAN_REPORT.md（规则 85 例外），学生过目后提交。学生选了删并的，CC 照原话记进报告末尾「学生选择」栏；执行放在结课前（规则 54）。
+四，指纹相同，CC 把报告原样存进 docs/LIBRARIAN_REPORT.md（规则 85 例外），再跑 bash scripts/report-check.sh（DECISIONS-R1 R1-130 问 134A）。最后一行不是「两项一致」，就停下报学生，不提交；是，学生过目后提交。学生选了删并的，CC 照原话记进报告末尾「学生选择」栏；执行放在结课前（规则 54）。
 
 第 3 件：确认接续。用一段话说清楚分工，口径同 LESSON_TEMPLATE 老师锚点第一行。
 我讲课、执行：出讲解、跑命令、改文件。
