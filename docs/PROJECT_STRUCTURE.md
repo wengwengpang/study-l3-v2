@@ -9,6 +9,7 @@
 │   │   ├── architect.md     架构师角色，只 Read，model: opus，Lec 4 建
 │   │   ├── client.md        用户研究员角色，只提问和综合，不扮用户
 │   │   ├── designer.md      产品设计师角色，只 Read，三态 UI + 极简主义
+│   │   ├── librarian.md     资料管理员角色，只查不改，跑体检脚本出删并候选，model: sonnet（复课前第 3 步建，DECISIONS-R1 R1-121、R1-124）
 │   │   ├── persona.md       假设目标用户角色，AI 设定，未经真人验证
 │   │   └── pm.md            产品经理角色，只 Read，含隐性基础需求检查
 │   ├── settings.json        权限系统 defaultMode + allow/ask/deny 三档，机械层护栏（Lec 6 建，05-ARCH 修，学生亲写，规则 66）
