@@ -3145,3 +3145,18 @@ git log -- docs/LIBRARIAN_REPORT.md
   git status：本条提交后干净。
 二，下个会话从这里接：照 R1-125 第二点。第一步学生确认 default 模式，亲手跑 J 节第 2 件第一步的指纹命令。
 进 HARNESS：本条为记账，不判。
+
+--- R1-127 · 管理员首跑完成；报告存档；目录树加一行 ---
+一，闸门四步（SESSION_START J 节第 2 件）：
+  第一步：开场 CC 收到系统提示为 auto 模式，停下；学生切到状态栏「manual mode」。CC 改 .gitignore 实测弹窗，学生拒绝，文件未改。选 .gitignore 因为它不在 ask 清单；docs/**、CLAUDE.md、.claude/** 在 ask 清单，任何模式都弹，分不出。指纹 79d31880832f6cd93fef800b4640751176ad47fcec141b1aef3dcc5bc9a3eec5。
+  第二步：派单原文照 J 节，一字不加。学生原话：「弹窗命令是 bash scripts/doc-check.sh，已单次放行」。
+  第三步：学生再跑指纹，与第一步相同。
+  第四步：fea47ef 报告存 docs/LIBRARIAN_REPORT.md，学生原话：「过目了，提交」。CC 照交回全文写出，未与原始输出机器比对（原始记录文件过大不可读），只抽查：6 栏齐，栏 4 候选 5 行。
+二，dfcee64 目录树加 LIBRARIAN_REPORT.md 一行，学生原话：「同意」。数次数新行 1、原第 31 行 1。
+三，新发现：
+  1. 状态栏「manual mode」就是 default 模式（弹窗实测）。
+  2. dfcee64 提交后 CC 又收到 auto 模式系统提示，学生状态栏为：「⏸ manual mode on」。学生原话：「我刚才改为了auto mode，现在改回了“⏸ manual mode on”」。
+  3. 报告栏 3 第 3 条：D1-D7 与 D1-D8 口径冲突，照 D8 只报，待学生裁决。
+  4. 报告栏 6「学生选择」未填。
+四，下一步：出第四份审查包（V1 到 V7 加首跑报告，问 133A）。
+进 HARNESS：本条为记账，不判。
