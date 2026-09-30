@@ -19,7 +19,8 @@
 ├── prisma/
 │   └── schema.prisma       Prisma 数据模型，6 model + 3 enum + onDelete（Lec 5 建）
 ├── scripts/
-│   └── doc-check.sh        资料体检脚本，只读，查编号清单缺号重号、指空引用、零引用、行数（复课前第 3 步建，DECISIONS-R1 R1-100）
+│   ├── doc-check.sh        资料体检脚本，只读，查编号清单缺号重号、指空引用、零引用、行数（复课前第 3 步建，DECISIONS-R1 R1-100）
+│   └── report-check.sh     体检报告原样核对，只读，比报告与管理员返回、栏 1 与脚本原样输出（复课前第 3 步建，DECISIONS-R1 R1-130）
 └── docs/
     ├── AGENT_SPEC.md            角色文件标准图纸
     ├── BACKLOG.md              跨课待办清单
