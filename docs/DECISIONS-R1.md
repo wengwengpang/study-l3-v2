@@ -4723,3 +4723,9 @@ HARNESS第五节：
   问 142 B：CLAUDE.md:161「D7 罩在 D1-D6 之上」不改。D8 遇冲突一律停下报，D7 罩上不多拦一事；D8 正文（CLAUDE.md:167）专写「为什么不并进 D7」。否决 A（罩 D1-D6 与 D8）：与 D8 自述分立相拧；C（罩其余各条）：为将来的 D9 预改，不急。
 二，对照共 5 条：Z1 CLAUDE.md:144、Z2 CLAUDE.md:147、Z3 docs/PROJECT_STRUCTURE.md:79、Z4 docs/HARNESS.md:103、Z5 docs/KNOWLEDGE_BASE.md:401。改前各原句计数均为 1。
 进 HARNESS：本条为记账，不判。
+
+--- R1-136 · Z1 到 Z5 落地 ---
+一，学生原话：「Z1 到 Z5 帮我改」。照对照一字不差改，一处一提交：Z1 5ceec97、Z2 b0d35b5、Z3 deab989、Z4 914a891、Z5 6ec106b。
+二，核数：五处新句各 1、旧句各 0；KNOWLEDGE_BASE:236 原句仍为 1。复扫「D1-D7」（三份流水账不计）余 7 处，全是 R1-134 判「不影响」的与问 141C 留的 :236，另加 PROJECT_STRUCTURE:77 括号内的来历说明，均不改。
+三，下一步：填报告栏 6；Z1 到 Z5 并入第五份审查包。
+进 HARNESS：本条为记账，不判。
