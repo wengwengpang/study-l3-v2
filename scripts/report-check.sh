@@ -47,9 +47,13 @@ for line in open(log):
 report = open('docs/LIBRARIAN_REPORT.md').read()
 bad = False
 
-if report.rstrip('\n') != last.rstrip('\n'):
+def body(s):  # 只取「## 栏 6」之前；栏 6 由 CC 事后照学生原话填，不核（问 150A）
+    k = s.find('\n## 栏 6')
+    return (s if k < 0 else s[:k]).rstrip('\n')
+
+if body(report) != body(last):
     bad = True
-    print('一，报告与管理员最后一条返回不同')
+    print('一，报告栏 6 之前与管理员最后一条返回不同')
 
 col1, inside = [], False
 for l in report.splitlines():
