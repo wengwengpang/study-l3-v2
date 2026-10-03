@@ -4716,3 +4716,10 @@ HARNESS第五节：
   待学生裁：docs/KNOWLEDGE_BASE.md:236、:401（文件自述抽自原始课程 prompt，先例 DECISIONS-G1:2881 原料照原样不改，但它是现行知识库）；CLAUDE.md:161「D7 罩在 D1-D6 之上」要不要罩上 D8（是语义取舍，不是改数字）。
 三，下一步：问 141、142 裁后，一条消息列全编号对照。
 进 HARNESS：本条为记账，不判。
+
+--- R1-135 · 问 141C、142B ---
+一，学生原话：「问 141 选 C，问 142 选 B」。两问均为 CC 推荐项。
+  问 141 C：docs/KNOWLEDGE_BASE.md:236 留（课程知识点名，Lec 6 教的就是七类）；:401 改 D1-D8（Harness 对照表写的是现行宪法）。否决 A（两处都留）：:401 对照表是后加的现行映射，不算原料；B（两处都改）：:236 是知识点名，改了失原意。
+  问 142 B：CLAUDE.md:161「D7 罩在 D1-D6 之上」不改。D8 遇冲突一律停下报，D7 罩上不多拦一事；D8 正文（CLAUDE.md:167）专写「为什么不并进 D7」。否决 A（罩 D1-D6 与 D8）：与 D8 自述分立相拧；C（罩其余各条）：为将来的 D9 预改，不急。
+二，对照共 5 条：Z1 CLAUDE.md:144、Z2 CLAUDE.md:147、Z3 docs/PROJECT_STRUCTURE.md:79、Z4 docs/HARNESS.md:103、Z5 docs/KNOWLEDGE_BASE.md:401。改前各原句计数均为 1。
+进 HARNESS：本条为记账，不判。
