@@ -76,7 +76,7 @@
     第二层 项目事实：A 方向 + B 需求十七条 + C UI 结论 + D 选型结论 + E 数据模型结论
     第三层 A 决策边界 D1-D8（Lec 6 建 D1-D7，补课 05-ARCH 加 D8 文档口径冲突）✓
   配套机械层：.claude/settings.json 权限三档 + defaultMode（Lec 6 建，补课 05-ARCH 修：删三条死规则、rm 收紧、加 Edit(docs/arch/**)、显式声明 defaultMode；开课资料重构迁入 CC 时加：Edit(docs/**) 进 ask、两份 settings 的 Edit 进 deny、git status/log/diff 进 allow）✓
-  说明：第三层「语义层 D1-D7 在 CLAUDE.md，机械层 allow/ask/deny 在 settings.json」，两轴垂直。
+  说明：第三层「语义层 D1-D8 在 CLAUDE.md，机械层 allow/ask/deny 在 settings.json」，两轴垂直。
 
 ## 补课链进度（规则 49 课数弹性）
 Lec 5 只做了数据库 schema，architect 其余四件架构产物拆出延后，随后先上了 Lec 6 宪法课。
