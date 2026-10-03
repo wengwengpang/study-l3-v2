@@ -4706,3 +4706,13 @@ HARNESS第五节：
   git status：本条提交后干净。
 三，下个会话从这里接：先请学生裁 D1-D7 与 D1-D8、填栏 6；再出第五份审查包，diff 基准 7418dc8（第四份包送审时的 HEAD），内容 W1 到 W4、Y1、Y2、第二次体检报告。
 进 HARNESS：本条为记账，不判。
+
+--- R1-134 · 问 140A：D 总数以 D1-D8 为现行口径；传播面扫描 ---
+一，学生原话：「问 140 选 A」。照 D8 只报，CC 未标推荐。
+  问 140 A：以 D1-D8 为现行口径；写 D1-D7 的逐处判，现行说明改 D1-D8，Lec 6 当时的历史记录留；每处单出对照，CLAUDE.md 两处须学生说「帮我改」。否决 B（保留 D1-D7 名指 Lec 6 七类，D8 另注）：门牌与花名册仍对不上，靠注解兜；C（记 BACKLOG 不裁）：冲突已连报两次。
+二，传播面扫描（grep「D1-D7」「D1 到 D7」「七类决策」「D1-D6」，全库，DECISIONS-R1、DECISIONS-G1、LIBRARIAN_REPORT 不计）：
+  要改：CLAUDE.md:144、CLAUDE.md:147、docs/PROJECT_STRUCTURE.md:79、docs/HARNESS.md:103。
+  不影响（Lec 6 当时的记录）：docs/lessons/06-full.md:6、:19、:31、:51；docs/lessons/06-cheatsheet.md:5、:8；docs/lessons/anti-patterns.md:202。
+  待学生裁：docs/KNOWLEDGE_BASE.md:236、:401（文件自述抽自原始课程 prompt，先例 DECISIONS-G1:2881 原料照原样不改，但它是现行知识库）；CLAUDE.md:161「D7 罩在 D1-D6 之上」要不要罩上 D8（是语义取舍，不是改数字）。
+三，下一步：问 141、142 裁后，一条消息列全编号对照。
+进 HARNESS：本条为记账，不判。
