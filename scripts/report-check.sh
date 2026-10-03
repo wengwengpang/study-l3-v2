@@ -9,15 +9,21 @@
 set -u
 proj="$HOME/.claude/projects/$(pwd | sed 's#/#-#g')"
 
-python3 - "$proj" <<'EOF'
+python3 - "$proj" "${1:-}" <<'EOF'
 import glob, json, os, sys
 
-metas = [m for m in glob.glob(os.path.join(sys.argv[1], '*', 'subagents', 'agent-*.meta.json'))
-         if json.load(open(m)).get('agentType') == 'librarian']
-if not metas:
-    print('找不到资料管理员子代理记录')
-    sys.exit(1)
-log = max(metas, key=os.path.getmtime).replace('.meta.json', '.jsonl')
+if sys.argv[2]:
+    log = sys.argv[2]
+    if not os.path.isfile(log):
+        print('找不到核对记录：' + log)
+        sys.exit(1)
+else:
+    metas = [m for m in glob.glob(os.path.join(sys.argv[1], '*', 'subagents', 'agent-*.meta.json'))
+             if json.load(open(m)).get('agentType') == 'librarian']
+    if not metas:
+        print('找不到资料管理员子代理记录')
+        sys.exit(1)
+    log = max(metas, key=os.path.getmtime).replace('.meta.json', '.jsonl')
 print('核对记录：' + log)
 
 last, raw, ids = '', '', set()
