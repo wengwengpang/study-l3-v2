@@ -398,7 +398,7 @@ TaskFlow 是什么：最小化的 Jira / Trello 风格任务协作平台，目�
 ### 课程内容 = Harness 组件（对照表）
 学生这门课的产出，用 2026 年业界术语说，就是一套完整的 Harness。对照关系：
 - CLAUDE.md 宪法  = AGENTS.md（项目宪法）
-- D1-D7 决策边界   = Permissions Manifest（权限清单）
+- D1-D8 决策边界   = Permissions Manifest（权限清单）
 - .claude/settings.json = Permission System（权限系统）
 - make verify      = Feedback Loop（反馈回路）
 - Verification + Fail Loop = Self-Correction（自我纠错）
