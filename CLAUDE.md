@@ -141,7 +141,7 @@ pm 推导的基础需求（Lec 3 前置补充 · Michael 已审定）：
 - 枚举：MemberRole(owner/executor)、TaskStatus(not_started/in_progress/completed)、NotificationType(stuck_task)。
 - schema 落点：prisma/schema.prisma。CC 改表结构前先回 architect 确认，不擅自改。
 
-## 第三层 A：决策边界 D1-D7（哪些决策必须主人拍板）
+## 第三层 A：决策边界 D1-D8（哪些决策必须主人拍板）
 
 > 宪法封顶层。回答一件事：CC 什么时候必须停下来喊主人。
 > 两条轴别混：D1-D7 管「决策类型」（语义层，什么时候喊主人）；
