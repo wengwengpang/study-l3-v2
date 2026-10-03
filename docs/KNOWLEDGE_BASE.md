@@ -233,7 +233,7 @@ Level 1 阶段（在 Claude 网页版）已学完：本文件第二到第六块�
 11. 操作标注规范：哪步学生做、哪步老师讲、哪步要决策，标清楚。
 12. 信息分层规则：信息按层级和寿命分类存放。
 13. client.md 双重身份：client 角色同时是被访谈客户 + 研究员。
-14. Decision Boundary D1-D7：七类决策边界，触发时由学生拍板。
+14. Decision Boundary D1-D7：七类决策边界，触发时由学生拍板。（Lec 6 口径；现行为 D1-D8，见 CLAUDE.md 第三层 A）
 15. Self-Doubt Protocol：AI 主动自我怀疑，不盲目自信。
 16. Decision Ownership：决策权属学生，AI 不越权拍板。
 17. Tiered Review Protocol：分级审查机制。
