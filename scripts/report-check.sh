@@ -26,7 +26,7 @@ else:
     log = max(metas, key=os.path.getmtime).replace('.meta.json', '.jsonl')
 print('核对记录：' + log)
 
-last, raw, ids = '', '', set()
+last, raws, ids = '', [], set()
 for line in open(log):
     d = json.loads(line)
     c = d.get('message', {}).get('content')
@@ -42,7 +42,7 @@ for line in open(log):
             t = '\n' + (x if isinstance(x, str) else ''.join(i.get('text', '') for i in x if isinstance(i, dict)))
             k = t.find('\n== 资料体检')
             if k >= 0:
-                raw = t[k + 1:]
+                raws.append(t[k + 1:])
 
 report = open('docs/LIBRARIAN_REPORT.md').read()
 bad = False
@@ -60,8 +60,11 @@ for l in report.splitlines():
         break
     if inside and l.strip() and l.strip() != '```':
         col1.append(l)
-raw_lines = [l for l in raw.splitlines() if l.strip()]
-if not raw_lines:
+raw_lines = [l for l in (raws[-1] if raws else '').splitlines() if l.strip()]
+if len(raws) > 1:
+    bad = True
+    print('二，记录里 doc-check.sh 跑了 %d 次，分不清报告用的是哪次' % len(raws))
+elif not raw_lines:
     bad = True
     print('二，记录里找不到脚本输出')
 elif col1 != raw_lines:
