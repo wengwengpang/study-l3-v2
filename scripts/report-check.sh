@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # 体检报告原样核对，只读。
-# 用法：在项目根目录跑 bash scripts/report-check.sh。最后一行是「两项一致」、退出码 0 才算过。
-# 查两项：一，docs/LIBRARIAN_REPORT.md 与管理员最后一条返回是否相同（查 CC 存档）；
+# 用法：在项目根目录跑 bash scripts/report-check.sh [核对记录路径]。最后一行是「两项一致」、退出码 0 才算过。
+# 查两项：一，docs/LIBRARIAN_REPORT.md「## 栏 6」之前与管理员最后一条返回是否相同（查 CC 存档；栏 6「学生选择」由 CC 事后填，不核）；
 #         二，报告栏 1 与管理员跑脚本那次的原样输出是否相同（查管理员有没有删改）。
-# 记录取最近一次资料管理员子代理的记录（~/.claude/projects/ 下 subagents/ 目录，按 agentType 认）。
-# 脚本输出取命令含 scripts/doc-check.sh 的那次调用，从「== 资料体检」行取到尾（管理员连着别的命令跑也取得对）。
-# 出处：DECISIONS-R1 R1-128、R1-129（第四份审查点 9）、R1-130 问 134A、R1-132 问 138A。
+# 记录：传了路径就核那份；不传取最近一次资料管理员子代理的记录（~/.claude/projects/ 下 subagents/ 目录，按 agentType 认）。首行打出所用路径，存档时记进 DECISIONS-R1，以后重跑带上。
+# 脚本输出取命令含 scripts/doc-check.sh 的那次调用，从「== 资料体检」行取到尾（管理员连着别的命令跑也取得对）；跑过不止一次就停下报。
+# 出处：DECISIONS-R1 R1-128、R1-129（第四份审查点 9）、R1-130 问 134A、R1-132 问 138A、R1-148 问 150A、151A。
 set -u
 proj="$HOME/.claude/projects/$(pwd | sed 's#/#-#g')"
 
