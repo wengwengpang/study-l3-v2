@@ -6226,3 +6226,12 @@ R1-156 也没有给它一个新的解释或裁决。
 一，学生用「! 」前缀一行跑完，得 0、1、0、80，与 R1-198 所给应得全对。对照 35 判完成；对照 36 改前基线对上。
 二，仍待学生答：对照 36 同不同意；第五节后半看懂没有；问 181。
 进 HARNESS：本条为记账，不判。
+
+--- R1-200 · 对照 36 已落；第五节读完；问 181B；出对照 37 ---
+一，学生原话：「对照 36 同意；第五节后半看懂了；问 181 选 B」。CC 推荐项。
+二，对照 36，4592667。改后数：新句 1，插入点原文 0，BACKLOG 80 行。
+三，问 181 B：手册「开工安全底座」第一条换成通用说法，补回原工作约定前两步（/permissions、默认模式与状态栏），加 R1-142 清单外普通文件一测。否决 A（只换词）：只测受保护文件测不出模式；否决 C（不改）：F100、F107-1 认了一直没改。R1-132「备查」一项就此了结。
+四，对照 37 已出。传播面扫描：git grep -nE '实测权限|/permissions|defaultMode|manual mode|受保护的正本' -- docs CLAUDE.md .claude scripts | grep -v '^docs/DECISIONS-'。手册 86 行要改。COURSE_RULES 289 行（/permissions 加实测）、307 行（defaultMode 与状态栏对上）、SESSION_START 58 行（清单外文件也弹窗）与改后同向，不影响；第 1 步措辞照 COURSE_RULES 289 行。docs/lessons/ 各行为课程笔记，只作来历：05-arch-full 36 行「项目实际运行在 auto mode 下七节课，师生双方都不知道」，用作对照的「不改会怎样」。BACKLOG 30、PROJECT_STRUCTURE、settings.json 不影响。另核 .claude/settings.json：ask 含 Edit(docs/**)，deny 含两份 settings；deny 不弹窗直接拒，故第 3 步只写「要先问的」，不写「不许改的」。
+  改前基线：86 行原文整行 1，新句 0，手册 126 行。改后一行变四行，手册 129 行。
+五，待学生答：对照 37 同不同意。
+进 HARNESS：本条为记账，不判。
