@@ -12,8 +12,8 @@
 
 | 欠账 | 来源 | 未审范围 | 涉及文件（今名） | 怎么还 | 状态 |
 |---|---|---|---|---|---|
-| 1 | G1 补遗 56 第二点（并 47、50、52、55） | D1 e67e892#178..8a1e501#222；E 段 5ec2991#230 | HANDOFF-refactor-w2（已删）、HARNESS、PENDING | HARNESS 第一包；HANDOFF、PENDING 不审 | HARNESS 已审（R1-219）；余不审（问 197A） |
-| 2 | G1 补遗 62 第三点 | HARNESS 整份：#280 后 26 个提交，11 个从没送审 | HARNESS | 第一包 | 已审（R1-219） |
+| 1 | G1 补遗 56 第二点（并 47、50、52、55） | D1 e67e892#178..8a1e501#222；E 段 5ec2991#230 | HANDOFF-refactor-w2（已删）、HARNESS、PENDING | HARNESS 第一包；HANDOFF、PENDING 不审 | HARNESS 现状已审（R1-219）；余不审（问 197A） |
+| 2 | G1 补遗 62 第三点 | HARNESS 整份：#280 后 26 个提交，11 个从没送审 | HARNESS | 第一包 | 现状已审（R1-219） |
 | 3 | G1 补遗 67 第一点、68 第三点 | 9777efa#296..1840087#304 | HARNESS、COURSE_RULES、CLAUDE.md | 第一包、第二包 | 待审（第二包） |
 | 4 | G1 补遗 89 第一点 | ae49d2d#372..fa153e7#383 | SESSION_START、COURSE_RULES | 第一包、第二包 | 待审（第二包） |
 | 5 | G1 补遗 96 第一点 | d21d02c#401..5ae39b0#411 | LESSON_TEMPLATE、SESSION_START、PROJECT_STRUCTURE、TEACHING_STYLE | 第一包、第二包 | 待审（第二包） |
@@ -21,8 +21,8 @@
 | 7 | G1 补遗 122 第四点 | 8c0a001#508..0e16c99#511 | KNOWLEDGE_BASE | 补 b0cf33a diff | 待审（第二包） |
 | 8 | G1 补遗 126 第三点 | 01e85c7#516..669aefd#520 | COURSE_RULES | 第二包 | 待审（第二包） |
 | 9 | G1 补遗 129 第四点 | 57f3431#521..b91a413#539 | BACKLOG | 第二包 | 待审（第二包） |
-| 10 | G1 补遗 144 问 11、145 11A | 7b0f8ef#586..5c4efd4#588 | REFACTOR-HANDBOOK | 第一包 | 已审（R1-219） |
-| 11 | G1 补遗 147、148 第一点 | a9f0c2b#592..a77ed8e#599 | HARNESS | 第一包 | 已审（R1-219） |
+| 10 | G1 补遗 144 问 11、145 11A | 7b0f8ef#586..5c4efd4#588 | REFACTOR-HANDBOOK | 第一包 | 现状已审（R1-219） |
+| 11 | G1 补遗 147、148 第一点 | a9f0c2b#592..a77ed8e#599 | HARNESS | 第一包 | 现状已审（R1-219） |
 | 12 | G1 补遗 158 第三点 | 推断 a77ed8e#599..4fef137#626；另两项核查：PENDING「已执行」对 git log，docs/lessons 等目录的引用扫描 | BACKLOG、BRIDGE-05-api-w2、COURSE_RULES、HARNESS、REFACTOR-HANDBOOK | 提交已由 G1 补遗 165 审过（子代理，半独立，范围 a77ed8e..020ce3f）；现状随第一、二包，BRIDGE 补 6066aac diff；两项核查 CC 跑，见文末 | 待审（第二包）；两项核查已跑（CC 自跑，不独立） |
 | 13 | G1 补遗 161 问 28A、162 第二点 | b959dfb#661..cb0064c#665 | COURSE_RULES、REFACTOR-BRIEF（已删） | COURSE_RULES 第二包；REFACTOR-BRIEF 不审 | 待审（第二包）；余不审（问 197A） |
 | 14 | 本次查出：E4 学生补约定 | b7e38ca#344 | REFACTOR-BRIEF（已删） | 不审 | 不审（问 197A） |
