@@ -182,8 +182,7 @@ SESSION_START J 节第 4 件定义自检 1-8。本条追加 9 项起（号段：
 建任何角色文件，必须依据 docs/AGENT_SPEC.md，不照已有角色样品仿。
 讲任何授课段落，必须依据 docs/LESSON_TEMPLATE.md 的骨架顺序，配合 TEACHING_STYLE.md 的手感。
 桥梁格式依据规则 82 九节。
-新老师开课前，除规则 55 的 4 个必读文件，还须读 AGENT_SPEC.md 与 LESSON_TEMPLATE.md。
-（即开课必读升级为 6 个文件，清单见 PROJECT_STRUCTURE 的「课程标准文件清单」小节。）
+新老师开课前还须读 AGENT_SPEC.md 与 LESSON_TEMPLATE.md，这两份已在开课必读唯一清单里（规则 55）。
 
 ## 59 · harness 目标为课程方针
 Michael 的终极目标是把本项目沉淀成通用 harness 框架,可用于任何项目。
