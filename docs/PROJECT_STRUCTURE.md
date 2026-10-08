@@ -33,6 +33,7 @@
     ├── DECISIONS-R1.md          复课前一轮决策记录（本轮结束后只查不追加）
     ├── LIBRARIAN_REPORT.md      资料管理员体检报告，整份覆盖写，历史在 git 里，末栏记学生选择（复课前第 3 步首跑建，DECISIONS-R1 R1-102、R1-107）
     ├── REFACTOR-HANDBOOK.md     重构手册：从本次重构提炼、换项目可用的做法（学生复制到 ~/.claude/templates/）
+    ├── REVIEW-DEBT.md           审查欠账表：没送审的改动，每条记怎么还、还了没有（BACKLOG 57 反方审建，DECISIONS-R1 R1-226）
     ├── BRIDGE-05-api-w2.md      05-API 第二窗口暂存桥梁（学生确认后删除）
     ├── KNOWLEDGE_BASE.md        课程知识库（唯一真相，粘贴版已作废）
     ├── LESSON_TEMPLATE.md       段落骨架标准图纸
