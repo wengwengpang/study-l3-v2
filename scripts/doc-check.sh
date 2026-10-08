@@ -159,3 +159,16 @@ unreferenced "原则" "原则 ?" principle_ids "（参考，不是删并信号�
 echo
 echo "== S5 各文件行数"
 wc -l $files | sort -rn | sed 's/^/  /'
+
+# S6：上次体检以来 docs/、CLAUDE.md、.claude/、scripts/ 里新增、删除、改名的文件，供人对 SESSION_START M 节送审命令清单（DECISIONS-R1 R1-167 问 162A）
+# 起点取上次报告的提交；只比已提交的；范围比上面的 files 宽，不只 .md
+echo
+echo "== S6 上次体检以来新增、删除、改名的文件（A 新增、D 删除、R 改名；请对 SESSION_START M 节送审命令清单：要不要加、要不要改）"
+last=$(git log -1 --format=%h -- docs/LIBRARIAN_REPORT.md)
+if [ -z "$last" ]; then
+  echo "  首次体检，无上次报告可比"
+else
+  out=$(git diff --name-status --diff-filter=ADR "$last" HEAD -- docs CLAUDE.md .claude scripts | sed 's/^/  /')
+  echo "  起点：上次报告提交 $last"
+  echo "${out:-  无}"
+fi
