@@ -6816,3 +6816,26 @@ BACKLOG 57 自己写得很清楚：
 二，同一行打出 after-46-48.md（规则 78 改后那一节全文）与 debt-table-draft.md。屏幕上「>」「<」显示成「&gt;」「&lt;」，是输出显示的转义；CC 核过两份文件里没有「&gt;」「&lt;」，after-46-48.md 里「> 」开头的 6 行原样在。
 三，仍待学生答：读完有无意见；对照 49 到 51；问 194 到 196。
 进 HARNESS：本条为记账，不判。
+
+--- R1-226 · 对照 49 到 51 已落；问 194A、195B、196A；欠账表定稿草稿；问 197；出对照 52 ---
+一，学生原话：「读完了没意见；对照 49 到 51 帮我改；问 194 选 A，问 195 选 B，问 196 选 A」。三问均为 CC 推荐项。改后那两节（after-46-48.md）学生读过，无意见。
+二，对照 49，464a2e8；对照 50，1775a74；对照 51，6f0196e。规则 78 例外流程：改前原文各 1（R1-225 学生亲跑），逐处改、逐处提交。合验：三处旧 0、新 1，SESSION_START 156 行、LESSON_TEMPLATE 45 行、HARNESS 305 行。
+  改后那几节（SESSION_START 62 到 66 行、LESSON_TEMPLATE 30 到 34 行、HARNESS 129 到 135 行）用 sed -n 导出到临时目录 scratchpad/review57/after-49-51.md（22 行），交学生读。
+  复扫「独立审查」：剩 5 行，都是 R1-221 第五点判不影响的。
+  会话重启过，临时目录换成 6bc074f0-4bb2-47e8-9f2e-a50f3933a3f4；review57 下四份文件已拷过去，旧目录还在。
+三，问 194 A：表外各段进表，从欠账 14 编起，标「本次查出」。否决 B（只记一笔）、C（不记）：表要证明覆盖完整，漏了就不完整。
+  问 195 B：审现状。COURSE_RULES、BACKLOG、TEACHING_STYLE、LESSON_TEMPLATE 送全文；KNOWLEDGE_BASE、anti-patterns、BRIDGE 补 diff。否决 A（逐提交约 100 个）：成本高，过程本就不可完全重放（反方 11）；否决 C（不补审）：错改留在现文件里没人看。
+  照 B，只涉第一包文件的欠账 2、10、11 标「已审（R1-219）」，表头写明审时没标出欠账位置。
+  问 196 A：新建 docs/REVIEW-DEBT.md。否决 B（拆进 BACKLOG）：一下涨十几条；否决 C（存补遗）：状态又散。
+四，表定稿草稿：scratchpad/review57/REVIEW-DEBT.draft.md（39 行）。欠账 1 到 13 取 R1-224 草稿；14 到 20 为本次查出。
+  CC 用 git 核过 14 到 20：E4 b7e38ca 改 REFACTOR-BRIEF；G2 d1cf6ef、4084025 改 COURSE_TUNER、KB；G5 #438 到 445；G6 #457 到 460；尾段 #654 到 670 各提交改的文件；补遗 131 第四点、148 第二点原文；补遗 165 第二点写「提交范围 a77ed8e..020ce3f」，盖住欠账 12 的范围。
+  第二包要补的 diff 共 4 个：b0cf33a、4084025（KB），e11fa29（anti-patterns），6066aac（BRIDGE）。
+五，CC 自认两处：问 195 B 没说已删文件与 PENDING 怎么办，出题时漏了，补问 197。读 PROJECT_STRUCTURE 前没先报要读，先读后报。
+六，问 197（表里「待定」三样）：一，已删两份：HANDOFF-refactor-w2（欠账 1：aeb66c8、b88b446）、REFACTOR-BRIEF（欠账 13：8d824c7；欠账 14：b7e38ca）。二，PENDING-TUNER-REFACTOR：欠账 1 的 D1 本体（38 个提交改的就是它）、欠账 20 的记账。三，欠账 12 剩两项机械核查。
+  A 已删两份与 PENDING 不审，表里写「不审」接理由；两项核查 CC 用命令跑，命令与结果记进表。B 已删两份的 4 个提交导 diff 进第二包；PENDING 不审；两项核查 CC 跑。C 已删两份的 diff 与 D1 的 38 个提交都进第二包；两项核查 CC 跑。
+  CC 推荐 A：已删文件不再约束谁，搬出去的内容在现文件里，随现状审；PENDING 已封、只查不追加、开课不读。它被常驻文件当出处引，引错了反方读现文件时会看到出处，要原文照 M 节补拿流程导。代价：两项核查是 CC 自己跑，不独立；命令写进表，反方可重跑。
+七，对照 52：PROJECT_STRUCTURE 目录树 REFACTOR-HANDBOOK 一行后插「    ├── REVIEW-DEBT.md           审查欠账表：没送审的改动，每条记怎么还、还了没有（BACKLOG 57 反方审建，DECISIONS-R1 R1-226）」。PROJECT_STRUCTURE 不在 M 节清单，同意即可。
+  改前基线（CC 已跑）：REVIEW-DEBT 0；插入点那行整行 1；122 行。改后：1、1、123。
+八，新建 docs/REVIEW-DEBT.md：宪法第一层 B 第 4 条，新文件可直接建。等问 197 答完照草稿定稿一次建好，免得建完再改。
+九，待学生答：读 after-49-51.md 与表草稿有无意见；问 197；对照 52。
+进 HARNESS：本条为记账，不判。
