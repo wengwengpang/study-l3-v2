@@ -267,6 +267,7 @@ COURSE_RULES、anti-patterns、TEACHING_STYLE、PROJECT_STRUCTURE、AGENT_SPEC�
 一，本课临时状态听桥梁。
 二，规则听 COURSE_RULES，反模式听 lessons/anti-patterns.md。这两份是正本。
 三，开课怎么走听 SESSION_START，学什么听 KNOWLEDGE_BASE。
+SESSION_START 管开课动作的先后与做法；动作背后的持久规则在七文件，两者打架按七文件执行。桥梁的「本课安排」只管本课讲什么、讲到哪，不改开课动作。
 SESSION_START、KNOWLEDGE_BASE 与正本打架，按正本执行，并记进本课挂账。
 桥梁只在「本课临时状态」上优先：进度、接续、本课安排、git 状态、待办交接。
 凡涉及讲课方式、协作规矩、角色标准、段落骨架、结课流程这类持久规则，以开课必读七文件为准，桥梁无权覆盖。
