@@ -5947,3 +5947,11 @@ R1-156 也没有给它一个新的解释或裁决。
 二，实跑 doc-check.sh（只读）：S1、S2 四份清单数与新写的四样对得上（规则 57 自检项共 10 行含留空 12，实际 9）；S3 与末次报告同，只有规则 42 两处。
 三，规则 78 改后两步：验证命令已给，HARNESS 文件头、规则 57、规则 60 整节已贴回，待学生跑、读。BACKLOG 不在 M 节清单，贴回不是必需，验证命令照给。
 进 HARNESS：本条为记账，不判。
+
+--- R1-170 · 对照 4 到 9 判完成；出对照 10 到 12；问 163 ---
+一，学生原话：「五条都对，三段读完了；出 162 的对照」。对照 4 到 9 规则 78 改后两步走完，判完成。问 161A 落地；F42 两处与 BACKLOG 58 关闭另办。
+二，对照 10 到 12 已出（问 162A），待「帮我改」：10，doc-check.sh 头注「S1 到 S5」改「S1 到 S6」；11，doc-check.sh 末尾加 S6（上次报告提交以来 docs/、CLAUDE.md、.claude/、scripts/ 里新增、删除、改名的文件）；12，PROJECT_STRUCTURE 目录树 doc-check.sh 一行补「上次体检以来增删改名的文件」。doc-check.sh 是问 160A 后头一回按规则 78 改脚本。原文改前各数 1 次。
+  试跑：改后脚本副本放 scratchpad 跑，退出码 0；S1 到 S5 与现脚本输出逐行相同；S6 得「起点 1cd2dc3，无」。以首跑前 fea47ef~1 为起点手跑同一条 git diff，列出 A docs/LIBRARIAN_REPORT.md、A scripts/report-check.sh，后者正是 R1-161 第二点第 3 项清单漏掉的那份。
+  传播面（搜「指空引用 / 零引用」于 docs/、CLAUDE.md、.claude/、scripts/，DECISIONS 与 LIBRARIAN_REPORT 除外）：要改 PROJECT_STRUCTURE 目录树一行（对照 12）、librarian.md 职责 1（等问 163）。report-check.sh 从「== 资料体检」取到尾，S6 自动在内，不改。
+三，问 163（S6 有输出时谁提醒学生）待答。librarian.md 的对照等答完再出。
+进 HARNESS：本条为记账，不判。
