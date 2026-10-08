@@ -1,0 +1,57 @@
+# REVIEW-DEBT · 审查欠账表
+
+> 用途：一处看全没送审的改动（审查欠账），每条记怎么还、还了没有。来历：BACKLOG 57 反方审，反方 8 到 10（DECISIONS-R1 R1-219、R1-220），问 192A、194A、195B、196A、197A。
+> 去留：欠账全部还清后定（问 196A）。
+> 编号：欠账 N。1 到 13 是重构时记下的「留给反方」（出处 DECISIONS-G1）；14 起是 BACKLOG 57 这次查出、当时没记的（问 194A）。新号接着往下编。
+> 范围：「未审范围」写起止提交，git log 起^..止 可重查；#n 指 git log --reverse 的行号。
+> 怎么还（问 195B）：不逐提交补审，改审现在的文件。
+>   第一包：CLAUDE.md、SESSION_START（原 COURSE_TUNER）、HARNESS、REFACTOR-HANDBOOK、PROJECT_STRUCTURE 五份全文，反方已审（DECISIONS-R1 R1-219）。审时没标出欠账在哪几处。
+>   第二包：COURSE_RULES、BACKLOG、TEACHING_STYLE、LESSON_TEMPLATE 四份全文；KNOWLEDGE_BASE、anti-patterns、BRIDGE-05-api-w2 只补改过的那几个提交的 diff。
+>   不审（问 197A）：已删的 HANDOFF-refactor-w2、REFACTOR-BRIEF，与 PENDING-TUNER-REFACTOR。已删文件不再约束谁，搬出去的内容在现文件里，随现状审；PENDING 已封、只查不追加、开课不读，被常驻文件当出处引时，引错了反方读现文件会看到，要原文照 SESSION_START M 节补拿流程导。
+> 状态：已审写出处；待审写哪一包；不审写依据。
+
+| 欠账 | 来源 | 未审范围 | 涉及文件（今名） | 怎么还 | 状态 |
+|---|---|---|---|---|---|
+| 1 | G1 补遗 56 第二点（并 47、50、52、55） | D1 e67e892#178..8a1e501#222；E 段 5ec2991#230 | HANDOFF-refactor-w2（已删）、HARNESS、PENDING | HARNESS 第一包；HANDOFF、PENDING 不审 | HARNESS 已审（R1-219）；余不审（问 197A） |
+| 2 | G1 补遗 62 第三点 | HARNESS 整份：#280 后 26 个提交，11 个从没送审 | HARNESS | 第一包 | 已审（R1-219） |
+| 3 | G1 补遗 67 第一点、68 第三点 | 9777efa#296..1840087#304 | HARNESS、COURSE_RULES、CLAUDE.md | 第一包、第二包 | 待审（第二包） |
+| 4 | G1 补遗 89 第一点 | ae49d2d#372..fa153e7#383 | SESSION_START、COURSE_RULES | 第一包、第二包 | 待审（第二包） |
+| 5 | G1 补遗 96 第一点 | d21d02c#401..5ae39b0#411 | LESSON_TEMPLATE、SESSION_START、PROJECT_STRUCTURE、TEACHING_STYLE | 第一包、第二包 | 待审（第二包） |
+| 6 | G1 补遗 117 第三点 | c0ad29e#478..6935950#497 | COURSE_RULES、SESSION_START、anti-patterns、PROJECT_STRUCTURE、HARNESS | 第一包、第二包；anti-patterns 补 e11fa29 diff | 待审（第二包） |
+| 7 | G1 补遗 122 第四点 | 8c0a001#508..0e16c99#511 | KNOWLEDGE_BASE | 补 b0cf33a diff | 待审（第二包） |
+| 8 | G1 补遗 126 第三点 | 01e85c7#516..669aefd#520 | COURSE_RULES | 第二包 | 待审（第二包） |
+| 9 | G1 补遗 129 第四点 | 57f3431#521..b91a413#539 | BACKLOG | 第二包 | 待审（第二包） |
+| 10 | G1 补遗 144 问 11、145 11A | 7b0f8ef#586..5c4efd4#588 | REFACTOR-HANDBOOK | 第一包 | 已审（R1-219） |
+| 11 | G1 补遗 147、148 第一点 | a9f0c2b#592..a77ed8e#599 | HARNESS | 第一包 | 已审（R1-219） |
+| 12 | G1 补遗 158 第三点 | 推断 a77ed8e#599..4fef137#626；另两项核查：PENDING「已执行」对 git log，docs/lessons 等目录的引用扫描 | BACKLOG、BRIDGE-05-api-w2、COURSE_RULES、HARNESS、REFACTOR-HANDBOOK | 提交已由 G1 补遗 165 审过（子代理，半独立，范围 a77ed8e..020ce3f）；现状随第一、二包，BRIDGE 补 6066aac diff；两项核查 CC 跑，见文末 | 待审（第二包）；两项核查已跑（CC 自跑，不独立） |
+| 13 | G1 补遗 161 问 28A、162 第二点 | b959dfb#661..cb0064c#665 | COURSE_RULES、REFACTOR-BRIEF（已删） | COURSE_RULES 第二包；REFACTOR-BRIEF 不审 | 待审（第二包）；余不审（问 197A） |
+| 14 | 本次查出：E4 学生补约定 | b7e38ca#344 | REFACTOR-BRIEF（已删） | 不审 | 不审（问 197A） |
+| 15 | 本次查出：G2 审后返修 | d1cf6ef#357..845c70f#359 | SESSION_START、KNOWLEDGE_BASE | 第一包；KNOWLEDGE_BASE 补 4084025 diff | 待审（第二包） |
+| 16 | 本次查出：G5 审后 | ba180b9#438..df31d03#445 | COURSE_RULES、BACKLOG、SESSION_START（删 O、M、I、H 节） | 第一包、第二包 | 待审（第二包） |
+| 17 | 本次查出：G6 审后 | 611b109#457..cb10fb4#460 | PROJECT_STRUCTURE、BACKLOG、SESSION_START | 第一包、第二包 | 待审（第二包） |
+| 18 | 本次查出：G1 补遗 131 第四点 | 无提交：CC 判「与 BACKLOG 6 不冲突」，未送审 | BACKLOG | 第二包 | 待审（第二包） |
+| 19 | 本次查出：G1 补遗 148 第二点 | 组末审查没写审到哪个提交，#546 到 598 覆盖不明 | 多份 | 第一包、第二包 | 待审（第二包） |
+| 20 | 本次查出：第二次组末审查后的尾段 | fa6bcc5#654..d58f1c9#670，不含欠账 13 | HARNESS、BACKLOG、CLAUDE.md、PROJECT_STRUCTURE、PENDING | 第一包、第二包；PENDING 不审 | 待审（第二包）；PENDING 不审（问 197A） |
+
+说明：
+- 推断四处：欠账 1 的 E 段与返修已审终点、欠账 3 与 10 的已审终点、欠账 12 的范围（DECISIONS-R1 R1-224）。
+- 重叠：欠账 2 是 HARNESS 总账，与 1、3、6、11、12、20 重叠；6、7、8 原文都写「补遗 56 欠账」，概念上属欠账 1。
+- 不进本表的两类：「对照全文不落盘」一族（G1 补遗 122 第三点、127 第 20 项、148 第三点第 4 项、153、154）归 BACKLOG 57，见反方 11、12；「判否不送审」是手册第五节定的做法，不算欠账。
+
+欠账 12 两项核查（CC 自跑，2026-10-08，命令可重跑）：
+
+核查一，PENDING「已执行」行里的提交号是否都在 git 里。只核提交号存在，不核提交内容对不对得上。
+
+```
+grep '已执行' docs/PENDING-TUNER-REFACTOR.md | grep -oE '\b[0-9a-f]{7}\b' | sort -u | while read h; do git cat-file -e "$h^{commit}" 2>/dev/null || echo "缺 $h"; done
+```
+
+结果：含「已执行」的行 23 行，其中提交号去重 43 个，全在，无「缺」。不带提交号的 5 行：23、35、519 行是说明与标题；140 行写「见该条」，278 行指 6.0.2 与补遗 136、137，都是指针。
+
+核查二，已删、改名的文件在常驻文件以外的目录有没有人引。补遗 143、163 已扫过常驻文件、CLAUDE.md、.claude/。
+
+```
+git grep -n -E 'COURSE_TUNER|HANDOFF-refactor-w2|BACKLOG-重构窗口交接|REFACTOR-BRIEF|调节器' -- docs/lessons docs/design docs/arch prisma
+```
+
+结果：2 处。docs/lessons/04-full.md 第 25 行「调节器 I 节」，是历史课程笔记，不改。docs/lessons/anti-patterns.md 第 300 行「调节器 P 节」，在反模式的「现象」里讲当年的事；anti-patterns 是常驻文件，读的人照名去找会找不到。要不要补一句今名，交第二包请反方判。
