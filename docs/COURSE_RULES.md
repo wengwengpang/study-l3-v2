@@ -158,9 +158,9 @@ PROJECT_STRUCTURE.md 的更新必须是结课的最后一个文件动作，排�
 
 ## 56 · 追踪所有 CLAUDE.md
 项目中所有 CLAUDE.md 的位置、职责、当前进度，统一记录在 docs/PROJECT_STRUCTURE.md 末尾的"CLAUDE.md 追踪"小节。
-当前两个：
-- ~/.claude/CLAUDE.md        全局通用宪法，跨项目生效，已完整（信仰/协议/格式/反模式/方法论库）。
-- ~/projects/study-l3-v2/CLAUDE.md  项目宪法，三层结构：第一层通用协议+陷阱（已建）、第二层项目事实（Lec 1 起填，当前仅方向）、第三层决策边界+权限（Lec 6 建）。
+当前两个（各自进度见该小节，本条不写，免得两处不一）：
+- ~/.claude/CLAUDE.md        全局通用宪法，跨项目生效（信仰/协议/格式/反模式/方法论库）。
+- ~/projects/study-l3-v2/CLAUDE.md  项目宪法，三层结构：第一层通用协议+陷阱、第二层项目事实、第三层决策边界+权限。
 新增或分层变化时，更新该小节。
 
 ## 57 · 漂移自检追加项（与 SESSION_START J 节第 4 件 8 项叠加生效）
