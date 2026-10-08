@@ -172,3 +172,11 @@ else
   echo "  起点：上次报告提交 $last"
   echo "${out:-  无}"
 fi
+
+# S7：开头 15 行里没有「去留：」的文件（DECISIONS-R1 R1-8 第二点第 1 条、R1-176 问 166A、R1-177 问 169A）
+# 用途看 PROJECT_STRUCTURE 目录树，谁能改看规则 78 与 M 节清单，开头只补去留一行；不急补，哪节课改到哪份，顺手补那份
+echo
+echo "== S7 开头 15 行没有「去留：」的文件（补一行「去留：长期」或「去留：一次性，某某时删」；哪节课改到哪份，顺手补那份）"
+miss=$(for f in $files; do head -15 "$f" | grep -q '去留：' || echo "  $f"; done)
+echo "  共 $(echo "$files" | grep -c .) 份，缺 $(echo "$miss" | grep -c .) 份"
+echo "${miss:-  无}"
