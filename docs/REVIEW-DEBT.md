@@ -6,7 +6,7 @@
 > 范围：「未审范围」写起止提交，git log 起^..止 可重查；#n 指 git log --reverse 的行号。
 > 怎么还（问 195B）：不逐提交补审，改审现在的文件。
 >   第一包：CLAUDE.md、SESSION_START（原 COURSE_TUNER）、HARNESS、REFACTOR-HANDBOOK、PROJECT_STRUCTURE 五份全文，反方已审（DECISIONS-R1 R1-219）。审时没标出欠账在哪几处。
->   第二包：COURSE_RULES、BACKLOG、TEACHING_STYLE、LESSON_TEMPLATE 四份全文；KNOWLEDGE_BASE、anti-patterns、BRIDGE-05-api-w2 只补改过的那几个提交的 diff。
+>   第二包：COURSE_RULES、BACKLOG、TEACHING_STYLE、LESSON_TEMPLATE 四份全文；KNOWLEDGE_BASE、anti-patterns、BRIDGE-05-api-w2 只补改过的那几个提交的 diff。反方已审（DECISIONS-R1 R1-231）。
 >   不审（问 197A）：已删的 HANDOFF-refactor-w2、REFACTOR-BRIEF，与 PENDING-TUNER-REFACTOR。不审它们当年的内容对不对；只审现文件引它们引得对不对、现在还受不受它们约束（反方 15）。已删文件不再约束谁，搬出去的内容在现文件里，随现状审；PENDING 已封、只查不追加、开课不读，被常驻文件当出处引时，要原文照 SESSION_START M 节补拿流程导。
 > 状态：现状已审写出处，只说那份文件现在的样子审过，不等于逐提交复审、欠账已还（反方 14）；待审写哪一包；不审写依据。
 
