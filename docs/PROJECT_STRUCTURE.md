@@ -110,6 +110,7 @@ Claude Code 是 2.1 版。
 学生已经建好的全局文件，不要重建：
 ~/.claude/CLAUDE.md 是全局 AI 行为规则。
 ~/.claude/templates/PROJECT_CLAUDE.md.template 是项目模板。
+~/.claude/templates/REFACTOR-HANDBOOK.md 是重构手册的副本。以仓库里的 docs/REFACTOR-HANDBOOK.md 为准，手册改了要学生重新亲手复制。
 
 新项目从零开始，但这两个全局文件继续生效。
 
