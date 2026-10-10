@@ -8093,3 +8093,17 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
   再做 BACKLOG 70：本项目规则补手册新做法三样，改的是规则 78 文件，逐处出对照，学生说「帮我改」；措辞以手册为准。做完这一批，照 M 节看要不要记进 REVIEW-DEBT 当欠账 21。
   然后问学生 BACKLOG 60（复课前这一轮本身）关不关，再复课 05-API 第二窗口。互动照手册第四节。
 进 HARNESS：本条为记账，不判。
+
+--- R1-265 · 开场；BACKLOG 69 手册已复制、本条关闭；问 219A、220A（学生：「对照 114 帮我改，问 219 选 A，问 220 选 A」）---
+一，开场报告照手册第六节出。CC 自认之错：开场先报读 3 个文件，实读 4 个，多读了手册第六节，另看了 ~/.claude/templates/ 目录；与 R1-243 同一种错。
+二，BACKLOG 69 剩的一件已做。开场已向学生点明：四包反方都没要求改手册，手册算定稿，问 186B 的前提已满足；手册最后一次改动是 7826f0a（对照 42）。
+  学生亲跑 cp、cmp、wc -l -m：得「一致」，130 行、4602 字符，与所给应得全对。落点 ~/.claude/templates/REFACTOR-HANDBOOK.md，文件名照原名（BACKLOG 69 只写了目录）。复制前该目录只有 PROJECT_CLAUDE.md.template，没覆盖东西。
+三，对照 114，fbe482b。BACKLOG 69 末栏旧句「剩一件：学生亲手把手册复制到 ~/.claude/templates/，等 BACKLOG 57 反方审完、手册定稿后再做（问 186B）」改「手册已由学生亲手复制到 ~/.claude/templates/REFACTOR-HANDBOOK.md（2026-10-10，cmp 一致，130 行 4602 字符，DECISIONS-R1 R1-265）。本条关闭」，前半句不动。
+  数：旧句、新句、「69 | 收敛 | 」开头行、总行数，改前学生亲跑 1、0、1、83，改后 0、1、1、83，与所给应得全对。
+四，问 219 A（CC 推荐项）。开场扫 BACKLOG 时间栏，38、39、46、50、55、59 六条时间栏是「开课资料重构全部完成后」，没写「复课前」，R1-264 的接续顺序里没有。CC 在本文件按「BACKLOG 编号」搜，没搜到给它们排期的记录；换说法记过的，这个查法会漏。
+  A：先不动，问 BACKLOG 60 关不关时一并过这六条，每条定「复课前做」还是改时间栏。CC 出题时给的理由：60 关的正是复课前这一轮，关之前清点最顺，也不打断手上的 69。B（现在逐条过）、C（六条都不挡复课、时间栏不动）学生没选，没另述理由。
+五，问 220 A（CC 推荐项）。对照 114 的传播面扫描 git grep -n -E 'claude/templates|BACKLOG 69' -- docs CLAUDE.md .claude scripts | grep -v '^docs/DECISIONS-'，扫出 PROJECT_STRUCTURE「学生已经建好的全局文件，不要重建」一段只列了 PROJECT_CLAUDE.md.template 一行。目录树 REFACTOR-HANDBOOK 一行与手册文件头写的是「学生复制到」，仍成立，不动。
+  A：补一行手册副本，写明是副本、以仓库里的为准、手册改了要重新复制。理由：副本不会自动跟着仓库变。B（不补）学生没选。
+  对照 115：在「~/.claude/templates/PROJECT_CLAUDE.md.template 是项目模板。」一行后插一行「~/.claude/templates/REFACTOR-HANDBOOK.md 是重构手册的副本。以仓库里的 docs/REFACTOR-HANDBOOK.md 为准，手册改了要学生重新亲手复制。」改前应得：锚行 1、新句 0、总行数 123；改后 1、1、124。
+六，待学生答：对照 115。之后 BACKLOG 70；再问 BACKLOG 60 关不关，并过问 219 的六条；然后复课 05-API 第二窗口。
+进 HARNESS：本条为记账，不判。
