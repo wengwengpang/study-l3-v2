@@ -59,7 +59,7 @@
         ├── 05-api-cheatsheet.md 补课 05-API 速查卡（第一窗口）
         └── anti-patterns.md     反模式库，号段见 anti-patterns 文件头
 
-## 课程标准文件清单（开课必读 7 个，规则 58 六文件 + BACKLOG）
+## 课程标准文件清单（开课必读 7 个，规则 55）
 - docs/COURSE_RULES.md          课程规则唯一正本；号段见 COURSE_RULES 文件头
 - docs/lessons/anti-patterns.md 反模式库；号段见 anti-patterns 文件头
 - docs/TEACHING_STYLE.md        讲课手感（一至九节）
