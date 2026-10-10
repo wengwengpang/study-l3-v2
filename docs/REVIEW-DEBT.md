@@ -26,7 +26,7 @@
 | 12 | G1 补遗 158 第三点 | 推断 a77ed8e#599..4fef137#626；另两项核查：PENDING「已执行」对 git log，docs/lessons 等目录的引用扫描 | BACKLOG、BRIDGE-05-api-w2、COURSE_RULES、HARNESS、REFACTOR-HANDBOOK | 提交已由 G1 补遗 165 审过（子代理，半独立，范围 a77ed8e..020ce3f）；现状随第一、二包，BRIDGE 补 6066aac diff；两项核查 CC 跑，见文末 | 现状已审（R1-231）；BRIDGE-05-api-w2 只是指定 diff 已审（6066aac）；两项核查已跑（CC 自跑，不独立） |
 | 13 | G1 补遗 161 问 28A、162 第二点 | b959dfb#661..cb0064c#665 | COURSE_RULES、REFACTOR-BRIEF（已删） | COURSE_RULES 第二包；REFACTOR-BRIEF 不审 | 现状已审（R1-231）；余不审（问 197A） |
 | 14 | 本次查出：E4 学生补约定 | b7e38ca#344 | REFACTOR-BRIEF（已删） | 不审 | 不审（问 197A） |
-| 15 | 本次查出：G2 审后返修 | d1cf6ef#357..845c70f#359 | SESSION_START、KNOWLEDGE_BASE | 第一包；KNOWLEDGE_BASE 补 4084025 diff | 现状已审（R1-231） |
+| 15 | 本次查出：G2 审后返修 | d1cf6ef#357..845c70f#359 | SESSION_START、KNOWLEDGE_BASE | 第一包；KNOWLEDGE_BASE 补 4084025 diff | SESSION_START 现状已审（R1-219）；KNOWLEDGE_BASE 指定 diff 已审（4084025，R1-231） |
 | 16 | 本次查出：G5 审后 | ba180b9#438..df31d03#445 | COURSE_RULES、BACKLOG、SESSION_START（删 O、M、I、H 节） | 第一包、第二包 | 现状已审（R1-231） |
 | 17 | 本次查出：G6 审后 | 611b109#457..cb10fb4#460 | PROJECT_STRUCTURE、BACKLOG、SESSION_START | 第一包、第二包 | 现状已审（R1-231） |
 | 18 | 本次查出：G1 补遗 131 第四点 | 无提交：CC 判「与 BACKLOG 6 不冲突」，未送审 | BACKLOG | 第二包 | 现状已审（R1-231） |
