@@ -34,6 +34,7 @@
 | 19 | 本次查出：G1 补遗 148 第二点 | 组末审查没写审到哪个提交，#546 到 598 覆盖不明 | 多份 | 第一包、第二包 | 现状已审（R1-231）；历史覆盖不追溯（问 195B） |
 | 20 | 本次查出：第二次组末审查后的尾段 | fa6bcc5#654..d58f1c9#670，不含欠账 13 | HARNESS、BACKLOG、CLAUDE.md、PROJECT_STRUCTURE、PENDING | 第一包、第二包；PENDING 不审 | 现状已审（R1-231）；PENDING 不审（问 197A） |
 | 21 | 复课前一轮 BACKLOG 70（DECISIONS-R1 R1-267、R1-268；问 224A） | 61e435d#1274..29c87d9#1285，对照 116 到 127 | COURSE_RULES | 复课第一节结课送审时一并送；试行期第一次送审另附的 git diff pre-trial-c -- docs/ 已含这一段 | 待审（复课第一节结课送审包） |
+| 22 | 复课前一轮 BACKLOG 50（DECISIONS-R1 R1-272 到 R1-275；照问 224A） | 8b38942#1298..524f7a4#1305，对照 133 到 140 | COURSE_RULES、LESSON_TEMPLATE | 复课第一节结课送审时一并送；试行期第一次送审另附的 git diff pre-trial-c -- docs/ 已含这一段 | 待审（复课第一节结课送审包） |
 
 说明：
 - 推断四处：欠账 1 的 E 段与返修已审终点、欠账 3 与 10 的已审终点、欠账 12 的范围（DECISIONS-R1 R1-224）。
