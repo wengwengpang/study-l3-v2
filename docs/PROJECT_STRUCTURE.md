@@ -112,6 +112,7 @@ Node.js 是 22 版（LTS），用 nvm 管理。
 pnpm 是 11 版。
 Docker Desktop 是 29 版，装在 Windows 侧，已开 WSL 集成。Docker Desktop 没启动时，WSL 里的 docker 命令用不了，见 BACKLOG 49。
 Git：WSL 里是 2.34，项目用这个，autocrlf 设成了 input。Windows 侧另装了 2.45，项目不用。
+远端：GitHub 私有仓库 git@github.com:wengwengpang/study-l3-v2.git，用 SSH 密钥登录，私钥在 ~/.ssh/id_ed25519，没设口令（2026-10-10 建，DECISIONS-R1 R1-284、R1-285）。推送是黄牌，CC 推之前会弹确认。
 Claude Code 是 2.1 版。
 
 学生已经建好的全局文件，不要重建：
