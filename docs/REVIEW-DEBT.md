@@ -55,4 +55,4 @@ grep '已执行' docs/PENDING-TUNER-REFACTOR.md | grep -oE '\b[0-9a-f]{7}\b' | s
 git grep -n -E 'COURSE_TUNER|HANDOFF-refactor-w2|BACKLOG-重构窗口交接|REFACTOR-BRIEF|调节器' -- docs/lessons docs/design docs/arch prisma
 ```
 
-结果：2 处。docs/lessons/04-full.md 第 25 行「调节器 I 节」，是历史课程笔记，不改。docs/lessons/anti-patterns.md 第 300 行「调节器 P 节」，在反模式的「现象」里讲当年的事；anti-patterns 是常驻文件，读的人照名去找会找不到。要不要补一句今名，交第二包请反方判。
+结果：2 处。docs/lessons/04-full.md 第 25 行「调节器 I 节」，是历史课程笔记，不改。docs/lessons/anti-patterns.md 第 300 行「调节器 P 节」，在反模式的「现象」里讲当年的事；anti-patterns 是常驻文件，读的人照名去找会找不到。反方第二包判要补（反方 21），已补今名（对照 58，DECISIONS-R1 R1-235）。
