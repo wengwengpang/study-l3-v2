@@ -41,7 +41,7 @@
     ├── REFACTOR-HANDBOOK.md     重构手册：从本次重构提炼、换项目可用的做法（学生复制到 ~/.claude/templates/）
     ├── REVIEW-DEBT.md           审查欠账表：没送审的改动，每条记处置方式与处置状态（BACKLOG 57 反方审建，DECISIONS-R1 R1-226）
     ├── BRIDGE-05-api-w2.md      05-API 第二窗口暂存桥梁（学生确认后删除）
-    ├── web_course_sample1.md 至 web_course_sample5.md  网页版课堂记录样本五份（依次是 Lec 3、4、2、05-API 第一窗口、6），教科书参考用，不是正本。去留：一次性，教科书写完后删（BACKLOG 73，DECISIONS-R1 R1-279 问 238A）
+    ├── web_course_sample1.md 至 web_course_sample6.md  网页版课堂记录样本六份（依次是 Lec 3、4、2、05-API 第一窗口、6、0），教科书参考用，不是正本。去留：一次性，教科书写完后删（BACKLOG 73，DECISIONS-R1 R1-279 问 238A）
     ├── KNOWLEDGE_BASE.md        课程知识库（唯一真相，粘贴版已作废）
     ├── LESSON_TEMPLATE.md       段落骨架标准图纸
     ├── PROJECT_STRUCTURE.md     本文件
