@@ -14,24 +14,24 @@
 |---|---|---|---|---|---|
 | 1 | G1 补遗 56 第二点（并 47、50、52、55） | D1 e67e892#178..8a1e501#222；E 段 5ec2991#230 | HANDOFF-refactor-w2（已删）、HARNESS、PENDING | HARNESS 第一包；HANDOFF、PENDING 不审 | HARNESS 现状已审（R1-219）；余不审（问 197A） |
 | 2 | G1 补遗 62 第三点 | HARNESS 整份：#280 后 26 个提交，11 个从没送审 | HARNESS | 第一包 | 现状已审（R1-219） |
-| 3 | G1 补遗 67 第一点、68 第三点 | 9777efa#296..1840087#304 | HARNESS、COURSE_RULES、CLAUDE.md | 第一包、第二包 | 待审（第二包） |
-| 4 | G1 补遗 89 第一点 | ae49d2d#372..fa153e7#383 | SESSION_START、COURSE_RULES | 第一包、第二包 | 待审（第二包） |
-| 5 | G1 补遗 96 第一点 | d21d02c#401..5ae39b0#411 | LESSON_TEMPLATE、SESSION_START、PROJECT_STRUCTURE、TEACHING_STYLE | 第一包、第二包 | 待审（第二包） |
-| 6 | G1 补遗 117 第三点 | c0ad29e#478..6935950#497 | COURSE_RULES、SESSION_START、anti-patterns、PROJECT_STRUCTURE、HARNESS | 第一包、第二包；anti-patterns 补 e11fa29 diff | 待审（第二包） |
-| 7 | G1 补遗 122 第四点 | 8c0a001#508..0e16c99#511 | KNOWLEDGE_BASE | 补 b0cf33a diff | 待审（第二包） |
-| 8 | G1 补遗 126 第三点 | 01e85c7#516..669aefd#520 | COURSE_RULES | 第二包 | 待审（第二包） |
-| 9 | G1 补遗 129 第四点 | 57f3431#521..b91a413#539 | BACKLOG | 第二包 | 待审（第二包） |
+| 3 | G1 补遗 67 第一点、68 第三点 | 9777efa#296..1840087#304 | HARNESS、COURSE_RULES、CLAUDE.md | 第一包、第二包 | 现状已审（R1-231） |
+| 4 | G1 补遗 89 第一点 | ae49d2d#372..fa153e7#383 | SESSION_START、COURSE_RULES | 第一包、第二包 | 现状已审（R1-231） |
+| 5 | G1 补遗 96 第一点 | d21d02c#401..5ae39b0#411 | LESSON_TEMPLATE、SESSION_START、PROJECT_STRUCTURE、TEACHING_STYLE | 第一包、第二包 | 现状已审（R1-231） |
+| 6 | G1 补遗 117 第三点 | c0ad29e#478..6935950#497 | COURSE_RULES、SESSION_START、anti-patterns、PROJECT_STRUCTURE、HARNESS | 第一包、第二包；anti-patterns 补 e11fa29 diff | 现状已审（R1-231） |
+| 7 | G1 补遗 122 第四点 | 8c0a001#508..0e16c99#511 | KNOWLEDGE_BASE | 补 b0cf33a diff | 现状已审（R1-231） |
+| 8 | G1 补遗 126 第三点 | 01e85c7#516..669aefd#520 | COURSE_RULES | 第二包 | 现状已审（R1-231） |
+| 9 | G1 补遗 129 第四点 | 57f3431#521..b91a413#539 | BACKLOG | 第二包 | 现状已审（R1-231） |
 | 10 | G1 补遗 144 问 11、145 11A | 7b0f8ef#586..5c4efd4#588 | REFACTOR-HANDBOOK | 第一包 | 现状已审（R1-219） |
 | 11 | G1 补遗 147、148 第一点 | a9f0c2b#592..a77ed8e#599 | HARNESS | 第一包 | 现状已审（R1-219） |
-| 12 | G1 补遗 158 第三点 | 推断 a77ed8e#599..4fef137#626；另两项核查：PENDING「已执行」对 git log，docs/lessons 等目录的引用扫描 | BACKLOG、BRIDGE-05-api-w2、COURSE_RULES、HARNESS、REFACTOR-HANDBOOK | 提交已由 G1 补遗 165 审过（子代理，半独立，范围 a77ed8e..020ce3f）；现状随第一、二包，BRIDGE 补 6066aac diff；两项核查 CC 跑，见文末 | 待审（第二包）；两项核查已跑（CC 自跑，不独立） |
-| 13 | G1 补遗 161 问 28A、162 第二点 | b959dfb#661..cb0064c#665 | COURSE_RULES、REFACTOR-BRIEF（已删） | COURSE_RULES 第二包；REFACTOR-BRIEF 不审 | 待审（第二包）；余不审（问 197A） |
+| 12 | G1 补遗 158 第三点 | 推断 a77ed8e#599..4fef137#626；另两项核查：PENDING「已执行」对 git log，docs/lessons 等目录的引用扫描 | BACKLOG、BRIDGE-05-api-w2、COURSE_RULES、HARNESS、REFACTOR-HANDBOOK | 提交已由 G1 补遗 165 审过（子代理，半独立，范围 a77ed8e..020ce3f）；现状随第一、二包，BRIDGE 补 6066aac diff；两项核查 CC 跑，见文末 | 现状已审（R1-231）；两项核查已跑（CC 自跑，不独立） |
+| 13 | G1 补遗 161 问 28A、162 第二点 | b959dfb#661..cb0064c#665 | COURSE_RULES、REFACTOR-BRIEF（已删） | COURSE_RULES 第二包；REFACTOR-BRIEF 不审 | 现状已审（R1-231）；余不审（问 197A） |
 | 14 | 本次查出：E4 学生补约定 | b7e38ca#344 | REFACTOR-BRIEF（已删） | 不审 | 不审（问 197A） |
-| 15 | 本次查出：G2 审后返修 | d1cf6ef#357..845c70f#359 | SESSION_START、KNOWLEDGE_BASE | 第一包；KNOWLEDGE_BASE 补 4084025 diff | 待审（第二包） |
-| 16 | 本次查出：G5 审后 | ba180b9#438..df31d03#445 | COURSE_RULES、BACKLOG、SESSION_START（删 O、M、I、H 节） | 第一包、第二包 | 待审（第二包） |
-| 17 | 本次查出：G6 审后 | 611b109#457..cb10fb4#460 | PROJECT_STRUCTURE、BACKLOG、SESSION_START | 第一包、第二包 | 待审（第二包） |
-| 18 | 本次查出：G1 补遗 131 第四点 | 无提交：CC 判「与 BACKLOG 6 不冲突」，未送审 | BACKLOG | 第二包 | 待审（第二包） |
-| 19 | 本次查出：G1 补遗 148 第二点 | 组末审查没写审到哪个提交，#546 到 598 覆盖不明 | 多份 | 第一包、第二包 | 待审（第二包） |
-| 20 | 本次查出：第二次组末审查后的尾段 | fa6bcc5#654..d58f1c9#670，不含欠账 13 | HARNESS、BACKLOG、CLAUDE.md、PROJECT_STRUCTURE、PENDING | 第一包、第二包；PENDING 不审 | 待审（第二包）；PENDING 不审（问 197A） |
+| 15 | 本次查出：G2 审后返修 | d1cf6ef#357..845c70f#359 | SESSION_START、KNOWLEDGE_BASE | 第一包；KNOWLEDGE_BASE 补 4084025 diff | 现状已审（R1-231） |
+| 16 | 本次查出：G5 审后 | ba180b9#438..df31d03#445 | COURSE_RULES、BACKLOG、SESSION_START（删 O、M、I、H 节） | 第一包、第二包 | 现状已审（R1-231） |
+| 17 | 本次查出：G6 审后 | 611b109#457..cb10fb4#460 | PROJECT_STRUCTURE、BACKLOG、SESSION_START | 第一包、第二包 | 现状已审（R1-231） |
+| 18 | 本次查出：G1 补遗 131 第四点 | 无提交：CC 判「与 BACKLOG 6 不冲突」，未送审 | BACKLOG | 第二包 | 现状已审（R1-231） |
+| 19 | 本次查出：G1 补遗 148 第二点 | 组末审查没写审到哪个提交，#546 到 598 覆盖不明 | 多份 | 第一包、第二包 | 现状已审（R1-231） |
+| 20 | 本次查出：第二次组末审查后的尾段 | fa6bcc5#654..d58f1c9#670，不含欠账 13 | HARNESS、BACKLOG、CLAUDE.md、PROJECT_STRUCTURE、PENDING | 第一包、第二包；PENDING 不审 | 现状已审（R1-231）；PENDING 不审（问 197A） |
 
 说明：
 - 推断四处：欠账 1 的 E 段与返修已审终点、欠账 3 与 10 的已审终点、欠账 12 的范围（DECISIONS-R1 R1-224）。
