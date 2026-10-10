@@ -8438,3 +8438,23 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
   问 245（给手机读的形式）：A（CC 推荐）三样都给，仓库里的 Markdown、每章一个 claude.ai 私有网页、本机生成的离线单文件网页；B 再加整本 PDF，本机没有转 PDF 的工具，要另装。
 六，下个会话从这里接（会话中断时用）：看仓库地址与问 244、245 的答复。密钥已在本机，不用重建。样章源文件与五份报告仍在 R1-283 说的临时目录。
 进 HARNESS：本条为记账，不判。
+
+--- R1-285 · 问 244A、245A；远端建成并首推；书落进 book/；出对照 154、155；开始重温第 0 课（学生：「问 244 选 A，问 245 选 A；git@github.com:wengwengpang/study-l3-v2.git」）---
+一，问 244 A：书放仓库根下的 book/，章节与转网页脚本都在里面。问 245 A：给手机读的形式三样都给，仓库里的 Markdown、每章一个 claude.ai 私有网页、本机生成的离线单文件网页。PDF 不做。
+二，远端。ssh -T 回「Hi wengwengpang! You've successfully authenticated」。加远端 origin，地址 git@github.com:wengwengpang/study-l3-v2.git。推之前远端是空的。
+  核对是不是私有：不带任何身份走 HTTPS 访问，回「could not read Username」，退出码 128，外人看不到。
+  CC 自认之错：第一次做这个匿名测试退出码是 0，看着像公开仓库。查下来是 VS Code 的 GIT_ASKPASS 替 git 代填了账号，那次不是真匿名；去掉这条通道重测，才是上面的结果。R1-282 第三点说本机没有登录方式，漏了这条 HTTPS 通道；现在用 SSH，不受影响。
+  首推：git push -u origin master pre-trial-c，退出码 0。远端 master 是 8cac914，与本地一致；标签 pre-trial-c 是 30194bf，与本地一致。本地 master 已跟踪 origin/master。R1-281 第六点第 1 步做完。
+三，书入库，都是新建文件，分三次提交。
+  book/lec06.md，8effa2c：学生已认的样章，10816 字符，一字未改。
+  book/build.py 与 book/.gitignore，49c5216：在项目根目录跑 python3 book/build.py，每章生成离线网页与发布用页面各一份，放 book/out，不进 git。新生成的页面与已发布的样章网页除标题外一字不差。
+  book/notes 下五份样本摘要，acee9b1。这一样是 CC 自己加的，学生问 244 A 只说了章节与脚本。理由：五份摘要重做一遍要重派五个子代理，放临时目录会丢。已报学生，学生不要可删。
+  书章约 330 行，脚本 186 行，都超过单次 100 行。是新建文件，没法拆到 100 行以内，照实记。
+  bash scripts/doc-check.sh 退出码 0。book/ 不在体检范围里，S6 没有列它。
+四，对照 154（PROJECT_STRUCTURE 登记 book/）：在「├── CLAUDE.md                项目宪法，三层结构，当前到第三层 A（决策边界 D1-D8）」一行后插六行，原文见给学生的消息。改前应得：「book/」0 次，锚行 1 次，125 行。改后应得：6 次，1 次，131 行。
+  对照 155（PROJECT_STRUCTURE 开发环境记远端）：在「Git：WSL 里是 2.34，项目用这个，autocrlf 设成了 input。Windows 侧另装了 2.45，项目不用。」一行后插一行「远端：GitHub 私有仓库 git@github.com:wengwengpang/study-l3-v2.git，用 SSH 密钥登录，私钥在 ~/.ssh/id_ed25519，没设口令（2026-10-10 建，DECISIONS-R1 R1-284、R1-285）。推送是黄牌，CC 推之前会弹确认。」。改前应得：「远端：GitHub」0 次，锚行 1 次。改后应得：1 次，1 次，行数比对照 154 之后多 1。
+  传播面已搜：docs 与 CLAUDE.md 里（不含 DECISIONS 与样本）提到远端、remote、GitHub 的只有 KNOWLEDGE_BASE 一处，讲的是 GitHub Actions，与本仓库的远端无关。
+五，第 5 步开始，按课重温。顺序：Lec 0、1、2、3、4、5、05-ARCH、05-API 第一窗口、6，共九课。第 6 课的章已有，重温到它时照学生的反应再改。
+  第 0 课没有网页版样本，依据是 docs/lessons/00-full.md。出三道选择题，每题带「不确定」一项，看学生哪块模糊，章就在哪块写细。题目原文见给学生的消息。
+六，下个会话从这里接（会话中断时用）：看对照 154、155 的答复与第 0 课三道题的答案。之后写 book/lec00.md，再重温第 1 课。
+进 HARNESS：本条为记账，不判。
