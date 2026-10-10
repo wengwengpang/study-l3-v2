@@ -8107,3 +8107,14 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
   对照 115：在「~/.claude/templates/PROJECT_CLAUDE.md.template 是项目模板。」一行后插一行「~/.claude/templates/REFACTOR-HANDBOOK.md 是重构手册的副本。以仓库里的 docs/REFACTOR-HANDBOOK.md 为准，手册改了要学生重新亲手复制。」改前应得：锚行 1、新句 0、总行数 123；改后 1、1、124。
 六，待学生答：对照 115。之后 BACKLOG 70；再问 BACKLOG 60 关不关，并过问 219 的六条；然后复课 05-API 第二窗口。
 进 HARNESS：本条为记账，不判。
+
+--- R1-266 · 对照 115 已落；BACKLOG 70 开工侦察；出问 221、222（学生：「对照 115 帮我改」）---
+一，对照 115，cd0d343。锚行、新句、总行数改后 1、1、124，与 R1-265 所给应得全对；新行整行匹配 1。改前三数 CC 跑过，学生没另跑；学生第二次亲跑的是对照 114 的验证命令，得 0、1、1、83。
+  体检 bash scripts/doc-check.sh（提交 cd0d343，未提交改动 0 处）：BACKLOG 共 72 条，DECISIONS-R1 共 265 条，缺号重号无。
+  CC 自认之错：R1-265 记账那次提交，说明的标题后漏了空行，三条要点并进标题。仓库没有远端，当场 --amend 修，d3e1bd5 改为 16f3461，内容不变。
+二，BACKLOG 70 侦察。CC 自认之错：先报 4 个文件（本文件四条出处、COURSE_RULES、手册第四五节、SESSION_START 节标题），实际另用 git grep 碰了 TEACHING_STYLE、LESSON_TEMPLATE，还看了 TEACHING_STYLE 节标题，共 6 个，超了先报数，也超了 5 个上限。与 R1-265 第一点同类。
+  第一样（R1-191 第五点）：规则 28 写了出对照、一字不差，规则 78 例外写了「对照流程一步不省」，两处都没写原文怎么取、改前数原文。手册原句在第四节第 5、7 步。
+  第二样（R1-194 第三点）：git grep -n -E '亲手做|学生跑|学生亲跑|「! 」|你可以回|消息末尾|醒目'，限 COURSE_RULES、SESSION_START、TEACHING_STYLE、LESSON_TEMPLATE 四份，0 处命中，上课一侧没有现成的家。手册原句在第四节「你可以回」段后一行。
+  第三样（R1-204 第三点、R1-207 第四点）：规则 77 格式六行后没写判「否」接理由。COURSE_RULES「进 HARNESS：」行共 30，判否 12：规则 77 格式示例 4 行，有理由 2 行，无理由 6 行。
+三，待学生答：问 221（第一样落点：A 只写规则 28，B 规则 28 与规则 78 例外都写；CC 推荐 A）；问 222（第二样落点：A COURSE_RULES 新立一条，B SESSION_START J 节补一条，C TEACHING_STYLE 第四节补一条；CC 推荐 A，J 节与 TEACHING_STYLE 第四节的正文 CC 没读）。答完一条消息列全对照，从 116 起编。
+进 HARNESS：本条为记账，不判。
