@@ -9,6 +9,7 @@
 >   第二包：COURSE_RULES、BACKLOG、TEACHING_STYLE、LESSON_TEMPLATE 四份全文；KNOWLEDGE_BASE、anti-patterns、BRIDGE-05-api-w2 只补改过的那几个提交的 diff。反方已审（DECISIONS-R1 R1-231）。
 >   不审（问 197A）：已删的 HANDOFF-refactor-w2、REFACTOR-BRIEF，与 PENDING-TUNER-REFACTOR。不审它们当年的内容对不对；只审现文件引它们引得对不对、现在还受不受它们约束（反方 15）。已删文件不再约束谁，搬出去的内容在现文件里，随现状审；PENDING 已封、只查不追加、开课不读，被常驻文件当出处引时，要原文照 SESSION_START M 节补拿流程导。
 > 状态：现状已审写出处，只说那份文件现在的样子审过，不等于逐提交复审、欠账已还（反方 14）；指定 diff 已审写提交号与出处，只说那个提交的改动审过，不等于整份文件现在的样子审过（反方 27）；待审写哪一包；不审写依据。
+> 了结：历史提交审没审过不追溯，接受这一限制（问 195B）；各行到了现状已审、指定 diff 已审或不审，就算了结。
 
 | 欠账 | 来源 | 未审范围 | 涉及文件（今名） | 怎么还 | 状态 |
 |---|---|---|---|---|---|
