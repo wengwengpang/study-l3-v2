@@ -17,7 +17,7 @@
 | 3 | G1 补遗 67 第一点、68 第三点 | 9777efa#296..1840087#304 | HARNESS、COURSE_RULES、CLAUDE.md | 第一包、第二包 | 现状已审（R1-231） |
 | 4 | G1 补遗 89 第一点 | ae49d2d#372..fa153e7#383 | SESSION_START、COURSE_RULES | 第一包、第二包 | 现状已审（R1-231） |
 | 5 | G1 补遗 96 第一点 | d21d02c#401..5ae39b0#411 | LESSON_TEMPLATE、SESSION_START、PROJECT_STRUCTURE、TEACHING_STYLE | 第一包、第二包 | 现状已审（R1-231） |
-| 6 | G1 补遗 117 第三点 | c0ad29e#478..6935950#497 | COURSE_RULES、SESSION_START、anti-patterns、PROJECT_STRUCTURE、HARNESS | 第一包、第二包；anti-patterns 补 e11fa29 diff | 现状已审（R1-231） |
+| 6 | G1 补遗 117 第三点 | c0ad29e#478..6935950#497 | COURSE_RULES、SESSION_START、anti-patterns、PROJECT_STRUCTURE、HARNESS | 第一包、第二包；anti-patterns 补 e11fa29 diff | 现状已审（R1-231）；anti-patterns 只是指定 diff 已审（e11fa29） |
 | 7 | G1 补遗 122 第四点 | 8c0a001#508..0e16c99#511 | KNOWLEDGE_BASE | 补 b0cf33a diff | 现状已审（R1-231） |
 | 8 | G1 补遗 126 第三点 | 01e85c7#516..669aefd#520 | COURSE_RULES | 第二包 | 现状已审（R1-231） |
 | 9 | G1 补遗 129 第四点 | 57f3431#521..b91a413#539 | BACKLOG | 第二包 | 现状已审（R1-231） |
