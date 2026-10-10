@@ -16,6 +16,12 @@
 │   └── worktrees/           CC worktrees 空目录，git 不跟踪
 ├── .gitignore
 ├── CLAUDE.md                项目宪法，三层结构，当前到第三层 A（决策边界 D1-D8）
+├── book/                    教科书，一本离开 CC 也能读的课程书，按课分章（BACKLOG 73，DECISIONS-R1 R1-285 问 244A）
+│   ├── .gitignore           只忽略 out/
+│   ├── build.py             把每章 Markdown 转成网页，只用 Python 标准库；在项目根目录跑 python3 book/build.py
+│   ├── lec06.md             第 6 课 决策边界与权限系统（学生已认的样章，问 243A）
+│   ├── notes/               五份网页版样本的摘要报告，写书参考用。去留：一次性，教科书写完后删
+│   └── out/                 导出的网页，git 不跟踪
 ├── prisma/
 │   └── schema.prisma       Prisma 数据模型，6 model + 3 enum + onDelete（Lec 5 建）
 ├── scripts/
