@@ -9030,3 +9030,41 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 六，本条 CC 自认：先报的与实读的有出入，实读比报的多。多出的：REFACTOR-HANDBOOK 第五节（只报了第四节）；COURSE_RULES 规则 79（只报了 78）；OUTLINE 第二、三、四、六、七节（只报了第五节）；PENDING-TUNER-REFACTOR 多两行；SESSION_START 多五行；KNOWLEDGE_BASE 第八节开头十行。都是同一次读顺带出来的，没有另开没报过的文件。
 七，下个会话从这里接（会话中断时用）：看对照 214、215 放没放行，问 270、271 答没答。214 落完照规则 78 贴回第七节全文，并先读 REVIEW-DEBT 的入账标准，核这一处要不要记欠账。然后做 R1-306 第六点第 2 件：写前核四样，再照骨架重写第 0 课。
 进 HARNESS：本条为记账，不判。
+
+--- R1-309 · 对照 214、215 已落，第 1 件做完；问 270 A、271 A；第 2 件写前核四样；新发现三处；出问 272 到 274（学生：「214、215 帮我改；问 270 选 A；问 271 选 A」）---
+一，学生先亲跑改前基线一行，输出 6、0、1、0，与 R1-308 第三、四点的改前数同。随后原话：「214、215 帮我改；问 270 选 A；问 271 选 A」。
+二，已落：
+  对照 214，复课前-750（702f24f）。改前原文整行 1。改后旧文整行 0，新文整行 1，含 JWT 的行 5，含 DB session 的行 1，与应得同。
+  对照 215，复课前-751（4255db5）。改后新文 1，旧末段 0，行首「15 |」1 行，该行栏数 4，与应得同。
+  学生那一行命令 CC 改后实跑：5、1、0、1，与应得同。
+  规则 78：第七节改到的 Phase 2 一段贴回；其余没动，这份文件两次提交间只有 1 行增、1 行删。给了「贴全文」的选项。学生回「读完了」才算走完。
+  CC 自认一处：对照 215 的提交信息初稿写「四处同病」，BACKLOG 15 原文点名的是三处。提交没推，当场改了提交信息，文件内容没变，提交号由 ab7c190 变 4255db5。
+  第 1 件做完。三件剩第 2、3 件。
+三，裁决：问 270 A，十三条陷阱分轻重。问 271 A，九步沿用写字楼的比方与例子，每步四段。都是 CC 推荐项。
+四，第 2 件，写前核四样。
+  其一，Claude Code 官方文档三页，2026-10-12 查，经 WebFetch。
+    code.claude.com/docs/en/memory，存盘 636 行，读了三段。跨会话带知识的机制有两套：CLAUDE.md 是人写的，自动记忆是 Claude 写的。两套都在每次对话开头加载。官方写明它们是上下文，不是强制配置；要硬拦一个动作，用 PreToolUse hook。CLAUDE.md 有四个位置，按加载先后：组织级（Linux 与 WSL 在 /etc/claude-code/CLAUDE.md）、用户级 ~/.claude/CLAUDE.md、项目级 ./CLAUDE.md 或 ./.claude/CLAUDE.md、本地级 ./CLAUDE.local.md。从启动目录往上每一层的都在启动时加载，拼在一起，不互相覆盖，离启动目录近的后读。子目录里的，等 Claude 读写那个子目录的文件时才加载。@路径 可导入别的文件，最多四跳。自动记忆在 ~/.claude/projects/<project>/memory/，MEMORY.md 是索引，每次加载前 200 行或 25KB；主题文件按需读；只在本机。CLAUDE.md 4 MiB 以内整份加载，官方写越短越听话。
+    code.claude.com/docs/en/permission-modes，存盘 792 行，读了三段。模式六种：default（界面上叫 Manual）、acceptEdits、plan、auto、dontAsk、bypassPermissions。计划模式里 Claude 读文件、跑命令探查、写计划，不改源文件。进入有三法：按 Shift+Tab；在一条 prompt 前加 /plan；启动时 claude --permission-mode plan。再按 Shift+Tab 退出。计划出来后三个选项：批准并自动执行、批准并逐处确认、不批准接着改计划。Ctrl+G 可在编辑器里改计划。Shift+Tab 的循环是 default、acceptEdits、plan，可选的模式排在 plan 后。v2.1.283 起，终端与 VS Code 的交互会话默认从 auto 起步。
+    code.claude.com/docs/en/model-config，全页 116497 字符，只读到前 100000。别名有 default、best、fable、sonnet、opus、haiku、opusplan 等，别名指向的版本随时间换。设模型四法按优先级：会话里 /model；启动时 --model；环境变量 ANTHROPIC_MODEL；设置文件的 model 字段。opusplan 是计划模式用 opus、执行换 sonnet。思考力度用 /effort 调。
+  其二，响应格式。docs/arch/API_CONTRACT.md 第一节「全局约定」现写「本节待定，05-API 第 2 组拍板后填」。本项目的响应外壳没定。照 OUTLINE 写法约定第 9 条，第 0 课第 8 步不写本项目的响应格式，只讲回执里有状态码和内容两样，指向补课 05-API 一章。网页版的 { code, message, data } 不当本项目的事实写。
+  其三，三层演化的出处。
+    Context engineering：Simon Willison 2025-06-27 的文章「Context engineering」转引 Tobi Lütke 与 Andrej Karpathy 的原帖，两人都说这个叫法比 prompt engineering 好。Anthropic 2025-09-29 的文章「Effective context engineering for AI agents」写它是 prompt engineering 的自然延伸。
+    Harness engineering：Mitchell Hashimoto 2026-02-05 的文章「My AI Adoption Journey」第 5 步「Engineer the Harness」，原话是他不知道业界有没有通行叫法、自己管它叫 harness engineering。OpenAI 2026 年 2 月一文只见二手转述，原页取回 403，没读到。
+    没找到的：「2024 年是第一层」没有出处。「三层叠着往上走」这个整体排法，没读到一手出处。
+    照清单第三栏第 7 条办：后两层各写出处与时间；第一层不标年份；「一年一层」「三层楼」写成这门课的讲法，不写成业界定论。
+  其四，Memory 三层，对官方文档的结果。三份文件各一版，都与官方对不上：
+    docs/lessons/00-full.md 要点 6：全局 ~/.claude/CLAUDE.md、项目 CLAUDE.md、会话上下文。第三层官方不算记忆，官方原话是每次会话从空白上下文开始。
+    docs/HARNESS.md 第三节其他待答问题 1：写「官方 memory 三层」，第三层是「临时级 .claude/memory/」。官方那一页没有「三层」的说法；自动记忆的位置是 ~/.claude/projects/<project>/memory/，不在项目里，也不是临时的。
+    docs/KNOWLEDGE_BASE.md 第六节：同 HARNESS 那一版，第三层写 .claude/memory/<topic>.md。
+    书照官方文档写。三份文件怎么处置，照 D8 只报不改，下一轮问。
+五，新发现三处，只报不改：
+  1. 反模式库 1 到 13 号里，只有 3 号有根因与分条教训，其余十二条各只有现象、教训两行。R1-308 第五点那句 [假设] 不成立。问 270 A 的完整例子要另找来源，出问 274。
+  2. 3 号的标题两处不同：CLAUDE.md 第一层 D 写「角色激活了不等于人设生效」；反模式库写「表象成功 ≠ 实质生效」，内容扩成了角色与文件两件。书里收 CLAUDE.md 的原文，并写明库里这条后来扩过。两处要不要对齐，没问。
+  3. 官方写 v2.1.283 起交互会话默认从 auto 起步。REFACTOR-HANDBOOK 第五节「开工安全底座」要求默认模式是每次改动都先问。本机现在是哪一版、起步是哪个模式，没查。
+六，出三问。
+  问 272（对照 214 记不记欠账）：A（CC 推荐）不记。只换一个词，照问 269 乙；手册第五节写照已拍裁决搬文本、改指针这类机械活不送审；复课第一节结课时 SESSION_START M 节那条命令仍会列出 KNOWLEDGE_BASE。B 记欠账 27，随复课第一节结课送审包。
+  问 273（十三条里讲成完整例子的挑哪几条）：A（CC 推荐）五条，1 号、3 号、4 号、7 号、13 号。B 学生点名增减。理由：1 号是第 0 课「第一次让 CC 干活」当场用到的；3 号库里记得最细，和信仰二是一回事；4 号、7 号、13 号是自己写 prompt 头几回就会撞上的，这一句是 CC 的判断。
+  问 274（完整例子拿什么写）：A（CC 推荐）先找本项目记录里真发生过的事，带出处；找不到真事的那一条，写一个示意的例子，书里标明是示意。B 只用真事；找不到的那条不展开，只留原文加一句为什么。C 全用示意的例子。理由：写法约定第 9 条，核不了的不写成事实；标明示意就不算装成真事。
+七，本条 CC 自认：实读比先报的多。HARNESS 第三节开头三个核心问题那十行；API_CONTRACT 全文 43 行，报的是一节；REVIEW-DEBT 欠账 1 到 15 各行；KNOWLEDGE_BASE 第六节一行与 CLAUDE.md 第一层 D 的 3 号一行，没先报。外部多取了三页（两篇原文、一篇转引），是搜完才知道要取的。
+八，下个会话从这里接（会话中断时用）：看学生读没读完贴回的一段，问 272 到 274 答没答。答完就照 R1-305 第四点的清单、OUTLINE 第五节、本条第四点的核查结果重写第 0 课；通用的网络知识（DNS、TCP、TLS、HTTP）写时对一手资料核。写完发网页给学生读。下一轮另问：Memory 三份文件怎么处置；3 号标题两处要不要对齐；本机起步模式查不查。
+进 HARNESS：问 270 A、问 271 A 否（不是框架层）。定的是这本书第 0 课里十三条陷阱讲多细、九步用哪套比方。
