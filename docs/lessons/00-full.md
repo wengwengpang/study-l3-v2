@@ -28,12 +28,12 @@ Level 3 课程 · Phase 0 立项 · 第 0 讲（共 20 讲）
 ### 要点 3：19 课全景图（6 个过关点）
 
 ```
-Phase 0 立项   Lec 0-6    → SG-1
-Phase 1 环境   Lec 7-9    → SG-2
-Phase 2 MVP    Lec 10-12  → SG-3
-Phase 3 扩展   Lec 13-14  → SG-4
-Phase 4 部署   Lec 15-17  → SG-5
-Phase 5 演进   Lec 18-19  → SG-6
+Phase 0 立项   Lec 0-6    没有过关点
+Phase 1 环境   Lec 7-9    SG-1 在 Lec 7
+Phase 2 MVP    Lec 10-12  SG-2 在 Lec 12
+Phase 3 扩展   Lec 13-14  SG-3 在 Lec 14
+Phase 4 部署   Lec 15-17  SG-4、SG-5、SG-6 在 Lec 15、16、17
+Phase 5 演进   Lec 18-19  没有过关点
 ```
 
 每个 Phase 结束有一个 Stage Gate（SG）过关点，验收通过才进下一阶段。
