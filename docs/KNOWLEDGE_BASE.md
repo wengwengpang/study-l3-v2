@@ -320,7 +320,7 @@ Phase 1 · 环境搭建 · Lec 7-9 —— SG-1 在 Lec 7
 - Lec 9：Docker + 数据库 + ORM + Seed（能连库 + Seed 成功）。
 
 Phase 2 · MVP 开发 · Lec 10-12 —— SG-2 在 Lec 12
-- Lec 10：后端 MVP，backend 角色（模块 + API + JWT + 校验 + 异常路径）。
+- Lec 10：后端 MVP，backend 角色（模块 + API + DB session + 校验 + 异常路径）。
 - Lec 11：前端 MVP，frontend 角色（核心页面 + 三态 UI + 状态 + 拖拽）。
 - Lec 12：联调 + SG-2，reviewer 角色（契约先行 / 类型同步 / 一致性报告 / 交接包）。
 
