@@ -36,7 +36,7 @@ Phase 4 部署   Lec 15-17  SG-4、SG-5、SG-6 在 Lec 15、16、17
 Phase 5 演进   Lec 18-19  没有过关点
 ```
 
-每个 Phase 结束有一个 Stage Gate（SG）过关点，验收通过才进下一阶段。
+六个 Stage Gate（SG）过关点不是每个 Phase 结束各一个，落在哪几课照 KNOWLEDGE_BASE 第七节。验收通过才往下走。更正：原写每个 Phase 结束各一个，学生 2026-10-12 裁定以 KNOWLEDGE_BASE 为准（DECISIONS-R1 R1-291 问 246 乙）。
 
 ### 要点 4：Web 请求 9 步
 
