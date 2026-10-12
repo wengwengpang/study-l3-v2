@@ -36,6 +36,7 @@
 | 21 | 复课前一轮 BACKLOG 70（DECISIONS-R1 R1-267、R1-268；问 224A） | 61e435d#1274..29c87d9#1285，对照 116 到 127 | COURSE_RULES | 复课第一节结课送审时一并送；试行期第一次送审另附的 git diff pre-trial-c -- docs/ 已含这一段 | 待审（复课第一节结课送审包） |
 | 22 | 复课前一轮 BACKLOG 50（DECISIONS-R1 R1-272 到 R1-275；照问 224A） | 8b38942#1298..524f7a4#1305，对照 133 到 140 | COURSE_RULES、LESSON_TEMPLATE | 复课第一节结课送审时一并送；试行期第一次送审另附的 git diff pre-trial-c -- docs/ 已含这一段 | 待审（复课第一节结课送审包） |
 | 23 | 复课前一轮：学生对框架的新说法进 HARNESS（DECISIONS-R1 R1-296、R1-297；问 257 乙、258 A） | d1c8cae#1353..fb46b37#1370，对照 159 到 176 | HARNESS | 复课第一节结课送审时一并送；试行期第一次送审另附的 git diff pre-trial-c -- docs/ 已含这一段 | 待审（复课第一节结课送审包） |
+| 24 | 复课前一轮：学生补五点进 HARNESS、规则 77 判据四（DECISIONS-R1 R1-298 到 R1-301；问 261 B、262 A、263 A） | f266f15#1377..e9bb8c2#1397，对照 181 到 199 | HARNESS、COURSE_RULES | 复课第一节结课送审时一并送；试行期第一次送审另附的 git diff pre-trial-c -- docs/ 已含这一段 | 待审（复课第一节结课送审包） |
 
 说明：
 - 推断四处：欠账 1 的 E 段与返修已审终点、欠账 3 与 10 的已审终点、欠账 12 的范围（DECISIONS-R1 R1-224）。
