@@ -9755,3 +9755,17 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 四，新报一处，只报不改。Prisma 官方升级到 7 的指南：datasource 块里的 url 等字段已弃用（deprecated），改配在项目根的 prisma.config.ts；新的 prisma-client 生成器必须写 output；老的 prisma-client-js 将在以后的版本移除；7.0.0 起默认不加载环境变量。本项目 schema 第 2 到 3 行、第 6 到 8 行是老写法。docs/arch/TECH_STACK.md 没锁版本，仓库根没有 package.json。BACKLOG、docs/arch 下各份、05-full、05-cheatsheet、CLAUDE.md 搜 Prisma 7、prisma.config、版本锁、prisma-client，各 0。会不会直接报错，指南这句只说弃用，CC 没实跑。属 D4，取舍归学生。碰上它是在装 Prisma、跑迁移时，本章只是一份文本，不挡写章。
 五，下一轮要问两样：写前四样的第四样（几条裁决没进决策文件，要不要补记）；第四点那处怎么处理（本章怎么交代、进不进 BACKLOG）。
 进 HARNESS：本条为记账，不判。
+
+--- R1-343 · 问 293 A、294 A、295 B；出问 296、297（学生：「293 A；294 A；295 B」）---
+一，三问已答。293 A：终稿摘真产物，中间步骤写示意并标明。294 A：课后四问拆开放，三个归宿与四行判断表归第 6 课一章，本章末尾指过去。295 B：书里教读者在 VS Code 粘贴保存，旁注交代课上用 cat。
+二，本步读的。docs/lessons/05-full.md 第 30 到 45 行；docs/SESSION_START.md M 节送审一段。
+  查到的：没进决策文件的裁决，笔记里只有 05-full.md 排除字段一节一句（priority、display_name、created_by、invitations 表、roles 表、任务历史表，PRD 未定义，一律不加或入待确认）。规则 78 送审命令所列文件里没有 docs/arch/DECISIONS.md、docs/BACKLOG.md，改这两份学生回「同意」即可。
+三，问 296，待答。几条没进决策文件的裁决，要不要补记（R1-337 第五点第 1 处）。
+  A（CC 推荐）补记一条 ADR-DB-005 进 docs/arch/DECISIONS.md，照记录写，不新做决策，标明是补记与出处。出对照，学生同意再落。
+  B 不补。书里出处写 05-full.md 排除字段一节与 schema。
+  C 只在 BACKLOG 记一条，以后再补。
+四，问 297，待答。Prisma 7 写法那处（R1-342 第四点）怎么处理。
+  A（CC 推荐）本章照 schema 原样写，加一条旁注说 Prisma 7 起写法有变、带出处；BACKLOG 加一条「装 Prisma 前定版本」，D4 归学生。BACKLOG 一条出对照，学生同意再落。
+  B 现在就定锁 Prisma 6，TECH_STACK 记一句，schema 不动。
+  C 本章不提，只进 BACKLOG。
+进 HARNESS：本条为记账，不判。
