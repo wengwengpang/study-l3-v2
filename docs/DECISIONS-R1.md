@@ -9309,3 +9309,10 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
   传播面：搜「lec-intro」，book/OUTLINE.md、docs/BACKLOG.md、docs/KNOWLEDGE_BASE.md 各 0 行。「待学生认」在 OUTLINE、lec-intro.md 各 0 次，在 PROJECT_STRUCTURE 2 次；另一次是 lec00-draft.md 一行，新稿没认，不动。OUTLINE 第三节「开篇　导读」下只有「提纲见第四节」，没写状态。别的文件没搜。
 五，本会话 CC 自认，两条：开场先报要读 docs/vide_coding.md，实际只看了大小、没读内容；docs/REFACTOR-HANDBOOK.md 第四节没先报就读了。两处都在当条消息里说了。
 进 HARNESS：本条为记账，不判。
+
+--- R1-321 · 对照 224 已落（学生：「同意」）---
+一，学生先在 CC 里亲跑基线命令，得「待学生认」2、「学生已认」2，与 CC 报的应得数同。之后回「同意」。
+二，对照 224 已落：docs/PROJECT_STRUCTURE.md 目录树 lec-intro.md 一行，「，待学生认（DECISIONS-R1 R1-314）」改为「（学生已认，DECISIONS-R1 R1-314、R1-320）」，写法照同文件 OUTLINE.md 一行。动手前原文 1 次、新文 0 次；改后旧文 0、新文 1；「待学生认」2 变 1，「学生已认」2 变 3。提交复课前-779。
+三，R1-319 第二点「跟着后面的活一起改」的账：目录树导读一行已改。还剩 OUTLINE 第三节第 0 课的状态、目录树 lec00-draft.md 一行，等新稿认了、替换旧稿时改。
+四，眼下等学生两样，同 R1-320 第三点。CC 这边没有不靠学生就能往下做的活。本机比远端多复课前-778 到本条，没推，学生没说「推」。
+进 HARNESS：本条为记账，不判。
