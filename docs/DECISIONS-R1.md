@@ -9743,3 +9743,15 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
   C 读者让主对话的 CC 照原文存。
   三项写完都跑三条验证命令。
 进 HARNESS：本条为记账，不判。
+
+--- R1-342 · 学生暂不实机；问 293 到 295 待回字母；写前核做完；新报 Prisma 7 一处（学生：「我目前不想实机操作，日后发现有错再解决。其它按你推荐做。」）---
+一，「目前不想实机操作，日后发现有错再解决」。CC 的理解：本章动手一节不等学生实做，照课堂记录与官方文档写，没实跑的标待实测，同 R1-325 先例。三问的推荐项都不要学生实机做，这句不改推荐。学生可改。
+二，「其它按你推荐做」。问 293 到 295 都是 A/B/C 选择，照手册第四节末段不放行，与 R1-340 判问 292 同一口径。请学生回字母。
+三，写前核，不看三问的答案，先做了。
+  1. ADR-DB-001 到 004 正文读了（docs/arch/DECISIONS.md），与清单说法对得上：自增整数、硬删、timestamptz、onDelete 三类。prisma/schema.prisma 全文读了。
+  2. 选择菜单。课上那个菜单是 CC 提问用的 AskUserQuestion（报告第 81 条：三个选项、Chat about this、按 Esc 取消）。官方工具参考页 AskUserQuestion tool behavior 一节：选一项，或在 Other 一行、备注栏里自己写字。该页没写 Esc，也没写 Chat about this；这两样只在 GitHub issue 里见到，不是官方文档。CC 打算：照官方写 Other 与备注栏，课上按 Esc、选 Chat about this 照记录写，标明官方文档没写。学生可改。
+  3. Prisma 官方文档。referential actions 页：Cascade 删引用方、Restrict 有引用就不让删、SetNull 置空且只用于可选关系；不写时可选关系默认 SetNull、必填关系默认 Restrict。schema 参考页：@updatedAt 自动记最后更新时间；now() 记创建时间；@map、@@map 改列名、表名；@@unique 联合唯一，字段必须是必填的；PostgreSQL 原生支持枚举。本项目 schema 都对得上：assigneeUserId 是 Int?，@@unique 的两个字段都必填。
+  4. PostgreSQL 官方文档：Timestamptz(6) 的 6 是秒以下保留几位，范围 0 到 6；带时区的时间在库里一律存成 UTC，取出时换成会话时区显示。
+四，新报一处，只报不改。Prisma 官方升级到 7 的指南：datasource 块里的 url 等字段已弃用（deprecated），改配在项目根的 prisma.config.ts；新的 prisma-client 生成器必须写 output；老的 prisma-client-js 将在以后的版本移除；7.0.0 起默认不加载环境变量。本项目 schema 第 2 到 3 行、第 6 到 8 行是老写法。docs/arch/TECH_STACK.md 没锁版本，仓库根没有 package.json。BACKLOG、docs/arch 下各份、05-full、05-cheatsheet、CLAUDE.md 搜 Prisma 7、prisma.config、版本锁、prisma-client，各 0。会不会直接报错，指南这句只说弃用，CC 没实跑。属 D4，取舍归学生。碰上它是在装 Prisma、跑迁移时，本章只是一份文本，不挡写章。
+五，下一轮要问两样：写前四样的第四样（几条裁决没进决策文件，要不要补记）；第四点那处怎么处理（本章怎么交代、进不进 BACKLOG）。
+进 HARNESS：本条为记账，不判。
