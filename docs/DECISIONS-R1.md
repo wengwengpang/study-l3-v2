@@ -9769,3 +9769,26 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
   B 现在就定锁 Prisma 6，TECH_STACK 记一句，schema 不动。
   C 本章不提，只进 BACKLOG。
 进 HARNESS：本条为记账，不判。
+
+--- R1-344 · 问 296 A、297 A；出对照 255 到 259；新报两处（学生：「296 A；297 A」）---
+一，两问已答。296 A：补记 ADR-DB-005。297 A：本章照 schema 原样写加旁注，BACKLOG 加一条。写前四样全答完。
+二，本步读的。docs/arch/DECISIONS.md 第 1 到 33 行；报告第 30 到 33 条全文，另搜了 description、默认；样本 docs/web_course5_sample1.md 只导出第 605 到 620 行；docs/BACKLOG.md 文件头与最后几行；R1-279 第六点（对照 149 到 152 的前例）。
+  查到的：样本 612 行老师原话「三个实体待确认 + 删除策略 C + description 必填 + 几个字段默认值，全部进 DECISIONS.md / BACKLOG.md」。删除策略 C 已在 ADR-DB-002，其余没进。学生当时选删除策略 C、description 可空选「否」、其余同意（报告行段表 591 到 600 行）。
+三，对照 255，docs/arch/DECISIONS.md，在末行（ADR-DB-004 后果一行）后加一空行与以下五行：
+  「## ADR-DB-005 · 三个不单独成表的实体与几处字段口径（补记）」
+  「- 背景：Lec 5 定字段时，roles、invitations、任务状态历史要不要单独成表，以及几处字段口径，由主人拍板。课上说这些裁决要进决策文件，结课只追加了 ADR-DB-001~004，它们只留在 docs/lessons/05-full.md「排除字段」一节与 schema 里。」
+  「- 决策：三样都不单独成表。角色是 project_memberships 上的 role 枚举字段（MemberRole：owner / executor）；加成员是负责人填已注册用户的邮箱、指定角色，直接写一行 project_memberships，不存待接受的邀请；任务只存当前状态，另加 status_updated_at 记最后一次变更时间，供判断长时间无进展。tasks.description 必填（architect 初判可空，主人拍板必填）；tasks.status 默认 not_started。priority、display_name、created_by 不加。」
+  「- 后果：换来表少、查询简单，不为 PRD 没定义的需求建表；放弃了自定义角色、发邀请等对方接受、回看任务状态轨迹三样能力，将来真有这类需求再加表。」
+  「- 备注：复课前照课堂记录补记，没有新做决策（DECISIONS-R1 R1-343 问 296 A）。」
+  应得数：行数 56 变 62；「ADR-DB-005」0 变 1；末行原文前后各 1。插入点在文件末尾，后面没有原文可带，防插两份靠改前数「ADR-DB-005」为 0。
+四，对照 256，docs/BACKLOG.md，在末行（73 一行）后加一行：
+  「74 | 下沉 | Prisma 版本未定。Prisma 7 起 schema 的 datasource 块里 url 弃用，连接地址改配项目根的 prisma.config.ts；新的 prisma-client 生成器必须写 output，老的 prisma-client-js 以后移除（Prisma 官方升级到 7 的指南）。prisma/schema.prisma 的 datasource、generator 两块是老写法，docs/arch/TECH_STACK.md 没锁版本。锁 6 还是上 7、上 7 时两块怎么改，D4 归主人。来源 DECISIONS-R1 R1-342 第四点、R1-343 问 297 A | 装 Prisma 前」
+  类型栏「下沉」是照 22 号（备份方案未定、留到灾备）这类技术待办写的，四种类型的定义文件里没有。何时做写「装 Prisma 前」，不写课号（反模式 34）。
+  应得数：行数 84 变 85；「74 | 」开头 0 变 1。防插两份同上，靠改前数为 0。
+五，对照 257、258、259，docs/BACKLOG.md 文件头三句，各一处：「号段：1-73。」改「号段：1-74。」；「实际条数：73 条。」改「实际条数：74 条。」；「下一个可用号：74。」改「下一个可用号：75。」。应得数：三句旧文各 1 变 0，新文各 0 变 1。
+  传播面：别处没记 BACKLOG 的条数（搜了 CLAUDE.md、docs 一层、docs/arch、book 一层、scripts）。
+六，五份都不在规则 78 范围，学生回「同意」即可。照前例一处一提交。
+七，新报两处，只报不改。
+  1. 撞名：docs/arch/DECISIONS.md 已有「ADR-005 · Zod」，新条叫 ADR-DB-005，前缀不同不冲突，读时易混。
+  2. 目录树老缺口：docs/PROJECT_STRUCTURE.md 的 docs/arch/DECISIONS.md 一行写「ADR-Lite 决策记录 ADR-001~005」，ADR-DB-001 到 004 一直没登。与本次补记无关，不顺手改，下一轮问。
+进 HARNESS：本条为记账，不判。
