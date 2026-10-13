@@ -764,7 +764,7 @@ nothing added to commit but untracked files present (use "git add" to track)
 
 ### 规则书第一层
 
-这是第 0 课建成时的全文，四十八行。第 4 步贴的就是它。
+这是第 0 课建成时的全文，四十八行。第四节第 4 步贴的就是它。
 
 ```
 # CLAUDE.md 项目宪法
