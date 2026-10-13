@@ -1196,7 +1196,7 @@ dist/
 - 网页版课堂记录 `docs/web_course_sample6.md`（第 0 课）、`docs/web_course_sample5.md`（第 6 课里验证权限的那件事）。
 - 复课前一轮的决策记录 `docs/DECISIONS-R1.md`：R1-21 第三点（第七节 13 号的真事）；R1-148 第二点（4 号的真事）；R1-291 问 247 乙（GCCOP 的更正）。
 
-**Claude Code 官方文档，code.claude.com/docs。** Quickstart 页；记忆页（How Claude remembers your project）；权限模式页（Choose a permission mode）；模型设置页（Model configuration）；VS Code 页（Use Claude Code in VS Code）。
+**Claude Code 官方文档，code.claude.com/docs。** Quickstart 页；记忆页（How Claude remembers your project）；权限模式页（Choose a permission mode）；交互模式页（Interactive mode）；模型设置页（Model configuration）；VS Code 页（Use Claude Code in VS Code）。
 
 **三层楼的出处。**
 
