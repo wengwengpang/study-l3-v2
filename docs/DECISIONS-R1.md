@@ -9665,3 +9665,15 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 六，还没问、写前要问的，留下一轮（本轮已有问 291、292）：动手一节「应该看到什么」怎么来；课后四问的内容放哪一章；schema 由读者贴进编辑器还是让主对话的 CC 存；第五点第 1 处要不要补记。
 七，问 292 的补充。写清单时才看清：第 5 课一章要靠第 4 课的东西，照问 289 B 的顺序写，就得先短短交代、以后回头对。R1-336 答问时没说到。CC 的推荐仍是 A，理由：短交代写得出来，回头对的活不大。学生可改选。
 进 HARNESS：本条为记账，不判。
+
+--- R1-338 · 学生亲手删了重复的第 6 份，问 291 按 A 了结；出对照 254；清单与问 292 仍待答（学生：亲跑一行「rm docs/web_course5_sample6.md; git status --short」，无输出）---
+一，学生没有回字，在输入框里亲跑了问 291 A 项给的那一行，输出为空。CC 核：docs/web_course5_sample6.md 已不在；docs/web_course_sample4.md 仍在；git status 0 行；本机比远端多 4 条。
+二，问 291 按 A 了结。学生没回「291 A」，也没回「CONFIRM」。删除是学生亲手做的，不是 CC 做的。CC 照动作对得上 A 项处理，当条消息说明了，没有替学生补那两个词。回滚照旧：内容与 web_course_sample4.md 相同，只差导出时间一行，也可从网页再导。
+三，清单认不认、问 292，学生都没答，CC 没当答过。问 289 B 仍然有效。
+四，对照 254，待答。docs/PROJECT_STRUCTURE.md，纯插入一行，插在第 47 行（旧六份样本那行）之后。
+  新行：「    ├── web_course5_sample1.md 至 web_course5_sample5.md  网页版课堂记录样本五份（依次是 Lec 5、05-ARCH 第一、二、三、四窗口），教科书参考用，不是正本。去留：一次性，教科书写完后删（BACKLOG 73，DECISIONS-R1 R1-336 问 290 A）」
+  应得数：改前「web_course5_sample」在该文件 0 行，改后 1 行；旧行「web_course_sample1.md 至 web_course_sample6.md」前后都是 1 行。
+  该文件不在规则 78 的范围：规则 78 追加段的范围是 SESSION_START M 节「什么时候送审」第 1 条命令所列的文件，那条命令没列 docs/PROJECT_STRUCTURE.md。本条核过。学生回「同意」即可。
+  传播面：搜 web_course_sample、web_course5_sample，限 book、docs、CLAUDE.md，除决策记录、样本本身、vide_coding.md。列着样本清单的只有目录树第 47 行一处。其余命中是 lec00.md、lec06.md 与各份摘要报告各自点名自己的样本，不用跟着改。目录树 notes/ 一行写「一份样本一份」，仍成立，不改。
+五，还没做的：对照 254 等同意。写前要问的四样（R1-337 第六点）等清单认了再问。
+进 HARNESS：本条为记账，不判。
