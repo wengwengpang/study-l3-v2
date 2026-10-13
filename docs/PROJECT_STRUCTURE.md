@@ -19,7 +19,7 @@
 ├── book/                    教科书，一本离开 CC 也能读的课程书，按课分章（BACKLOG 73，DECISIONS-R1 R1-285 问 244A）
 │   ├── .gitignore           只忽略 out/
 │   ├── OUTLINE.md           全书骨架：写法约定、目录、每章固定十节、一章怎么写出来（学生已认，DECISIONS-R1 R1-291）
-│   ├── build.py             把每章 Markdown 转成网页，只用 Python 标准库；在项目根目录跑 python3 book/build.py
+│   ├── build.py             把每章 Markdown 转成网页，只用 Python 标准库；在项目根目录跑 python3 book/build.py。学生改在 GitHub 上读，现在不用（问 302 A），去留没定
 │   ├── lec-intro.md         开篇导读，照全书骨架第四节的提纲写（学生已认，DECISIONS-R1 R1-314、R1-320）
 │   ├── lec00.md             第 0 课 全局观，照全书骨架十节写（学生已认，DECISIONS-R1 R1-310、R1-327）
 │   ├── lec05.md             第 5 课 数据库设计，照全书骨架十节写（学生已认，DECISIONS-R1 R1-347、R1-353）
