@@ -9802,3 +9802,18 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 三，文件头与条目互核：条目行 74，最大编号 74，与号段 1-74、实际 74 条、下一个可用号 75 对得上。
 四，还没做的：R1-344 第七点第 2 处（目录树没登 ADR-DB 四条）要不要补，待问。写前四样已全答，下一步写第 5 课一章。本机比远端多 11 条，学生没说推。
 进 HARNESS：本条为记账，不判。
+
+--- R1-346 · 写前读材料；新报一处：第 5 课的 architect 是主对话照定义办事，不是子代理；出问 298、299（R1-345 之后学生没有新发言）---
+一，本步读的。book/OUTLINE.md 第一、二、五、六节；book/lec00.md 第一、二节、第四节第 7、8 步、第八到十节；报告 book/notes/course5-sample1-lec5.md 第二到五节全文；样本 docs/web_course5_sample1.md 只导出 206 到 260、745 到 768 行；docs/web_course_sample2.md 只导出 545 到 560、615 到 630 行；.claude/agents/architect.md 头 8 行；book/notes/sample2-lec4.md 只搜了几个词。官方子代理页（code.claude.com/docs/en/sub-agents）前 10 万字符。
+二，新报一处，D7，写章前要问。
+  第 4 课：真调用了 architect 子代理。记录里有「Read architect spec（4 tool uses）」、模型行显示 Opus（web_course_sample2 第 621 到 623 行）。
+  第 5 课：三条 prompt 都以「请你先读自己的定义文件 .claude/agents/architect.md」开头，贴进主对话。学生贴回的输出是「我会只重读 .claude/agents/architect.md……read 1 file」，没有子代理的调用行（web_course5_sample1 第 750 到 752 行）。随后弹了选择菜单。官方子代理页：AskUserQuestion 在每个子代理里都被去掉。所以第 5 课干活的是主对话照定义文件办事，「只读」靠 prompt 里一句话，不是工具限制；「建议模型 Opus」切的是主对话的模型。CC 的判断，学生可改。
+  官方子代理页另说：点名调用写 @agent-名字；子代理从空白上下文开始，只交回摘要；tools 列表限住它能用的工具。
+三，问 298，待答。书里第 5 课动手一节，architect 怎么用。
+  A（CC 推荐）照第 5 课实际：prompt 发给主对话，第一句让它读定义文件照着办。书里讲清这时干活的是主对话，「只读」是 prompt 里的软约束，写文件前停下来问是兜底。第六节讲子代理是什么、和这种做法差在哪。
+  B 改成真调用子代理，每条 prompt 前加 @agent-architect。只读是硬拦。代价：onDelete 那步弹不出菜单，要改成它在文字里列选项；三步之间的裁决要靠主对话转述；这套流程没跑过，只能标待实测。
+  C 正文照 A，旁注写 B 的做法。
+四，问 299，待答。目录树 docs/arch/DECISIONS.md 一行只登「ADR-001~005」，ADR-DB 一直没登（R1-344 第七点第 2 处）。
+  A（CC 推荐）补成「ADR-001~005、ADR-DB-001~005」，出对照，同意再落。
+  B 不补。
+进 HARNESS：本条为记账，不判。
