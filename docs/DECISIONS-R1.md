@@ -9475,3 +9475,30 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
   B 留着，每章写之前仍出三题。
 六，还留着没问的三样：独立审查按章还是按篇；复课排在书写到哪一步之后；第 6 课的范围。另有 vide_coding.md 没读的两段何时读，跟着问 286 的结果走。
 进 HARNESS：本条为记账，不判。
+
+--- R1-331 · 问 285 A、286 A、287 A；rm 被权限墙拦下；对照 244 到 247 与 286 的计划待答（学生：「CONFIRM；285 A；286 A；287 A」）---
+一，学生原话：「CONFIRM；285 A；286 A；287 A」。CONFIRM 对的是删 book/out 下两份旧名字的生成文件。
+二，那两份没删成。CC 发的 rm 命令被拒。查项目 .claude/settings.json：禁的一档里有 Bash(rm *)。这是第 6 课建的权限墙，拦的是 CC，不是学生点的拒绝。CC 没换别的命令绕，改请学生自己在输入框里跑一行。两份文件此刻还在。
+三，问 287 A：重温三题不要了，第 1 课那三题作废。搜「三题」「三道」：book/OUTLINE.md、docs/BACKLOG.md、docs/PROJECT_STRUCTURE.md 各 0 行，没有文件要跟着改。
+四，问 285 A：三份都照官方改。今天重取官方记忆页（code.claude.com/docs/en/memory，工具转回的文字）。原话：「Each Claude Code session begins with a fresh context window. Two mechanisms carry knowledge across sessions」；位置表四行，Managed policy、User instructions ~/.claude/CLAUDE.md、Project instructions ./CLAUDE.md or ./.claude/CLAUDE.md、Local instructions ./CLAUDE.local.md；「Each project gets its own memory directory at ~/.claude/projects/<project>/memory/」；「The first 200 lines of MEMORY.md, or the first 25KB, whichever comes first, are loaded at the start of every conversation」。「three layers」「.claude/memory/」在那一页 0 处。
+  传播面：限 docs、book、CLAUDE.md、.claude，除两份决策记录与六份网页版样本。讲三层的有 00-full.md、HARNESS、KNOWLEDGE_BASE 三份，另有 docs/PENDING-TUNER-REFACTOR.md 一行与 HARNESS 同文。那一份目录树写明「重构结束后只查不追加」，是历史件，CC 不出对照，报给学生。book/notes 摘要两行讲的是网页版没展开，不改。
+  对照 244，docs/lessons/00-full.md「Memory 三层」四行，不在规则 78 清单。改后四行：
+    **Memory：官方是两套机制**
+    - 人写的 `CLAUDE.md`。全局 `~/.claude/CLAUDE.md`：所有项目通用的协议和规范。项目 `CLAUDE.md`：项目专属事实，随课程迭代填充。官方另有组织级、本地级 `CLAUDE.local.md` 两处。
+    - 自动记忆：Claude Code 自己记的笔记，在 `~/.claude/projects/<项目>/memory/`，每次会话开头读进索引的前 200 行或 25KB。
+    - 更正：原标题写「Memory 三层」，第三层写「会话上下文：当前对话的临时状态，不持久化」。官方没有三层的说法，会话上下文不算记忆，每次会话从空白开始（Claude Code 官方记忆页，2026-10-13 查；DECISIONS-R1 R1-309 第四点、R1-330 问 285 A）。
+  对照 245，docs/KNOWLEDGE_BASE.md 第六节一行，在规则 78 清单，要「帮我改」。原文「- Memory 系统三层：项目级 ./CLAUDE.md、全局级 ~/.claude/CLAUDE.md、临时级 .claude/memory/<topic>.md。」改后「- Memory 系统：官方是两套，不叫三层。一套是人写的 CLAUDE.md，四个位置：组织级、用户级 ~/.claude/CLAUDE.md、项目级 ./CLAUDE.md、本地级 ./CLAUDE.local.md。一套是自动记忆，Claude Code 自己记的笔记，在 ~/.claude/projects/<项目>/memory/，每次会话开头读进索引 MEMORY.md 的前 200 行或 25KB。会话上下文不算记忆，每次会话从空白开始。（官方记忆页，2026-10-13 查）」
+  对照 246，docs/HARNESS.md 第三节其他待答问题第 1 条的前四行，在规则 78 清单，要「帮我改」。改后五行：
+    1. 规则 64 的三层落点（全局 / 项目事实 / 桥梁）与 Claude Code 官方的记忆机制
+       （人写的 CLAUDE.md，分组织级、用户级 ~/.claude/CLAUDE.md、项目级 ./CLAUDE.md、本地级 ./CLAUDE.local.md；
+       另有自动记忆，在 ~/.claude/projects/<项目>/memory/。官方不叫三层，2026-10-13 照官方记忆页更正）
+       是两套并行说法，谁都没提谁。
+       结论已定：不合并，写一行对照说清哪一类落进官方哪一处、哪一类根本不进。
+    结论不变，只把「memory 哪一层」换成「官方哪一处」。「理由」两行不动。
+  对照 247，book/lec00.md 第七节 1 号。在「「Memory 三层」那三行，和 Claude Code 官方文档的说法也对不上，官方的说法见第六节。」后面加一句：这一处笔记也在 2026 年 10 月做了更正。对照 244 落了才落它。
+  四条原文各数到 1 次。245、246 落后要记送审欠账，起止提交落了才知道，届时出对照。
+五，问 286 A：去掉前 135 行再入库。今天看过：第 1 到 135 行是侧栏，第 136 行起是正文；像邮箱的串全文只在第 131 行；第 136 行以后像密钥、口令的串 0 处。4829 行，124247 字符。
+  计划，不毁原件：一，把原件挪到仓库外 ~/vide_coding.orig.md。二，从原件取第 136 行到末尾，写回 docs/vide_coding.md。三，核对：新文件 4694 行；头一行是正文那一行；与原件第 136 行起逐字节相同；像邮箱的串 0。四，入库，一条提交；4694 行过了一百行的线，先例是六份样本原样提交（R1-280）。五，出对照在目录树登记一行。
+  回滚：把原件挪回原位。删内容属 D5，学生回 CONFIRM 才动。
+六，还留着没问的三样不变，见 R1-330 第六点。
+进 HARNESS：本条为记账，不判。
