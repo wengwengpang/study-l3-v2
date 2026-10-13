@@ -54,3 +54,9 @@
   - tasks.assignee → SetNull（任务资产保全，删用户后变未认领；assignee_user_id 因此可空）。
   - 其余业务外键（task→project、membership→user/project、notification→user/task）→ Restrict（防无声连坐删除）。
 - 后果：贴合"数据资产不无声蒸发"安全直觉；代价是将来做删除功能时，Restrict 的外键需先写清理逻辑。
+
+## ADR-DB-005 · 三个不单独成表的实体与几处字段口径（补记）
+- 背景：Lec 5 定字段时，roles、invitations、任务状态历史要不要单独成表，以及几处字段口径，由主人拍板。课上说这些裁决要进决策文件，结课只追加了 ADR-DB-001~004，它们只留在 docs/lessons/05-full.md「排除字段」一节与 schema 里。
+- 决策：三样都不单独成表。角色是 project_memberships 上的 role 枚举字段（MemberRole：owner / executor）；加成员是负责人填已注册用户的邮箱、指定角色，直接写一行 project_memberships，不存待接受的邀请；任务只存当前状态，另加 status_updated_at 记最后一次变更时间，供判断长时间无进展。tasks.description 必填（architect 初判可空，主人拍板必填）；tasks.status 默认 not_started。priority、display_name、created_by 不加。
+- 后果：换来表少、查询简单，不为 PRD 没定义的需求建表；放弃了自定义角色、发邀请等对方接受、回看任务状态轨迹三样能力，将来真有这类需求再加表。
+- 备注：复课前照课堂记录补记，没有新做决策（DECISIONS-R1 R1-343 问 296 A）。
