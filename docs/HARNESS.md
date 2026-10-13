@@ -125,10 +125,11 @@ anti-patterns 18 号与 37 号（不确定要明说，不许在猜测上盖楼�
 
 其他待答问题：
 
-1. 规则 64 的三层落点（全局 / 项目事实 / 桥梁）与 Claude Code 官方 memory 三层
-   （项目级 ./CLAUDE.md、全局级 ~/.claude/CLAUDE.md、临时级 .claude/memory/）
+1. 规则 64 的三层落点（全局 / 项目事实 / 桥梁）与 Claude Code 官方的记忆机制
+   （人写的 CLAUDE.md，分组织级、用户级 ~/.claude/CLAUDE.md、项目级 ./CLAUDE.md、本地级 ./CLAUDE.local.md；
+   另有自动记忆，在 ~/.claude/projects/<项目>/memory/。官方不叫三层，2026-10-13 照官方记忆页更正）
    是两套并行说法，谁都没提谁。
-   结论已定：不合并，写一行对照说清哪一类落进 memory 哪一层、哪一类根本不进。
+   结论已定：不合并，写一行对照说清哪一类落进官方哪一处、哪一类根本不进。
    理由：规则 64 的 A 类有一半落 COURSE_RULES 而 CC 不读它，C 类落桥梁也不经过 CC，
    真正重合的只有 B 类对项目级 CLAUDE.md。
 
