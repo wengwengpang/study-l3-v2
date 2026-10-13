@@ -829,7 +829,7 @@ nothing added to commit but untracked files present (use "git add" to track)
 
 ### 反模式库
 
-这是第 0 课建成时的全文，十三条。第 5 步贴的就是它。
+这是第 0 课建成时的全文，十三条。第四节第 5 步贴的就是它。
 
 ```
 # 反模式案例库
