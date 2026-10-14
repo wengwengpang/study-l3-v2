@@ -10385,3 +10385,34 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 五，推前检查，在本条提交之前做，覆盖前 2 条：git fetch 后远端仍在 f65a041；用 awk 取全部新增行，25 行，1860 字符；扫邮箱、令牌六种、Bearer、私钥头、连接串、口令赋值、机器名、家目录，各 0。
 六，推送结果在当条消息里报，用 git ls-remote 核。
 进 HARNESS：本条为记账，不判。
+
+--- R1-381 · 审查追问的结果已回，逐条判；出对照 282 到 286（学生贴回追问结果，没有另写字）---
+一，R1-380 的推送结果：3 条推上，f65a041..c8be6be，推后 git ls-remote 核，本机与远端一致。之后学生问「直接贴审查追问的结果？哪个？」，CC 重讲了三步，并在当条消息里重给了追问的原文。学生照做，贴回追问结果。
+二，审查者自己改口的两处。
+  F3：撤回。它确认段首有「已全部回写完毕」的状态行，那一段是第五节收的项目文件原文。与 R1-376 的判定一致。它把那一段说成在「第 5 课第五节」，实际在补课 05-ARCH 一章第五节，是它的笔误。
+  F5：它撤回了旧依据（「Pro 等不支持 auto」），但在逐条核对里（A4）仍判第 0 课那句「不一致」。理由是它在官方页上找不到 CC 引的那句，它看到的是「Starting August 14, 2026, auto mode becomes the default permission mode for new sessions on Pro, Max, and Team plans.」CC 不认 A4。2026-10-14 下午重新取了官方权限模式页（code.claude.com/docs/en/permission-modes）核：全文第 11 行有「With Claude Code v2.1.283 or later, auto mode is the built-in starting permission mode for interactive terminal and VS Code sessions.」；「on every plan and provider」一句在第 305 行；「August 14」「becomes the default permission mode」全页 0 处；它引的「Plan: All plans.」在页上，是真的。上午、下午两次取到的页面不逐字节相同（792 行对 783 行），两次都有上面两句。它看到的多半是另一个时候的版本，CC 核不了它那边。第 0 课那一句不改（对照 272 之后已带三种例外）。它审的包是对照 272 之前生成的。
+三，新报三条，都在第 5 课一章，原句都核到了。
+  F7（「硬删除是把文件扔进碎纸机，数据从数据库里真的抹掉」说过头；中）：认。硬删除是这一行从表里删掉、查不到；备份里可能还在，仓库里 ADR-DB-002 自己就写着「将来恢复误删需靠备份或迁移」。对照 282。
+  F8（「updated_at 每次改这一行时自动更新」没说是哪一层做的；中）：认。Prisma 官方 schema 参考页（prisma.io/docs/orm/reference/prisma-schema-reference，2026-10-14 取）原话：@updatedAt「If you do not supply a time yourself, Prisma Client will automatically set the value for fields with this attribute.」「Implemented at Prisma ORM level」；now() 在关系型数据库上「Implemented on the database-level, meaning that it manifests in the database schema」。所以建行时间是数据库填的，更新时间是 Prisma 填的，绕过 Prisma 直接改库不会更新。对照 283、284。第 357 行「走一遍」例子里那句「updated_at 也跟着自动更新」讲的是经应用改，不改。
+  F9（第一节「每张表、每个字段都要能追到这份文档的某一条」与后文「sessions 是技术栈带出来的」口径不一；中）：认。对照 285。
+四，逐条对官方文档的那一部分，十四条：十条「一致」，两条「基本一致」，一条「不一致」（A4，见第二点，不认），一条「核不动」。CC 的处置：
+  A2（「每次会话都从一个空白的上下文开始」）：它说是简化，不是错，后文已讲规则书与自动记忆会读进来。不改。
+  D2（计划模式「不动你的文件，直到你批准」）：它指出官方有例外，「Except in interactive terminal sessions with bypass permissions available」。属实，R1-367 第五点取的同一页有这句。本书不用那种模式，第 0 课写过「另外还有两种模式，本书不用」。CC 建议不改，告诉学生可选改。
+  C4（grep 不是 Claude Code 的功能，却放在补课 05-ARCH 第六节「Claude Code 知识点」里）：属实，是归类不严。那一章学生还没认，留到学生读后一并定，CC 不单出对照。
+  D1（别名指到哪个型号因供应商而异）：书里没写具体型号，不改。
+五，对这一轮审查的观察：第 5 课一章它说十节都读到了，三条发现的原句都对得上；逐条核对给了页面与原话。比第一轮扎实。A4 一处它引的官方原话，CC 两次取页都没有。
+六，对照 282，待学生同意。book/lec05.md 第三节「删除怎么删」，原句现出现 1 次。
+  原文：「打个比方，硬删除是把文件扔进碎纸机，数据从数据库里真的抹掉。」
+  改后：「打个比方，硬删除是把文件扔进碎纸机：这一行从表里删掉，再也查不到，想找回只能靠备份。」
+七，对照 283，待学生同意。book/lec05.md 第三节一条，整行现出现 1 次。
+  原文：「- 每张表都有 `created_at` 和 `updated_at`。前者建这一行时自动填上当时的时间，后者每次改这一行时自动更新。」
+  改后：「- 每张表都有 `created_at` 和 `updated_at`。前者建这一行时由数据库自动填上当时的时间。后者每次改这一行时自动更新；这一步是 Prisma 做的，经它改才会更新，绕过它直接改数据库不会。」
+八，对照 284，待学生同意。book/lec05.md 第三节写法表里的一行，整行现出现 1 次。
+  原文：「| `@updatedAt` | 每次改这一行，自动更新成改的时间 |」
+  改后：「| `@updatedAt` | 每次经 Prisma 改这一行，由 Prisma 自动更新成改的时间 |」
+九，对照 285，待学生同意。book/lec05.md 第一节「上一章交来什么」需求文档一条的末句，现出现 1 次。
+  原文：「这一章的每张表、每个字段，都要能追到这份文档的某一条。」
+  改后：「这一章的每张表、每个字段，都要说得出来历：多数能追到这份文档的某一条；少数是已经拍板的技术决定带出来的，比如后面要讲的会话表。」
+十，对照 286，待学生同意。book/lec05.md 第十节「核对日期」一行末尾加一句。原文末句「Prisma、PostgreSQL 的说法对的是这一天两家的官方文档。」其后接「10 月 14 日独立审查后，照 Prisma 的 schema 参考页，写明了 `updated_at` 由 Prisma 更新。」
+十一，五份对照改的都是学生已认的第 5 课一章。book/ 不在规则 78 清单，回「同意」即可。
+进 HARNESS：本条为记账，不判。
