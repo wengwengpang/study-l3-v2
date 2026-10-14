@@ -411,7 +411,7 @@ model User {
 | 类型后面不带问号，比如 `description String` | 必填 |
 | `@default(not_started)` | 默认值 |
 | `@default(now())` | 建这一行时填上当时的时间 |
-| `@updatedAt` | 每次改这一行，自动更新成改的时间 |
+| `@updatedAt` | 每次经 Prisma 改这一行，由 Prisma 自动更新成改的时间 |
 | `@db.Timestamptz(6)` | 在数据库里用带时区的时间类型。决策写的「带时区」，靠这一个记号落进设计图 |
 | `@unique` | 这一列不许重复 |
 | `@@unique([userId, projectId])` | 这两列合起来不许重复。官方文档写明，参与的字段都必须是必填的 |
