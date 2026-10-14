@@ -10184,3 +10184,12 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
   C 全不进，七条做法也留给附录。
 九，没问、留下一轮的：权限与决策边界怎么交代、弯路怎么写、「应该看到什么」怎么来、反模式与规则原文进不进产出物（上一章是问 304、305、307、308，都答 A）；旧报告 book/notes/sample4-05api.md 删不删。文件名 CC 定 book/lec05-api-1.md（新文件；问 289 B 已定第一窗口单独一章）；骨架目录「补课 05-API」一行怎么登记，写完出对照。补课 05-ARCH 一章认不认仍挂着。
 进 HARNESS：本条为记账，不判。
+
+--- R1-367 · 补课 05-API 第一窗口一章写前核：Claude Code 四样对官方文档（R1-366 之后学生没有新发言）---
+一，没等学生答问 309 到 311 就做了：核的是哪种答法都要用的事实，先例 R1-342。核对日期 2026-10-14，四页都在 code.claude.com/docs/en/ 下。
+二，子代理页（sub-agents）。每个子代理有自己的上下文窗口。原话「returns only the summary」，只把总结交回主对话。看它的记录：结束后 30 秒内跑 /tasks，在它那行按回车；记录文件在 ~/.claude/projects/{project}/{sessionId}/subagents/ 下，名为 agent-{agentId}.jsonl。Ctrl+O 这一页没写（R1-362 第二点在交互模式页核过）。模型：定义文件的 model 栏可写 sonnet、opus、haiku、fable、完整模型编号或 inherit；取用顺序是单次调用带的 model 参数、定义文件的 model、环境变量 CLAUDE_CODE_SUBAGENT_MODEL、主对话的模型。子代理里去掉了 AskUserQuestion（与 R1-346 一致）。这一页全文 108817 字符，读到前 100000，末尾 8817 没读。
+三，工具参考页（tools-reference）Edit 一节。原话「performs exact string replacement」「It doesn't use regex or fuzzy matching」。三道检查：先读过（新模型在读它不用弹权限时可免）；原文须与文件里一字不差，差一个空格或缩进就对不上；须恰好出现一次，多于一次时 Claude 要么给更长的原文，要么设 replace_all。原文过时或不唯一时，Claude 重读文件再改。所以网页版「匹配到零处它可能自作主张找个像的」不是工具的行为：工具不做模糊匹配，对不上就不改；之后拿哪段原文重试是模型的事。书里照这个写。
+四，模型配置页（model-config）。切换：会话里 /model，启动时 claude --model，环境变量 ANTHROPIC_MODEL，设置文件的 model 栏。别名：default、best、fable、sonnet、opus、haiku、sonnet[1m]、opus[1m]、opusplan。在 Anthropic API 上 opus 是 Opus 5.5，sonnet 是 Sonnet 5.5，haiku 是 Haiku 5.5；fable 是 Fable 5.1。Pro、Max、Team、Enterprise 与 Anthropic API 默认 Opus 5.5。另有力度档 /effort。网页版写的「建议模型 opus」「sonnet」是别名，现在仍能用，指到的型号已换。这一页全文 116643 字符，读到前 100000。
+五，权限模式页（permission-modes）。会话里按 Shift+Tab 轮换；从 auto 按第一下到 default，再到 acceptEdits、plan。状态栏：default 显示灰色「⏸ manual mode on」，plan 显示「⏸ plan mode on」，两者图标相同，与网页版「要看图标后的字」一致。进计划模式三种办法：按 Shift+Tab；在单条 prompt 前加 /plan；启动时 claude --permission-mode plan。工具参考页另列有 EnterPlanMode 工具（「Switches to plan mode to design an approach before coding」，不需权限）。所以网页版「计划模式是键盘状态，不是 prompt 里写一句话能切的」要纠：现在官方有 /plan 前缀，Claude 自己也有进入计划模式的工具。书里照官方写；写前看第 0 课一章是怎么写的，两章对齐。Alt+M 这一页没搜到（R1-328 在交互模式页核过）。
+六，清单第三栏第 6 项因此细化：两条要纠（Edit 对不上时会怎样、计划模式怎么进），一条照旧（子代理只回总结，官方原话如此）。第二栏第 3 项（三种做法在业界的叫法与工具）还没核，等问 310 答了再核。
+进 HARNESS：本条为记账，不判。
