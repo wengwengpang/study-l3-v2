@@ -231,7 +231,7 @@ PostgreSQL 的带时区类型叫 `timestamptz`。官方文档写明：带时区�
 - `sessions.token_hash`。同样，存的是登录凭据的哈希。
 - `sessions.expires_at`。这条会话什么时候过期。本项目的登录态保持 30 天。
 - `notifications.read_at`。可空。空着表示还没读，填了时间表示什么时候读的。
-- 每张表都有 `created_at` 和 `updated_at`。前者建这一行时自动填上当时的时间，后者每次改这一行时自动更新。
+- 每张表都有 `created_at` 和 `updated_at`。前者建这一行时由数据库自动填上当时的时间。后者每次改这一行时自动更新；这一步是 Prisma 做的，经它改才会更新，绕过它直接改数据库不会。
 
 ### 关系：把房间连起来
 
