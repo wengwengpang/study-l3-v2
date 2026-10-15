@@ -10747,3 +10747,19 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 七，下一步：出对照 331（契约汇总加 API-23、API-24）、332 到 334（ARCHITECTURE 三处），学生「同意」后落盘；再出第三批（成功码、instance、请求格式、唯一约束撞车、STANDARDS 档次栏、T15 措辞）。
 八，git：本条提交后干净；本机比远端多 12 条，学生没说推。
 进 HARNESS：拍板类判定见第六点；其余为记账，不判。
+
+--- R1-406 · 对照 331 到 334 已落；第三批标准核对；问 381 到 383（学生：「同意」「381 A；382 A；383 A」）---
+一，学生回「同意」前先跑改前基线：0、0、0、0，与应得一致。
+二，对照 331 到 334 照原样落盘，一份一提交：331 dbcb9d2（汇总登记 API-23、API-24，插入位置连上一行一起认，因「理由登记在……偏离登记」一行在 API-10、API-22 各出现一次）、332 13da4b3（后端分层开头一句）、333 893af48（第 6 条全局异常过滤器）、334 a17ce31（出处加 NestJS 官方文档三页）。改后 2、1、2、1，与应得一致。
+三，标准核对，2026-10-15 经 WebFetch：RFC 9110 第 15.3.1 节（200）、15.3.2 节（201，Location 头）、15.3.5 节（204）、15.5.16 节（415）；RFC 9457 第 3.1.1 节（type）、3.1.5 节（instance，「it is RECOMMENDED that absolute URIs be used」，打不开时作唯一标识）；RFC 9562 第 4 节 UUID 的 URN 写法（urn:uuid:），该 RFC 取代 RFC 4122；Zalando：POST 新建「SHOULD return 201 and the new resource object (including the resource identifier)」，Location 头响应体带了新资源时 SHOULD、没带时 MUST，204「Returned instead of 200, if no response payload is returned」，415「The client did not provide a supported content-type for the request body」，第 114 条建议用标准 application/json。Zalando 页面 10 万到 30 万字符两段读过，「JSON 作为载荷格式」那一条本次没找到原文，未引。
+四，三问，学生都选 A：
+  问 381 A，记 API-25：成功码照 RFC 9110 三分，读取、更新回 200 带资源；新建回 201，响应体带新资源与 id，并带 Location 头；成功无内容回 204（如登出）。未选：B 201 不带 Location；C 一律 200。
+  问 382 A，记 API-26：instance 填每次出错生成的随机编号，写成 urn:uuid: 开头；同一编号写进服务端日志，日志怎么记留到讲可观测性那一课。由全局异常过滤器生成，是 CC 从 API-23（唯一出口）推的，对照里写明。未选：B 填请求路径；C 相对路径加编号。
+  问 383 A，记 API-27：有请求体的接口只收 application/json，Content-Type 不对回 415，性质名「格式不支持」，经全局过滤器收形，在 API-14 码表上加一行。框架默认会不会自动回 415 没核，标 [假设]，写后端代码时实测。未选：B 按参数不合法回 400。
+五，传播面（规则 69，八份文件搜过 200、201、204、415、instance、Content-Type、application/json；只有契约 API-17「instance 标这一次出错」一处，仍成立）：
+  API-25：契约要改（汇总加 API-25）；STANDARDS 要改（RFC 9110 一行的拍板栏加指针）；ARCHITECTURE 不影响（第三节只写性质，状态码属契约；W1-7「返回新任务」仍成立）；PRD、UI_DESIGN、TECH_STACK、DECISIONS、CLAUDE.md 不影响；PROJECT_STRUCTURE 要改（契约一行编号范围，结课时）。进 HARNESS：否（不是框架层）。只属本项目接口口径。
+  API-26：契约要改（汇总加 API-26）；STANDARDS 要改（登记表加 RFC 9562 一行）；ARCHITECTURE 要改（第 6 条「负责」一行加生成 instance）；其余不影响；PROJECT_STRUCTURE 同上。进 HARNESS：否（不是框架层）。只属本项目接口口径。
+  API-27：契约要改（汇总加 API-27）；STANDARDS 要改（与 API-25 同一行、同一份对照）；ARCHITECTURE 不影响（检查落在哪一层写后端代码时定，[假设]）；其余不影响；PROJECT_STRUCTURE 同上。进 HARNESS：否（不是框架层）。只属本项目接口口径。
+六，下一步：出对照 335（契约汇总加 API-25 到 API-27）、336（STANDARDS RFC 9110 一行）、337（STANDARDS 加 RFC 9562 一行）、338（ARCHITECTURE 第 6 条负责一行），连同 architect 第二轮派单原文一起给学生看；学生「同意；发」后先落盘再派。第二轮接着上一轮的 architect 说话（它留着自己的大纲），派单里写死重读文件清单。派出后出最后一批不挡正文的题（唯一约束撞车、STANDARDS 档次栏、T15 措辞）。
+七，git：本条提交后干净；本机比远端多 17 条，学生没说推。
+进 HARNESS：拍板类判定见第五点；其余为记账，不判。
