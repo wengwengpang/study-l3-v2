@@ -10697,3 +10697,27 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 七，下一步：查 RFC 9110 第 11 节原文（桥梁第 5 节待核一），写 architect 起草契约第一节的派单给学生看，学生说「发」才派。
 八，git：本条提交后干净；本机比远端多 1 条（本条），学生没说推。
 进 HARNESS：本条为记账，不判。
+
+--- R1-403 · 第 1 段：问 370 到 375；architect 核对轮回报；传播面；新报两处 D8（学生：「370 A；发」「问：不用做管理员检测吗」「问：不是新窗口就要做吗」「372 A；371 B」「373 A；374 A；375 A」）---
+一，问 370 A：architect 拆两轮。本轮是核对轮，只出大纲、两处待核、拍板点；下一轮写正文。由来：桥梁第 5 节原排一轮起草、两处待核一并出，CC 写派单时判为反模式 38 的形状，提出来请学生拍。
+二，派单五个区块，学生说「发」后原样派出。待核一的原句 2026-10-15 经 WebFetch 取：rfc-editor.org 的 RFC 9110 纯文本版第 11.1、11.3、11.4、11.5、11.6.1、15.5.2 节；IANA HTTP Authentication Scheme Registry（最后更新 2025-02-18，登记 14 个方案，没有与会话 Cookie 相关的）；MDN 401 页（2026-06-22 修改）、WWW-Authenticate 页（2026-09-17 修改）。下载命令被拦，是 .claude/settings.json deny 档的 Bash(curl *)，不是学生拒的。WebFetch 用小模型摘句，没法和整份文件逐字比，已告诉学生。
+三，问 371（概念题）答 B。
+四，学生两次问资料管理员体检。照 J 节字面每个新窗口都做，学生说的对得上；本窗口免掉是问 358 A 的例外。CC 开场只写「体检闸门不重做」，没说闸门包着资料管理员体检，认（TEACHING_STYLE 第九节）。问 372 A：维持例外，不做。代价已说明：第二窗口体检后改过的文件（对照 289 到 322）要到下节课开课才查。
+五，architect 回报。记录核过：Read 4 次，恰为清单 4 份，第一次读定义文件；记录里每次调用各记两行，调用编号 4 个，与用量一致。记录里的派单首末行、71 行、区块标记与给学生看的一致，没逐字比。报告从记录取出 7997 字符、230 行，首末行与五个小节标题核过。报告留在本会话的子代理记录里，本会话只派过这一个子代理。
+六，报告判法：冲突与缺口 11 处。冲突 2（第二节已拍板的取舍 4、取舍 5、命名规范、决策 Q1 不在派单的依据范围）是 CC 派单漏列，下一轮派单补上，不用拍。冲突 10（行号漂移）归 BACKLOG 31，本窗口不清。其余分批问。学生亲手抽查三处引用（ARCHITECTURE:364、API_CONTRACT:86-87、STANDARDS:8），都对得上。
+七，CC 核 architect 标「未核」的外部说法，2026-10-15 经 WebFetch：Zalando 第 118 条「MUST property names must be snake_case (and never camelCase)」属实，第 130 条对查询参数同样要求；微软 Azure 规范「DO use camel case for all JSON field names.」；Django REST framework 会话认证未登录回 403；Chrome 只认 Basic、Digest、NTLM、Negotiate 四种方案，自定方案名不弹框是推导；NestJS Guard 返回 false 时框架抛 ForbiddenException，Guard 抛的异常走异常层与过滤器。Google JSON 规范网址 404，没查到。
+八，三问，学生都选 A：
+  问 373 A，记 API-20：回 401 照带 WWW-Authenticate，用自定方案名，名字下一轮定；方案没登记一处写进偏离。
+  问 374 A，记 API-21：退回性质「权限不足」拆成「看不见」（404）与「不许做」（403）；界面文字照旧都显示「权限不足」（API-4）；ARCHITECTURE 第二节例子块与第三节走查回写。
+  问 375 A，记 API-22：API 字段保留 camelCase，登记偏离 Zalando 第 118、130 条。理由三句：同层微软 Azure 规范要求 camelCase；Zalando 自承没有行业标准；全链路 TypeScript、不做命名转换（ARCHITECTURE 第二节命名规范）。
+九，传播面（规则 69，打开文件搜过「权限不足」「无权限」、camel、snake、401、WWW-Authenticate）：
+  API-20：契约要改（汇总加 API-20；API-14「待核」一句改为已核）；STANDARDS 要改（偏离登记一条；登记表 RFC 9110 一行核对栏加第 11 节）；ARCHITECTURE 本批不影响，待核二时一并写；PRD 不影响（无 401 字样）；UI_DESIGN 不影响；CLAUDE.md 不影响；PROJECT_STRUCTURE 要改（目录树契约一行的编号范围，结课时，规则 52）。进 HARNESS：否（不是框架层）。只属本项目接口口径。
+  API-21：契约要改（汇总加 API-21）；ARCHITECTURE 要改，九行：第二节例子块三行、第三节走查公共约定决策 B 一行、R2-2、R2-5、R2-6、R2-7、W1-2 各一行；PRD 不影响（四处「权限不足」都是界面提示）；UI_DESIGN 不影响（同为界面文字）；CLAUDE.md 不影响（第二层 C 一句是界面文字）；PROJECT_STRUCTURE 要改（同上，结课）。口径回扫（规则 69 追加）：契约 API-4、API-11、API-14、API-15 仍成立；ARCHITECTURE 第二节取舍 5、第三节走查公共约定「无权限与不存在同一响应」一条仍成立。进 HARNESS：否（不是框架层）。只属本项目接口口径。
+  API-22：契约要改（汇总加 API-22）；STANDARDS 要改（偏离登记一条）；ARCHITECTURE 要改（命名规范加一行指针）；PRD、UI_DESIGN、CLAUDE.md、TECH_STACK、DECISIONS 不影响（无命名字样）；PROJECT_STRUCTURE 要改（同上，结课）。进 HARNESS：否（不是框架层）。只属本项目接口口径。
+  另：book/lec05-arch.md 第五节收的 ARCHITECTURE 原文有同样九行，正文表格也用「权限不足」当性质名。跟不跟着改，记为本课挂账二十四，结课写书时与对照 293 一起定（桥梁第 5 节）。
+十，新报两处 D8，只报不改，出问 376、377：
+  1，STANDARDS 文件头写「偏离主参考的地方，写进对应 ADR 或契约并带理由，本文件只列指针」；同文件「偏离登记」API-10 一条带全部理由，契约 API-10 写「理由登记在 docs/arch/STANDARDS.md「偏离登记」」，是问 352 A（R1-394）。两处做法相反，API-20、API-22 的理由写哪定不下来。
+  2，STANDARDS 文件头「上下层冲突，上层让下层」可两读：按网络分层读，设计规范让协议；按上一行列表先后读，协议让设计规范。原始提案在 R1-391 第三点，前半句是「越往底层越统一」，按它协议层是底层。
+十一，下一步：学生答 376、377 后，一条消息列全 API-20 到 API-22 的对照；再问下一批（成功码、instance、type 归属、报错部件放哪、跨站拒绝排在哪、请求媒体类型、唯一约束撞车、STANDARDS 档次栏、T15 措辞）。
+十二，git：本条提交后干净；本机比远端多 2 条，学生没说推。
+进 HARNESS：拍板类判定见第九点；其余为记账，不判。
