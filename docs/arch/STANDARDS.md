@@ -26,6 +26,8 @@
 ## 二、偏离登记
 
 - 会话期限（API-10）：固定 30 天、无空闲超时，偏离 OWASP 会话管理「should implement an idle or inactivity timeout」与「absolute timeout」。理由：PRD D7 经项目主人确认；空闲超时要求读请求写 sessions，会推翻 T4；补救为登出即删服务端会话、角色改即时生效、Cookie 加 HttpOnly 与 Secure。将来风险变高时加空闲超时，见 BACKLOG。
+- 401 认证方案名（API-20）：自定方案名没在 IANA HTTP Authentication Scheme Registry 登记，RFC 9110 第 11.1 节写的是「ought to be registered」，属建议档。理由：登记表 14 个方案里没有会话 Cookie 类的；登记要走 IETF 评审，本项目不对外提供接口，唯一调用方是自家前端，前端不读这个头（API-6）。核对 2026-10-15。
+- 字段命名（API-22）：API 字段名与查询参数名用 camelCase，偏离 Zalando 第 118 条「MUST property names must be snake_case (and never camelCase)」与第 130 条（查询参数同）。理由：同层另一家主流规范微软 Azure 要求「DO use camel case for all JSON field names.」；Zalando 第 118 条自述「No established industry standard exists」；本项目前后端与 Prisma 都用 TypeScript，全链路不做命名转换（ARCHITECTURE 第二节「命名规范」）。核对 2026-10-15。
 
 ## 三、待登记
 
