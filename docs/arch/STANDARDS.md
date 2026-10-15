@@ -23,7 +23,7 @@
 
 ## 二、偏离登记
 
-无。
+- 会话期限（API-10）：固定 30 天、无空闲超时，偏离 OWASP 会话管理「should implement an idle or inactivity timeout」与「absolute timeout」。理由：PRD D7 经项目主人确认；空闲超时要求读请求写 sessions，会推翻 T4；补救为登出即删服务端会话、角色改即时生效、Cookie 加 HttpOnly 与 Secure。将来风险变高时加空闲超时，见 BACKLOG。
 
 ## 三、待登记
 
