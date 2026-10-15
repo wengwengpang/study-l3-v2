@@ -72,8 +72,8 @@
         ├── 06-cheatsheet.md     第 6 课速查卡
         ├── 05-arch-full.md      补课 05-ARCH 完整笔记（模块划分 + 分层）
         ├── 05-arch-cheatsheet.md 补课 05-ARCH 速查卡
-        ├── 05-api-full.md      补课 05-API 完整笔记（第一窗口）
-        ├── 05-api-cheatsheet.md 补课 05-API 速查卡（第一窗口）
+        ├── 05-api-full.md      补课 05-API 完整笔记（第一窗口；第二窗口补记追加在末尾）
+        ├── 05-api-cheatsheet.md 补课 05-API 速查卡（第一窗口；第二窗口补记追加在末尾）
         └── anti-patterns.md     反模式库，号段见 anti-patterns 文件头
 
 ## 课程标准文件清单（开课必读 7 个，规则 55）
