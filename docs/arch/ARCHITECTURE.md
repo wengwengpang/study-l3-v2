@@ -230,8 +230,9 @@ Zod 执行三处，各拦不同的东西：
 
 - 数据库列名：snake_case（如 assignee_user_id、created_at）。仅存在于 Postgres 内部。
 - Prisma 字段名与 TypeScript：camelCase（如 assigneeUserId、createdAt）。写代码用这一套。
-- API 请求与响应字段：camelCase。与 Prisma 和共享层一致，全链路不做命名转换。
+- API 请求与响应字段、查询参数名：camelCase。与 Prisma 和共享层一致，全链路不做命名转换。
 依据：prisma/schema.prisma 全表使用 @map / @@map，snake_case 被封闭在数据库层。
+偏离：主参考 Zalando 要求字段名与查询参数名用 snake_case（第 118、130 条）。本项目保留 camelCase，理由登记在 docs/arch/STANDARDS.md「偏离登记」（API-22）。
 后果：字段名不一致（前端 userId / 后端 user_id）这类联调错误在本项目结构上不会发生。协议 9 一致性报告在字段名这一层由 schema 写法保证。
 
 ### 共享类型推导方式（取舍 4）
