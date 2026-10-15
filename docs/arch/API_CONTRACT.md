@@ -142,3 +142,9 @@
   依据：RFC 9110 第 15.5.16 节；主参考 Zalando 状态码表 415
         「The client did not provide a supported content-type for the request body」。
   未核：框架默认会不会自动回 415。假设要自己加一道检查，写后端代码时实测。
+- API-28 并发写入撞上数据库唯一约束时，由该表的 Repository 接住，翻成「冲突」往上抛，
+  经全局异常过滤器回 409（API-23）。Service 先查后写照常做，唯一约束是最后一道防线。
+  理由：Repository 是这张表唯一的读写出口（ARCHITECTURE 第二节「一表一主」），知道每条唯一约束对应什么；
+        Service 不用懂数据库的错误码。
+  没选：统一出口认数据库错误，分不清撞的是哪条约束；不翻，落成 500，给用户错的提示。
+  未定：Prisma 报这类错的错误码随版本不同，版本未锁（见 BACKLOG），写代码时按锁定的版本查官方错误参考。
