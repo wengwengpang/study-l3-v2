@@ -10589,3 +10589,17 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 六，下一步：第 3 段议题 4 会话凭据。开讲前查 OWASP 会话管理与跨站请求伪造防护指南、MDN Set-Cookie、Next.js rewrites。
 七，git：本条提交后干净；本机比远端多 18 条。
 进 HARNESS：本条为记账，不判。
+
+--- R1-394 · 第 3 段议题 4 第一轮：问 350 到 352，API-8 到 API-10；学生提中枢按背景调讲解深浅（学生：「350 A、351 A、352 A; 补充：……」）---
+一，开讲前当场查：OWASP 跨站请求伪造防护指南（SameSite「is useful as a defense-in-depth control but it does not replace a proper CSRF defense in most deployments」；首选框架内置，有状态用同步令牌，Sec-Fetch-Site 为首选信号且须 Origin 兜底，API 型站点可用自定义请求头，GET 不改状态）；OWASP 会话管理指南（会话 ID 用 Cookie 交换，只接受 Cookie；Secure 必须，HttpOnly 必须，SameSite 显式写 Strict 优先或 Lax，Domain 不设，Path 尽量限定，过期以服务端为准，应有空闲超时与绝对超时，登录后换新会话 ID）；MDN Set-Cookie（HttpOnly 仍随 fetch 发送；Secure 本地例外；Lax 只放行跨站的顶层导航且方法安全）；Next.js rewrites（可当代理转外部地址）。
+  与 architect 第一轮推荐不同的两处，已向学生摆明：一，CSRF 不能只靠 SameSite；二，会话期限 30 天、无空闲超时，偏离 OWASP 的 should（问 344 A 顺带核出的第一处）。
+二，问 350 A，记 API-8：会话凭据用 HttpOnly Cookie，只接受 Cookie。属性照 OWASP：Secure 一律加（本地也加）、HttpOnly、SameSite 显式写、Domain 不设、Path 为 /、Max-Age 与服务端期限一致；过期以服务端为准；登出删服务端会话并让浏览器清 Cookie；每次登录新建会话。
+  问 351 A，记 API-9：SameSite 取 Lax。理由：OWASP 允许 Strict 或 Lax；Strict 让外链进来的首个页面请求不带凭据；Lax 拦跨站 POST、PUT、DELETE；正式防护第二轮另定。
+  问 352 A，记 API-10：保留固定 30 天（PRD D7、T4），在 STANDARDS.md「偏离登记」写明偏离 OWASP 空闲超时与绝对超时，理由三条（PRD 真人确认；空闲超时会推翻 T4 纯读不写；登出即删、角色即时生效、Cookie 加固）；另记 BACKLOG：风险变高时加空闲超时。
+三，学生补充原话：「类似这样的原理说明，在我们最后沉淀成的框架中，中枢也需要有这样的功能，并且是否需要做出可隐藏可显示，毕竟有些人是明白这些原因没必要再细读，那是否可以按背景做出不同详细深入程度的讲解。例如有一些技术性的背景要求细说那就专业的讲解。小白就需要非常详细并将它引导到专业知识」。
+  CC 核 HARNESS：第一节「用户是谁」已有「有技术背景的人换一套话术」「先搞清用户的背景和懂多少，再定怎么说、怎么带」；第三节问题 7、10、16 未答。学生这条是上课实感，算问题 16（中枢讲东西照什么规矩、本课程讲课规矩哪些能搬）的答案材料；「可展开收起」「把小白引到专业知识」是新的一层。照规则 60 结课自检，结课时出 HARNESS 对照（规则 78，要「帮我改」）。
+  本课内先照 TEACHING_STYLE 第二节「先讲核心一句话，再展开」做显：每块原理先给加粗一句结论，细节可跳；学生也可用 L 节触发词「太长了」「看不懂这段」。
+四，落盘安排：议题 4 两轮拍完一起出对照，免得 ARCHITECTURE 第四节同几行改两遍。决策先记本条。
+五，本课挂账新增一件：十九，学生的中枢讲解深浅设想，结课按规则 60、77 判并出 HARNESS 对照。
+六，git：本条提交后干净；本机比远端多 19 条。
+进 HARNESS：本条为记账，不判。第三点的判定在挂账十九。
