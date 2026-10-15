@@ -88,3 +88,13 @@
   前端按错误外壳里的原因出文字。
 - API-16 登录凭据错误回 401，错误外壳不区分邮箱错还是密码错（PRD 防枚举）。
   前端：在登录页收到 401 显示「邮箱或密码不正确」；不在登录页收到 401 跳登录页。
+- API-17 错误外壳照 RFC 9457（application/problem+json）：type 标问题类型（机读原因），title、detail 为说明，
+  status 为状态码，instance 标这一次出错；需要时加扩展部分（如 400 时的逐项问题）。所有接口出错都回此形状，
+  框架自带的退回由后端统一收成此形状。401 不附任何字段指向。不暴露堆栈。字段归共享 schema（API-3）。
+  依据：RFC 9457；主参考 Zalando #176（MUST support problem JSON）、#177（不暴露堆栈）。
+- API-18 成功响应不加统一外包装。单个资源直接返回对象；列表接口顶层也返回对象，数组放在其中一个字段里，
+  字段名归 schema（05-类型定）。分页留第 3 组。
+  依据：主参考 Zalando #167、#110（顶层用对象，为以后扩展）。
+- API-19 给用户看的中文提示由前端按 type 出；后端 title、detail 只作开发排查与兜底。
+  依据：Zalando #176「clients must be robust and not rely on a Problem JSON object being returned」；
+  网关错误不带本项目外壳；前端提交前的校验提示本来就在前端。
