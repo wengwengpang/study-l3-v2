@@ -15,7 +15,7 @@
 | 领域 | 主参考 | 原文 | 拍板 | 核对 |
 |---|---|---|---|---|
 | API 设计 | Zalando RESTful API Guidelines | https://opensource.zalando.com/restful-api-guidelines/ | API-5（docs/arch/API_CONTRACT.md「本节裁决汇总」） | 2026-10-15 |
-| HTTP 语义（状态码、方法、认证头） | RFC 9110 HTTP Semantics | https://www.rfc-editor.org/rfc/rfc9110 | 协议层，必须照做；状态码见 API-14 到 API-16，401 的认证头见 API-20 | 2026-10-15（第 11、15 节） |
+| HTTP 语义（状态码、方法、认证头） | RFC 9110 HTTP Semantics | https://www.rfc-editor.org/rfc/rfc9110 | 协议层，必须照做；状态码见 API-14 到 API-16、API-25、API-27，401 的认证头见 API-20 | 2026-10-15（第 11、15 节） |
 | 提交信息 | Conventional Commits | 见 CLAUDE.md 第一层 C | 已在 CLAUDE.md 第一层 C | 未核 |
 | 会话管理 | OWASP Session Management Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html | API-8、API-9、API-10 | 2026-10-15 |
 | 跨站请求伪造防护 | OWASP Cross-Site Request Forgery Prevention Cheat Sheet；实现用 NestJS 自带防护 | https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html ；https://docs.nestjs.com/security/csrf | API-11 | 2026-10-15 |
