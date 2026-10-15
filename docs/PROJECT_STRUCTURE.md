@@ -55,7 +55,7 @@
     ├── PROJECT_STRUCTURE.md     本文件
     ├── TEACHING_STYLE.md        讲课手感标准，一至九节
     ├── arch/
-    │   ├── API_CONTRACT.md      接口契约：管辖范围 + 全局约定 + 接口清单（05-API 建，骨架已立，正文待续）
+    │   ├── API_CONTRACT.md      接口契约：管辖范围 + 全局约定 + 接口清单（05-API 建；裁决 API-1 到 API-19 已登记，第一节正文待第三窗口起草）
     │   ├── ARCHITECTURE.md      系统架构：一模块划分 + 二分层 + 三数据流 + 四部署拓扑（补课 05-ARCH 建，四节齐；25 处回写已于 05-ARCH 第四窗口执行完毕，四节口径已对齐）
     │   ├── DECISIONS.md         ADR-Lite 决策记录 ADR-001~005、ADR-DB-001~005
     │   └── TECH_STACK.md        技术栈选型 + 四象限
