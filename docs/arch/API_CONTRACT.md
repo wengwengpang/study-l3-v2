@@ -112,3 +112,18 @@
 - API-22 API 的字段名与查询参数名用 camelCase（ARCHITECTURE 第二节「命名规范」）。
   偏离主参考 Zalando 第 118 条（JSON 属性名 MUST 用 snake_case）与第 130 条（查询参数同），
   理由登记在 docs/arch/STANDARDS.md「偏离登记」。
+- API-23 各层出错只抛「退回性质」，不直接写状态码。全局异常过滤器一处把性质映射成状态码，
+  收成 RFC 9457 形状（API-17），401 时补 WWW-Authenticate（API-20）。
+  Guard 拒绝时必须抛错，不得只返回 false：返回 false 时框架固定抛 ForbiddenException、回 403，
+  会把 401、404 都变成 403（NestJS 官方文档 Guards 一页）。
+  过滤器挂在全局：跨站请求伪造检查排在中间件与 Guard 之前，被拒的请求只有全局过滤器接得到
+  （NestJS 官方文档 CSRF 一页）。
+  错误类型与过滤器放在后端一个横切目录，名字建后端骨架时定。
+  理由：映射与本文件第一节的表一一对应，改一处就够；Service 不沾状态码，守住 ARCHITECTURE 第二节
+        Service「不做：解析 HTTP」。
+  没选：各层直接抛框架自带的 HTTP 异常，状态码散在各层；错误类型各模块自带，同一性质多处定义。
+  落点：ARCHITECTURE 第二节「后端分层」第 6 条。
+- API-24 错误外壳的 type 字段分开管：本文件第一节列「退回性质 → 状态码」的映射；
+  type 的字面值归共享 schema，本文件点名那份 schema，名字在第一节起草时定。与 API-1、API-3 同一口径。
+  由来：第零节「本文件管退回性质到状态码的映射」与「取值范围归 schema」两句，
+        对 type 能读出两个答案（第三窗口 architect 核对报出）。
