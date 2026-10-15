@@ -108,6 +108,7 @@ users 不依赖任何模块，是依赖图的地基。
 层序按 NestJS 请求生命周期排，即请求实际经过的顺序：
 Guard → Pipe → Controller → Service → Repository → Prisma
 守卫在 Controller 之前执行。被 Guard 拒绝的请求，Controller 方法根本不会被调用。
+出错另有一个统一出口，不在上面这条调用链里：全局异常过滤器，见下方第 6 条。任何一层出的错，都由它收成同一形状再发出（API-17、API-23）。
 
 #### 1. Guard（AuthGuard → AuthzGuard）
 AuthGuard 属 auth 模块，负责会话有效性，只能调 auth 模块暴露的能力读 sessions，并把当前用户 id 放入请求上下文。
