@@ -21,6 +21,7 @@
 | 跨站请求伪造防护 | OWASP Cross-Site Request Forgery Prevention Cheat Sheet；实现用 NestJS 自带防护 | https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html ；https://docs.nestjs.com/security/csrf | API-11 | 2026-10-15 |
 | Cookie 属性 | MDN Set-Cookie | https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie | API-8、API-9 | 2026-10-15 |
 | 错误响应格式 | RFC 9457 Problem Details for HTTP APIs；主参考 Zalando #176、#177 | https://www.rfc-editor.org/rfc/rfc9457.html | API-17 | 2026-10-15 |
+| 出错实例编号 | RFC 9562 UUID（URN 写法 urn:uuid:） | https://www.rfc-editor.org/rfc/rfc9562 | API-26 | 2026-10-15（第 4 节） |
 | JSON 顶层结构 | 主参考 Zalando #167、#110（顶层用对象） | https://opensource.zalando.com/restful-api-guidelines/ | API-18 | 2026-10-15 |
 
 ## 二、偏离登记
