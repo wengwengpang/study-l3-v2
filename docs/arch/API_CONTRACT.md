@@ -127,3 +127,18 @@
   type 的字面值归共享 schema，本文件点名那份 schema，名字在第一节起草时定。与 API-1、API-3 同一口径。
   由来：第零节「本文件管退回性质到状态码的映射」与「取值范围归 schema」两句，
         对 type 能读出两个答案（第三窗口 architect 核对报出）。
+- API-25 成功码照 RFC 9110 三分：读取、更新回 200，带资源；新建回 201，响应体带新资源与它的 id，
+  并带 Location 头；成功但没有内容回 204（如登出）。
+  依据：RFC 9110 第 15.3.1、15.3.2、15.3.5 节；主参考 Zalando：POST 新建
+        「SHOULD return 201 and the new resource object (including the resource identifier)」，
+        Location 头在响应体带了新资源时 SHOULD、没带时 MUST。
+- API-26 错误外壳的 instance 填每次出错生成的随机编号，写成 urn:uuid: 开头（RFC 9562 第 4 节的 URN 写法）。
+  由全局异常过滤器生成（API-23），同一编号写进服务端日志；日志怎么记，留到讲可观测性那一课。
+  依据：RFC 9457 第 3.1.5 节，instance 标「the specific occurrence of the problem」，打不开时只作唯一标识；
+        「it is RECOMMENDED that absolute URIs be used」。urn:uuid: 是绝对 URI，又不用写域名（API-13）。
+  没选：填请求路径，标的是资源不是这一次；相对路径加编号，RFC 说相对写法「can cause confusion」。
+- API-27 有请求体的接口只收 application/json。Content-Type 不对回 415，性质名「格式不支持」，
+  同样经全局异常过滤器收成 RFC 9457 形状。本条在 API-14 的码表上加一行。
+  依据：RFC 9110 第 15.5.16 节；主参考 Zalando 状态码表 415
+        「The client did not provide a supported content-type for the request body」。
+  未核：框架默认会不会自动回 415。假设要自己加一道检查，写后端代码时实测。
