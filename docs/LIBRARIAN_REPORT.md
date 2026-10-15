@@ -1,13 +1,13 @@
-**资料体检报告（第三次体检）**
+**资料体检报告(第四次体检)**
 
-我按 `.claude/agents/librarian.md` 做了本次体检。
-
-上一份报告在 `docs/LIBRARIAN_REPORT.md`。`git log --oneline -- docs/LIBRARIAN_REPORT.md` 输出 3 条：1cd2dc3、a98b9eb、fea47ef。所以这不是首次体检，文件也在。
+我先读了 `.claude/agents/librarian.md`,再读了上一份报告 `docs/LIBRARIAN_REPORT.md`。`git log --oneline -- docs/LIBRARIAN_REPORT.md` 有 4 条输出(123325d、1cd2dc3、a98b9eb、fea47ef),文件也在。所以这不是首次体检。
 
 ## 栏 1　脚本原样输出
 
+脚本是 `bash scripts/doc-check.sh`,下面是完整输出,没删没改。
+
 ```
-== 资料体检 2026-10-14 15:09:14  提交 cb4bf87  未提交改动 0 处
+== 资料体检 2026-10-15 09:43:56  提交 ec60e1e  未提交改动 0 处
 == 范围：58 份文件
 
 == S1、S2 编号清单
@@ -20,7 +20,7 @@
   问题（HARNESS 第三节）：共 16 条，最大号 16；缺号：无；重号：无
   决策边界 D（CLAUDE.md）：共 8 条，最大号 8；缺号：无；重号：无
   规则 57 自检项（9 起，1 到 8 在 SESSION_START J 节）：共 10 条，最大号 18；缺号：无；重号：无
-  DECISIONS-R1 条目：共 384 条，最大号 384；缺号：无；重号：无
+  DECISIONS-R1 条目：共 387 条，最大号 387；缺号：无；重号：无
   DECISIONS-G1 补遗：共 170 条，最大号 170；缺号：无；重号：无
 
 == S3 指空的引用（写了号，清单里没有）
@@ -223,21 +223,8 @@
        14 docs/lessons/04-cheatsheet.md
 
 == S6 上次体检以来新增、删除、改名的文件（A 新增、D 删除、R 改名；请对 SESSION_START M 节送审命令清单：要不要加、要不要改）
-  起点：上次报告提交 1cd2dc3
-  A	docs/REVIEW-DEBT.md
-  A	docs/vide_coding.md
-  A	docs/web_course5_sample1.md
-  A	docs/web_course5_sample2.md
-  A	docs/web_course5_sample3.md
-  A	docs/web_course5_sample4.md
-  A	docs/web_course5_sample5.md
-  A	docs/web_course_sample1.md
-  A	docs/web_course_sample2.md
-  A	docs/web_course_sample3.md
-  A	docs/web_course_sample4.md
-  A	docs/web_course_sample5.md
-  A	docs/web_course_sample6.md
-  A	scripts/rule-index.sh
+  起点：上次报告提交 123325d
+  无
 
 == S7 开头 15 行没有「去留：」的文件（补一行「去留：长期」或「去留：一次性，某某时删」；哪节课改到哪份，顺手补那份）
   共 58 份，缺 57 份
@@ -302,113 +289,93 @@
 
 ## 栏 2　和上次比
 
-规则总数：
-- 脚本数出 84 条，上次 83 条，涨了 1。
-- 涨的原因不是新增规则。上次脚本把规则 34 算作一条规则，这次把它算作占位（占位从 3 个变 4 个：2 3 21 34）。
-- 最大号从 85 变 86。
-- 实际条数 80 与 docs/COURSE_RULES.md:9 写的「实际条数：80 条」对得上。「下一个可用号：87」（docs/COURSE_RULES.md:10）也对得上。
-- 号段 1-86 在 docs/COURSE_RULES.md:7，留空清单在 docs/COURSE_RULES.md:8，也对得上。
-- 因为脚本口径变了，我没法用 83 对 84 判断有没有对应的删并。判断：按 80 条的口径比，没有可核的新增规则。
+规则总数:
+- 本次 84 条,上次 84 条,没涨。
+- 最大号 86 不变,缺号 42、68 不变,占位 2 3 21 34 不变。
+- 实际条数 80 与 docs/COURSE_RULES.md:9 写的「实际条数:80 条」对得上。
+- 下一个可用号 87(docs/COURSE_RULES.md:10)对得上。
+- 号段 1-86(docs/COURSE_RULES.md:7)和留空清单(docs/COURSE_RULES.md:8)也对得上。
+- 规则没涨,所以没有需要核对的删并。
 
-其他清单变化：
-- BACKLOG 69 增到 74。
-- HARNESS 原则 17 增到 19，问题 9 增到 16。
-- DECISIONS-R1 131 增到 384。这份是历史记录，按规则不查旧号。
+其他清单变化:
+- 只有 DECISIONS-R1 从 384 条增到 387 条。这是历史记录,不查旧号。
+- BACKLOG、反模式、HARNESS 原则与问题、D 条、补遗、规则 57 自检项都没变。
 
-各文件行数（上次存档的数字对本次脚本）：
+各文件行数:
+- S5 每个文件的行数与上一份报告栏 1 完全一致,总数同为 49800,增减全为 0。
+- `git diff --stat 123325d HEAD` 只显示 docs/DECISIONS-R1.md 加了 29 行。DECISIONS-R1 不在 S5 的 58 份里。
 
-| 文件 | 上次 | 本次 | 增减 |
-|---|---|---|---|
-| docs/COURSE_RULES.md | 613 | 626 | +13 |
-| docs/HARNESS.md | 301 | 373 | +72 |
-| docs/BACKLOG.md | 76 | 85 | +9 |
-| docs/PROJECT_STRUCTURE.md | 121 | 140 | +19 |
-| docs/REFACTOR-HANDBOOK.md | 124 | 130 | +6 |
-| docs/SESSION_START.md | 154 | 156 | +2 |
-| docs/LESSON_TEMPLATE.md | 45 | 46 | +1 |
-| docs/arch/DECISIONS.md | 56 | 62 | +6 |
-| docs/arch/API_CONTRACT.md | 43 | 44 | +1 |
-| docs/BRIDGE-05-api-w2.md | 242 | 244 | +2 |
-| docs/lessons/00-full.md | 92 | 93 | +1 |
-| docs/lessons/05-api-full.md | 75 | 76 | +1 |
-| CLAUDE.md | 169 | 170 | +1 |
-
-- 其余文件行数不变。
-- 总行数由 5806 变 49800。原因是 S6 新增 13 份大文件，范围从 45 份变 58 份。这 13 份是：REVIEW-DEBT、vide_coding、11 份 web_course 样本。
-- scripts/rule-index.sh 在 S6 里列为新增，但它不在 58 份范围内。
-
-上一份「学生选择」复查（栏 6 五条）：
-- 规则 34「删，号留空，写已并入规则 82」：已落。docs/COURSE_RULES.md:75 写「已废……见 DECISIONS-R1 R1-137」。文件头留空清单含 34（docs/COURSE_RULES.md:8）。
-- 规则 26「留」：已落。S4 本次不再把它列为零引用。
-- 规则 30「留」：已落。S4 本次不再列它。
-- 规则 8、9「留」：已落。这两条仍在 docs/COURSE_RULES.md:32、33，原文没动。
-- 规则 13、23、38、39、40、43、63「留」：已落。7 条都还在。
+上一份「学生选择」的复查(栏 6 共 3 条加「删并无选择」):
+- 问 321(把 web_course 样本和 vide_coding 排出体检范围,A):没落。
+  - 栏 6 写的是「本课结课前改 scripts/doc-check.sh,按规则 78 先出对照,学生说『帮我改』才改」,所以现在没落可能只是时间未到。
+  - 我 `grep -n "web_course\|vide_coding" scripts/doc-check.sh` 没有输出,脚本里没有排除这些文件的写法。
+  - 本次 S1 到 S5 仍是「范围:58 份」,假指空引用也都还在。
+  - 这也解释了为什么 S3 的规则 42、68 和反模式 57 都留着。
+- 问 322(新增文件不进送审清单,A):已落。本次 S6 输出「无」。scripts/rule-index.sh 已列在 docs/PROJECT_STRUCTURE.md:36。
+- 问 323(缺「去留:」的 57 份,哪节课改到哪份就补哪份,A):没落。
+  - 本次 S7 仍是「58 份缺 57 份」,与上次同数。
+  - 这一条选的是「顺手补」,不是批量补,所以数字没动不算违反。我只写事实。
+- 删并:上次无新候选,无选择可复查。
 
 ## 栏 3　发现
 
-1. 新入库的 12 份网页课堂记录样本，被脚本当「常驻」文件来查。这拉出一大批假指空引用。
-   - 范围：web_course_sample1 到 6、web_course5_sample1 到 5，共 11 份。另有 vide_coding.md 一份。出处是 docs/PROJECT_STRUCTURE.md:50-52。
-   - 这些文件是别处导出的聊天记录。里面的「规则 42」「规则 68」「反模式 57」用的是网页版当时的编号，不是本项目 COURSE_RULES 的编号。
-   - S3 因此多出约 40 条指空引用，S3 附多出约 80 条区间。
-   - S4 的规则零引用也被样本里的号码撞掉。上次零引用 12 条，本次只剩 4 条（8、9、13、23）。
-   - 判断：规则 26、30、38、39、40、43、63 退出零引用，很可能是被样本里的撞号冲掉的，不是真有新引用。我只在样本以外的 md 里搜到 book/notes/ 下的引用，而 book/ 不在脚本范围内。所以没法确认这 7 条在范围内的真实引用数。[假设]
-   - docs/PROJECT_STRUCTURE.md:50-51 写这些样本「去留：一次性，教科书写完后删」。docs/PROJECT_STRUCTURE.md:52 写 vide_coding「去留没定」。
-   - 要不要把样本排出脚本范围，由学生定。
-2. 规则 42 的指空引用，样本以外还有两处。docs/PENDING-TUNER-REFACTOR.md:196 是历史。docs/LESSON_TEMPLATE.md:23 是常驻，原文是「规则 42 已废……编号留空不重排」。
-   - 一方：docs/LESSON_TEMPLATE.md:23 写 42 已废。
-   - 另一方：docs/COURSE_RULES.md:8 把 42 列入留空。
-   - 判断：两处说法一致，是误报。上次也是同样情况。
-3. S7 报「58 份缺 57 份」。只有 docs/REVIEW-DEBT.md:4 有「去留：」。
-   - S7 是新加的检查，上次报告没有这一项。
-   - docs/REFACTOR-HANDBOOK.md:38 写「立项时就写好去留」，但 docs/REFACTOR-HANDBOOK.md 自己也缺。
-   - 样本 12 份在 docs/PROJECT_STRUCTURE.md:50-52 有去留，但文件头没有。
-   - 要不要补、补成长期还是一次性，学生判。
-4. S6 有输出。按职责 1，每个文件列一条。每条都是「要不要进 SESSION_START M 节送审命令清单，学生判」。
-   - docs/REVIEW-DEBT.md：它自己就是审查欠账表（docs/REVIEW-DEBT.md:1-4）。
-   - docs/vide_coding.md：学习材料，docs/PROJECT_STRUCTURE.md:52。
-   - docs/web_course5_sample1.md 至 sample5.md，共 5 份：样本，docs/PROJECT_STRUCTURE.md:51。
-   - docs/web_course_sample1.md 至 sample6.md，共 6 份：样本，docs/PROJECT_STRUCTURE.md:50。
-   - scripts/rule-index.sh：只读脚本，docs/PROJECT_STRUCTURE.md 我没核是否已列。[假设]
-   - 判断：样本是外来记录、一次性文件，进送审清单的意义不大。这只是我的倾向，由学生拍。
-5. D 总数口径不一致，上次报的 7 对 8，这次大半已对齐。
-   - 现在 D1-D8 的有：CLAUDE.md:145、CLAUDE.md:148、docs/PROJECT_STRUCTURE.md:18、docs/PROJECT_STRUCTURE.md:94、docs/PROJECT_STRUCTURE.md:96、docs/KNOWLEDGE_BASE.md:401、docs/HARNESS.md:119。
-   - 还写 D1-D7 的有：docs/KNOWLEDGE_BASE.md:236。
-   - 该行自己注了「Lec 6 口径；现行为 D1-D8，见 CLAUDE.md 第三层 A」。
-   - docs/PROJECT_STRUCTURE.md:94 写「Lec 6 建 D1-D7，补课 05-ARCH 加 D8」，是历史说明。
-   - 判断：上次的冲突已基本消除，剩 KNOWLEDGE_BASE:236 一处带注的历史口径。
-6. 规则 8、9、13、23 仍是零引用（docs/COURSE_RULES.md:32、33、40、59）。这四条与上次相同，学生已选「留」。
+1. 脚本范围没变,假指空引用仍在。这是栏 2 问 321 未落的直接后果。
+   - 规则 42 在 docs/web_course_sample*.md 和 docs/web_course5_sample1.md:673 等处约 30 条。
+   - 规则 68 有 5 条:docs/web_course5_sample2.md:4013、4015,docs/web_course5_sample4.md:3874、3901,docs/web_course5_sample5.md:535。
+   - 反模式 57 有 1 条:docs/web_course_sample2.md:2463。
+   - 判断:这些是网页版当时的编号,与本项目 COURSE_RULES 的编号无关。依据是上次报告栏 3 第 1 条和 docs/PROJECT_STRUCTURE.md:50-52。我这次没有逐处读这些行。
+2. 规则 42 在样本以外的指空引用,仍是两处,都是误报。
+   - docs/LESSON_TEMPLATE.md:23(常驻)写「规则 42 已废……编号留空不重排」。
+   - docs/PENDING-TUNER-REFACTOR.md:196(历史)。
+   - docs/COURSE_RULES.md:8 把 42 列入留空,与 LESSON_TEMPLATE:23 说法一致。
+   - 判断:没有冲突,和上次一样。
+3. 规则 8、9、13、23 仍是零引用(S4),原文在 docs/COURSE_RULES.md:32、33、40、59。
+   - 这四条上次学生拍板「留」。本次我重读了这四行原文。
+   - 它们是独立的具体规则,我没发现被别条完全盖住。
+   - 判断:没有推翻上次「留」的理由。
+4. BACKLOG 在 S4 列了 34 个零引用号,例如 1、2、3、12、13、14。
+   - 脚本标明这是「参考,不是删并信号」。我没逐条读。
+   - 15 号有历史引用 4 次,48 号有 1 次,其余历史 0 次。
+5. S6 本次无输出,按职责 1 栏 3 不必列文件。
+6. S7 报缺 57 份,与上次相同。
+   - 只有 docs/REVIEW-DEBT.md:4 有「去留:」。
+   - docs/REFACTOR-HANDBOOK.md:38 写「立项时就建,立项时就写好去留」,但 docs/REFACTOR-HANDBOOK.md 自己开头也缺。
+   - 这一点上次已经报过,没有变化。
+7. 本次与上次之间只有两个提交:89bfda4 和 ec60e1e。
+   - 它们只动 docs/DECISIONS-R1.md,加 29 行(R1-385 之后记到 R1-387)。
+   - 常驻文件没有变化。所以我没有发现新的矛盾或新的重复。
 
 ## 栏 4　可删/可并
 
-无新增候选。理由：
-- 上次候选（34、26、30、8、9、13、23、38、39、40、43、63）学生已全部拍板，处置已落（栏 2）。
-- 本次 S4 零引用只剩 8、9、13、23，是已拍板「留」的那几条，我没有新的判断理由推翻。
-- 这 4 条本次没有重读原文判断。原文只重读了一行：docs/COURSE_RULES.md:32、33、40、59。它们是独立的具体规则，我没发现被别的条盖住。
-- 另有一项可能要学生拍：栏 3 第 1 条，样本 12 份是否排出脚本范围。这不是删文件的建议，是脚本范围问题。
+无。理由:
+- 规则总数、各常驻文件行数都没动,没有新增内容可以判重复。
+- S4 唯一的规则零引用是 8、9、13、23,上次学生已选「留」。我重读原文后没有新的判断理由推翻。
+- 不是删文件的建议,但有一项仍待学生处理:栏 2 问 321 的脚本范围改动,按栏 6 的话要先出对照,学生说「帮我改」。
 
 ## 栏 5　我拿不准的
 
-1. 栏 3 第 1 条：26、30、38、39、40、43、63 退出零引用，是因为样本撞号，还是真有新的常驻引用，我没法确认。[假设]
-2. 我没有逐份读 12 份样本的内容，只看了前几行和 S3 输出的行号。样本里的「规则 N」是否都是网页版编号，我没逐处核对。[假设]
-3. 我没有比对 PRD 与 UI_DESIGN、ARCHITECTURE 与 TECH_STACK 之间有没有矛盾。栏 3 第 5 条的 D 口径是顺手核的。
-4. 我没有逐条读 46 条反模式、74 条 BACKLOG 的内容，只看了脚本的零引用数。
-5. 「形状相同」的判断，我本次没有套用，也没有读 HARNESS 第五节。
-6. docs/HARNESS.md 增了 72 行、BACKLOG 增了 9 行，我只看了行数，没有读新增内容是否与旧内容重复或矛盾。
+1. 问 321 未落,是排期还是漏了,我无法判断。栏 6 写的是「本课结课前」,今天是 2026-10-15。我没读 SESSION_START 或 DECISIONS-R1 的本课计划来核对。[假设]
+2. 我没有逐份读 12 份外来样本,不知道里面「规则 N」是否都是网页版编号。这条与上次相同。[假设]
+3. 我没有比对 PRD 与 UI_DESIGN、ARCHITECTURE 与 TECH_STACK 有没有矛盾。这次没有常驻文件变化,所以没有触发。
+4. 我没有逐条读 46 条反模式和 74 条 BACKLOG。BACKLOG 的 34 个零引用号只看了脚本数字。
+5. 我没有套「形状相同」的判据,也没有读 HARNESS 第五节。
+6. 我没有读 DECISIONS-R1 新增的 R1-385 到 R1-387。它是历史记录,职责 4 说不查旧号。我只看了 `git diff --stat`。
 7. 我没有跑 scripts/report-check.sh。它要等报告存档后由主对话跑。
 
 ## 栏 6　学生选择
 
-- 问 321（十二份外来材料要不要排出体检范围）：A，排出。本课结课前改 scripts/doc-check.sh 的范围，跳过 web_course 开头的样本与 docs/vide_coding.md；脚本在送审清单里，按规则 78 先出对照，学生说「帮我改」才改。
-- 问 322（上次体检以来新增的文件进不进送审清单）：A，都不加。scripts/rule-index.sh 已被送审命令里的 scripts/ 覆盖。
-- 问 323（开头缺「去留：」的 57 份）：A，照 S7 那句办，哪节课改到哪份，顺手补那份，不专门批量补。
+- 问 330（这次体检没经学生说「发」就派出，认不认）：A，认。派单原文与规定一字不差，四次调用全是只读，体检前后指纹相同。「谁派的」「有没有弹窗」记本课挂账。
+- 问 331（体检那段时间看到弹窗没有）：B，看到了，选了 Yes。
+- 问 332（学生有没有自己启动管理员）：A，没有。
+- 问 333（核对脚本退出码 1，栏 1 多一句说明，认不认这份）：A，认。去掉那一句后，栏 1 与脚本原样输出 271 行逐行同序相同。改管理员定义文件还是改核对脚本，结课时定。
 - 删并：本次没有新候选，无选择。
-学生原话：先回「321 _、322 _、323 _全按推荐」；CC 照手册第四节请回字母后，回「321 A、322 A、323 A」。
+学生原话：「330 A、331 B、332 A」；「333 A」。
 
-相关文件：
+相关文件:
 - /home/michael/projects/study-l3-v2/.claude/agents/librarian.md
 - /home/michael/projects/study-l3-v2/docs/LIBRARIAN_REPORT.md
 - /home/michael/projects/study-l3-v2/docs/COURSE_RULES.md
 - /home/michael/projects/study-l3-v2/docs/PROJECT_STRUCTURE.md
-- /home/michael/projects/study-l3-v2/docs/KNOWLEDGE_BASE.md
-- /home/michael/projects/study-l3-v2/docs/REVIEW-DEBT.md
+- /home/michael/projects/study-l3-v2/docs/LESSON_TEMPLATE.md
+- /home/michael/projects/study-l3-v2/docs/REFACTOR-HANDBOOK.md
 - /home/michael/projects/study-l3-v2/scripts/doc-check.sh
