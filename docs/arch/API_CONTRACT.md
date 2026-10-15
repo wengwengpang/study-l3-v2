@@ -99,7 +99,7 @@
   依据：Zalando #176「clients must be robust and not rely on a Problem JSON object being returned」；
   网关错误不带本项目外壳；前端提交前的校验提示本来就在前端。
 - API-20 回 401 必须带 WWW-Authenticate 头，至少一个 challenge（RFC 9110 第 11.6.1、15.5.2 节，MUST）。
-  本项目用一个自定的方案名，名字在本文件第一节起草时定。
+  本项目用自定的方案名 Session：说的是缺一个会话，不暗示凭据放 Authorization 头（RFC 9110 第 11.3 节），也不与 IANA 已登记的方案重名。
   理由：登记表上没有会话 Cookie 类方案；写 Basic，浏览器会弹自带的账号密码框（MDN），绕开前端登录页；
         Chrome 只认 Basic、Digest、NTLM、Negotiate 四种方案，自定名不在其中，不会弹框（推导）。
   没选：未登录改回 403、不带头（Django REST framework 的做法），要推翻 API-14 一行与 API-16；
