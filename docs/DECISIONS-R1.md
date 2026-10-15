@@ -10649,3 +10649,15 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 四，出对照 310、311，待学生「同意」。
 五，git：本条提交后干净；本机比远端多 34 条。
 进 HARNESS：本条为记账，不判。
+
+--- R1-399 · 对照 310、311 已落；第 5 段议题 3：问 362 到 364，API-17 到 API-19；第 2 组拍完；出对照 312 到 314 与换窗口三问（学生：「同意；段末题 B；362 A、363 A、364 A」）---
+一，对照 310 契约登记 API-14 到 API-16 648e94b；311 STANDARDS RFC 9110 一行改已核 0bbd00d。第 4 段段末题学生答 B，正确。
+二，第 5 段开讲前当场查 Zalando：#176 MUST support problem JSON（application/problem+json，依 RFC 9457；每个接口出错都要能回；可自定义问题类型作扩展；前端「must be robust and not rely on a Problem JSON object being returned」）；#177 不暴露堆栈；#167「The JSON payload must use a JSON object as top-level data structure (if possible) to allow for future extension」，集合同样，目录中 #110 标 MUST。与 architect 第一轮不同两处已摆明：错误外壳由自定改照 RFC 9457；列表由直接返回数组改为顶层对象。
+三，问 362 A，记 API-17：错误外壳照 RFC 9457，type 标问题类型（机读原因），title、detail 为说明，status，instance；需要时加扩展部分（如 400 逐项问题）；所有接口出错都回此形状，框架自带退回由后端统一收成此形状；401 不附字段指向；不暴露堆栈。字段归共享 schema（API-3）。后端统一收口的落点，第三窗口起草时在 ARCHITECTURE 第二节出对照。
+  问 363 A，记 API-18：成功响应不加统一外包装；单个资源直接返回对象；列表接口顶层返回对象，数组放在其中一个字段（字段名归 schema，05-类型定）；分页留第 3 组。
+  问 364 A，记 API-19：给用户看的中文提示由前端按 type 出；后端 title、detail 只作开发排查与兜底。
+四，规则 69 传播面，打开文件核：契约要改（登记三条）；STANDARDS.md 要改（登记表加错误响应格式、JSON 顶层结构两行，待登记删错误响应格式一行）；ARCHITECTURE 第二节要给后端统一收口一个落点，第三窗口起草时出对照（进桥梁）；PRD 不影响（提示文字仍是产品规则，由前端照着出）；UI_DESIGN 不影响；CLAUDE.md 不影响；BACKLOG 不影响（分页已在第 3 组）；PROJECT_STRUCTURE 不影响。进 HARNESS：三条都判否（不是框架层）。
+五，第 2 组四条议题与两处冲突全部拍完：API-3 到 API-19。照问 357 A，接下来做换窗口收尾。出换窗口三问 365（换窗口前入库不入库，BACKLOG 48，D8）、366（第二窗口笔记补记还是另出）、367（旧桥梁删不删），待答。
+六，出对照 312 到 314，待学生「同意」。
+七，git：本条提交后干净；本机比远端多 37 条。
+进 HARNESS：本条为记账，不判。
