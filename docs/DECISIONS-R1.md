@@ -10579,3 +10579,13 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 三，学生补问，原话：「定好标准后，是否整个项目都按这套标准，避免不同标准」。CC 答与传播面在下一条记。
 四，git：本条提交后干净；本机比远端多 12 条。
 进 HARNESS：本条为记账，不判。
+
+--- R1-393 · 问 349 A：新建 STANDARDS.md；对照 295 到 298 已落（学生：「349 A、段末题 按推荐」「同意」）---
+一，CC 答学生补问：对，一个领域认一份主参考，同领域不混；靠一处登记、偏离要记、出选项前先查清单。
+二，规则 69 传播面，打开文件核：API-5 契约要改，CLAUDE.md 结课改，PROJECT_STRUCTURE 结课登记，其余不影响。API-6 契约、ARCHITECTURE 第四节状态、BACKLOG 24 要改；ARCHITECTURE 第四节开头「前缀以 05-API 的 API 契约为准」仍成立；其余不影响。API-7 契约、ARCHITECTURE 第二节数据访问层要改，其余不影响。三条进 HARNESS 都判否（不是框架层）；「选一份主参考」这个做法随挂账十七判。
+三，问 349 A：新建 docs/arch/STANDARDS.md，按领域一行一条。段末题学生回「按推荐」，该题没有推荐项，CC 给答案 B 并讲理由。
+四，落盘，每件改后数过：新建 STANDARDS.md 0d99f0a；对照 295 契约登记 API-5 到 API-7 e3a50b6；296 ARCHITECTURE 第四节状态行 afa427b；297 ARCHITECTURE 数据访问层一句 e35bf75；298 BACKLOG 24 3f044a9。
+五，本课挂账新增一件：十八，结课时 CLAUDE.md 第二层 D 加指向 STANDARDS.md 的指针（随问 342、343），PROJECT_STRUCTURE 登记 STANDARDS.md；以后派单「规矩」块加「先查 docs/arch/STANDARDS.md、列适用标准、给出处、标档次」。
+六，下一步：第 3 段议题 4 会话凭据。开讲前查 OWASP 会话管理与跨站请求伪造防护指南、MDN Set-Cookie、Next.js rewrites。
+七，git：本条提交后干净；本机比远端多 18 条。
+进 HARNESS：本条为记账，不判。
