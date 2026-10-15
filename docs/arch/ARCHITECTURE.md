@@ -266,6 +266,7 @@ Zod 执行三处，各拦不同的东西：
 - assignee 字段与列名映射：prisma/schema.prisma:85。
 - 全表 @map / @@map：prisma/schema.prisma:28-112。
 - NestJS 请求生命周期层序、跨模块只走 Service、共享层判据四问、命名三层的推论：推导，无直接出处。
+- Guard 返回 false 时框架回 403、中间件与 Guard 抛的错都走异常层、跨站请求伪造检查排在 Guard 之前且只有全局过滤器接得到：NestJS 官方文档 Guards、Exception filters、CSRF 三页，2026-10-15 核。
 
 
 ## 三、数据流
