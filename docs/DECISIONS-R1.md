@@ -10672,3 +10672,12 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 七，本课挂账新增一件：二十二，见第四点。
 八，git：本条提交后干净（桥梁未提交）；本机比远端多 49 条。
 进 HARNESS：本条为记账，不判。
+
+--- R1-401 · 桥梁 w3 已提交；推送；Claude Code 安装报错（学生：「桥梁确认；推」「推」）---
+一，桥梁 docs/BRIDGE-05-api-w3.md 学生确认，单独提交 fc93d44。提交前 git status 只有桥梁一个新文件。
+二，推前检查：git fetch 后远端仍在 89bfda4，远端比本机多 0 条。第一次扫描时 grep 报「Error: claude native binary not installed」与「.../@anthropic-ai/claude-code/bin/claude.exe: No such file or directory」，新增行读成 0，CC 判为不作数，改用 /usr/bin/grep 重扫：新增 657 行（13 个文件）；邮箱、令牌、Bearer 长串、私钥头、连接串、口令赋值、机器名各 0；家目录 4 行，DECISIONS-R1 两行（R1-388 资料管理员记录路径、R1-389 本会话记录路径）、LIBRARIAN_REPORT 两行（相关文件路径），同 R1-386 判可推。学生说「推」。
+三，推送 89bfda4..fc93d44 到 origin/master，git ls-remote 核过远端在 fc93d44，与本机一致。
+四，安装报错：CC 推测 Claude Code 后台更新后少了原生程序，本窗口因早已加载仍可用，下次开窗口 claude 命令可能打不开，属 [假设]。已请学生关窗口前另开终端跑 claude --version；报同样的错就照报错原文修（node node_modules/@anthropic-ai/claude-code/install.cjs，路径换成全局安装位置，或重装）。下个会话开头先核。
+五，下个会话从这里接：开新窗口复课 05-API 第三窗口。学生说「开始」，照 SESSION_START J 节做，体检闸门不重做（问 358 A）；三份开课资料为 KNOWLEDGE_BASE、SESSION_START、桥梁 docs/BRIDGE-05-api-w3.md（docs/ 下有两份桥梁，以 w3 为准）。第一步派 architect 起草契约第一节。
+六，git：本条提交后干净；本机比远端多 1 条（本条），学生没说推。
+进 HARNESS：本条为记账，不判。
