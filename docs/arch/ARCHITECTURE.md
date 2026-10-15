@@ -109,6 +109,7 @@ users 不依赖任何模块，是依赖图的地基。
 Guard → Pipe → Controller → Service → Repository → Prisma
 守卫在 Controller 之前执行。被 Guard 拒绝的请求，Controller 方法根本不会被调用。
 出错另有一个统一出口，不在上面这条调用链里：全局异常过滤器，见下方第 6 条。任何一层出的错，都由它收成同一形状再发出（API-17、API-23）。
+上面这条链之前，框架还有一道跨站请求伪造检查；被拒的请求连 Guard 都到不了（API-23）。
 
 #### 1. Guard（AuthGuard → AuthzGuard）
 AuthGuard 属 auth 模块，负责会话有效性，只能调 auth 模块暴露的能力读 sessions，并把当前用户 id 放入请求上下文。
@@ -532,7 +533,7 @@ Zod 执行三处，各拦不同的东西：
    - 根路径转给 frontend。
    - API 前缀转给 backend。
 4. 页面和静态资源由 frontend 返回（T9）。页面渲染要取数时，走路径二。
-5. API 请求进入 NestJS，从 AuthGuard 开始，后续见第三节。
+5. API 请求进入 NestJS，先过框架的跨站请求伪造检查，再从 AuthGuard 开始，后续见第三节（API-23）。
 6. 响应原路返回，由 nginx 加密后发回浏览器。
 - 浏览器侧用相对路径（/api/...），不写域名（API-13；T15 原写公网后端地址）。
 
@@ -540,7 +541,7 @@ Zod 执行三处，各拦不同的东西：
 1. 浏览器请求页面，经路径一第 1-3 步到达 frontend。
 2. frontend 服务端代码用内网后端地址直连 backend。不回 nginx，不走公网（T15）。
 3. 浏览器带来的会话凭据，不会自动跟着这次服务端请求走。frontend 必须手工转发（T15）。凭据载体属 API 契约（本文:275）。
-4. backend 对这次请求的处理和浏览器直连完全一样：从 AuthGuard 开始，不因为请求来自内网就放宽鉴权（本文:218）。
+4. backend 对这次请求的处理和浏览器直连完全一样：先过跨站请求伪造检查，再从 AuthGuard 开始，不因为请求来自内网就放宽鉴权（本文:218）。
 5. 已知代价：服务端渲染要配后端的内网地址；浏览器侧用相对路径，不另配（API-13；T15 原写两套地址）。变量名见 ENV_DESIGN（T18）。
 
 数据持久化
