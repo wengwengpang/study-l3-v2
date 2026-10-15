@@ -128,10 +128,11 @@
   由来：第零节「本文件管退回性质到状态码的映射」与「取值范围归 schema」两句，
         对 type 能读出两个答案（第三窗口 architect 核对报出）。
 - API-25 成功码照 RFC 9110 三分：读取、更新回 200，带资源；新建回 201，响应体带新资源与它的 id，
-  并带 Location 头；成功但没有内容回 204（如登出）。
+  新资源有能读的地址时带 Location 头，没有就不带（如登录新建的会话）；成功但没有内容回 204（如登出）。
   依据：RFC 9110 第 15.3.1、15.3.2、15.3.5 节；主参考 Zalando：POST 新建
         「SHOULD return 201 and the new resource object (including the resource identifier)」，
         Location 头在响应体带了新资源时 SHOULD、没带时 MUST。
+  修订（同窗口）：原写「并带 Location 头」，改为有能读的地址才带。RFC 9110 第 15.3.2 节允许不带，此时以请求的地址为准。
 - API-26 错误外壳的 instance 填每次出错生成的随机编号，写成 urn:uuid: 开头（RFC 9562 第 4 节的 URN 写法）。
   由全局异常过滤器生成（API-23），同一编号写进服务端日志；日志怎么记，留到讲可观测性那一课。
   依据：RFC 9457 第 3.1.5 节，instance 标「the specific occurrence of the problem」，打不开时只作唯一标识；
