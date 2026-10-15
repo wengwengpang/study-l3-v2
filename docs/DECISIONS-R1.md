@@ -10570,3 +10570,12 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 六，下一步：第 2 段议题 1 前缀。开讲前查候选设计规范与相关官方文档，主参考选哪份拿给学生比。
 七，git：本条提交后干净；本机比远端多 11 条。
 进 HARNESS：本条为记账，不判。问 345 A 的判定在挂账十七。
+
+--- R1-392 · 第 2 段议题 1：问 346 到 348，API-5 到 API-7（学生：「346 A、347 A、348 A；补充：……」）---
+一，开讲前当场查六份原文：Google AIP-185（主版本号放 REST 路径第一段，must）；微软 Azure REST API Guidelines（必填查询参数 api-version，DO NOT 在路径放版本段；自述适用 Azure 服务团队 data plane 接口）；Zalando RESTful API Guidelines（#113 SHOULD avoid versioning，#114 MUST use media type versioning，#115 MUST not use URL versioning）；Nginx proxy_pass（带 URI 替换匹配段，不带 URI 原样转发）；NestJS setGlobalPrefix（统一加前缀，exclude 可排除）；Next.js Route Handlers（app 下任意位置，官方例子多在 app/api，同段不能与 page 并存）。
+二，问 346 A，记 API-5：设计规范主参考选 Zalando RESTful API Guidelines。理由：专讲 HTTP 与 JSON 的 REST 接口；规则标 MUST、SHOULD、MAY，对上问 345 A 三档。主参考不等于照单全收，每条仍按三档判。
+  问 347 A，记 API-6：API 前缀 /api；Nginx 原样转发不剥；NestJS 用 setGlobalPrefix 统一加；不加版本号（可选档，不提前堆；不堵死，有第二个调用方时按当时主参考加）。
+  问 348 A，记 API-7：本版不在 Next.js 写 Route Handler，接口都在 NestJS，前端只经 api client 调后端；将来要写不得用 /api 前缀。
+三，学生补问，原话：「定好标准后，是否整个项目都按这套标准，避免不同标准」。CC 答与传播面在下一条记。
+四，git：本条提交后干净；本机比远端多 12 条。
+进 HARNESS：本条为记账，不判。
