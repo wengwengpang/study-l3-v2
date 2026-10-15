@@ -63,3 +63,18 @@
   不堵死：出现第二个调用方时，按当时主参考加版本。Nginx 配置写法留 Lec 9。
 - API-7 本版不在 Next.js 写 Route Handler。接口都在 NestJS，前端只经 api client 调后端。
   将来要写，不得用 /api 前缀：生产上会被 Nginx 转给后端，本地不会，两边表现不一。
+- API-8 会话凭据用 HttpOnly Cookie，只接受 Cookie，不接受请求头携带（OWASP 会话管理）。
+  Cookie 属性：Secure（本地也加）、HttpOnly、SameSite 显式写（API-9）、不设 Domain、Path 为 /、
+  Max-Age 与服务端会话期限一致，过期以服务端为准。登出删服务端会话并让浏览器清 Cookie；每次登录新建会话。
+  服务端渲染把浏览器带来的 Cookie 原样转发（T15）。
+- API-9 SameSite 取 Lax。拦跨站的 POST、PUT、DELETE；外链进来的页面请求仍带凭据。
+  只作纵深防护，正式防护见 API-11。
+- API-10 会话固定 30 天，不设空闲超时（PRD D7、T4）。偏离 OWASP 会话管理的空闲超时与绝对超时建议，
+  理由登记在 docs/arch/STANDARDS.md「偏离登记」。
+- API-11 跨站请求伪造防护用 NestJS 自带的（12.1 起，enableCsrfProtection）：先看 Sec-Fetch-Site，
+  没有再比 Origin 与 Host；GET、HEAD、OPTIONS 放行，故这三种方法不得改数据；拒绝返回 403。
+  要求 NestJS 12.1 起，版本锁定见 BACKLOG。
+- API-12 本地开发由 Next.js rewrites 把 /api 转给本地后端，只在开发环境打开，本地与生产同源。
+  Set-Cookie 与 Sec-Fetch-Site 经转发是否原样，Lec 9 实测。
+- API-13 浏览器发请求用相对路径（/api/...），不写域名；只有服务端渲染配后端内网地址
+  （T15 的「两套地址」改为一套）。
