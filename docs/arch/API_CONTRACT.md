@@ -98,3 +98,17 @@
 - API-19 给用户看的中文提示由前端按 type 出；后端 title、detail 只作开发排查与兜底。
   依据：Zalando #176「clients must be robust and not rely on a Problem JSON object being returned」；
   网关错误不带本项目外壳；前端提交前的校验提示本来就在前端。
+- API-20 回 401 必须带 WWW-Authenticate 头，至少一个 challenge（RFC 9110 第 11.6.1、15.5.2 节，MUST）。
+  本项目用一个自定的方案名，名字在本文件第一节起草时定。
+  理由：登记表上没有会话 Cookie 类方案；写 Basic，浏览器会弹自带的账号密码框（MDN），绕开前端登录页；
+        Chrome 只认 Basic、Digest、NTLM、Negotiate 四种方案，自定名不在其中，不会弹框（推导）。
+  没选：未登录改回 403、不带头（Django REST framework 的做法），要推翻 API-14 一行与 API-16；
+        回 401 不带头，违反 MUST。
+  偏离：自定方案名没在 IANA 登记，理由登记在 docs/arch/STANDARDS.md「偏离登记」。
+- API-21 退回性质「权限不足」拆成两个：「看不见」回 404（资源不存在，或不让你知道它存在，API-15）；
+  「不许做」回 403（看得见但动作不许做，API-14）。界面文字照旧都显示「权限不足」（API-4）。
+  由来：第三窗口 architect 核对报出，ARCHITECTURE 第二、三节一个性质名对着两个状态码。
+  落点：ARCHITECTURE 第二节例子块、第三节走查改用新名字；本文件第一节的映射表用新名字。
+- API-22 API 的字段名与查询参数名用 camelCase（ARCHITECTURE 第二节「命名规范」）。
+  偏离主参考 Zalando 第 118 条（JSON 属性名 MUST 用 snake_case）与第 130 条（查询参数同），
+  理由登记在 docs/arch/STANDARDS.md「偏离登记」。
