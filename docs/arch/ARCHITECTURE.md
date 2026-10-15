@@ -201,6 +201,7 @@ Zod 执行三处，各拦不同的东西：
 2. 数据访问层（api client）
 负责：唯一发 HTTP 的地方，出入参走 packages/shared 的 Zod schema。
 不做：渲染、判权限。
+本版不在 Next.js 写 Route Handler，接口都在 NestJS；将来要写，不得用 /api 前缀（API-7）。
 
 3. 视图组件层（Client Component）
 负责：渲染、交互、按角色条件渲染入口。
