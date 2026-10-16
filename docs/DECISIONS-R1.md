@@ -11219,3 +11219,8 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 二，传播面（规则 69，打开文件核）：API_CONTRACT 要改（汇总加 API-31 到 33；第一节第 2、4 小节两处「待第 3 组定」放第五批起草时写）；STANDARDS 要改（登记表两行、偏离登记一条）；PRD 要改（澄清注记 13，BACKLOG 16 原写「回填 PRD」）；BACKLOG 要改（16、17 关闭）；ARCHITECTURE 不影响（Pipe 职责不变，第三节「已进 BACKLOG」一句是历史记录）；DECISIONS.md 不影响（ADR-DB-005「描述必填」由 API-32 解释，不矛盾）；UI_DESIGN、CLAUDE.md、PROJECT_STRUCTURE、book/ 不影响。
 三，API-32 里「存去掉首尾空白后的值」是 433 B 带出的一个小取舍（只校验不改值，或校验并存修剪后的值），CC 写成后者（Zod trim 的做法），在消息里单独点明，学生可剔除。
 进 HARNESS：问 432 到 434 判否（不是框架层），是本项目接口口径；其余为记账，不判。
+
+--- R1-441 · 对照 420 到 425 已落；第三批第二轮出问 435 到 437（学生：「同意 420 到 425」）---
+一，六份照原样落盘，一份一提交，数对才提交：420 2043d5c（契约增 14 行、删 0 行，与预期一致）、421 9e455ba、422 578ef04、423 d2f5b94、424 747c74d、425 629ae50。只读脚本 verify-420-425.sh 改后 11 行全对。BACKLOG 16、17 关闭。
+二，出问 435（当前用户身份与项目内角色由哪个响应下发，推荐 A 单设当前用户接口）、436（任务更新拆几个接口，推荐 B 两个）、437（跨场景概念题，规则 83 第 3 条：NestJS ValidationPipe 的 whitelist 加 forbidNonWhitelisted 对应 432 哪个选项）。旧裁决：契约第 3 小节与第 6 小节两处「待第 3 组定」，课堂记录与 book/ 没拍过。原文（2026-10-16 WebFetch）：GitHub「Get the authenticated user」GET /user；GitHub「Update an issue」PATCH 一个接口，「Without push access to the repository, assignee changes are silently dropped.」；NestJS 校验页 whitelist「validator will strip validated (returned) object of any properties that do not use any validation decorators」、forbidNonWhitelisted「instead of stripping non-whitelisted properties validator will throw an exception」。Jira 接口文档页正文取不到，不作依据。UI_DESIGN 页 3 核心元素有「当前身份」。
+进 HARNESS：本条为记账，不判。
