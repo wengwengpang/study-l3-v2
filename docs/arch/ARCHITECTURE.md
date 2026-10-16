@@ -78,6 +78,7 @@ projects → users
 authz → projects
 tasks → projects、users
 notifications → tasks、users
+成员移出编排 → projects、tasks（问 446 A：移出成员要在同一次写入里删成员行、把名下本项目任务改为未认领，由这一层开事务、交给两边的 Repository；不许 projects 反调 tasks，否则与 tasks → projects 成环。给成员分配任务也要拿 ADR-DB-006 的同一把锁，防止分给正被移出的人。它是单独的模块，还是某模块里的一个服务，名字放哪，建后端骨架时定）
 users 不依赖任何模块，是依赖图的地基。
 
 ### 本版范围裁决
