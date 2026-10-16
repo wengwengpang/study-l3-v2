@@ -41,7 +41,7 @@
 #### 4. projects
 职责：项目容器 + 成员与角色的唯一写入者。
 拥有表：projects、project_memberships
-覆盖：US-P01、US-P02、US-P03、US-R02
+覆盖：US-P01、US-P02、US-P03、US-P04、US-R02
 依赖：users（按邮箱找被邀请人）
 
 #### 5. tasks
