@@ -293,3 +293,17 @@
   理由：名字是本文件与 05-类型 的接缝（API-1），主体对得上即可；后缀牵涉全部 schema，归 05-类型。
         主体取 RFC 9457 的原词 problem details。
   参考：Zod 官方「基本用法」页的例子，schema 与类型同名、不带后缀（Player）；该页没有命名规定，只作 05-类型 的参考。
+- API-31 请求体出现 schema 没列的字段，一律拒绝，回「参数不合法」（400），外壳逐项列出多出来的键（ValidationProblemDetails）。
+  请求体里多带的项目 id 同样拒绝；新任务归哪个项目仍只从路径取（决策 D）。响应方向反过来：前端解析响应时容忍多出来的字段。
+  依据：主参考 Zalando #109「Unknown input fields in payload or URL should not be ignored;」「servers should provide error feedback to clients via an HTTP 400 response code.」；
+        #108 客户端「Be tolerant with unknown fields in the payload」；OWASP Mass Assignment「Explicitly allow-list fields」。
+  没选：静默剔除（Zod 默认），前端多传了不报错，错误被藏住；剔除加敏感键黑名单，OWASP 说黑名单不能当唯一防护。
+  落点：第一节第 2、4 小节两处「待第 3 组定」，第五批起草时写。
+- API-32 标题、描述、项目名称都必填：去掉首尾空白后为空的，回「参数不合法」；存的是去掉首尾空白后的值。最大长度归 05-类型 在 schema 里定。
+  依据：ADR-DB-005「tasks.description 必填」（Lec 5 主人拍板）；PRD「US-P01 创建项目」名称必填；PRD 澄清注记 13。Zalando #109 建议给字符串定长度范围。
+  没选：描述可为空串；都允许空串。
+- API-33 更新接口照 JSON Merge Patch（RFC 7396）的规则：没传的字段不改，传 null 表示清空。null 只对可空字段有效（任务的负责人、截止日期），对不可空字段传 null 回「参数不合法」。
+  负责人把任务改回未分配（PRD 审定决策 D16），就是把负责人传 null。媒体类型仍只收 application/json（API-27），偏离理由见 docs/arch/STANDARDS.md「偏离登记」。
+  依据：RFC 7396「Null values in the merge patch are given special meaning to indicate the removal of existing values in the target.」；
+        主参考 Zalando #123 要求 null 与没传同义，并写明「The only exception to this rule is JSON Merge Patch」。
+  没选：另收 application/merge-patch+json，要修订 API-27；null 与没传同义，清空另设接口。
