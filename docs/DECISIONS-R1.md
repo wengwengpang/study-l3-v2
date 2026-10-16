@@ -11094,3 +11094,20 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 七，下一步：学生确认桥梁后，照问 392 A 拆三次提交：第 0 到 3 节（第 1 到 81 行，81 行）、第 4 到 8 节（第 82 到 159 行，78 行）、第 9 节到启动指令（第 160 到 223 行，64 行），工作区不动；再记一条写桥梁提交号。学生说「推」就推。
 八，git：本条提交后，工作区有两处：新建未提交的桥梁 w5，和 docs/LIBRARIAN_REPORT.md 那一处非 CC 改动；本机比远端多 58 条，学生没说推。
 进 HARNESS：拍板类判定见第四点；其余为记账，不判。
+
+--- R1-429 · 桥梁 w5 已提交；推前扫描；学生问模型与 effort；下个会话接续点（学生：「桥梁确认；推；补充：这节课的模型可以切换到opus，effort用hign或medium吗？我现在用xhigh」）---
+一，桥梁 docs/BRIDGE-05-api-w5.md 学生确认，照问 392 A 拆三次提交：f85b169（第 0 到 3 节，81 行）、e48fe7a（第 4 到 8 节，78 行）、ef6aa7e（第 9 节到启动指令，64 行）。提交后的文件与工作区一致。
+二，学生说「推」。推前 git fetch：远端比本机多 0 条，本机比远端多 61 条；扫新增 593 行（12 个文件），邮箱、令牌、Bearer 长串、私钥头、连接串、口令赋值、机器名、家目录路径八类都是 0。推送在本条提交之后做，结果下个会话新一条补记（免得多一条没推的提交）。docs/LIBRARIAN_REPORT.md 那一处不在任何提交里，不随推送上去。
+三，学生问模型与 effort。CC 答（官方模型配置页 code.claude.com/docs/en/model-config，2026-10-16 经 WebFetch 逐句取原文）：
+  1，当前主对话已经是 Opus 5.5（学生跑的 /context 显示 claude-opus-5-5），不用切模型。
+  2，Opus 5.5 收 low、medium、high、xhigh、max 五档；原文「Opus 5.5 starts at `medium` unless one of the sources above sets a level for it」。
+  3，切法：「`/effort` followed by a level name to set it directly」；在 /effort 滑块或 /model 里按 s 只管本次会话，按 Enter 存为默认、以后会话也用。
+  4，取舍：原文「Lower effort is faster and cheaper for straightforward tasks, while higher effort provides deeper reasoning for complex problems.」
+  5，出问 414：A 保持 xhigh；B 改 high；C 改 medium。CC 推荐 B。理由：剩下的活是跨文件一致性核对、扫传播面、判 D8 冲突，属官方说的「complex problems」，medium 合「straightforward tasks」；本窗口几次差错（grep 漏 -e、看截断输出下结论、预期数没数）是程序疏漏，靠闸门和脚本拦住的，看不出 xhigh 比 high 多拦了哪次，这一判断是 CC 的推测 [假设]。子代理的 effort 怎么定，CC 没核，不下结论。
+四，进 HARNESS：本条为记账，问 414 待答，不判。
+五，下个会话从这里接：
+  1，开新窗口复课 05-API 第五窗口。学生说「开始」，照 SESSION_START J 节做，体检闸门不重做（问 413 A）；三份开课资料为 KNOWLEDGE_BASE、SESSION_START、桥梁 docs/BRIDGE-05-api-w5.md（docs/ 下有四份桥梁，以 w5 为准）。第一步派 architect 核对第 3 组，只核对（桥梁第 5 节）。
+  2，开场先补记本条第二点的推送结果；看 git status，若只有 docs/LIBRARIAN_REPORT.md 一处，照桥梁第 2 节请学生关标签页再亲跑撤销。
+  3，问 414 若学生本会话没答，开场重给；学生要切 effort，照本条第三点 3 用「🔴」写明敲什么。
+六，git：本条提交后，工作区只剩 docs/LIBRARIAN_REPORT.md 一处非 CC 改动；本机比远端多 62 条，推送后应为 0。
+进 HARNESS：本条为记账，不判。
