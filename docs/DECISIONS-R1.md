@@ -11158,3 +11158,19 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 六，下一步：给学生看续派 architect 确认 dueAt 改日期类型的派单原文，学生说「发」才派；回来后出对照。
 七，git：本条提交后工作区干净；本机比远端多 1 条，学生没说推。
 进 HARNESS：问 423 判否（不是框架层），是本项目产品口径；其余为记账，不判。
+
+--- R1-434 · architect 确认轮回来、原文取回；问 424 A、425 A、426 A；学生额度将尽、在安全点停；问本课有没有要进反模式库的（学生：「推，然后发；补充：那在教学过程中尽量把它变的更聪明和自适应，而不是只靠警报器」「424 A；425 A；426 A；补充：1.我的额度快到上限了，先在下一个可以安全/exit的停下。还有我们这课没有需要加入到anti-patterns.md的内容？」）---
+一，推送：推前 git fetch，远端比本机多 0 条、本机多 1 条；扫新增 10 行，八类敏感都是 0；推送 ea99c2e..e6890c9，再 fetch 两边差 0。随后照学生「发」，经 SendMessage 续派 architect，正文与学生看过的一字不差。
+二，architect 确认轮：从记录取出 117 行、3514 字符，首末行与六个小节标题核过；只读五份清单内文件的指定段与定义文件。它报一处对不上：派单转述的 Lec 5 原话不在它的五份里（原话在 docs/web_course5_sample1.md 与 book/lec05.md，见 R1-433 第二点），报得对。结论：改纯日期不挡路，坑在 JS 层；schema 那一行改为 @db.Date；契约第一节第 4 小节把时间分成时间点与纯日期两类，纯日期一律 YYYY-MM-DD、全链路不换算时区；共享 schema 用日期格式字符串，不用日期对象校验器；Prisma 值与字符串只在 TasksRepository 一处互转（假设）；ADR-DB-003 修订行写清五样；CLAUDE.md 第二层 E 收窄；ARCHITECTURE W1-3 改「日期或空」。报告留在子代理记录，临时目录另存 report-arch-due.md。
+三，CC 取回原文（2026-10-16 WebFetch）：PostgreSQL 日期时间类型一页，date 为「date (no time of day)」、精度 1 day，「the date type cannot have an associated time zone」；Prisma schema 参考，@db.Date 对应 date，「Prisma Client returns all DateTime as native Date objects」，写入「need to be passed as Date objects」；MDN Date.parse，只有日期的写法「will imply UTC time because it's date-only」；Zod API 页，「z.iso.date() method validates strings in the format YYYY-MM-DD」，示例拒 2020-01-32，2 月 30 日这类不存在的日期未核；Zalando 第 169 条 MUST，日期时间用字符串格式，date 为「full-date in RFC 3339」；Zalando 第 235 条 SHOULD，名字含 date、day、time 等或以 _at 结尾。仓库 prisma/ 下只有 schema.prisma、没有迁移目录，没有旧数据要转，决策边界 D5 不触发。Prisma migrate 生成的 SQL 未核，写代码时实测。
+四，问 424 A：试行「发前自查」，每条消息末尾写一行；清单先放三项（回复区照手册第四节格式并带安全离开与推送；出推荐前搜决策记录、课堂记录与书；写预期数前照要写的文字先数），存进自动记忆，漏了新的就加一项。记挂账二十九，结课与挂账十九、二十一同批出 HARNESS 对照。未选：B 只记挂账；C 现在写进 TEACHING_STYLE。
+五，问 425 A：tasks.dueAt 改名 dueDate、列名 due_date，与改 date 类型同一次做（决策边界 D2；改类型 architect 已确认不挡路，改名是它报出并推荐的）。依据：本项目 At 后缀只表示时间点；Zalando 第 235 条两种写法都认，不逼改名；知识库协议 13 的反例「直接把 due 改名成 dueDate」管运行中的系统，本仓库无库、无数据、无代码，不适用；Lec 9 建库后再改名须照协议 13 三步。未选：B 保留 dueAt。
+六，问 426 A：「判断过没过期时，『今天』按哪个时区算」记进 BACKLOG，时机写「做过期判断时（US-04 第三条验收或 US-02b）」。BACKLOG 是已有文件，照规则 28 下个会话出对照，学生同意后落盘；本条只记裁决。未选：B 现在定。
+七，学生问本课有没有要进反模式库的。CC 答：有候选，照问 365 甲结课一次入库（规则 54 第 1 项）。本窗口新冒出两条：一，规矩按字面记、不按触发时刻记，换个叫法就不触发（挂账五同形，已在挂账二十八）；二，出推荐前没搜旧裁决，推荐里推翻了旧拍板而题目没写（R1-433 第二点），CC 建议记挂账三十，下次开课学生可否决。预期数没先数属反模式 42 延伸，挂账二十七已有，不新开。另有 BACKLOG 59 三条候选待入库。
+八，学生额度将尽，要在下一个能安全离开的点停。本条提交并推送后即为安全点。第一批对照（PRD 三处、ARCHITECTURE 一处、DECISIONS.md 一处、schema 一处、CLAUDE.md 两处）与 BACKLOG 一条都还没出，没有改了一半的文件。
+九，下个会话从这里接：
+  1，开新会话，仍是 05-API 第五窗口（没结课、没写新桥梁）。学生说「开始」，照 SESSION_START J 节做；三份开课资料为 KNOWLEDGE_BASE、SESSION_START、桥梁 docs/BRIDGE-05-api-w5.md；体检闸门不重做（问 413 A）。桥梁写的进度停在第四窗口，本窗口进度以 R1-430 到本条为准。
+  2，开场先看 git status；读 R1-430 到本条；照自动记忆做发前自查。
+  3，第一步：出第一批对照，一处一份，照问 419 A、421 A、423 A、425 A、426 A 写；schema 那一处写 dueDate、@map("due_date")、@db.Date；CLAUDE.md 两处要学生当场说「帮我改」。之后接第二批（D3 三处缺口，问 418 A：CC 直接出选项）。
+十，git：本条提交后工作区干净；推送后本机与远端差 0。
+进 HARNESS：问 424 判否（不是框架层），是本课上课的做法，挂账二十九结课另判；问 425、426 判否（不是框架层），是本项目口径；其余为记账，不判。
