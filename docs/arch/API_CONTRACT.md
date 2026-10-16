@@ -324,7 +324,7 @@
   转让完成后调用者已是执行者，按 PRD 审定决策 D11 看不见成员列表，响应不带成员列表，具体回什么随接口清单定。
   依据：PRD 审定决策 D10；主参考 Zalando #141「MUST keep URLs verb-free」、#138「create an article lock with PUT or POST instead of using a lock action.」。
   没选：动作式 POST，路径带动词，违反 #141；借通用的改成员角色接口隐式降级，副作用出人意料。
-  未定：转给非成员、转给自己各回什么，第四批第二轮定；路径写法随接口清单定。
+  已定：转给非成员、转给自己见 API-39；路径写法随接口清单定。
 - API-37 唯一负责人移出自己，回 409「冲突」，配一个专门的 type，前端据此提示「需先转让负责人身份」（PRD「US-P04 移出项目成员」与错误规则）。
   首版单负责人，且没有通用的改角色接口（API-36），「把唯一负责人直接降为执行者」从接口上触发不了，本条只管移出这一种。
   依据：RFC 9110 第 15.5.10 节「This code is used in situations where the user might be able to resolve the conflict and resubmit the request.」：先转让即可化解。
