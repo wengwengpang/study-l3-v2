@@ -10947,3 +10947,17 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 五，下一步：问 401、402 答完出第二批（第四条三问：判定字段、天数、全局还是按项目，以及「已分配从未开始」算不算卡住，挑不超过三题）；顺带发现四处另排一批。PRD 已落的部分，等第二批拍完再出 UI_DESIGN、STANDARDS、BACKLOG、ARCHITECTURE、CLAUDE.md 的对照。
 六，git：本条提交后，工作区只剩 docs/LIBRARIAN_REPORT.md 一处非 CC 改动；本机比远端多 17 条，学生没说推。
 进 HARNESS：本条为记账，不判。
+
+--- R1-420 · 问 402 A；出第二批问 403、404，重给问 401（学生：跑 git checkout 命令，没回字）---
+一，问 402 A：学生亲跑 git checkout -- docs/LIBRARIAN_REPORT.md; git status --short，无输出。CC 核：报告与 HEAD 一致，工作区干净。问 401 学生没答，照惯例挂着，本轮重给。
+二，出题前查同类产品怎么判「任务放久了」（2026-10-16，WebFetch，逐句要原文）：
+  1，Trello Card Aging（Atlassian 博客「How to use the Card Aging Power-Up in Trello」）：「cards will visibly age with inactivity.」「cards become progressively more transparent and "fade out" the longer they remain untouched.」页面没写天数，也没写什么会重置。按「没被碰过」算，是 B 的思路。
+  2，Jira「Customizing cards」页的 Days in column：「representing the number of days that the issue has been in the column.」退回待过的列时：「the indicator reflects a cumulative value of the number of days the issue stayed in that column.」按「在这一状态待了几天」算，是 A 的思路。
+  3，没查到：两家的官方天数。搜到的 7、14、28 天来自第三方插件，不用。C（以状态变化与分配中较晚者起算）两家都不是，是 pm 提的。
+  都是同类产品的做法，不是标准，只作参考；两家不一，列出来请学生拍。
+三，第二批两题（加问 401 共三题，守每批不超过三题）：
+  问 403 判定字段与起点。三个选项共用两条底线：只看已分配、未完成的任务；没人认领的标「未认领」，不标「可能卡住」。A 只看状态变化（statusUpdatedAt）；B 任何修改都算（updatedAt）；C 以状态变化与分配两者中较晚者起算。CC 推荐 C。代价：可能要加一个可空字段，或放宽 statusUpdatedAt 的写入口径，归 architect（CLAUDE.md 第二层 E）。
+  问 404 天数与范围：A 全局固定，满 7×24 小时；B 全局固定，满 3×24 小时；C 全局固定，学生填天数；D 每个项目由负责人自己设（要加「编辑项目」故事与项目表字段，同 PRD 注记 5 延后项目截止日期的理由）。CC 推荐 A。理由：状态只有三种，进行中的任务正常也会好几天不变；「可能卡住」是提示不是告警；全局常量以后改着便宜。按 24 小时计，避开时区与工作日日历。没有标准也没有数据，7 天是 CC 的判断。
+四，下一步：三题答完，出 PRD 第二批对照（US-02a 注记、审定决策 D13 等），再出 UI_DESIGN、STANDARDS、BACKLOG、ARCHITECTURE、CLAUDE.md 的对照；顺带发现四处另排一批。
+五，git：本条提交后干净；本机比远端多 18 条，学生没说推。
+进 HARNESS：本条为记账，不判。
