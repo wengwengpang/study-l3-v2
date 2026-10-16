@@ -85,3 +85,4 @@
 74 | 下沉 | Prisma 版本未定。Prisma 7 起 schema 的 datasource 块里 url 弃用，连接地址改配项目根的 prisma.config.ts；新的 prisma-client 生成器必须写 output，老的 prisma-client-js 以后移除（Prisma 官方升级到 7 的指南）。prisma/schema.prisma 的 datasource、generator 两块是老写法，docs/arch/TECH_STACK.md 没锁版本。锁 6 还是上 7、上 7 时两块怎么改，D4 归主人。来源 DECISIONS-R1 R1-342 第四点、R1-343 问 297 A | 装 Prisma 前
 75 | 下沉 | NestJS 版本未锁。跨站请求伪造防护用 NestJS 自带的（API-11），要求 12.1 起（NestJS 官方文档跨站请求伪造一页）；docs/arch/TECH_STACK.md 没锁版本。锁哪个版本归 D4。来源 DECISIONS-R1 R1-395 | 装 NestJS 前（Lec 7）
 76 | 下沉 | 会话空闲超时。本版固定 30 天、无空闲超时（API-10），偏离 OWASP。风险变高时（如出现敏感数据、多人共用设备）再加，要同时改 T4（读请求写 sessions）与 PRD D7。来源 DECISIONS-R1 R1-394、R1-395 | 风险变高时
+77 | 收敛 | 判断截止日期过没过期时，「今天」按哪个时区算：用户所在时区、服务器时区，还是固定一个时区。截止日期本版是不带时区的纯日期，本版没有任何逻辑拿它和「今天」比。来源 DECISIONS-R1 R1-432 问 420 A、R1-434 问 426 A | 做过期判断时（US-04 第三条验收或 US-02b）
