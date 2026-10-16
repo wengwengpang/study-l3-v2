@@ -11224,3 +11224,8 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 一，六份照原样落盘，一份一提交，数对才提交：420 2043d5c（契约增 14 行、删 0 行，与预期一致）、421 9e455ba、422 578ef04、423 d2f5b94、424 747c74d、425 629ae50。只读脚本 verify-420-425.sh 改后 11 行全对。BACKLOG 16、17 关闭。
 二，出问 435（当前用户身份与项目内角色由哪个响应下发，推荐 A 单设当前用户接口）、436（任务更新拆几个接口，推荐 B 两个）、437（跨场景概念题，规则 83 第 3 条：NestJS ValidationPipe 的 whitelist 加 forbidNonWhitelisted 对应 432 哪个选项）。旧裁决：契约第 3 小节与第 6 小节两处「待第 3 组定」，课堂记录与 book/ 没拍过。原文（2026-10-16 WebFetch）：GitHub「Get the authenticated user」GET /user；GitHub「Update an issue」PATCH 一个接口，「Without push access to the repository, assignee changes are silently dropped.」；NestJS 校验页 whitelist「validator will strip validated (returned) object of any properties that do not use any validation decorators」、forbidNonWhitelisted「instead of stripping non-whitelisted properties validator will throw an exception」。Jira 接口文档页正文取不到，不作依据。UI_DESIGN 页 3 核心元素有「当前身份」。
 进 HARNESS：本条为记账，不判。
+
+--- R1-442 · 问 435 A、436 B；437 答 A 答对；出对照 426（学生：「435 选 A；436 选 B；437 选 A」）---
+一，问 435 A：单设当前用户接口，注册与登录响应带同一个用户形状，项目列表每项与项目详情带「我在本项目的角色」（API-34）；未选 B 只靠登录响应、C 塞进项目信息。问 436 B：改任务拆两个接口，负责人专用的改任务（标题、描述、截止日期、负责人）由 AuthzGuard 按角色回「不许做」，改状态两种角色都能调、归属在 Service 判（API-35）；未选 A 一个接口按字段判、C 拆三个。问 437（概念题）学生答 A，答对：whitelist 单开是剔除（432 B），加 forbidNonWhitelisted 是抛错（432 A）。
+二，传播面（规则 69，打开文件核）：API_CONTRACT 要改（汇总加 API-34、35，正文第 3、6 小节两处「待第 3 组定」放第五批起草）；ARCHITECTURE 不影响（决策 Q1 与 435 A 一致；当前用户接口归 auth 还是 users 模块，随接口清单定）；PRD、UI_DESIGN 不影响（US-A02、页 3「当前身份」由 API-34 满足）；STANDARDS 不影响（GitHub 是同类产品参考，不是标准）；CLAUDE.md、BACKLOG、PROJECT_STRUCTURE、book/ 不影响。
+进 HARNESS：问 435、436 判否（不是框架层），是本项目接口口径；问 437 是概念检验，不判。
