@@ -11193,3 +11193,11 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 四，下一步：学生读完后接第二批，三处 D3 缺口（谁能改标题与描述、能否改回未分配、执行者能否看见项目负责人），CC 直接出选项（问 418 A），出题前取同类产品原文、搜旧裁决。
 五，git：本条提交后工作区干净；本机比远端多 12 条，学生没说推。
 进 HARNESS：本条为记账，不判。
+
+--- R1-437 · 推送 196b1af；第二批出问 428 到 430（学生：「读完了；推」）---
+一，规则 78 后半走完：学生读完 CLAUDE.md 第二层 B、E 改后全文。
+二，推送：推前 git fetch，远端比本机多 0 条、本机多 12 条；扫新增 29 行，邮箱、令牌、Bearer 长串、私钥头、连接串、口令赋值、机器名、家目录路径八类都是 0；推送 760650a..196b1af，ls-remote 核过，再 fetch 两边差 0。
+三，第 3 组核对报告从上一会话子代理记录重取（同一记录里最长的一段 assistant 文本）：283 行、13409 字符，十五个二级标题核过；R1-431 第五点记 284 行、13467 字符，差的是首行前粘着的一句过程话，正文同。
+四，第二批出题前：搜旧裁决（DECISIONS-R1、PRD、ARCHITECTURE、BACKLOG、课堂记录、book/），三件都没拍过；UI_DESIGN 页 7 写「负责人专属分配/编辑入口」、页 8「任务创建 / 编辑页或面板」写「仅负责人」，执行者「只可更新自己任务状态」，是设计稿已有的口径，PRD 权限矩阵缺对应一行，属缺口不属冲突。取原文（2026-10-16 WebFetch）：GitHub 仓库角色一页，「Close, reopen, and assign all issues and pull requests」Read 角色不能、Triage 起能，「Edit and delete anyone's comments on commits, pull requests, and issues」Write 起能，没有单列「编辑议题标题」一行；GitHub REST 指派一页，「Removes one or more assignees from an issue.」「Only users with push access can remove assignees from an issue.」。Jira 两页没取到能逐字引的权限说明（一页 404，一页只点名不解释），不作依据。原打算第二批问一道跨场景题，三问已满每轮上限，挪到第三批。
+五，出问 428（谁能改任务标题与描述，推荐 A 仅负责人）、429（能否改回未分配，推荐 A 负责人可以）、430（执行者能否看见项目负责人，推荐 A 看不见），选项与理由见消息，学生答后记入下一条。
+进 HARNESS：本条为记账，不判。
