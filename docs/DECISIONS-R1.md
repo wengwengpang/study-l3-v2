@@ -11234,3 +11234,10 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 一，对照 426 照原样落盘：307e694，契约增 12 行、删 0 行，API-34、35 各 1 次，与预期一致。第三批（核对报告第 4、5、6 项）收完。
 二，第四批第一轮出问 438（表上要不要兜底每项目至多一个负责人，决策边界 D2，推荐 B 部分唯一索引，选 B 先派 architect 确认写法再出 schema 对照）、439（转让负责人接口形状，推荐 C 用 PUT 写「本项目的负责人」子资源）、440（唯一负责人移出自己回什么性质，推荐 A 409 配专门 type）。旧裁决：只记「属 D2，先回 architect」（R1-418 第五点），没拍过。原文（2026-10-16 WebFetch）：PostgreSQL 部分索引页「This enforces uniqueness among the rows that satisfy the index predicate, without constraining those that do not.」；Prisma 索引页「The where argument is available on the @unique, @@unique and @@index attributes.」「It requires the partialIndexes Preview feature.」；Zalando #141「MUST keep URLs verb-free」「In URLs, use only nouns.」、#138「create an article lock with PUT or POST instead of using a lock action.」；RFC 9110 第 15.5.10 节「This code is used in situations where the user might be able to resolve the conflict and resubmit the request.」。新发现：部分唯一索引在 Prisma 里要开预览功能，Prisma 版本又未锁（BACKLOG 74），选 B 时写法要回 architect。
 进 HARNESS：本条为记账，不判。
+
+--- R1-444 · 问 438 B、439 C、440 A；出 architect 派单原文与对照 427 到 429（学生：「438 选 B；439 选 C；440 选 A」）---
+一，问 438 B：project_memberships 加部分唯一索引，每项目 role 为 owner 的行至多一条，「至少一个」靠应用逻辑（决策边界 D2，写法待 architect 确认）；未选 A 只靠事务加锁、C projects 加 owner 列。问 439 C：转让用 PUT 写「本项目的负责人」子资源，一个事务改两行加行锁（API-36）；未选 A 动作式 POST、B 借通用改角色接口。问 440 A：唯一负责人移出自己回 409 配专门 type（API-37）；未选 B 400、C 403。
+二，传播面（规则 69，打开文件核）：API_CONTRACT 要改（汇总加 API-36、37）；STANDARDS 要改（RFC 9110 一行状态码栏加 API-37）；PRD 不影响（US-R02、US-P04 与错误规则的提示与 API-37 一致）；UI_DESIGN、CLAUDE.md、BACKLOG、book/ 不影响；schema 与 ADR 等 architect 确认后另出对照。
+三，新发现：ARCHITECTURE 第一节 projects 模块「覆盖」只列 US-P01、P02、P03、R02，没有第四窗口新增的 US-P04（问 405 B，D14）；全文与 BACKLOG、本文件都没记过，是第四窗口传播面漏扫。出对照 429 补上。
+四，architect 派单原文已给学生看，学生说「发」才派（规则 4）；读文件六份，超五份理由写进派单。
+进 HARNESS：问 438 到 440 判否（不是框架层），是本项目数据与接口口径；其余为记账，不判。
