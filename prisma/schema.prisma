@@ -85,7 +85,7 @@ model Task {
   assigneeUserId  Int?       @map("assignee_user_id")
   status          TaskStatus @default(not_started)
   statusUpdatedAt DateTime   @default(now()) @map("status_updated_at") @db.Timestamptz(6)
-  dueAt           DateTime?  @map("due_at") @db.Timestamptz(6)
+  dueDate         DateTime?  @map("due_date") @db.Date
   createdAt       DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt       DateTime   @updatedAt @map("updated_at") @db.Timestamptz(6)
 
