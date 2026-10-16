@@ -307,3 +307,15 @@
   依据：RFC 7396「Null values in the merge patch are given special meaning to indicate the removal of existing values in the target.」；
         主参考 Zalando #123 要求 null 与没传同义，并写明「The only exception to this rule is JSON Merge Patch」。
   没选：另收 application/merge-patch+json，要修订 API-27；null 与没传同义，清空另设接口。
+- API-34 当前用户身份与项目内角色分开下发。单设「当前用户」接口，返回当前用户的 id 与邮箱，刷新页面与服务端渲染都靠它取身份；注册、登录成功的响应带同一个用户形状。
+  项目列表的每一项与项目详情带「我在本项目的角色」；执行者拿到的项目信息照 PRD 审定决策 D11、D17。
+  理由：US-A02 要求刷新后仍能读到「我是谁」，UI_DESIGN 页 3 要显示当前身份；角色随项目响应取得，不做跨页面长缓存（ARCHITECTURE 第二节决策 Q1）。
+  参考：GitHub「Get the authenticated user」（GET /user），同类产品做法，只作参考。
+  没选：只靠登录响应、前端自存，刷新就丢；身份塞进项目信息，项目列表页拿不到。
+  落点：第一节第 3 小节「待第 3 组定」，第五批起草时写；路径、所属模块与 schema 名随接口清单定。
+- API-35 改任务拆两个接口。负责人专用的「改任务」接口管标题、描述、截止日期、负责人，执行者调用时由 AuthzGuard 按角色回「不许做」；
+  「改状态」接口两种角色都能调，执行者只能改分给自己的任务，归属在 Service 里判，先判「看不见」（ARCHITECTURE 第三节 R2-6、R2-7 同一顺序）。两个接口的请求体都照 API-31、API-33。
+  理由：PRD 审定决策 D15、D16 与权限矩阵把内容与分配划给负责人，状态两种角色都能改；按 T6，只凭角色能判的归 Guard，字段级权限变成路由级。
+  后果：执行者往「改状态」接口多带别的字段，按 API-31 回「参数不合法」，不是「不许做」。
+  没选：一个接口由 Service 按字段判（GitHub 是一个接口，但对无权字段悄悄扔掉，与 API-31 相反）；内容、分配、状态拆三个。
+  落点：第一节第 6 小节「待第 3 组定」，第五批起草时写；路径随接口清单定。
