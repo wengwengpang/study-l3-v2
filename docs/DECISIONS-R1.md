@@ -11259,3 +11259,8 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 二，CC 核 architect 第 3 组报告 N4 的判据「客户端改参数能过的回 400，要先改服务端状态才能过的回 409」：拿契约现有五例逐一走，「邮箱已被使用」「已在项目中」两例客户端换参数就能过，按这条判据该回 400，与 API-14、API-16、注册一条现行的 409 相反（反模式 40 的形状，只走了一种情况）。改按 RFC 9110 的「目标资源」划：第 15.5.10 节「due to a conflict with the current state of the target resource.」，第 15.5.1 节「due to something that is perceived to be a client error」；五例（邮箱已被使用、已在项目中、assignee 非成员即决策 E、唯一负责人移出自己即 API-37、转给非成员）都对得上。
 三，出问 444（400 与 409 的分界，推荐 A 按目标资源划）、445（转让给自己，推荐 A 当成功不改任何东西）、446（移出成员的同一次写入，推荐 A 新设编排层）。旧裁决：都没拍过；依赖图现为 tasks → projects，ProjectsService 调 TasksService 会成环（ARCHITECTURE 第一节「依赖方向」）。
 进 HARNESS：本条为记账，不判。
+
+--- R1-448 · 问 444 A、445 A、446 A；学生再问 effort；出对照 434 到 437（学生：「读完了；444 选 A；445 选 A；446 选 A；补充：忘了看，当前你是推荐我/effort用high还是xhigh」）---
+一，对照 433 规则 78 后半走完（学生读完）。问 444 A：400 与 409 按目标资源分（API-38）；未选 B architect 原判据、C 不写判据。问 445 A：转给自己当成功、不改任何东西；转给非成员按 API-38 回 400（API-39）；未选 B 转给自己回 400。问 446 A：新设一层成员移出编排，同时依赖 projects、tasks，由它开事务交给两边 Repository；分配任务也要拿 ADR-DB-006 那把锁；是单独模块还是某模块里的一个服务，建后端骨架时定；未选 B 第三方事务库（D4）、C 应用内异步事件。学生再问 effort：CC 照 R1-435 第五点答维持 high、不用切；本窗口抓到的几处差错靠的是逐例核对与验证闸门，不靠更高的推理档，xhigh 更慢更费，与问 431 A 省 token 相反。
+二，传播面（规则 69，打开文件核）：API_CONTRACT 要改（汇总加 API-38、39；API-36「未定」一行改为指向 API-39）；ARCHITECTURE 要改（第一节「依赖方向」加一行编排）；STANDARDS 要改（RFC 9110 一行状态码栏到 API-39）；PRD、UI_DESIGN、DECISIONS.md、CLAUDE.md、BACKLOG、book/ 不影响（ADR-DB-006 讲转让与移出的锁，分配任务的锁要求写在 ARCHITECTURE 新行，不改刚落的 ADR）。
+进 HARNESS：问 444 到 446 判否（不是框架层），是本项目接口与架构口径；effort 一问是本课设置，不判。
