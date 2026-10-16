@@ -11241,3 +11241,10 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 三，新发现：ARCHITECTURE 第一节 projects 模块「覆盖」只列 US-P01、P02、P03、R02，没有第四窗口新增的 US-P04（问 405 B，D14）；全文与 BACKLOG、本文件都没记过，是第四窗口传播面漏扫。出对照 429 补上。
 四，architect 派单原文已给学生看，学生说「发」才派（规则 4）；读文件六份，超五份理由写进派单。
 进 HARNESS：问 438 到 440 判否（不是框架层），是本项目数据与接口口径；其余为记账，不判。
+
+--- R1-445 · 对照 427 到 429 已落；architect 确认部分唯一索引回来；出问 441 到 443（学生：「发；同意 427 到 429」）---
+一，派单原样派出 architect（opus，定义文件定）。对照落盘：429 62aa37d、428 5a3bf7b、427 95521fd（契约增 10 行、删 0 行），每份数对才提交。
+二，architect 报告：临时目录 report-arch-owner.md，145 行、6180 字符，首末行与六个二级标题核过；Read 7 次，定义文件加派单六份，没读别的。CC 抽查引文 7 处全对（DECISIONS.md:64、PRD.md:123、226、287，API_CONTRACT.md:121、172）。要点：写法甲（schema 加 where，开预览功能）、乙（迁移手写 SQL）、丙（写法随 BACKLOG 74 锁版本一起定），推荐丙；ADR 推荐新开 ADR-DB-006；先降后升写成两条 UPDATE 不挡路；凡负责人改成员的写操作要拿同一把锁，锁哪一行可留到写转让接口时拍；新报 D8 冲突：ADR-DB-005 修订「负责人只能经转让产生」对 PRD「US-P01 创建项目」与 API-2 创建者自动成为负责人。
+三，CC 取原文核（2026-10-16 WebFetch）：PostgreSQL CREATE TABLE 页兼容性一节「PostgreSQL checks for uniqueness immediately whenever a row is inserted or modified.」，与 architect 逐行检查的记忆一致；Prisma 索引页没写 partialIndexes 从哪个版本起有，也没写对 findUnique 的影响，where 有 raw() 与对象两种写法。architect 列的其余六条原文未取，不挡本轮拍板。
+四，出问 441（写法，推荐丙）、442（ADR 记法，推荐 A 新开 ADR-DB-006）、443（D8 冲突，按变更提醒五应学生要求给推荐，推荐 A 在 ADR-DB-005 修订后补一句更正）。
+进 HARNESS：本条为记账，不判。
