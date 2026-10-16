@@ -11213,3 +11213,9 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 二，问 431 A：本窗口试行消息瘦身、记录写短，闸门不省。学生补充「省 token 但不能影响项目」：项目文件的对照原文、计数、出处一样不省，省的只是讲解篇幅与记录里的过程描述。未选：B 记账按批合并；C 维持现状。
 三，第三批第一轮（核对报告第 4 项）出问 432（请求体多余字段，推荐 A 拒绝回 400）、433（空字符串，推荐 B 标题描述去首尾空白后都不能为空）、434（更新时 null 与没传，推荐 A 合并补丁语义、媒体类型照 API-27）。旧裁决：BACKLOG 16、17 与课堂记录只记「未定义」，没拍过。原文（2026-10-16 WebFetch）：Zalando #109「Unknown input fields in payload or URL should not be ignored;」「servers should provide error feedback to clients via an HTTP 400 response code.」；#108「Be tolerant with unknown fields in the payload」；#123「The only exception to this rule is JSON Merge Patch」「which uses null to explicitly indicate property deletion while absent properties are ignored」；RFC 7396「Null values in the merge patch are given special meaning to indicate the removal of existing values in the target.」；Zod API 页「By default, unrecognized keys are stripped from the parsed result:」；OWASP 批量赋值「Explicitly allow-list fields when binding to an object with additional properties.」。
 进 HARNESS：问 431 结课与挂账二十五同批判；其余为记账，不判。
+
+--- R1-440 · 问 432 A、433 B、434 A；出对照 420 到 425（学生：「读完了；432 选 A；433 选 B；434 选 A」）---
+一，对照 419 规则 78 后半走完（学生读完）。问 432 A：请求体出现 schema 没列的字段一律拒绝，回 400 并逐项列出（API-31）；未选 B 静默剔除、C 剔除加敏感键黑名单。问 433 B：标题、描述、项目名称去掉首尾空白后不能为空（API-32）；未选 A 描述可空串、C 都允许空串。问 434 A：更新照 JSON Merge Patch 规则，没传不改、null 清空、只对可空字段，媒体类型仍只收 application/json，偏离登记（API-33）；未选 B 另收 merge-patch+json、C null 与没传同义。
+二，传播面（规则 69，打开文件核）：API_CONTRACT 要改（汇总加 API-31 到 33；第一节第 2、4 小节两处「待第 3 组定」放第五批起草时写）；STANDARDS 要改（登记表两行、偏离登记一条）；PRD 要改（澄清注记 13，BACKLOG 16 原写「回填 PRD」）；BACKLOG 要改（16、17 关闭）；ARCHITECTURE 不影响（Pipe 职责不变，第三节「已进 BACKLOG」一句是历史记录）；DECISIONS.md 不影响（ADR-DB-005「描述必填」由 API-32 解释，不矛盾）；UI_DESIGN、CLAUDE.md、PROJECT_STRUCTURE、book/ 不影响。
+三，API-32 里「存去掉首尾空白后的值」是 433 B 带出的一个小取舍（只校验不改值，或校验并存修剪后的值），CC 写成后者（Zod trim 的做法），在消息里单独点明，学生可剔除。
+进 HARNESS：问 432 到 434 判否（不是框架层），是本项目接口口径；其余为记账，不判。
