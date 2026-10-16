@@ -10896,3 +10896,20 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 七，下一步：学生抽查三处引文（弱点训练）。之后出第一批拍板（第一、二、三条）。出题前查主流做法与安全基线，带出处。
 八，git：本条提交后干净；本机比远端多 3 条，学生没说推。
 进 HARNESS：本条为记账，不判。
+
+--- R1-417 · 学生抽查三处引文对上；出第一批问 398 到 400（学生：跑抽查命令，没回字）---
+一，学生跑了 sed -n '5p;40,41p;219p' docs/design/PRD.md，没回字。输出与 R1-416 第四点一致：第 5 行是页首那句（pm 标 6），第 40 行是「只显示分配给本人」（pm 标 41），第 41 行是「如未开始→进行中」，第 219 行 pm 标对。抽查算做完。
+二，出题前查主流做法与安全基线（2026-10-16，WebFetch，逐句要原文）：
+  1，GitHub「Maintaining ownership continuity for your organization」：「we recommend that at least two people within each organization have the owner role.」「If an organization only has one owner, the organization's projects can become inaccessible if the owner is unreachable.」
+  2，Google Drive 帮助 answer/2494892：「You own the files you create or upload on Google Drive.」「You can transfer ownership of the files and folders you own to another account.」「If the pending owner accepts, you're downgraded to Editor.」
+  3，OWASP Authorization Cheat Sheet「Enforce Least Privileges」：「As a security concept, Least Privileges refers to the principle of assigning users only the minimum privileges necessary to complete their job.」此表未在 STANDARDS 登记。
+  4，Atlassian「Manage transitions in team-managed projects」：「Take care when creating transitions that don't start from Any status.」「These transitions may cause unintended behavior when people move cards across your board.」该页没写默认工作流允许什么。
+  5，没查到：Asana 项目负责人与项目管理员的官方说明（帮助页正文取不到，只有论坛帖，不用）；GitHub 成员列表谁能看（页面 404）。
+  1、2、4 是同类产品的做法，不是标准，只作参考；3 属安全基线一层。
+三，第一批三题：
+  问 398 负责人数量：A 创建者永远是唯一负责人，不能换；B 单负责人加转让，原负责人自动变执行者，唯一负责人不得直接降级；C 推翻 PRD 审定决策 D4，多负责人、至少留一个。CC 推荐 B。
+  问 399 执行者能看见什么：A 只看见自己所在的项目（名称与自己的角色）和分给自己的任务，看不见成员列表、看不见未认领任务；B 在 A 上加成员列表只读；C 在 B 上加未认领可见、可自取。CC 推荐 A。
+  问 400 状态流转：A 三态任意互转；B 只许相邻互转；C 往前随意，已完成退回限负责人。CC 推荐 A。
+四，下一步：学生答完三题，出 PRD 对照清单（一处一对照），并扫传播面。第四条与顺带发现四处放第二批。
+五，git：本条提交后干净；本机比远端多 4 条，学生没说推。
+进 HARNESS：本条为记账，不判。
