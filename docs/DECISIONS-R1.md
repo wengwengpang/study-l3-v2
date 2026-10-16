@@ -11248,3 +11248,8 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 三，CC 取原文核（2026-10-16 WebFetch）：PostgreSQL CREATE TABLE 页兼容性一节「PostgreSQL checks for uniqueness immediately whenever a row is inserted or modified.」，与 architect 逐行检查的记忆一致；Prisma 索引页没写 partialIndexes 从哪个版本起有，也没写对 findUnique 的影响，where 有 raw() 与对象两种写法。architect 列的其余六条原文未取，不挡本轮拍板。
 四，出问 441（写法，推荐丙）、442（ADR 记法，推荐 A 新开 ADR-DB-006）、443（D8 冲突，按变更提醒五应学生要求给推荐，推荐 A 在 ADR-DB-005 修订后补一句更正）。
 进 HARNESS：本条为记账，不判。
+
+--- R1-446 · 问 441 C、442 A、443 A；出对照 430 到 433（学生：「441 选 C；442 选 A；443 选 A」）---
+一，问 441 C：约束现在定，写法随 BACKLOG 74 锁 Prisma 版本时定，锁的版本支持 partialIndexes 就写进 schema；未选 A 现在就写进 schema、B 迁移手写 SQL。问 442 A：新开 ADR-DB-006；未选 B 给 ADR-DB-005 加修订、C 新开加指针。问 443 A（决策边界 D8，学生裁）：以 PRD「US-P01 创建项目」与 API-2 为准，ADR-DB-005 修订后补一句更正，修订原文不改；未选 B 都不动、C 改写修订原文。
+二，传播面（规则 69，打开文件核）：DECISIONS.md 要改（更正一句、ADR-DB-006）；BACKLOG 74 要改（补一句写法随锁版本定）；CLAUDE.md 第二层 E 要改（加一条约束，规则 78）；schema 本轮不改（问 441 C）；PROJECT_STRUCTURE 里 DECISIONS.md 一行写「ADR-DB-001~005」要改成到 006，按规则 52 放本窗口收尾时改；API_CONTRACT 不影响（API-28 照旧）；STANDARDS 不加行（architect 列为可选，本轮不做）；ARCHITECTURE、TECH_STACK 不影响（Repository 认索引名、锁版本都是写代码与装 Prisma 时的事）；PRD、UI_DESIGN、book/ 不影响。
+进 HARNESS：问 441、442 判否（不是框架层），是本项目数据口径；问 443 判否（不是框架层），是本项目文档措辞。
