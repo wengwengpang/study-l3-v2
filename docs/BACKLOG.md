@@ -25,7 +25,7 @@
 14 | 收敛 | 前端除路由层外的目录组织未定。Next.js 官方对非路由文件不做规定，ARCHITECTURE 与 TECH_STACK 两份均未写 | Lec 7 建骨架前
 15 | 收敛 | KNOWLEDGE_BASE 里 backend 角色写的是 JWT 鉴权 + class-validator 校验，本项目实际是 DB session + Zod。照知识库建角色会建错。另 KB 第二块协议 1 示例「NestJS + Passport-JWT」、第七块 Lec 10「JWT」两处同病（DECISIONS-G1 补遗 121）。进度（2026-10-12）：第七块 Lec 10 一处已改为 DB session（问 269 乙，对照 214，DECISIONS-R1 R1-308）；backend 角色、第二块协议 1 示例两处未动 | Lec 10 建 backend 角色前
 16 | 收敛 | 任务标题、描述的必填与空值规则未定义。schema 两列非空（prisma/schema.prisma:83-84），但允不允许空字符串无出处；项目名称有必填规则（PRD.md:221），任务无对应条目 | 已做：问 433 B，标题、描述、项目名称去掉首尾空白后不能为空（API-32、PRD 澄清注记 13，DECISIONS-R1 R1-440）。本条关闭
-17 | 收敛 | 请求体多出的字段（如 projectId、status），Zod 管道是剔除还是拒绝，未定义 | 05-API
+17 | 收敛 | 请求体多出的字段（如 projectId、status），Zod 管道是剔除还是拒绝，未定义 | 已做：问 432 A，一律拒绝，回 400（API-31，DECISIONS-R1 R1-440）。本条关闭
 18 | 下沉 | sessions.token_hash 无唯一约束也无索引（prisma/schema.prisma:43），但每个请求都按它查一次，等于全表扫 | Lec 9 做 migration 时
 19 | 下沉 | 过期会话的清理机制未定义。T4 定了不续期，但没定过期记录何时删 | Lec 9 或更后
 20 | 收敛 | 未认领任务（assigneeUserId 为空）执行者是否可见，PRD 无明文。第三节 R2-7 按「算不相等」即不可见处理，属推导。任务列表接口会再撞上 | 已做：问 399 A，PRD 审定决策 D11 与澄清注记 7 写明未认领任务执行者看不见，与 ARCHITECTURE 第三节 R2-7 一致（对照 365、369、370，DECISIONS-R1 R1-418、R1-419）。本条关闭
