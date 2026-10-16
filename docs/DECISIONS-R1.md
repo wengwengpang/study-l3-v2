@@ -11229,3 +11229,8 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 一，问 435 A：单设当前用户接口，注册与登录响应带同一个用户形状，项目列表每项与项目详情带「我在本项目的角色」（API-34）；未选 B 只靠登录响应、C 塞进项目信息。问 436 B：改任务拆两个接口，负责人专用的改任务（标题、描述、截止日期、负责人）由 AuthzGuard 按角色回「不许做」，改状态两种角色都能调、归属在 Service 判（API-35）；未选 A 一个接口按字段判、C 拆三个。问 437（概念题）学生答 A，答对：whitelist 单开是剔除（432 B），加 forbidNonWhitelisted 是抛错（432 A）。
 二，传播面（规则 69，打开文件核）：API_CONTRACT 要改（汇总加 API-34、35，正文第 3、6 小节两处「待第 3 组定」放第五批起草）；ARCHITECTURE 不影响（决策 Q1 与 435 A 一致；当前用户接口归 auth 还是 users 模块，随接口清单定）；PRD、UI_DESIGN 不影响（US-A02、页 3「当前身份」由 API-34 满足）；STANDARDS 不影响（GitHub 是同类产品参考，不是标准）；CLAUDE.md、BACKLOG、PROJECT_STRUCTURE、book/ 不影响。
 进 HARNESS：问 435、436 判否（不是框架层），是本项目接口口径；问 437 是概念检验，不判。
+
+--- R1-443 · 对照 426 已落，第三批收完；第四批第一轮出问 438 到 440（学生：「同意 426」）---
+一，对照 426 照原样落盘：307e694，契约增 12 行、删 0 行，API-34、35 各 1 次，与预期一致。第三批（核对报告第 4、5、6 项）收完。
+二，第四批第一轮出问 438（表上要不要兜底每项目至多一个负责人，决策边界 D2，推荐 B 部分唯一索引，选 B 先派 architect 确认写法再出 schema 对照）、439（转让负责人接口形状，推荐 C 用 PUT 写「本项目的负责人」子资源）、440（唯一负责人移出自己回什么性质，推荐 A 409 配专门 type）。旧裁决：只记「属 D2，先回 architect」（R1-418 第五点），没拍过。原文（2026-10-16 WebFetch）：PostgreSQL 部分索引页「This enforces uniqueness among the rows that satisfy the index predicate, without constraining those that do not.」；Prisma 索引页「The where argument is available on the @unique, @@unique and @@index attributes.」「It requires the partialIndexes Preview feature.」；Zalando #141「MUST keep URLs verb-free」「In URLs, use only nouns.」、#138「create an article lock with PUT or POST instead of using a lock action.」；RFC 9110 第 15.5.10 节「This code is used in situations where the user might be able to resolve the conflict and resubmit the request.」。新发现：部分唯一索引在 Prisma 里要开预览功能，Prisma 版本又未锁（BACKLOG 74），选 B 时写法要回 architect。
+进 HARNESS：本条为记账，不判。
