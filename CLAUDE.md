@@ -140,6 +140,7 @@ pm 推导的基础需求（Lec 3 前置补充 · Michael 已审定）：
 - 6 张表：users、sessions、projects、project_memberships（中间表）、tasks、notifications。
 - 主键自增整数；时间点用 timestamptz，截止日期（tasks.due_date）是纯日期，用 date；MVP 硬删除（无 deleted_at，软删除见 BACKLOG 8）。
 - onDelete：会话 Cascade、任务 assignee SetNull、其余 Restrict。
+- 约束：每项目至多一个负责人（部分唯一索引，写法随 Prisma 锁版本定，见 docs/arch/DECISIONS.md ADR-DB-006）。
 - 枚举：MemberRole(owner/executor)、TaskStatus(not_started/in_progress/completed)、NotificationType(stuck_task)。
 - schema 落点：prisma/schema.prisma。CC 改表结构前先回 architect 确认，不擅自改。
 
