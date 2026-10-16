@@ -60,3 +60,4 @@
 - 决策：三样都不单独成表。角色是 project_memberships 上的 role 枚举字段（MemberRole：owner / executor）；加成员是负责人填已注册用户的邮箱、指定角色，直接写一行 project_memberships，不存待接受的邀请；任务只存当前状态，另加 status_updated_at 记最后一次变更时间，供判断长时间无进展。tasks.description 必填（architect 初判可空，主人拍板必填）；tasks.status 默认 not_started。priority、display_name、created_by 不加。
 - 后果：换来表少、查询简单，不为 PRD 没定义的需求建表；放弃了自定义角色、发邀请等对方接受、回看任务状态轨迹三样能力，将来真有这类需求再加表。
 - 备注：复课前照课堂记录补记，没有新做决策（DECISIONS-R1 R1-343 问 296 A）。
+- 修订（补课 05-API，PRD 审定决策 D10、D13）：加成员不再指定角色，一律以执行者身份写入 project_memberships，负责人只能经转让产生。「长时间无进展」改为从最近一次状态变化与最近一次分配两者中较晚者起算，status_updated_at 只是其中一个依据；分配时间怎么记、要不要加字段，归第 3 组 architect。上面的决策原文不改。
