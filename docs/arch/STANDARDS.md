@@ -20,7 +20,7 @@
 | 会话管理 | OWASP Session Management Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html | API-8、API-9、API-10、API-44 | 2026-10-15；2026-10-17（Web Content Caching and Clear-Site-Data 一节） |
 | 跨站请求伪造防护 | OWASP Cross-Site Request Forgery Prevention Cheat Sheet；实现用 NestJS 自带防护 | https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html ；https://docs.nestjs.com/security/csrf | API-11 | 2026-10-15 |
 | Cookie 属性 | MDN Set-Cookie | https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie | API-8、API-9 | 2026-10-15 |
-| 错误响应格式 | RFC 9457 Problem Details for HTTP APIs；主参考 Zalando #176、#177 | https://www.rfc-editor.org/rfc/rfc9457.html | API-17 | 2026-10-15 |
+| 错误响应格式 | RFC 9457 Problem Details for HTTP APIs；主参考 Zalando #176、#177 | https://www.rfc-editor.org/rfc/rfc9457.html | API-17、API-47 | 2026-10-15；2026-10-17（第 4.2.1 节） |
 | 出错实例编号 | RFC 9562 UUID（URN 写法 urn:uuid:） | https://www.rfc-editor.org/rfc/rfc9562 | API-26 | 2026-10-15（第 4 节） |
 | JSON 顶层结构 | 主参考 Zalando #167、#110（顶层用对象） | https://opensource.zalando.com/restful-api-guidelines/ | API-18 | 2026-10-15 |
 | 授权（最小权限） | OWASP Authorization Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html | PRD 审定决策 D11（执行者可见范围，问 399 A）、D14（移出成员，问 405 B）、D15（编辑任务内容，问 428 A）、D17（执行者看不见项目负责人，问 430 A）、API-42（列表按角色过滤，问 457 A） | 2026-10-16（Enforce Least Privileges 一节） |
