@@ -113,7 +113,7 @@ grep -E "^#{2,3} " docs/arch/API_CONTRACT.md | sed -E 's/^#+ //' | while IFS= re
 | G36 | 学生还没裁的三处：R1-366 第五点第 2 项（BACKLOG 27 看不出已关）、第 4 项（反模式 43 与 BACKLOG 31 写「全部漂移」而课上没全核）；C4（grep 放在 05-ARCH 一章第六节合不合适） | R1-366、R1-381、R1-384 | 待做 |
 | G37 | 窗口末检视成果（Scrum Sprint Review）：每个窗口收尾要不要对着本窗口目标检视产出 | R1-480、问 494 A | 待做 |
 | G38 | BACKLOG 定期梳理（Scrum Backlog refinement）：合并、关闭、排序，与 G34、BACKLOG 4 同族 | R1-480、问 494 A | 待做 |
-| G39 | 示例邮箱 Bob@x.com 改成 example.com 写法（PRD 澄清注记 14、书章草稿），x.com 是真实域名（RFC 2606 惯例） | R1-482、问 496 A | 待做（第七窗口） |
+| G39 | 示例邮箱 Bob@x.com 改成 example.com 写法（PRD 澄清注记 14、书章草稿），x.com 是真实域名（RFC 2606 惯例） | R1-482、问 496 A | 待做（第八窗口） |
 | G40 | 规则 48 的收尾线要不要从七八成提前到六成：第六窗口用量过半后错误明显变多 | R1-483 | 待做 |
 | G41 | 钩子要不要提前到本节：用 UserPromptSubmit 钩子每条消息附一行提醒（官方 hooks 指南）；settings.json 由学生亲写（规则 66），原排 Lec 8（BACKLOG 7）；第七窗口收尾回顾时看试点漏没漏再定 | R1-488、R1-489 | 待做 |
 | G42 | 决策边界 D8：DECISIONS-R1 文件头与目录树写用途是复课前一轮、做完只查不追加，实际 05-API 第二到第七窗口都在往里记 | R1-488 | 待做 |
