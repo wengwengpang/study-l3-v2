@@ -36,6 +36,8 @@ grep -E "^#{2,3} " docs/arch/API_CONTRACT.md | sed -E 's/^#+ //' | while IFS= re
 | D1 | 邮箱不分大小写的唯一约束（API-55，决策边界 D2） | architect 确认写法；schema 与 ADR 对照落盘 | 待做（第七窗口第一件） |
 | D2 | 起草轮派单（第一节正文） | architect 先核对（已做，R1-470）再起草；正文分段读完、落盘 | 待做（起草轮） |
 | D3 | 受影响的项目文档同步 | 每次拍板扫传播面，逐类写要改或不影响（规则 69） | 随做 |
+| D4 | 时刻检查单试点 docs/CHECKPOINTS.md（问 501 A、503 A、505 A） | 十三张卡分两段落盘，学生读过认了；自动记忆的发前自查改成一行指针；收尾回顾看错数，定留不留 | 进行中（第一段 c3dcd5e） |
+| D5 | 决策记录目录脚本 scripts/decision-index.sh（问 502 A） | 只读、现打印、不存副本；打印条数与 DECISIONS-R1、DECISIONS-G1 的条数对得上 | 已完（2bc0aed） |
 
 ## 三、每个窗口收尾
 
