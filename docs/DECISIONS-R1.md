@@ -11356,3 +11356,10 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 一，五份照原样落盘，数对才提交：467 a908ad8（契约 360 行）、468 8ed1e5a（DECISIONS.md 78 行）、469 d1304d1（79 行）、470 d9c3efa（TECH_STACK 64 行）、471 3d413c6（CLAUDE.md，学生说了「帮我改」，172 行不变）。规则 78 后半：第二层 D 全文用 sed -n '125,137p' 导出贴回，等学生读完。
 二，第二轮出问 470（415 检查放哪层，推荐 B 放在 Guard 之后、Pipe 之前的拦截器里，非成员不论格式对错都先回「看不见」，与 API-21 一致）、471（框架自带的退回，推荐 A 能对上的并进现有性质，其余保留标准码、type 用 about:blank）、472（服务端渲染发不发写请求，推荐 A 只发读请求，写请求一律浏览器经 api client 发，不用 Server Actions）。旧裁决：三项都只在 R1-407、R1-409 记为待拍，API-29 写过「框架自带退回的 type 还没定」。原文（2026-10-17 WebFetch）：NestJS 请求生命周期 Summary「Middleware」「Guards」「Interceptors (pre-controller)」「Pipes」依次排；RFC 9457 第 4.2.1 节登记 about:blank，此时 title「SHOULD be the same as the recommended HTTP status phrase for that code」。
 进 HARNESS：本条为记账，不判。
+
+--- R1-465 · 第二层 D 读完；问 470 B、471 A、472 A；学生提醒清废旧文件；出对照 472 到 475 与问 473（学生：「读完了；470 选 B；471 A；472 A；补充：注意处理一些废旧文件，不要只知道增加而忘记删减」）---
+一，对照 471 规则 78 后半走完（学生读完第二层 D）。问 470 B：415 检查放在 Guard 之后、Pipe 之前，用拦截器做，非成员不论格式先回「看不见」（API-46，连带定下第二轮留的「几种退回同时成立时的先后」）；未选 A 中间件、C 不单独检查。问 471 A：框架自带的退回，能对上的并进现有性质（路径不存在为看不见、JSON 坏了为参数不合法），其余保留标准码、type 用 about:blank（API-47）；未选 B 单设一种、C 全用 about:blank。问 472 A：服务端渲染只发读请求，不用 Server Actions（API-48）；未选 B 允许 Server Actions 写。
+二，传播面（规则 69，打开文件核）：API_CONTRACT 要改（汇总加 API-46 到 48）；STANDARDS 要改（RFC 9457 一行拍板栏加 API-47）；ARCHITECTURE 要改两处（第二节层序说明加一句格式检查、第 6 条接法补 type 指向 API-47）；ARCHITECTURE 第四节「frontend 访问 backend（仅 SSR 取数，T15）」与 472 A 本就一致，不影响；PRD、UI_DESIGN、CLAUDE.md、BACKLOG、book/ 不影响。出对照 472（契约）、473（STANDARDS）、474、475（ARCHITECTURE）。
+三，学生补充：清废旧文件，不要只增不减。CC 认：本窗口落了二十多份对照，没删一份文件；修订行的写法（原文不改）也只增。现有候选：桥梁 w2 到 w5（问 367 A 定整节课结课时删，被 PROJECT_STRUCTURE、05-api-full、REVIEW-DEBT 等引用，删前要照规则 75 核第二个家并扫引用）；book/notes/sample4-05api.md（已被 v2 取代，删不删一直没问）；网页版样本与 book/notes（BACKLOG 73 定教科书写完后删）；docs/vide_coding.md（去留没定）。出问 473（什么时候清，推荐 A 本窗口收尾出删减清单、第一批删桥梁 w2 到 w5 与旧报告，会提前问 367 A 的时间）。新挂账三十四：结课清单加一问「这节有哪些能删」，与 BACKLOG 4（规则只增不减）同族，结课判进不进规则 54 或 60。
+四，删除走三道闸：rm 在禁止档，请学生用「! 」亲跑；属决策边界 D5，学生回 CONFIRM 才算；删前列影响与回滚（git 里能捞回）。
+进 HARNESS：问 470 到 472 判否（不是框架层），是本项目接口口径；学生的补充与挂账三十四结课与挂账十九、二十一同批判。
