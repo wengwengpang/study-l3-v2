@@ -11322,3 +11322,9 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 二，传播面（规则 69，打开文件核）：ARCHITECTURE 要改（第 11 项 Service 职责去掉「状态流转」并补「可能卡住」判定，对照 459；第 14 项三处，对照 460 到 462）；API_CONTRACT 不影响（第一节已写「转不成数字视为查不到」）；PRD、UI_DESIGN、CLAUDE.md、BACKLOG 不影响；book/lec05-arch.md 收的 ARCHITECTURE 原文有「鉴权失败」5 处，归挂账二十四，写书时一起看。第三节走查公共约定那一处改成指向紧接着的决策 B 一条，不重复写一遍。
 三，出对照 459 到 462。
 进 HARNESS：问 461 判否（不是框架层），是本项目文档措辞；问 462 是概念检验，不判。
+
+--- R1-459 · architect 分配时间列报告回来；出问 463 到 465（无学生原话，接 R1-458 同一条消息）---
+一，报告从子代理记录取（临时目录 extract.py，按内容块去重）：89 行、4412 字符，首末行与六个二级标题核过；Read 6 次，正好是派单六份，没读别的。CC 抽查引文 11 处全对（DECISIONS.md:48、56、62，PRD.md:272、297、351，API_CONTRACT.md:296、351，schema.prisma:93、104，STANDARDS.md:30）。它说没核的两样 CC 当场核了：docs/arch/ 下没有 DATABASE.md，prisma/ 下没有 migrations 目录。
+二，要点：schema 加一行 assignedAt DateTime? @map("assigned_at") @db.Timestamptz(6)，可空、不设默认、不加索引，名字是它的推荐（候选 assigneeUpdatedAt）；写清六种情况（创建带负责人写创建时间、不带为空、换人写、改回未分配清空、移出成员同一事务清空、分给当前负责人不动），「原来那个人」读作当前负责人；ADR 推荐新开 ADR-DB-007（A），API-43「另记 ADR」偏向 A；挡路的事无，残留一处：删用户时 SetNull 清负责人不清本列，取舍是加不加 CHECK，推荐不加、写进 ADR 后果；它报「分配与移出并发可能分给非成员」是旧问题，ARCHITECTURE 第一节依赖方向（问 446 A）已写分配也拿同一把锁，architect 没读该文件，CC 已核。
+三，出问 463（ADR 记法，推荐 A 新开 ADR-DB-007，与问 442 A 新开 ADR-DB-006 同一做法）、464（CHECK 约束，推荐 B 不加）、465（「原来那个人」按当前负责人读，推荐 A）。
+进 HARNESS：本条为记账，不判。
