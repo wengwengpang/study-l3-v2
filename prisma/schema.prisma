@@ -83,6 +83,7 @@ model Task {
   title           String
   description     String
   assigneeUserId  Int?       @map("assignee_user_id")
+  assignedAt      DateTime?  @map("assigned_at") @db.Timestamptz(6)
   status          TaskStatus @default(not_started)
   statusUpdatedAt DateTime   @default(now()) @map("status_updated_at") @db.Timestamptz(6)
   dueDate         DateTime?  @map("due_date") @db.Date
