@@ -28,6 +28,7 @@
 | 批量赋值防护 | OWASP Mass Assignment Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Mass_Assignment_Cheat_Sheet.html | API-31 | 2026-10-16 |
 | 列表分页 | 主参考 Zalando #159、#160 | https://opensource.zalando.com/restful-api-guidelines/ | API-40（本版不分页，压在规模假设上） | 2026-10-17 |
 | 日期与时间格式 | RFC 3339；主参考 Zalando #169、#238 | https://www.rfc-editor.org/rfc/rfc3339 | API-41、ADR-DB-003 修订 | 2026-10-16（RFC 3339 第 2、5.6 节）；2026-10-17（Zalando #169、#238） |
+| HTTP 缓存 | RFC 9111 HTTP Caching | https://www.rfc-editor.org/rfc/rfc9111 | API-44（no-store 只作多一层保护） | 2026-10-17（第 5.2.2.5 节） |
 
 ## 二、偏离登记
 
