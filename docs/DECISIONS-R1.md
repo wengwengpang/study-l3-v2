@@ -11316,3 +11316,9 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 二，architect 派单原样派出（opus，定义文件定），在后台跑；报告回来取全文、核首末行与读过的文件、抽查引文，再出 schema 与 ADR 对照。
 三，第三轮出问 461（第 14 项旧词「鉴权失败」三处，推荐 B：两处现行描述原地改，T3 裁决原文留着加修订行，与对照 455 同一做法）、462（跨场景概念题，规则 83 第 3 条：Authorization 头与 Cookie 在共享缓存前的差别）。第 11 项 Service 职责措辞没有取舍，答完与 461 一起出对照，顺带补 459 A 的「可能卡住」判定。「锁哪一行」ADR-DB-006 已写「写转让接口时定」，本轮不出题。原文（2026-10-17 WebFetch）：RFC 9111 第 3.5 节「A shared cache MUST NOT use a cached response to a request with an Authorization header field」；第 7.3 节「Note that the Set-Cookie response header field does not inhibit caching;」。
 进 HARNESS：本条为记账，不判。
+
+--- R1-458 · 问 461 B；462 答 B 答对；出对照 459 到 462（学生：「461 选 B；462 选 B」）---
+一，问 461 B：「鉴权失败」两处现行描述（第二节 Pipe、第三节走查公共约定）原地改，T3 裁决原文留着加修订行；未选 A 三处都原地改、C 都不动。问 462（概念题，规则 83 第 3 条）学生答 B，答对：RFC 9111 只对带 Authorization 头的请求给共享缓存设默认禁令，Set-Cookie 不拦缓存，换成 Cookie 后要靠 no-store 自己说清楚（API-44）。
+二，传播面（规则 69，打开文件核）：ARCHITECTURE 要改（第 11 项 Service 职责去掉「状态流转」并补「可能卡住」判定，对照 459；第 14 项三处，对照 460 到 462）；API_CONTRACT 不影响（第一节已写「转不成数字视为查不到」）；PRD、UI_DESIGN、CLAUDE.md、BACKLOG 不影响；book/lec05-arch.md 收的 ARCHITECTURE 原文有「鉴权失败」5 处，归挂账二十四，写书时一起看。第三节走查公共约定那一处改成指向紧接着的决策 B 一条，不重复写一遍。
+三，出对照 459 到 462。
+进 HARNESS：问 461 判否（不是框架层），是本项目文档措辞；问 462 是概念检验，不判。
