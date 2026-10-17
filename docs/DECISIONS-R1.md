@@ -11351,3 +11351,8 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 二，传播面（规则 69，打开文件核，搜「通知表」「ZodValidationPipe」）：API_CONTRACT 要改（汇总加 API-45）；DECISIONS.md 要改两处（ADR-005 更正行；ADR-003 背景「通知表已满足『通知』这一支」与 TECH_STACK 同病，照 469 A 同样加修订行）；TECH_STACK 要改（修订行一处管第二节第 3 条、扩展点 1、第四节三处措辞）；CLAUDE.md 第二层 D「实时通信 MVP 不做（通知表 + 轮询）」要改（规则 78，要学生说「帮我改」）；ARCHITECTURE（决策 4、T1 本就一致）、PRD（US-02b 已延后）、UI_DESIGN（通知区已标 P2 延后）、STANDARDS、BACKLOG、book/ 不影响。
 三，出对照 467（契约 API-45）、468（ADR-005 更正行）、469（ADR-003 修订行）、470（TECH_STACK 修订行）、471（CLAUDE.md 一行，规则 78）。
 进 HARNESS：问 467 判否（不是框架层），是本项目范围；问 468、469 判否（不是框架层），是本项目文档措辞。
+
+--- R1-464 · 对照 467 到 471 已落；第二层 D 全文贴回待读；第二轮出问 470 到 472（学生：「同意 467 到 470；帮我改 471」）---
+一，五份照原样落盘，数对才提交：467 a908ad8（契约 360 行）、468 8ed1e5a（DECISIONS.md 78 行）、469 d1304d1（79 行）、470 d9c3efa（TECH_STACK 64 行）、471 3d413c6（CLAUDE.md，学生说了「帮我改」，172 行不变）。规则 78 后半：第二层 D 全文用 sed -n '125,137p' 导出贴回，等学生读完。
+二，第二轮出问 470（415 检查放哪层，推荐 B 放在 Guard 之后、Pipe 之前的拦截器里，非成员不论格式对错都先回「看不见」，与 API-21 一致）、471（框架自带的退回，推荐 A 能对上的并进现有性质，其余保留标准码、type 用 about:blank）、472（服务端渲染发不发写请求，推荐 A 只发读请求，写请求一律浏览器经 api client 发，不用 Server Actions）。旧裁决：三项都只在 R1-407、R1-409 记为待拍，API-29 写过「框架自带退回的 type 还没定」。原文（2026-10-17 WebFetch）：NestJS 请求生命周期 Summary「Middleware」「Guards」「Interceptors (pre-controller)」「Pipes」依次排；RFC 9457 第 4.2.1 节登记 about:blank，此时 title「SHOULD be the same as the recommended HTTP status phrase for that code」。
+进 HARNESS：本条为记账，不判。
