@@ -147,3 +147,42 @@ API 契约（docs/arch/API_CONTRACT.md）四节的状态，以交付物清单第
 离结课的估计（[假设]）：第八窗口清第一件并起草、读第一节；第九窗口做第二节接口清单；第十窗口整节课结课；之后另开会话统稿书章。
 整节课结课要做的，见交付物清单第四节 E1 到 E12 与第五节 G1 到 G44，本桥梁不再抄（规则 87）。
 
+## 第 6 节 · 项目目录结构
+
+见 docs/PROJECT_STRUCTURE.md（规则 50）。第七窗口已更新：标题、新登记 docs/CHECKPOINTS.md、scripts/decision-index.sh、本桥梁，桥梁 w7 改存档，两份笔记各一行，补课链进度。
+
+## 第 7 节 · 累计生效的规则与反模式
+
+规则在 docs/COURSE_RULES.md，反模式在 docs/lessons/anti-patterns.md，号段见各自文件头。两份都在开课必读清单里。第七窗口没有新规则、新反模式。
+
+## 第 8 节 · 用到的知识点 + 学生能力
+
+第七窗口用到：角色 4 architect（派单准备）、协议 3 证据契约、协议 4 假设账本（没核的标未核）、协议 6 影响分析与补丁 14 传播矩阵、强化 3 选择题加推荐、强化 4 条件触发（检查单）、补丁 13 动手前后检查、补丁 24 工程化 5 层防御（思路）、Claude Code 机制 Permissions（auto 与 manual）、Hooks（只调研）、Memory（自动记忆改指针）、Subagents（派单）。外部新学：上下文是有限资源与 just in time、检查单按暂停点分、瑞士奶酪模型、决策记录目录从正文生成。
+
+已熟练：前面各课的那些，加上对着标准原文判推荐、D2 改动先回 architect、拿行业做法解决课程流程的毛病。
+还在练：起草审读、接口清单、共享类型、环境设计。
+
+## 第 9 节 · 本窗口特别要注意的
+
+一、开场顺序：先读全开课必读文件，读完做自检，再出大纲和任何项目内容（规则 60 追加、反模式 37）。
+
+二、必读之外额外读：docs/CHECKPOINTS.md（每到一个时刻读对应那张）、docs/lessons/05-api-wbs.md、docs/arch/API_CONTRACT.md（第一节与汇总 API-28、API-31 起）、docs/arch/STANDARDS.md、docs/arch/ARCHITECTURE.md（第二、三节）、docs/arch/DECISIONS.md、.claude/agents/architect.md、docs/design/PRD.md（二之二、审定决策记录、文末注记）、prisma/schema.prisma、book/OUTLINE.md（写附录前读写法约定），以及 DECISIONS-R1 R1-487 到 R1-496。
+
+三、规则 72：新写进持久文档的引用写小节名或条目名，不写行号。
+
+四、派子代理照检查单卡 2，报告回来照卡 3。第七窗口没派子代理；取报告的脚本在会话临时目录，丢了重写（从会话目录 subagents/ 下的记录取，按内容块去重）。
+
+五、查网页用 WebFetch（curl 在 deny 档），要逐字就分句要、每句 125 字符内；长页带 offset 分段取。取不到的：npmjs.com（403）、eCFR（要人工验证，改用康奈尔法学院镜像）、BMJ 原站（403，改用 PMC 镜像）、WHO 的 PDF（403）。本机没装 PDF 渲染工具，Read 读不了 PDF。
+
+六、推前八类敏感扫描（检查单卡 11 第 3 条）：脚本在会话临时目录，丢了照八类重写；示例邮箱 Bob@x.com 会命中，G39 改完就不再命中。
+
+七、本课挂账在交付物清单第五节（G1 到 G44），桥梁不再抄。BACKLOG 43、68、72 本在 BACKLOG。
+
+## 第 10 节 · git 状态
+
+开课前跑 git status 与 git log --oneline -8 确认。working tree 应为 clean；若只有 docs/LIBRARIAN_REPORT.md 一处，照问 412 A 处理。不要回滚。
+本桥梁不写死提交号，只记开课提交号 123325d（送审用）。本桥梁提交后的那次推送，结果下个会话新一条先补记。
+
+## 启动指令（给本窗口老师）
+
+照 SESSION_START J 节的启动动作做，体检闸门做不做先问学生（第 0 节）。本课特有的动作见第 0、5、9 节；进度看交付物清单；每到一个时刻先读 docs/CHECKPOINTS.md 对应那张卡。
