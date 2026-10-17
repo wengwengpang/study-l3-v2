@@ -11417,3 +11417,10 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 三，学生要求参考行业做法。CC 查的原文（2026-10-17 WebFetch）：工作分解结构的 100% 规则，维基百科「The 100% rule states that the WBS includes 100% of the work defined by the project scope」，出处为 PMI《Practice Standard for Work Breakdown Structures》第二版；Scrum 指南「The Definition of Done is a formal description of the state of the Increment」「The Product Backlog is an emergent, ordered list of what is needed to improve the product.」。CC 判：缺的不是提醒，是一份按产物拆到底、每项写完成标准的清单；BACKLOG 管跨课，不合适；桥梁一窗一份，放进去就是反模式 24 的形状。出问 489（推荐 A 本节建交付物清单文件，去留一次性、整节课结课时删，报进度从它导出）。HARNESS 已有原则 18「先给全图，每一步报现在在哪」，本做法像是它的一层补充，挂账三十五结课一并判。
 四，下一步：落对照 486 到 490；问 489 答了照办；然后收尾（笔记补记、目录树、删减清单、桥梁 w7）。
 进 HARNESS：问 486 到 488 判否（不是框架层），是本项目接口与数据口径；问 489 结课随挂账三十五判。
+
+--- R1-475 · 对照 486 到 490 已落；问 489 A；交付物清单已建；学生追问用了什么办法、清单与 BACKLOG 的区别（学生：「同意 486 到 490；489 选 A；补充：你采用什么行业办法或有更好的办法来解决……还有交付物清单 05-api-wbs.md 和我们的 backlog 区别？」）---
+一，五份照原样落盘，数对才提交：486 eaad3ae（契约 399 行）、487 df627b9、488 74c0292、489 fbc3c91（STANDARDS 47 行）、490 679f9d2（PRD 353 行）。第五批、第 4、5 组、核对报告带出的待拍全部拍完，汇总到 API-55。
+二，问 489 A：新建 docs/lessons/05-api-wbs.md（63 行，去留一次性、整节课结课时删），照 WBS 100% 规则拆本节全部交付，每项写完成的定义与状态；文件头带一条覆盖核对命令，把契约全部二、三级标题逐个回清单里找，缺的打印出来。CC 实跑两次：正向，契约 12 个标题全在清单里，没有输出；反向，喂一个不存在的标题「四、不存在的一节」，命令报出「清单里缺」，喂一个已有标题不报。未选：B 状态表放桥梁、C 只靠自查清单。
+三，学生追问。办法：三层，清单（WBS 100% 规则，出处 PMI《Practice Standard for Work Breakdown Structures》）、完成的定义（Scrum 指南 Definition of Done）、机器核对（覆盖核对命令，靠机制不靠嘱咐，反模式 39 的思路；需求工程里叫追溯核对，未取原文，标推导）。区别：BACKLOG 相当于 Scrum 的 Product Backlog，跨课、长期、装本节不做的事；本清单相当于 Sprint Backlog，Scrum 指南原文「a highly visible, real-time picture of the work that the Developers plan to accomplish during the Sprint」（2026-10-17 WebFetch），只管本节、含已完成、每项有完成标准、结课转存后删；两边的接口是「移出」：本节决定不做的项移进 BACKLOG。
+四，下一步：收尾。两份笔记补记、目录树（契约一行到 API-55、DECISIONS 一行到 ADR-DB-007、新登记 05-api-wbs.md、桥梁 w7）、删减清单（问 473 A）、桥梁 w7、推送。
+进 HARNESS：问 489 结课随挂账三十五判；其余为记账，不判。
