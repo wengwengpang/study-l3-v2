@@ -178,6 +178,82 @@ Zalando 第 148 条说，PATCH 是「to update parts of the resource objects」�
 
 ---
 
+## 第三块　开课读得太多，中途会漂（第七窗口）
+
+### 1. 出了什么事
+
+第七窗口一开课，你问：新窗口开课前要读七个必读文件，还要过自检，内容太多，会跑偏、会忘；上个窗口就出过这种事，约束明明写在文件里，还是忘了。能不能分层读，或者用关系图来组织。
+
+我数了一下：开课读的文件 2666 行，自动记忆 509 行；规则 81 条、反模式 46 条、自检 20 项。
+
+### 2. 为什么读过还会忘
+
+**结论：开头读一遍，撑不住整个长会话。**
+
+先打个比方。你早上把一整本员工手册读了一遍，下午遇到一件事，手册里明明写了怎么办，你却想不起来。不是没读，是读得太早、读得太多，中间又塞进了一整天的事。
+
+三篇研究说的是同一件事：
+
+- Liu 等人的《Lost in the Middle》（TACL）发现，相关信息在长上下文的开头或结尾时表现最好（「performance is often highest when relevant information occurs at the beginning or end of the input context」），放在中间就明显变差。开课读的规则，会随着对话变长被挤到中间。这篇测的是检索问答，搬到「守规则」上是推断。
+- Chroma 的《Context Rot》（2025）：「model performance consistently degrades with increasing input length」，输入越长越钝。
+- IFScale（2025）：同时给 500 条指令时，「even the best frontier models only achieve 68% accuracy」，要守的规矩越多，守得越差。
+
+Anthropic 讲上下文管理的文章（2025-09-29）把这归成一句：上下文是「a finite resource with diminishing marginal returns」。Claude Code 官方的最佳实践说得更直白：「If Claude keeps doing something you don't want despite having a rule against it, the file is probably too long and the rule is getting lost.」
+
+### 3. 解法：按时刻分卡，到点再读
+
+**结论：规则按「什么时候用」分成短检查单，到了那一刻先读那一张。**
+
+飞行员不会起飞前把整本手册背下来。检查单按时刻分开：发动机启动前一张，起飞前一张，降落前一张。美国联邦航空条例第 121.315 条的原话是：「The procedures must be designed so that a flight crewmember will not need to rely upon his memory for items to be checked.」这和你说的「不是靠人脑死记，是需要时可查可看」是一个意思。Anthropic 那篇文章推荐的做法也叫「just in time」：手边留轻量的索引，用到时再取细节。
+
+我们的落法是 docs/CHECKPOINTS.md：十三张卡，从「开课」「派子代理前」一路排到「整节课结课」，每张不超过九条，只写要做的动作和正本在哪，不抄正文。用法有两种：动手前「先读再做」，每条消息末尾「做完对一遍」。原来的「发前自查」就是第 12 张卡。
+
+### 4. 先在自己项目里搜
+
+这个办法一提出来，你就问：是不是项目里本来就有，只是没留意。确实大半本来就有：发前自查本来就是按时刻记的；锚点第三行「这一步我最可能犯什么错」每步提醒一次；知识库里有强化 4「条件触发」和补丁 13「动手前后检查」；每条规则的「进自检」判定行早写了它在哪一刻起作用。只是散在各处，没收拢。
+
+教训：**提新办法之前，先在自己项目里搜。** 不搜，就会再立一份，成了重复。这一条写进了框架文件 HARNESS 原则 1。
+
+### 5. 能不能根治
+
+你接着问：这么多重要的内容，AI 的这些毛病是不是没法根治。
+
+**结论：记性根治不了，「靠记性」可以根治。**
+
+安全工程里有个瑞士奶酪模型。James Reason 在 2000 年的《英国医学杂志》上写，每一层防护都「more like slices of Swiss cheese, having many holes」。安全不靠哪一片没有洞，靠叠几片，让洞对不齐。他还说：「We cannot change the human condition, but we can change the conditions under which humans work.」
+
+我们的防护层由弱到强：开头读一遍，到点读卡，命令判对错，钩子自动跑，你把关。第六窗口漏过去的错，全在「只靠读」那一层；拦下来的，全靠命令。
+
+所以方向是四样：能删的删；剩下的到点再读；读也不保险的，交给命令、交给钩子；关键处由你把关。检查单上每条都标了靠什么守：【命令】有现成命令判对错，【读】只能靠读卡照做，【你】由你把关；现在没有一条由钩子守。剩下的洞，看得见。这一条写进了 HARNESS 原则 17。
+
+### 6. 记录要能回溯
+
+你还要一种能追查的记录：什么时候、在哪、做了什么，像书一样前面是目录、后面是正文。
+
+正文我们早有了：git log 记每次改动，DECISIONS-R1 记每次拍板。缺的是目录。行业里的做法是目录从正文生成，不另写：管理架构决策记录的工具 adr-tools，源码里就有生成目录（_adr_generate_toc）和关系图（_adr_generate_graph）的命令。Keep a Changelog 也提醒：「Using commit log diffs as changelogs is a bad idea: they're full of noise.」直接拿 git log 当目录，太吵。
+
+我们的落法是 scripts/decision-index.sh，从决策记录的标题行现场打印「编号 | 日期 | 提交号 | 标题」。比如跑 bash scripts/decision-index.sh R1 开课，就列出每个窗口是哪天开的；再跑 git show --stat 加提交号，看那一次改了哪些文件。
+
+### 7. 邮箱不分大小写的唯一约束，三种写法
+
+这一节只讲原理，选哪种要等架构师给选项、你拍板。API-55 定了比较时不分大小写，可现在数据库的约束是区分大小写的。PostgreSQL 有三种常见写法：
+
+- citext 列：换成扩展里「不分大小写的文字」类型。官方页写「The citext module provides a case-insensitive character string type」，可同一页又建议「Consider using nondeterministic collations ... instead of this module」。
+- 表达式唯一索引：在 lower(email) 上建唯一索引。官方原话是，它「would prevent creation of rows whose col1 values differ only in case」。
+- 不区分大小写的排序规则：官方提醒「their use leads to a performance penalty」，有的模式匹配也用不了。
+
+Prisma 的 schema 里查到能直接写的是第一种（@db.Citext，要先启用扩展）；另两种在 Prisma 文档里没找到 schema 写法，多半要在迁移文件里手写 SQL（未核），留给架构师在第八窗口核。
+
+### 8. 换个项目还用得上的
+
+- 规则多了，按「什么时候用」分成短卡，到点再读。
+- 每条标靠什么守住，看得见还剩多少洞。
+- 提新办法之前，先在自己项目里搜。
+- 能交给命令和钩子的，不靠记性。
+- 记录的目录从正文生成，不另写。
+
+---
+
 ## 本草稿的依据
 
 以下原文都在 2026-10-17 用网页取回核过：
