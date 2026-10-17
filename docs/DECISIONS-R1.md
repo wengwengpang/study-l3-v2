@@ -11334,3 +11334,8 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 二，问 463 A：分配时间列新开 ADR-DB-007，ADR-DB-005 修订行加一行指过去；未选 B 给 ADR-DB-005 再加修订。问 464 B：不加「有负责人 ⇔ 有分配时间」的数据库检查约束，删用户时的残留写进 ADR-DB-007 后果；未选 A 加约束（会让删用户撞约束，悄悄推翻 ADR-DB-004）。问 465 A：「原来那个人」读作当前负责人，不存分配历史；未选 B 按历史任何一位负责人。字段名照 architect 推荐 assignedAt，学生没改。
 三，传播面（规则 69，打开文件核）：DECISIONS.md 要改（新开 ADR-DB-007、ADR-DB-005 加指针行）；API_CONTRACT 要改（API-43「写法经 architect 确认后另记 ADR」改指 ADR-DB-007，与 API-36 改指 API-39 同一做法）；prisma/schema.prisma 要改（assigneeUserId 下加一行）；PROJECT_STRUCTURE 的 DECISIONS 一行「ADR-DB-001~006」与契约一行「API-1 到 API-39」要改，按规则 52 放收尾；CLAUDE.md 第二层 E（不列字段）、PRD（D13、D14、D16 一致）、ARCHITECTURE（移出编排一行「改为未认领」已涵盖清空）、STANDARDS、BACKLOG、book/ 不影响。出对照 463（ADR-DB-007）、464（ADR-DB-005 指针）、465（API-43）、466（schema），先落 ADR（规则 76）。schema 改后 prisma validate 跑不了：本机没装 Prisma，版本未锁（BACKLOG 74），写代码时验。
 进 HARNESS：问 463 到 465 判否（不是框架层），是本项目数据口径。
+
+--- R1-461 · 对照 463 到 466 已落，第五批收完；问 466 换窗口还是接第 4、5 组（学生：「同意 463 到 466」）---
+一，四份照原样落盘，数对才提交：463 0bfa4c2（DECISIONS.md 71 到 76 行）、464 13c190c（77 行）、465 990660c、466 77a827f（schema 113 行，只做文字计数，prisma validate 没跑，原因见 R1-460 第三点）。第五批九项与 architect 确认带出的三问全部落完；本窗口到此出对照 448 到 466 共 19 份、问 453 到 465。
+二，出问 466：A 接着上第 4 组（通知接口要不要）、第 5 组（冲突 3）与 architect 第二轮留下的待拍；B 本窗口收尾换窗口（笔记补记、目录树、桥梁 w7）；请学生先看 /context 再选，CC 按规则 48 七八成主动收。
+进 HARNESS：本条为记账，不判。
