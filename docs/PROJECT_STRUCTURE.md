@@ -51,7 +51,7 @@
     ├── BRIDGE-05-api-w3.md      05-API 第三窗口暂存桥梁（已用完，只作存档，整节课结课时删）
     ├── BRIDGE-05-api-w4.md      05-API 第四窗口暂存桥梁（已用完，只作存档，整节课结课时删）
     ├── BRIDGE-05-api-w5.md      05-API 第五窗口暂存桥梁（已用完，只作存档，整节课结课时删）
-    ├── BRIDGE-05-api-w6.md      05-API 第六窗口暂存桥梁（第六窗口以它为准）
+    ├── BRIDGE-05-api-w6.md      05-API 第六窗口暂存桥梁（已用完，只作存档，整节课结课时删）
     ├── web_course_sample1.md 至 web_course_sample6.md  网页版课堂记录样本六份（依次是 Lec 3、4、2、05-API 第一窗口、6、0），教科书参考用，不是正本。去留：一次性，教科书写完后删（BACKLOG 73，DECISIONS-R1 R1-279 问 238A）
     ├── web_course5_sample1.md 至 web_course5_sample5.md  网页版课堂记录样本五份（依次是 Lec 5、05-ARCH 第一、二、三、四窗口），教科书参考用，不是正本。去留：一次性，教科书写完后删（BACKLOG 73，DECISIONS-R1 R1-336 问 290 A）
     ├── vide_coding.md           学生学过的另一门课的整页记录（Claude Code 提示词工程与上下文工程），教科书参考用，不是正本。入库时去掉了前 135 行网页侧栏，原件在仓库外。去留没定（DECISIONS-R1 R1-289、R1-331 问 286 A）
