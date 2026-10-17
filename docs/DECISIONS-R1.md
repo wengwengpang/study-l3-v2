@@ -11293,3 +11293,9 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 三，问 453 A：第六窗口不重走体检闸门，理由同问 358 A、394 A、413 A；未选 B 重做四步。问 454 A：精力充足，正常节奏；未选 B 一般、C 有点累、D 只做一小段。主对话 Opus 5.5，effort 照问 414 B 存的默认 high，不用切。
 四，下一步：出第五批第一轮，每轮不超过三题，出题前搜旧裁决、取标准原文。
 进 HARNESS：问 453、454 判否（不是框架层），是本课节奏；其余为记账，不判。
+
+--- R1-454 · 第五批第一轮问 455 A、456 A、457 A；出对照 448 到 452（学生：「455 选 A；456 选 A；457 选 A」）---
+一，问 455 A：列表本版不分页，后端按 id 升序返回，排序筛选在前端做；压在 PRD 假设账本的规模上，Zalando #159（MUST）只管「(potentially) larger than just a few hundred entries」的列表；假设被推翻时加游标分页，进 BACKLOG（API-40）。未选：B 现在就做游标分页、C offset 分页（#160 要求避免）。「按 id 升序」是 CC 填的小细节，消息里已点明。问 456 A：时间点一律输出 UTC，大写 T 与 Z，以后收时间点也只收带 Z 的（API-41）。未选：B 输入另收偏移、C 输出带用户时区偏移。问 457 A（决策边界 D3）：一个任务列表接口，Service 按角色强制过滤；汇总与成员列表负责人专用，执行者调用回「不许做」（API-42）。未选：B 拆两个列表接口、C 执行者自带 assignee=me。原文（2026-10-17 WebFetch）：Zalando #159、#160、#169、#238；MDN toISOString「The timezone is always UTC, as denoted by the suffix Z.」。
+二，传播面（规则 69，打开文件核）：API_CONTRACT 要改（汇总加 API-40 到 42；正文第 4、5 小节两处「待第 3 组定」放架构师起草时写）；STANDARDS 要改（登记表加分页、日期与时间格式两行，RFC 3339 此前用过没登记；OWASP 授权一行拍板栏加 API-42）；BACKLOG 要改（加 78，文件头号段）；PROJECT_STRUCTURE 契约一行「API-1 到 API-39」要改，按规则 52 放收尾；PRD、UI_DESIGN（汇总、成员列表本就只给负责人）、ARCHITECTURE（汇总已归 tasks）、DECISIONS.md、CLAUDE.md、book/ 不影响。
+三，出对照 448（BACKLOG 文件头）、449（BACKLOG 78）、450（契约汇总 API-40 到 42）、451（STANDARDS 加两行）、452（STANDARDS 授权一行），先落 BACKLOG（规则 76）。
+进 HARNESS：问 455 到 457 判否（不是框架层），是本项目接口口径。
