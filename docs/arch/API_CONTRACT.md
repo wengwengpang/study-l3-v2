@@ -267,6 +267,7 @@
         「SHOULD return 201 and the new resource object (including the resource identifier)」，
         Location 头在响应体带了新资源时 SHOULD、没带时 MUST。
   修订（同窗口）：原写「并带 Location 头」，改为有能读的地址才带。RFC 9110 第 15.3.2 节允许不带，此时以请求的地址为准。
+  修订（第六窗口，问 478 A）：括号里的例子「如登录新建的会话」不再成立：登录回 200、响应体带当前用户，会话只经 Cookie（API-53）。上面原文不改。
 - API-26 错误外壳的 instance 填每次出错生成的随机编号，写成 urn:uuid: 开头（RFC 9562 第 4 节的 URN 写法）。
   由全局异常过滤器生成（API-23），同一编号写进服务端日志；日志怎么记，留到讲可观测性那一课。
   依据：RFC 9457 第 3.1.5 节，instance 标「the specific occurrence of the problem」，打不开时只作唯一标识；
