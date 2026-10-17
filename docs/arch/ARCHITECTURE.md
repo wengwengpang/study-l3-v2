@@ -347,7 +347,7 @@ Zod 执行三处，各拦不同的东西：
 - 层：Service
 - 校验：无
 - 鉴权：无。一律显示 email（PRD.md:290 注记 4）。
-- 取数方式未定：走 UsersService 还是 Prisma 关联查询，留给 05-API 定（决策 C）。
+- 取数方式（决策 C，问 458 A）：调 UsersService 按一批 id 取 email，列表也只多一次查询；不用 Prisma 关联查询直读 users 表，依赖图上 tasks → users 照旧成立，Lec 8 的 lint 管得到。
 - 退回：无
 - 表：读 users
 
