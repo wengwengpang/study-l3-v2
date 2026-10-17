@@ -24,7 +24,7 @@
 | 出错实例编号 | RFC 9562 UUID（URN 写法 urn:uuid:） | https://www.rfc-editor.org/rfc/rfc9562 | API-26 | 2026-10-15（第 4 节） |
 | JSON 顶层结构 | 主参考 Zalando #167、#110（顶层用对象） | https://opensource.zalando.com/restful-api-guidelines/ | API-18 | 2026-10-15 |
 | 授权（最小权限） | OWASP Authorization Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html | PRD 审定决策 D11（执行者可见范围，问 399 A）、D14（移出成员，问 405 B）、D15（编辑任务内容，问 428 A）、D17（执行者看不见项目负责人，问 430 A）、API-42（列表按角色过滤，问 457 A） | 2026-10-16（Enforce Least Privileges 一节） |
-| 部分更新（PATCH 语义） | RFC 7396 JSON Merge Patch；主参考 Zalando #123 | https://www.rfc-editor.org/rfc/rfc7396 | API-33 | 2026-10-16（第 1 节） |
+| 部分更新（PATCH 语义） | RFC 7396 JSON Merge Patch；主参考 Zalando #123 | https://www.rfc-editor.org/rfc/rfc7396 | API-33、API-54 | 2026-10-16（第 1 节） |
 | 批量赋值防护 | OWASP Mass Assignment Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Mass_Assignment_Cheat_Sheet.html | API-31 | 2026-10-16 |
 | 列表分页 | 主参考 Zalando #159、#160 | https://opensource.zalando.com/restful-api-guidelines/ | API-40（本版不分页，压在规模假设上） | 2026-10-17 |
 | 日期与时间格式 | RFC 3339；主参考 Zalando #169、#238 | https://www.rfc-editor.org/rfc/rfc3339 | API-41、ADR-DB-003 修订 | 2026-10-16（RFC 3339 第 2、5.6 节）；2026-10-17（Zalando #169、#238） |
