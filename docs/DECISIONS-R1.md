@@ -11328,3 +11328,9 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 二，要点：schema 加一行 assignedAt DateTime? @map("assigned_at") @db.Timestamptz(6)，可空、不设默认、不加索引，名字是它的推荐（候选 assigneeUpdatedAt）；写清六种情况（创建带负责人写创建时间、不带为空、换人写、改回未分配清空、移出成员同一事务清空、分给当前负责人不动），「原来那个人」读作当前负责人；ADR 推荐新开 ADR-DB-007（A），API-43「另记 ADR」偏向 A；挡路的事无，残留一处：删用户时 SetNull 清负责人不清本列，取舍是加不加 CHECK，推荐不加、写进 ADR 后果；它报「分配与移出并发可能分给非成员」是旧问题，ARCHITECTURE 第一节依赖方向（问 446 A）已写分配也拿同一把锁，architect 没读该文件，CC 已核。
 三，出问 463（ADR 记法，推荐 A 新开 ADR-DB-007，与问 442 A 新开 ADR-DB-006 同一做法）、464（CHECK 约束，推荐 B 不加）、465（「原来那个人」按当前负责人读，推荐 A）。
 进 HARNESS：本条为记账，不判。
+
+--- R1-460 · 对照 459 到 462 已落；问 463 A、464 B、465 A；出对照 463 到 466（学生：「同意 459 到 462；463 选 A；464 选 B；465 选 A」）---
+一，四份照原样落盘，数对才提交：459 7f7cc4c、460 96bc2af、461 7adc035、462 7fd5fdc；ARCHITECTURE 现 636 行，「鉴权失败」只剩 T3 原文与修订行 2 处。第五批九项全部拍完。
+二，问 463 A：分配时间列新开 ADR-DB-007，ADR-DB-005 修订行加一行指过去；未选 B 给 ADR-DB-005 再加修订。问 464 B：不加「有负责人 ⇔ 有分配时间」的数据库检查约束，删用户时的残留写进 ADR-DB-007 后果；未选 A 加约束（会让删用户撞约束，悄悄推翻 ADR-DB-004）。问 465 A：「原来那个人」读作当前负责人，不存分配历史；未选 B 按历史任何一位负责人。字段名照 architect 推荐 assignedAt，学生没改。
+三，传播面（规则 69，打开文件核）：DECISIONS.md 要改（新开 ADR-DB-007、ADR-DB-005 加指针行）；API_CONTRACT 要改（API-43「写法经 architect 确认后另记 ADR」改指 ADR-DB-007，与 API-36 改指 API-39 同一做法）；prisma/schema.prisma 要改（assigneeUserId 下加一行）；PROJECT_STRUCTURE 的 DECISIONS 一行「ADR-DB-001~006」与契约一行「API-1 到 API-39」要改，按规则 52 放收尾；CLAUDE.md 第二层 E（不列字段）、PRD（D13、D14、D16 一致）、ARCHITECTURE（移出编排一行「改为未认领」已涵盖清空）、STANDARDS、BACKLOG、book/ 不影响。出对照 463（ADR-DB-007）、464（ADR-DB-005 指针）、465（API-43）、466（schema），先落 ADR（规则 76）。schema 改后 prisma validate 跑不了：本机没装 Prisma，版本未锁（BACKLOG 74），写代码时验。
+进 HARNESS：问 463 到 465 判否（不是框架层），是本项目数据口径。
