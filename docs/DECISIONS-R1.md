@@ -11310,3 +11310,9 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 二，传播面（规则 69，打开文件核）：ARCHITECTURE 要改（tasks 依赖行、R2-8、裁决汇总决策 C 加修订行；Service 职责措辞随第 11 项下一轮一起出）；API_CONTRACT 要改（汇总加 API-43、44）；STANDARDS 要改（会话管理一行拍板栏加 API-44、登记 RFC 9111）；schema 与 DECISIONS.md 要改，等 architect 确认写法后另出对照；PRD（D13、D14、D16 与 A 一致）、UI_DESIGN（执行者本就不显示卡住标记）、CLAUDE.md、BACKLOG、book/ 不影响。
 三，出对照 453 到 458；architect 确认分配时间列写法的派单原文已给学生看，学生说「发」才派（规则 4），读文件六份，超五份理由写进派单。
 进 HARNESS：问 458 到 460 判否（不是框架层），是本项目架构、数据与接口口径。
+
+--- R1-457 · 对照 453 到 458 已落；architect 已派；第三轮出问 461、462（学生：「同意 453 到 458；发」）---
+一，六份照原样落盘，一份一提交，数对才提交：453 d83f617、454 b673ebc、455 f10669c、456 40f3434（契约增 7 行、删 0 行）、457 b716890、458 9c72dad。R1-456 提交时闸门又拦一次：实际 11312 行与消息里说的应得数一致，是 CC 在脚本里写成 11311；与 R1-455 第一点同形，挂账二十七再记一例（消息里的应得数与脚本里的比较值要从同一处来）。
+二，architect 派单原样派出（opus，定义文件定），在后台跑；报告回来取全文、核首末行与读过的文件、抽查引文，再出 schema 与 ADR 对照。
+三，第三轮出问 461（第 14 项旧词「鉴权失败」三处，推荐 B：两处现行描述原地改，T3 裁决原文留着加修订行，与对照 455 同一做法）、462（跨场景概念题，规则 83 第 3 条：Authorization 头与 Cookie 在共享缓存前的差别）。第 11 项 Service 职责措辞没有取舍，答完与 461 一起出对照，顺带补 459 A 的「可能卡住」判定。「锁哪一行」ADR-DB-006 已写「写转让接口时定」，本轮不出题。原文（2026-10-17 WebFetch）：RFC 9111 第 3.5 节「A shared cache MUST NOT use a cached response to a request with an Authorization header field」；第 7.3 节「Note that the Set-Cookie response header field does not inhibit caching;」。
+进 HARNESS：本条为记账，不判。
