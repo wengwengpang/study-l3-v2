@@ -11304,3 +11304,9 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 一，五份照原样落盘，一份一提交，数对才提交：448 13eabc4、449 056ceaf、450 d79e8fd（契约增 12 行、删 0 行）、451 a96639b、452 254bc37。448 第一次被验证闸门拦下：计数全对，是 CC 写的比较串少一位（应为 111088，写成 11108），改成带分隔符的比较串重跑后提交。闸门拦对了方向，挂账二十七又一例：比较串本身也要照计数逐位写。
 二，第二轮出问 458（决策 C：负责人显示信息怎么取，推荐 A 走 UsersService 批量取）、459（「可能卡住」计时，推荐 A 加可空分配时间列、后端算、只给负责人，决策边界 D2，选 A 后先派 architect 确认写法再出 schema 对照）、460（带会话的响应发不发 Cache-Control: no-store，推荐 A 全部需登录的接口与登录注册统一发）。旧裁决：决策 C 自 05-ARCH 起一直留给 05-API，没拍过；分配时间只记「归第 3 组 architect」；缓存头没拍过（第 3 组报告 N2）。原文（2026-10-17 WebFetch）：OWASP 会话管理「Use Cache-Control: no-store on responses containing session identifiers or sensitive session data.」「Set the cache policy in HTTP response headers on sensitive pages.」；RFC 9111 第 5.2.2.5 节「This directive is not a reliable or sufficient mechanism for ensuring privacy.」。
 进 HARNESS：本条为记账，不判。
+
+--- R1-456 · 问 458 A、459 A、460 A；出对照 453 到 458 与 architect 派单原文（学生：「458 选 A；459 选 A；460 选 A」）---
+一，问 458 A（决策 C）：负责人邮箱经 UsersService 按一批 id 取，不用 Prisma 关联查询，依赖图 tasks → users 照旧成立；落 ARCHITECTURE，不编 API 号（规则 71）。未选：B 关联查询并改 T13 口径、C 关联查询写成例外。问 459 A（决策边界 D2）：tasks 加可空分配时间列，分配或换人时写入，分给原来的人不算，改回未分配清空；「可能卡住」后端按服务端时钟算，只给负责人（API-43）。未选：B 分配也刷新 status_updated_at、C 单设计时起点列；「谁来算」由 CC 定为后端算，消息里已点明可拆，学生没拆。问 460 A：所有接口（含登录、注册）的响应一律带 Cache-Control: no-store，成功与出错都带，后端统一加，要盖住中间件之前退回的跨站被拒（API-44）。未选：B 只给登录注册、C 不定。
+二，传播面（规则 69，打开文件核）：ARCHITECTURE 要改（tasks 依赖行、R2-8、裁决汇总决策 C 加修订行；Service 职责措辞随第 11 项下一轮一起出）；API_CONTRACT 要改（汇总加 API-43、44）；STANDARDS 要改（会话管理一行拍板栏加 API-44、登记 RFC 9111）；schema 与 DECISIONS.md 要改，等 architect 确认写法后另出对照；PRD（D13、D14、D16 与 A 一致）、UI_DESIGN（执行者本就不显示卡住标记）、CLAUDE.md、BACKLOG、book/ 不影响。
+三，出对照 453 到 458；architect 确认分配时间列写法的派单原文已给学生看，学生说「发」才派（规则 4），读文件六份，超五份理由写进派单。
+进 HARNESS：问 458 到 460 判否（不是框架层），是本项目架构、数据与接口口径。
