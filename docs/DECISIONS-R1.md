@@ -11363,3 +11363,8 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 三，学生补充：清废旧文件，不要只增不减。CC 认：本窗口落了二十多份对照，没删一份文件；修订行的写法（原文不改）也只增。现有候选：桥梁 w2 到 w5（问 367 A 定整节课结课时删，被 PROJECT_STRUCTURE、05-api-full、REVIEW-DEBT 等引用，删前要照规则 75 核第二个家并扫引用）；book/notes/sample4-05api.md（已被 v2 取代，删不删一直没问）；网页版样本与 book/notes（BACKLOG 73 定教科书写完后删）；docs/vide_coding.md（去留没定）。出问 473（什么时候清，推荐 A 本窗口收尾出删减清单、第一批删桥梁 w2 到 w5 与旧报告，会提前问 367 A 的时间）。新挂账三十四：结课清单加一问「这节有哪些能删」，与 BACKLOG 4（规则只增不减）同族，结课判进不进规则 54 或 60。
 四，删除走三道闸：rm 在禁止档，请学生用「! 」亲跑；属决策边界 D5，学生回 CONFIRM 才算；删前列影响与回滚（git 里能捞回）。
 进 HARNESS：问 470 到 472 判否（不是框架层），是本项目接口口径；学生的补充与挂账三十四结课与挂账十九、二十一同批判。
+
+--- R1-466 · 对照 472 到 475 已落；问 473 A；最后一轮出问 474 到 476（学生：「同意 472 到 475；473 选 A」）---
+一，四份照原样落盘，数对才提交：472 125240b（契约 369 行）、473 d951f2a、474 03847a5（ARCHITECTURE 637 行）、475 db64288。问 473 A：本窗口收尾时出删减清单，第一批桥梁 w2 到 w5 与 book/notes/sample4-05api.md，逐份核第二个家与引用，学生回 CONFIRM 后亲跑删除；提前了问 367 A 的时间（题里已写明）；未选 B 照 367 A 结课删、C 只记挂账。
+二，最后一轮出问 474（前端显不显示 instance 编号，推荐 C 只在「内部错误」时显示，理由是 UI 调性「克制、低干扰」，CLAUDE.md 第二层 C）、475（更新接口用什么方法，推荐 A 部分更新用 PATCH，API-9 方法清单补 PATCH）、476（六项照标准的小项，推荐 A 全认：instance 生成规则归契约、成功响应 application/json、比对媒体类型忽略参数、写接口项目 id 以路径为准、challenge 不带 realm、路径段小写连字符复数）。第二轮十二项里的「退回先后」已由 API-46 定。原文（2026-10-17 WebFetch）：Zalando #148「MUST use HTTP methods correctly」，PATCH「to update parts of the resource objects」；#129「MUST use kebab-case for path segments」；#134「MUST pluralize resource names」；#167「MUST use JSON as payload data interchange format」；RFC 8259「No "charset" parameter is defined for this registration.」「Adding one really has no effect on compliant recipients.」；RFC 9110 第 11.5 节 realm「reserved for use by authentication schemes」「that wish to indicate a scope of protection.」；OWASP 错误处理速查表只要求通用提示、不暴露实现细节，没提给用户看编号。
+进 HARNESS：问 473 判否（不是框架层），是本课清理时机；其余为记账，不判。
