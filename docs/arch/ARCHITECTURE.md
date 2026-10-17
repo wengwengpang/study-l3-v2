@@ -111,6 +111,7 @@ Guard → Pipe → Controller → Service → Repository → Prisma
 守卫在 Controller 之前执行。被 Guard 拒绝的请求，Controller 方法根本不会被调用。
 出错另有一个统一出口，不在上面这条调用链里：全局异常过滤器，见下方第 6 条。任何一层出的错，都由它收成同一形状再发出（API-17、API-23）。
 上面这条链之前，框架还有一道跨站请求伪造检查；被拒的请求连 Guard 都到不了（API-23）。
+Guard 之后、Pipe 之前还有一道「格式不支持」检查，用拦截器做；不是成员的请求已在 Guard 回「看不见」，轮不到它（API-46）。
 
 #### 1. Guard（AuthGuard → AuthzGuard）
 AuthGuard 属 auth 模块，负责会话有效性，只能调 auth 模块暴露的能力读 sessions，并把当前用户 id 放入请求上下文。
