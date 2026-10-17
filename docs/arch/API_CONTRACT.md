@@ -348,3 +348,10 @@
   理由：PRD 审定决策 D6 单页面按角色渲染、D11 执行者可见范围；过滤不靠前端传什么；与 API-35 同一条界线（T6）。
   依据：OWASP Authorization Cheat Sheet 最小权限（必须）。
   没选：拆「全部」「我的」两个列表接口；一个接口要执行者自带 assignee=me 参数，等于把安全过滤交给前端。
+- API-43 「可能卡住」由后端按服务端时钟算，只放进负责人看得到的任务响应；执行者的响应不带这一项（PRD 权限矩阵「查看未认领 / 卡住标记」一行）。计时照 PRD 审定决策 D13，从最近一次状态变化与最近一次分配两者中较晚的那个起算；分配时间记在 tasks 新加的一列，写法经 architect 确认后另记 ADR。
+  理由：规则只有一份，前端不用各算一遍；执行者拿不到这个标记。
+  没选：前端拿时间戳自己算，规则两边各一份，执行者的响应也得带上时间戳。
+- API-44 所有接口（含登录、注册）的响应一律带 Cache-Control: no-store，成功与出错都带。由后端统一加，不靠各接口自己写；挂在哪一层写后端骨架时定，要盖住在中间件之前就退回的跨站被拒（API-23）。
+  理由：PRD 要「刷新就看到最新的」，被缓存的列表会违反它；响应里有会话凭据与项目数据。
+  依据：OWASP Session Management Cheat Sheet「Use Cache-Control: no-store on responses containing session identifiers or sensitive session data.」；RFC 9111 第 5.2.2.5 节提醒它「not a reliable or sufficient mechanism for ensuring privacy」，只作多一层保护。
+  没选：只给登录、注册发；不定，交给浏览器默认。
