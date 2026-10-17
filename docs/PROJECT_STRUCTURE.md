@@ -81,7 +81,7 @@
         ├── 05-arch-full.md      补课 05-ARCH 完整笔记（模块划分 + 分层）
         ├── 05-arch-cheatsheet.md 补课 05-ARCH 速查卡
         ├── 05-api-full.md      补课 05-API 完整笔记（第一窗口；第二到七窗口补记追加在末尾）
-        ├── 05-api-cheatsheet.md 补课 05-API 速查卡（第一窗口；第二到六窗口补记追加在末尾）
+        ├── 05-api-cheatsheet.md 补课 05-API 速查卡（第一窗口；第二到七窗口补记追加在末尾）
         ├── 05-api-wbs.md       补课 05-API 本节交付物清单：照 100% 规则拆全部交付、完成的定义、覆盖核对命令、推到结课的事（规则 87，问 489 A）。去留：一次性，整节课结课时删
         └── anti-patterns.md     反模式库，号段见 anti-patterns 文件头
 
