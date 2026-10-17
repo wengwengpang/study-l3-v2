@@ -367,3 +367,17 @@
 - API-48 服务端渲染只发读请求。写请求一律从浏览器经 api client 发（ARCHITECTURE 第二节前端分层「数据访问层」），本版不用 Next.js Server Actions。
   理由：跨站检查只守浏览器这一条写路径；服务端渲染直连后端时不带 Sec-Fetch-Site 与 Origin，按 NestJS 官方 CSRF 一页会被放行（推导，见 API-29 同类说明）。
   没选：允许 Server Actions 发写请求，写路径变两条，跨站防护要另想办法。
+- API-49 出错时，前端只在「内部错误」（500）的错误块里把 instance 编号给用户看：小字显示，可复制，用户报障时报这个编号，服务端日志里是同一个（API-26）。其余错误不显示编号，用户看提示就知道原因。
+  理由：UI 调性「克制、清晰、低干扰」（CLAUDE.md 第二层 C）；编号是随机的，不泄露实现细节（OWASP Error Handling Cheat Sheet 只要求提示通用、不暴露实现细节）。
+  没选：所有出错都显示；都不显示，报障时对不上日志。
+  落点：UI_DESIGN 文末澄清注记。
+- API-50 部分更新用 PATCH，「改任务」「改状态」两个接口（API-35）都是；转让负责人仍用 PUT（API-36），它整个替换「本项目的负责人」这个子资源。API-9 所列被 SameSite=Lax 拦下的方法补上 PATCH。
+  依据：主参考 Zalando #148「MUST use HTTP methods correctly」，PATCH「to update parts of the resource objects」；更新规则照 API-33。
+  没选：用 PUT，整个替换与「没传不改」对不上；用 POST，路径要带动作，违反 Zalando #141。
+- API-51 六项照标准的小项（问 476 A）：
+  一，instance 的生成规则（API-26）归本文件，schema 只定它是字符串；与 API-3、API-24 同一分法。
+  二，成功响应的媒体类型是 application/json（主参考 Zalando #167），出错时是 application/problem+json（API-17）。
+  三，比对请求的媒体类型时忽略参数，application/json; charset=utf-8 也收（RFC 8259「No "charset" parameter is defined for this registration.」）。
+  四，凡路径带项目 id 的写接口，项目一律以路径为准，请求体多带的按 API-31 拒绝；决策 D 从新建任务推广到全部写接口。
+  五，401 的 challenge 只写方案名 Session，不带 realm（RFC 9110 第 11.5 节：realm 留给要标明保护范围的方案，本项目只有一个保护范围）。
+  六，路径段一律小写，单词之间用连字符，资源名用复数（主参考 Zalando #129、#134，均为必须）。
