@@ -11368,3 +11368,9 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 一，四份照原样落盘，数对才提交：472 125240b（契约 369 行）、473 d951f2a、474 03847a5（ARCHITECTURE 637 行）、475 db64288。问 473 A：本窗口收尾时出删减清单，第一批桥梁 w2 到 w5 与 book/notes/sample4-05api.md，逐份核第二个家与引用，学生回 CONFIRM 后亲跑删除；提前了问 367 A 的时间（题里已写明）；未选 B 照 367 A 结课删、C 只记挂账。
 二，最后一轮出问 474（前端显不显示 instance 编号，推荐 C 只在「内部错误」时显示，理由是 UI 调性「克制、低干扰」，CLAUDE.md 第二层 C）、475（更新接口用什么方法，推荐 A 部分更新用 PATCH，API-9 方法清单补 PATCH）、476（六项照标准的小项，推荐 A 全认：instance 生成规则归契约、成功响应 application/json、比对媒体类型忽略参数、写接口项目 id 以路径为准、challenge 不带 realm、路径段小写连字符复数）。第二轮十二项里的「退回先后」已由 API-46 定。原文（2026-10-17 WebFetch）：Zalando #148「MUST use HTTP methods correctly」，PATCH「to update parts of the resource objects」；#129「MUST use kebab-case for path segments」；#134「MUST pluralize resource names」；#167「MUST use JSON as payload data interchange format」；RFC 8259「No "charset" parameter is defined for this registration.」「Adding one really has no effect on compliant recipients.」；RFC 9110 第 11.5 节 realm「reserved for use by authentication schemes」「that wish to indicate a scope of protection.」；OWASP 错误处理速查表只要求通用提示、不暴露实现细节，没提给用户看编号。
 进 HARNESS：问 473 判否（不是框架层），是本课清理时机；其余为记账，不判。
+
+--- R1-467 · 问 474 C、475 A、476 A，第 4、5 组与第二轮待拍全部拍完；出对照 476 到 480（学生：「474 选 C；475 选 A；476 选 A」）---
+一，问 474 C：只在「内部错误」时把 instance 编号给用户看（API-49）；未选 A 都显示、B 都不显示。问 475 A：部分更新用 PATCH，API-9 方法清单补 PATCH，转让仍用 PUT（API-50）；未选 B PUT、C POST。问 476 A：六项照标准的小项全认（API-51）；未选 B 划掉几项。至此第 4 组、第 5 组、architect 第二轮十二项全部拍完。
+二，传播面（规则 69，打开文件核，搜「POST、PUT、DELETE」「错误态」）：API_CONTRACT 要改（汇总加 API-49 到 51；API-9 原条补 PATCH，只此 1 处）；STANDARDS 要改（RFC 9110 一行拍板栏加方法与 realm、登记 RFC 8259 与路径写法两行）；UI_DESIGN 要改（文末注记一条，错误态只在内部错误时显示编号）；CLAUDE.md 第二层 C 错误态一条只写到「局部错误块 + 重试入口」，编号属细节，不影响；ARCHITECTURE、PRD、BACKLOG、book/ 不影响。出对照 476（契约 API-49 到 51）、477（API-9）、478（STANDARDS RFC 9110 一行）、479（STANDARDS 加两行）、480（UI_DESIGN 注记）。
+三，下一步：落完这五份，就到派 architect 起草契约第一节那几处「待第 3 组定」，先核对再起草（问 370 A 的做法）；派单原文先给学生看。
+进 HARNESS：问 474 到 476 判否（不是框架层），是本项目接口与界面口径。
