@@ -31,6 +31,9 @@
 | HTTP 缓存 | RFC 9111 HTTP Caching | https://www.rfc-editor.org/rfc/rfc9111 | API-44（no-store 只作多一层保护） | 2026-10-17（第 5.2.2.5 节） |
 | JSON 媒体类型 | RFC 8259；主参考 Zalando #167 | https://www.rfc-editor.org/rfc/rfc8259 | API-51 第二、三点 | 2026-10-17（IANA 一节） |
 | 路径写法 | 主参考 Zalando #129、#134、#141 | https://opensource.zalando.com/restful-api-guidelines/ | API-51 第六点；#141（URL 不带动词）见 API-36、API-50 | 2026-10-16（#141）；2026-10-17（#129、#134） |
+| 后端框架行为 | NestJS 官方文档：请求生命周期、Guards、异常过滤器 | https://docs.nestjs.com/faq/request-lifecycle ；https://docs.nestjs.com/guards ；https://docs.nestjs.com/exception-filters | API-23、API-46 | 2026-10-15（Guards、异常过滤器）；2026-10-17（请求生命周期） |
+| 错误处理 | OWASP Error Handling Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html | API-49 | 2026-10-17 |
+| 邮箱比较 | OWASP Email Validation and Verification Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Email_Validation_and_Verification_Cheat_Sheet.html | API-55 | 2026-10-17（Case Sensitivity、Email Canonicalization 两节） |
 
 ## 二、偏离登记
 
