@@ -270,4 +270,4 @@ Prisma 的 schema 里查到能直接写的是第一种（@db.Citext，要先启�
 
 「追溯核对」这个叫法没有取原文，是推导。覆盖核对命令在本机实跑过，正反各一次。
 
-项目里的出处：docs/DECISIONS-R1.md 的 R1-453 到 R1-481；契约 API-40 到 API-55；课程规则 87；HARNESS 原则 5、18。
+项目里的出处：docs/DECISIONS-R1.md 的 R1-453 到 R1-481；契约 API-40 到 API-55；课程规则 87；HARNESS 原则 5、18。第三块见 R1-487 到 R1-493；docs/CHECKPOINTS.md；scripts/decision-index.sh；HARNESS 原则 1、17。
