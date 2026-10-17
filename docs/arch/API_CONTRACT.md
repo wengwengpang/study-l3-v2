@@ -391,3 +391,9 @@
 - API-53 注册成功回 201，响应体带新建的用户；登录成功回 200，响应体带当前用户。两者都新建会话，会话凭据只经 HttpOnly Cookie 下发（API-8），响应体里从不出现会话或它的 id。用户的形状与「当前用户」接口相同（API-34）。
   理由：注册新建的资源就是用户；登录新建的会话调用方拿不到，算不上交给调用方的新资源。会话放进响应体，页面脚本就能读到，HttpOnly 白设。
   没选：登录也回 201、响应体带用户，作为例外写明，读的人会以为拿到了新资源；登录回 204、前端再调当前用户接口，多一次往返。
+- API-54 新建接口里，可空字段「没传」与「传 null」同义，都表示空，如新建任务不带负责人。更新接口照 API-33 区分两者。
+  依据：主参考 Zalando #123（null 与没传同义，JSON Merge Patch 例外）。
+  没选：新建时只许不传、传 null 回「参数不合法」。
+- API-55 邮箱的比较规则：存用户输入的原样（去掉首尾空白后）；注册查重、登录、按邮箱邀请成员时，整个地址不分大小写比较。数据库要有不分大小写的唯一约束，Prisma schema 写不出，写法属决策边界 D2，先回 architect 定（下个窗口）。
+  依据：OWASP Email Validation and Verification Cheat Sheet「Domain part: always case-insensitive」，本地部分「technically case-sensitive under SMTP, though many providers do not enforce this in practice」，并要求「Define an explicit comparison policy for the local part」「Preserve the original email address as entered by the user」。
+  没选：只把域名转小写，本地部分大小写不同就是两个账号；整个地址转小写再存，不保留原样。
