@@ -128,7 +128,7 @@ AuthzGuard 属 authz 模块，负责项目内角色级放行判定，只能调 a
 只能调：本模块 Service。
 
 #### 4. Service（TasksService）
-负责：业务规则（状态流转、未认领判定、项目内汇总）；数据级权限判定（这条记录归不归当前用户）。
+负责：业务规则（未认领判定、「可能卡住」判定（API-43）、项目内汇总；状态三态任意互转，不设流转规则，PRD 审定决策 D12）；数据级权限判定（这条记录归不归当前用户）。
 不做：解析 HTTP、直接写 Prisma 查询、伸手进别的模块的 Repository。
 只能调：本模块 Repository；别的模块的 Service（如 ProjectsService 校验 assignee 是本项目成员，第三节 T5）。
 
