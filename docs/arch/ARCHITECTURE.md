@@ -429,6 +429,7 @@ Zod 执行三处，各拦不同的东西：
 - 决策 A 角色经请求上下文由 Guard 传给 Service，Service 不重复查询。
 - 决策 B 路径 id 查库前转数字，转不动视为查不到。
 - 决策 C R2-8 保留，取数方式留给 05-API。
+  修订（补课 05-API，问 458 A）：取数方式定为调 UsersService 按一批 id 取 email，不用 Prisma 关联查询。上面原文不改。
 - 决策 D projectId 只从路径取，禁止从请求体取。
 - 决策 E W1-5 退回「参数不合法」。
 
