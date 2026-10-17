@@ -63,7 +63,7 @@
     ├── arch/
     │   ├── API_CONTRACT.md      接口契约：管辖范围 + 全局约定 + 接口清单（05-API 建；裁决 API-1 到 API-55 已登记，第一节全局约定已写，第二节接口清单待写）
     │   ├── ARCHITECTURE.md      系统架构：一模块划分 + 二分层 + 三数据流 + 四部署拓扑（补课 05-ARCH 建，四节齐；25 处回写已于 05-ARCH 第四窗口执行完毕，四节口径已对齐）
-    │   ├── DECISIONS.md         ADR-Lite 决策记录 ADR-001~005、ADR-DB-001~006
+    │   ├── DECISIONS.md         ADR-Lite 决策记录 ADR-001~005、ADR-DB-001~007
     │   ├── STANDARDS.md         本项目采用的标准：每个领域一份主参考、偏离登记（05-API 第二窗口建，问 349 A）
     │   └── TECH_STACK.md        技术栈选型 + 四象限
     ├── design/
