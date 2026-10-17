@@ -48,7 +48,7 @@
 职责：任务的创建、分配、状态流转、截止日期、列表与项目内汇总。
 拥有表：tasks
 覆盖：US-03、US-06、US-07、US-01、US-02a、US-04、US-08
-依赖：projects（校验 assignee 是本项目成员，第三节 T5）、users（负责人显示 email，第三节 R2-8；取数方式待 05-API 决策 C）
+依赖：projects（校验 assignee 是本项目成员，第三节 T5）、users（负责人显示 email，第三节 R2-8；经 UsersService 按一批 id 取，决策 C 已定，问 458 A）
 决策 5：US-04 项目汇总并入 tasks，不单开 reporting 模块。
 理由：汇总数据全部来自 tasks，单开只增加一层调用，不增加边界价值。
 备注：本模块覆盖 7 条用户故事，其余五个模块合计 6 条。工作量最重，Lec 10 排期时注意。
