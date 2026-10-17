@@ -201,7 +201,7 @@
   Cookie 属性：Secure（本地也加）、HttpOnly、SameSite 显式写（API-9）、不设 Domain、Path 为 /、
   Max-Age 与服务端会话期限一致，过期以服务端为准。登出删服务端会话并让浏览器清 Cookie；每次登录新建会话。
   服务端渲染把浏览器带来的 Cookie 原样转发（T15）。
-- API-9 SameSite 取 Lax。拦跨站的 POST、PUT、DELETE；外链进来的页面请求仍带凭据。
+- API-9 SameSite 取 Lax。拦跨站的 POST、PUT、PATCH、DELETE（PATCH 由 API-50 补）；外链进来的页面请求仍带凭据。
   只作纵深防护，正式防护见 API-11。
 - API-10 会话固定 30 天，不设空闲超时（PRD D7、T4）。偏离 OWASP 会话管理的空闲超时与绝对超时建议，
   理由登记在 docs/arch/STANDARDS.md「偏离登记」。
