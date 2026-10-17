@@ -355,3 +355,6 @@
   理由：PRD 要「刷新就看到最新的」，被缓存的列表会违反它；响应里有会话凭据与项目数据。
   依据：OWASP Session Management Cheat Sheet「Use Cache-Control: no-store on responses containing session identifiers or sensitive session data.」；RFC 9111 第 5.2.2.5 节提醒它「not a reliable or sufficient mechanism for ensuring privacy」，只作多一层保护。
   没选：只给登录、注册发；不定，交给浏览器默认。
+- API-45 本版契约不列通知接口。notifications 模块本版是空壳（ARCHITECTURE 第一节决策 4），唯一的通知类型「可能卡住」预警属 US-02b，已延后；Lec 13 做 US-02b 时再加接口。
+  理由：写没人调用的接口，违反「MVP 先跑通，不为以后可能用提前堆」（CLAUDE.md 第二层 D）。
+  没选：列出接口标「本版不实现」，前端可能当真去调；本版就做通知列表与已读，推翻决策 4。
