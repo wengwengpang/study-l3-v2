@@ -11707,3 +11707,11 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 七，问 539 A 的传播面：交付物清单要改，文件头已随 621 改，D8 状态格出对照 622；桥梁 w9 已写；PRD、UI_DESIGN、ARCHITECTURE 或契约、CLAUDE.md、PROJECT_STRUCTURE 不影响。
 八，体检闸门本窗口完整走（D8 第一步）：本条提交后学生跑第一次指纹；CC 试改 .gitignore 验弹窗，学生选 No；派单原文照 J 节只写「按 .claude/agents/librarian.md 做一次完整体检，不加别的要求。」，学生说「发」才派。派前读过 .claude/agents/librarian.md：先读定义文件、只报不判、打架给双方出处、一份报告交回主对话，检查单卡 2 第 1、2、4、5 条它的定义文件已管；第 6 条（先查 STANDARDS）体检用不上；建议模型照定义文件 sonnet。对照 622 等闸门第四步之后再落，两次指纹之间不提交。出重温第八窗口三题（问 542 到 544，检验题，没有推荐项）。
 进 HARNESS：问 540、541 判否（不是框架层），是本课节奏与记账核实；其余为记账，不判。
+
+--- R1-513 · 闸门第一步首测没拦住（第二例）；问 545 B、546 A、547 A；CC 认没等学生回字就测（学生：只亲跑第一次指纹、没回字；随后回「545 选 B；546 选 A；547 选 A」）---
+一，第一次指纹：学生亲跑 J 节第一步命令，输出 758edbd5f4fe57349984dc5dd6e315f328502846202c1ca29ad8844e8d0e18f8，没回字。随后 CC 没等学生回字就试改 .gitignore（末尾加一行测试注释），Edit 回报写入成功，git diff 见加 1 行。CC 只读核三份配置：项目 settings.json 的 defaultMode 是 default、allow 无 Edit；settings.local.json 的 allow 空；~/.claude/settings.json 只有 effortLevel、theme、agentPushNotifEnabled，无权限项。第一次指纹作废。
+二，问 545 B：弹了窗，学生选了 Yes 或直接回车；问 546 A：改清单（621）与决策记录（R1-512）两次弹窗都选第 1 项 Yes；问 547 A：状态栏 manual mode。未选：545 A 没弹窗、C 选了 No、D 分不清；546 B 选了本会话都允许改的那一项、C 分不清；547 B accept edits on、C 别的。结论：这次是弹窗答成 Yes，不是锁失效；CC 提的另两种假设（模式被切、VS Code 里接受）这次用不上。R1-388 那次首测为什么没拦住，仍没查清（清单 G8）。
+三，CC 认：上条消息写「你回话后，我第一个动作是试改 .gitignore」，学生只跑了指纹、没回字，CC 就发起 Edit，学生没料到那一刻弹窗。R1-388 重测前先讲弹窗样子、学生回「测」才做，这次没照做；也是自动记忆「贴入格式的回复」那条（只做动作不回字的，照旧挂着）。重测照 R1-388 与 R1-28 第五点：先讲弹窗样子与选法，学生回「测」才测；那一轮只做一次 Edit；学生把弹窗上的文件名与所选项原文告诉 CC。
+四，.gitignore 那行测试注释学生还没撤（git status 仍有 M .gitignore），本条只暂存 DECISIONS-R1；撤后重拍指纹。
+五，传播面：交付物清单 G8 要补第二例与出处（出对照 623，闸门第四步之后与 622 一起落）；检查单与 SESSION_START 闸门写法本条不改，锁拦得住，缺的是测前讲清、等「测」，写不写进 J 节第一步随 D8 判；PRD、UI_DESIGN、契约、CLAUDE.md、PROJECT_STRUCTURE 不影响。
+进 HARNESS：本条为记账，不判；「测前先讲弹窗样子、等学生说测」进不进 J 节随 D8 判。
