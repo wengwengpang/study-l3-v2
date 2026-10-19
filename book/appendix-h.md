@@ -116,6 +116,8 @@ Claude Code 官方也把两类东西分开：写在 CLAUDE.md 里的话是建议
 
 **决策记录目录 scripts/decision-index.sh。** 从决策记录的标题行现场打印「编号 | 日期 | 提交号 | 标题」，日期与提交号取自 git blame。行业里也这么做：管架构决策记录的工具 adr-tools，源码里就有生成目录与关系图的命令。Keep a Changelog 则提醒：「Using commit log diffs as changelogs is a bad idea: they're full of noise.」直接拿 git log 当目录，太吵。
 
+用法：跑 `bash scripts/decision-index.sh R1 开课`，列出标题里带「开课」的每一条，各带日期与提交号；再拿某一条的提交号跑 `git show --stat`，看那一次改了哪些文件。
+
 **框架规格。** HARNESS 原则 17 补了一层：到点读卡，交给机器，关键处由人把关。
 
 ### 七、具体怎么用（走一个例子）
