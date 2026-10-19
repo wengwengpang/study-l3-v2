@@ -6,58 +6,6 @@
 
 ---
 
-### 5. 说「以后再做」的事，当场登记
-
-这个窗口还暴露了同一类的另一个毛病。课上我常说「这个放到结课再做」，到这时已经攒了三十五件。它们记在每个窗口的交接文件（桥梁）里，而桥梁每个窗口一份，每次都要重抄。抄六遍，哪次漏一条，那条就丢了。
-
-管理上管这类事叫「行动项」（action item）。维基百科的定义是：「an action item is a documented event, task, activity, or action that needs to take place」，每一项要写负责人、计划什么时候完成。Scrum 在每轮结束时开回顾会，指南原话是：「The most impactful improvements are addressed as soon as possible.」「They may even be added to the Sprint Backlog for the next Sprint.」。回顾里发现要改的东西，不是记一笔就算了，要进下一轮的待办，和正事一起排、一起勾。
-
-我们的做法：凡说「放到结课再做」，当场登进交付物清单的第五节「推到结课的事」，写一句话、出处、状态；不登，就不许说推。结课时逐条清：做完了写提交号，移进 BACKLOG 写编号，你定了不做就写那道问题的编号。三样之一，才算清完。
-
-### 6. 交付物清单和 BACKLOG 有什么不同
-
-用 Scrum 的两个词最好懂。
-
-- BACKLOG 像 Scrum 的「产品待办」（Product Backlog）。指南的说法是「an emergent, ordered list of what is needed to improve the product」。它跨很多节课，装的是「该做、但这节课不做」的事。
-- 交付物清单像 Scrum 的「这一轮的待办」（Sprint Backlog）。指南说它是「a highly visible, real-time picture of the work that the Developers plan to accomplish during the Sprint」。它只管这一节课，连已经做完的也列着，每项有完成标准和状态；结课时没做完的转进 BACKLOG，然后删掉。
-
-两边之间只有一个接口，叫「移出」：这节课决定不做的项，从清单移进 BACKLOG，清单上标「移出」。
-
-### 7. 从 Scrum 借来的几样
-
-Scrum 整套做法的根，是三根支柱：「transparency, inspection, and adaptation」，看得见、常检查、随时调。对照我们：
-
-- **产品目标**（Product Goal，「describes a future state of the product」）：我们有，导读和框架文件第一节写着最终要做成什么。
-- **每轮目标**（Sprint Goal，「the single objective for the Sprint」）：以前只写在桥梁里。现在每个窗口开头，在交付物清单写一句本窗口目标，收尾时对着它看达没达到。
-- **每轮回顾**（Sprint Retrospective，「plan ways to increase quality and effectiveness」）：以前只在整节课结课时问一句「哪段讲得太粗」。现在每个窗口收尾做一次，三问：哪里顺、哪里出错、改进项是什么，改进项当场登进清单。
-- **每轮评审**（Sprint Review）和**待办梳理**（Backlog refinement）：先登进清单的「推到结课的事」，结课时判要不要变成规矩。待办梳理尤其要紧，我们的 BACKLOG 七十多条，只增不减。
-
-### 8. 为什么开课时读过规则，还是会忘
-
-你问过：控制我的就那几个文件，怎么还会犯这种错。照实说：每次开课要读的规则加起来约 2500 行，八十多条规则、四十多条反模式；读一遍，不等于做到中途还都记得。会话越长，规则越被对话内容淹没。
-
-所以这套做法分三层摆放，各管一个时刻：
-
-- **开课自检**：开场提醒一次。规则 57 第 19 项问「交付物清单建了吗」，第 20 项问「定下新做法时，会过三问吗」。
-- **每条消息的自查**：每发一条消息都过一遍，比如「报进度前，先跑命令导出产物大纲」。
-- **能跑的命令**：覆盖核对、提交前的计数闸门。不靠任何人记得。
-
-还有一样常被忽略：**删减**。规则越多，越记不住。结课时要问一句「这节有哪些能删」，这一条也登进了清单。
-
-### 9. 换个项目还用得上的
-
-这一块全部都能带走，已经写进框架文件：HARNESS 原则 18 补了「全图从交付物清单导出，并用机器核对」，原则 5 补了「说推就当场登、到点逐条清」；课程规则 87 管每节课都要建清单。
-
-可以带走的做法，一句话一样：
-
-- 做一件长事，先列交付物清单，照 100% 规则拆到底。
-- 每一项写完成的定义。
-- 配一条能跑的覆盖核对命令，没输出才报进度。
-- 说「以后再做」，当场登记，到点逐条清。
-- 每轮开头写目标，结尾做回顾。
-
----
-
 ## 第二块　第六窗口拍板的接口知识
 
 这一块收这个窗口定下的接口口径，每条写清「定了什么」和「为什么」。编号是契约「本节裁决汇总」里的编号，原文以契约为准。
