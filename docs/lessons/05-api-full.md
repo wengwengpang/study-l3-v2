@@ -135,7 +135,7 @@ API-2 的结论不变，凭的是上一段的理由。
 
 第三窗口先派 architect 起草契约第一节（含 401 的 WWW-Authenticate 怎么填、ARCHITECTURE 第二节错误统一收口的落点），再拍第 1 组四条、第 3 组六条、第 4 组一条、第 5 组小项，以及 BACKLOG 34、35 回填。
 
-本课挂账二十一件，整节课结课时处理。清单与接续见桥梁 docs/BRIDGE-05-api-w3.md。
+本课挂账二十一件，整节课结课时处理。清单与接续见桥梁 docs/BRIDGE-05-api-w3.md（第八窗口已删，原文用 git show 818e152:docs/BRIDGE-05-api-w3.md 取；挂账已搬进 docs/lessons/05-api-wbs.md 第五节）。
 
 ## 第三窗口补记（2026-10-15）
 
