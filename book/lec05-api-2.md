@@ -82,16 +82,10 @@ Prisma 的 schema 里查到能直接写的是第一种（@db.Citext，要先启�
 
 以下原文都在 2026-10-17 用网页取回核过：
 
-- PMI《Practice Standard for Work Breakdown Structures》第二版的 100% 规则，经维基百科「Work breakdown structure」条目转引。
-- Scrum 指南（scrumguides.org）：Definition of Done、Product Backlog、Sprint Backlog、Product Goal、Sprint Goal、Sprint Review、Sprint Retrospective、Backlog refinement、三支柱。
-- 维基百科「Action item」条目。
 - Zalando RESTful API Guidelines：第 129、134、141、148、159、160、167、169、238 条。
 - RFC 3339、RFC 8259、RFC 9110（第 9.3.4、11.5 节）、RFC 9111（第 3.5、5.2.2.5、7.3 节）、RFC 9457（第 4.2.1 节）。
 - OWASP 速查表：会话管理、错误处理、邮箱校验。
 - NestJS 官方文档「请求生命周期」；MDN「Date.prototype.toISOString」。
-- 第三块（第七窗口取）：Anthropic《Effective context engineering for AI agents》；Claude Code 文档 Best practices、How Claude remembers your project、Automate actions with hooks；Liu 等《Lost in the Middle》；Chroma《Context Rot》；Jaroslawicz 等《How Many Instructions Can LLMs Follow at Once?》；14 CFR 121.315（康奈尔法学院镜像）；Reason《Human error: models and management》（PMC 镜像）；adr-tools 说明页与源码目录；Keep a Changelog 1.1.0；PostgreSQL 18 文档 citext、表达式索引、排序规则三页；Prisma 7 文档 schema 参考、不支持的数据库功能、大小写三页。
-- 第三块没核到原文的：WHO 手术安全检查单的三个暂停点；《清单革命》里讲的「先读再做、做完对一遍」（只见二手摘录）。
+- 第二块（第七窗口取）：PostgreSQL 18 文档 citext、表达式索引、排序规则三页；Prisma 7 文档 schema 参考、不支持的数据库功能、大小写三页。
 
-「追溯核对」这个叫法没有取原文，是推导。覆盖核对命令在本机实跑过，正反各一次。
-
-项目里的出处：docs/DECISIONS-R1.md 的 R1-453 到 R1-481；契约 API-40 到 API-55；课程规则 87；HARNESS 原则 5、18。第三块见 R1-487 到 R1-493；docs/CHECKPOINTS.md；scripts/decision-index.sh；HARNESS 原则 1、17。
+项目里的出处：docs/DECISIONS-R1.md 的 R1-453 到 R1-481；契约 API-40 到 API-55。第二块见 R1-492 第四点。原先的「怎样不漏掉一整块」「开课读得太多，中途会漂」两块已挪进附录 H（book/appendix-h.md），出处跟着搬了过去（问 515 A、516 A）。
