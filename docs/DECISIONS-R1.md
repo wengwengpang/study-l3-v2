@@ -11715,3 +11715,11 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 四，.gitignore 那行测试注释学生还没撤（git status 仍有 M .gitignore），本条只暂存 DECISIONS-R1；撤后重拍指纹。
 五，传播面：交付物清单 G8 要补第二例与出处（出对照 623，闸门第四步之后与 622 一起落）；检查单与 SESSION_START 闸门写法本条不改，锁拦得住，缺的是测前讲清、等「测」，写不写进 J 节第一步随 D8 判；PRD、UI_DESIGN、契约、CLAUDE.md、PROJECT_STRUCTURE 不影响。
 进 HARNESS：本条为记账，不判；「测前先讲弹窗样子、等学生说测」进不进 J 节随 D8 判。
+
+--- R1-514 · 闸门第一步重测也写入成功；问 548 C、549 A、550 A：两次都是弹窗后直接回车选中 Yes；官方权限页核过；问 551 A 第一步算过（学生：「测；同意 623」，随后亲跑「git diff -- .gitignore; git restore .gitignore; git status --short」没回字，再回「548 选 C；549 选 A；550 选 A」「551 选 A 继续啊」）---
+一，重测前学生亲跑撤销与指纹（54d598b01423a00c7111c0e35d8d467f929a246193918de7be0a9b6c0e1a2aae），回「测；同意 623」。CC 那一轮只做一次 Edit（.gitignore 末尾加一行注释），回报写入成功；学生亲跑的 git diff 见加 1 行，随后撤掉，与 HEAD 相同。这次指纹作废。对照 623 学生已同意，闸门第四步之后与 622 一起落。
+二，官方权限页（code.claude.com/docs/en/permissions，2026-10-19 WebFetch）：表中 File modification 一行 Approval required「Yes」，"Yes, and don't ask again" behavior「Until session end」；「A file-modification approval isn't saved to the file: as the table shows, it lasts until the session ends.」；示例弹窗四项「Yes; Yes, and don't ask again for: npm test *; Yes, and switch to auto mode; and No」。CC 上条照 R1-29 画的弹窗只有「1. Yes 2. No」，那次是 docs/（ask 档）的弹窗；.gitignore 的弹窗 No 很可能排在最后，CC 画的图过时（反模式 10 号的形状），这次没造成后果。
+三，问 548 C：重测弹了窗，学生选 Yes 或回车；问 549 A：VS Code 自动打开了对比改动的标签页；问 550 A：两次都直接按回车。未选：548 A 没弹窗、B 选了 No、D 没注意；549 B 没有、C 没注意；550 B 按 2、C 方向键、D 记不清。结论：两次都弹了窗，光标默认在第 1 项 Yes（一次性批准），回车即批准；锁是好的，/permissions 不必看。根因 E4：测法要人在默认 Yes 的光标下移到最后一项，提醒两次拦不住。
+四，问 551 A：闸门第一步这次算过，按「弹窗出现即证明模式」放行，与 R1-142 问 148 B 的确认办法字面不全合（缺「学生答 No」）；未选 B 再测一次、C 不算过且删并不带体检报告。理由：第一步要证的是 manual 模式下改不在 ask 档的文件会弹窗，两次已证，再测多一次回车按错的风险。
+五，传播面：交付物清单 G8 已有对照 623（第二例原因）；测法改不改（先把光标移到 No，或换成改错也无害的临时文件）与弹窗图过时一并随 D8 判，J 节第一步本条不改；检查单、PRD、UI_DESIGN、契约、CLAUDE.md、PROJECT_STRUCTURE 不影响。本条提交后学生重拍指纹，进第二步。
+进 HARNESS：问 551 判否（不是框架层），是本课闸门的一次放行；测法改进随 D8 判；其余为记账，不判。
