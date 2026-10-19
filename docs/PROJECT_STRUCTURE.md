@@ -50,10 +50,6 @@
     ├── LIBRARIAN_REPORT.md      资料管理员体检报告，整份覆盖写，历史在 git 里，末栏记学生选择（复课前第 3 步首跑建，DECISIONS-R1 R1-102、R1-107）
     ├── REFACTOR-HANDBOOK.md     重构手册：从本次重构提炼、换项目可用的做法（学生复制到 ~/.claude/templates/）
     ├── REVIEW-DEBT.md           审查欠账表：没送审的改动，每条记处置方式与处置状态（BACKLOG 57 反方审建，DECISIONS-R1 R1-226）
-    ├── BRIDGE-05-api-w2.md      05-API 第二窗口暂存桥梁（已用完，只作存档，整节课结课时删，问 367 A）
-    ├── BRIDGE-05-api-w3.md      05-API 第三窗口暂存桥梁（已用完，只作存档，整节课结课时删）
-    ├── BRIDGE-05-api-w4.md      05-API 第四窗口暂存桥梁（已用完，只作存档，整节课结课时删）
-    ├── BRIDGE-05-api-w5.md      05-API 第五窗口暂存桥梁（已用完，只作存档，整节课结课时删）
     ├── BRIDGE-05-api-w6.md      05-API 第六窗口暂存桥梁（已用完，只作存档，整节课结课时删）
     ├── BRIDGE-05-api-w7.md      05-API 第七窗口暂存桥梁（已用完，只作存档，整节课结课时删）
     ├── BRIDGE-05-api-w8.md      05-API 第八窗口暂存桥梁（第八窗口以它为准）
