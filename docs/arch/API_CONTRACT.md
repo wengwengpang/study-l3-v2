@@ -397,3 +397,4 @@
 - API-55 邮箱的比较规则：存用户输入的原样（去掉首尾空白后）；注册查重、登录、按邮箱邀请成员时，整个地址不分大小写比较。数据库要有不分大小写的唯一约束，Prisma schema 写不出，写法属决策边界 D2，先回 architect 定（下个窗口）。
   依据：OWASP Email Validation and Verification Cheat Sheet「Domain part: always case-insensitive」，本地部分「technically case-sensitive under SMTP, though many providers do not enforce this in practice」，并要求「Define an explicit comparison policy for the local part」「Preserve the original email address as entered by the user」。
   没选：只把域名转小写，本地部分大小写不同就是两个账号；整个地址转小写再存，不保留原样。
+  修订（第十窗口，问 574 甲）：选 citext 后（ADR-DB-008，问 572 A），不分大小写的唯一约束写得进 Prisma schema（@db.Citext）；「Prisma schema 写不出」只对 lower(email) 唯一索引那条路成立。扩展怎么启用随 BACKLOG 74 定。上面原文不改。
