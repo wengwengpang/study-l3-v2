@@ -76,6 +76,26 @@ Zalando 第 148 条说，PATCH 是「to update parts of the resource objects」�
 
 Prisma 的 schema 里查到能直接写的是第一种（@db.Citext，要先启用扩展）；另两种在 Prisma 文档里没找到 schema 写法，多半要在迁移文件里手写 SQL（未核），留给架构师在第八窗口核。
 
+## 第三块　第十窗口的接口知识
+
+### 1. 邮箱最后选了 citext
+
+第二块讲的三种写法之外，架构师又补了一种「小写影子列」：另存一列全小写的邮箱，对它建唯一约束。四种比下来选了 citext（ADR-DB-008）：
+
+- 规则落在列的类型上，Prisma 的 schema 写得出（@db.Citext），注册、登录、邀请三处照常按邮箱查。
+- 库还没建，改列类型没有迁移成本。
+- 代价是多依赖一个 PostgreSQL 扩展；比较规则还随数据库的区域设置，官方原话「citext's case-folding behavior depends on the LC_CTYPE setting of your database」，所以区域设置要在环境设计里定死。
+
+影子列没选：数据库只保证小写那份不重复，不分大小写要靠程序每次都转对，漏一处就拦不住。PostgreSQL 官方建议考虑的排序规则也没选：它有性能代价，有的模式匹配用不了，Prisma 那边还要手写 SQL。
+
+### 2. 密码不去首尾空白
+
+契约规定必填文本去掉首尾空白再存，密码不能这样做。OWASP 认证速查表写「Allow usage of all characters including unicode and whitespace.」，又写「Do not silently truncate passwords.」。用户设的密码里有空格，服务端悄悄去掉，下次照原样输入就登不上。所以密码原样收（问 576 A）。
+
+### 3. 没定义的查询参数也拒绝
+
+请求体里多出没定义的字段要拒绝（API-31），查询参数同理。主参考 Zalando 第 109 条原话：「Unknown input fields in payload or URL should not be ignored」（问 578 A）。
+
 ---
 
 ## 本草稿的依据
@@ -87,5 +107,6 @@ Prisma 的 schema 里查到能直接写的是第一种（@db.Citext，要先启�
 - OWASP 速查表：会话管理、错误处理、邮箱校验。
 - NestJS 官方文档「请求生命周期」；MDN「Date.prototype.toISOString」。
 - 第二块（第七窗口取）：PostgreSQL 18 文档 citext、表达式索引、排序规则三页；Prisma 7 文档 schema 参考、不支持的数据库功能、大小写三页。
+- 第三块（第十窗口取）：OWASP Authentication Cheat Sheet（2026-10-20）。
 
-项目里的出处：docs/DECISIONS-R1.md 的 R1-453 到 R1-481；契约 API-40 到 API-55。第二块见 R1-492 第四点。原先的「怎样不漏掉一整块」「开课读得太多，中途会漂」两块已挪进附录 H（book/appendix-h.md），出处跟着搬了过去（问 515 A、516 A）。
+项目里的出处：docs/DECISIONS-R1.md 的 R1-453 到 R1-481；契约 API-40 到 API-55。第二块见 R1-492 第四点，第三块见 R1-525、R1-527 与 ADR-DB-008。原先的「怎样不漏掉一整块」「开课读得太多，中途会漂」两块已挪进附录 H（book/appendix-h.md），出处跟着搬了过去（问 515 A、516 A）。
