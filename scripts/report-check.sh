@@ -4,7 +4,7 @@
 # 查两项：一，docs/LIBRARIAN_REPORT.md「## 栏 6」之前与管理员最后一条返回是否相同（查 CC 存档；栏 6「学生选择」由 CC 事后填，不核）；
 #         二，报告栏 1 与管理员跑脚本那次的原样输出是否相同（查管理员有没有删改）。
 # 记录：传了路径就核那份；不传取最近一次资料管理员子代理的记录（~/.claude/projects/ 下 subagents/ 目录，按 agentType 认）。首行打出所用路径，存档时记进 DECISIONS-R1，以后重跑带上。
-# 脚本输出取命令含 scripts/doc-check.sh 的那次调用，从「== 资料体检」行取到尾（管理员连着别的命令跑也取得对）；跑过不止一次就停下报。
+# 脚本输出取命令含 scripts/doc-check.sh 的那次调用，从「== 资料体检」行取到尾（管理员连着别的命令跑也取得对）；同一次调用在记录里会存几遍，按 id 归拢，几份不一样就停下报；按 id 算跑过不止一次也停下报。栏 1 只比代码框里的行（清单 G10、问 333、问 569 A）。
 # 出处：DECISIONS-R1 R1-128、R1-129（第四份审查点 9）、R1-130 问 134A、R1-132 问 138A、R1-148 问 150A、151A。
 set -u
 proj="$HOME/.claude/projects/$(pwd | sed 's#/#-#g')"
@@ -26,7 +26,7 @@ else:
     log = max(metas, key=os.path.getmtime).replace('.meta.json', '.jsonl')
 print('核对记录：' + log)
 
-last, raws, ids = '', [], set()
+last, raws, ids = '', {}, set()
 for line in open(log):
     d = json.loads(line)
     c = d.get('message', {}).get('content')
@@ -42,7 +42,7 @@ for line in open(log):
             t = '\n' + (x if isinstance(x, str) else ''.join(i.get('text', '') for i in x if isinstance(i, dict)))
             k = t.find('\n== 资料体检')
             if k >= 0:
-                raws.append(t[k + 1:])
+                raws.setdefault(b['tool_use_id'], []).append(t[k + 1:])  # 同一次调用在记录里会存几遍，按 id 归拢（清单 G10）
 
 report = open('docs/LIBRARIAN_REPORT.md').read()
 bad = False
@@ -55,16 +55,23 @@ if body(report) != body(last):
     bad = True
     print('一，报告栏 6 之前与管理员最后一条返回不同')
 
-col1, inside = [], False
+if any(len(set(v)) > 1 for v in raws.values()):
+    bad = True
+    print('二，同一次调用在记录里存的几份返回不一样')
+
+col1, inside, fence = [], False, False
 for l in report.splitlines():
     if l.startswith('## 栏 1'):
         inside = True
         continue
     if l.startswith('## 栏 2'):
         break
-    if inside and l.strip() and l.strip() != '```':
+    if inside and l.strip().startswith('```'):  # 只取代码框里的行，框外的说明不是脚本输出（问 333）
+        fence = not fence
+        continue
+    if inside and fence and l.strip():
         col1.append(l)
-raw_lines = [l for l in (raws[-1] if raws else '').splitlines() if l.strip()]
+raw_lines = [l for l in (list(raws.values())[-1][0] if raws else '').splitlines() if l.strip()]
 if len(raws) > 1:
     bad = True
     print('二，记录里 doc-check.sh 跑了 %d 次，分不清报告用的是哪次' % len(raws))
