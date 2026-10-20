@@ -55,12 +55,12 @@ J 节 · 新窗口老师的启动动作
 第 2 件：读全七个必读文件。清单见 PROJECT_STRUCTURE「课程标准文件清单」小节（依据规则 65）。怎么拿到文件，照 A 节。
 读完回头核一遍：桥梁的启动指令和持久规则有没有打架（规则 67）。
 读完再过体检闸门（DECISIONS-R1 R1-111、R1-112、R1-117；审查 2-6、F72、F79、F88、F97）：
-一，确认主对话在 default 模式（不是 acceptEdits 或 auto）。学生亲手跑下面这条，记下输出的指纹：
-   ! { git rev-parse HEAD; git status --porcelain; git stash list; sha256sum .claude/settings.local.json ~/.claude/settings.json ~/.claude/CLAUDE.md 2>/dev/null; } | sha256sum
-   确认 default 模式的办法：看状态栏是 manual mode；CC 改一个不在 ask 清单的文件（如 .gitignore），必须弹窗，学生答 No。指纹测不出模式（DECISIONS-R1 R1-127、R1-142）。
-二，CC 派资料管理员，派单原文只写：「按 .claude/agents/librarian.md 做一次完整体检，不加别的要求。」弹窗只点单次放行，看清命令就是 bash scripts/doc-check.sh 再批。
-三，报告交回后，学生再跑一次第一步那条命令。指纹和第一步不同，就停下，由学生决定怎么查。
-四，指纹相同，CC 把报告原样存进 docs/LIBRARIAN_REPORT.md（规则 85 例外），再跑 bash scripts/report-check.sh <核对记录路径>（DECISIONS-R1 R1-130 问 134A）。路径由 CC 用第二步派单返回的 agentId 找：ls ~/.claude/projects/*/*/subagents/agent-<agentId>.jsonl，必须恰好一份。把这个路径记进 DECISIONS-R1，以后重跑带上（R1-148 问 151A、R1-152 问 153A）。最后一行不是「两项一致」，就停下报学生，不提交；是，学生过目后提交。学生选了删并的，CC 照原话记进报告末尾「学生选择」栏；执行放在结课前（规则 54）。
+一，确认主对话在 default 模式（不是 acceptEdits 或 auto）：学生看一眼状态栏是 manual mode，在回话里写一句。CC 跑下面这条，记下输出的指纹：
+   { git rev-parse HEAD; git status --porcelain; git stash list; sha256sum .claude/settings.local.json ~/.claude/settings.json ~/.claude/CLAUDE.md 2>/dev/null; } | sha256sum
+   问 569 A 起，取消改 .gitignore 测弹窗，理由同规则 57 第 12 项删除，防护本体是 settings.json 显式声明的 defaultMode；指纹改由 CC 跑，推翻问 121 A，钩子上了改由钩子跑（问 570 A，交付物清单 E9）。指纹测不出模式（DECISIONS-R1 R1-127、R1-142、R1-523）。
+二，CC 派资料管理员，派单原文只写：「按 .claude/agents/librarian.md 做一次完整体检，不加别的要求。」这句学生在本节看过，算规则 4 的看过，CC 直接派，不再等「发」（问 569 A）。弹窗只点单次放行，看清命令就是 bash scripts/doc-check.sh 再批。
+三，报告交回后，CC 再跑一次第一步那条命令。指纹和第一步不同，就停下，由学生决定怎么查。
+四，指纹相同，CC 把报告原样存进 docs/LIBRARIAN_REPORT.md（规则 85 例外），再跑 bash scripts/report-check.sh <核对记录路径>（DECISIONS-R1 R1-130 问 134A）。路径由 CC 用第二步派单返回的 agentId 找：ls ~/.claude/projects/*/*/subagents/agent-<agentId>.jsonl，必须恰好一份。把这个路径记进 DECISIONS-R1，以后重跑带上（R1-148 问 151A、R1-152 问 153A）。最后一行不是「两项一致」，就停下报学生，不提交；是，CC 提交，再把报告要点报给学生（问 569 A）。学生选了删并的，CC 照原话记进报告末尾「学生选择」栏；执行放在结课前（规则 54）。
 
 第 3 件：确认接续。用一段话说清楚分工，口径同 LESSON_TEMPLATE 老师锚点第一行。
 我讲课、执行：出讲解、跑命令、改文件。
