@@ -33,7 +33,7 @@
 - 字段名、类型、必填与否、取值范围不在本节。它们归共享 Zod schema（API-1、ARCHITECTURE 第二节取舍 4）。
 - 本节点名的 schema 名字就是接缝。05-类型 按名字交货（API-1）。
 - 本节提到的标准只写名字。原文出处与核对记录见 docs/arch/STANDARDS.md「登记表」（API-5）。
-- 偏离主参考的地方，本节只写指针。理由见 docs/arch/STANDARDS.md「偏离登记」（API-10、API-20、API-22）。
+- 偏离主参考的地方，本节只写指针。理由见 docs/arch/STANDARDS.md「偏离登记」（API-10、API-20、API-22、API-33）。
 
 ### 2. 路径与前缀
 
