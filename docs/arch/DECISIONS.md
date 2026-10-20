@@ -24,6 +24,7 @@
 - 背景：需要强一致 + 唯一约束（邮箱唯一 PRD.md:148）、以及 user×project×role 多对多关系建模（PRD.md:173）。
 - 决策：选 PostgreSQL 作为主库，配 Prisma 做类型安全 ORM 与 migration。
 - 后果：换来更严谨的约束与关系表达、对复杂查询与未来演进更友好；代价是若团队更熟 MySQL 则有一次性上手成本。放弃了 MySQL 的广泛默认部署便利。
+- 后续（补课 05-API，问 572 A）：邮箱唯一改为不分大小写，users.email 用 citext，见 ADR-DB-008；多依赖一个 PostgreSQL 扩展，对本条的绑定深了一层。
 
 ## ADR-005 · 数据校验用 Zod 而非 class-validator
 - 背景：项目目标是前后端共享一份类型（packages/shared 扩展点 #5）；密码等规则需两端一致校验（PRD.md:149）。
