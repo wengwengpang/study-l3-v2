@@ -380,11 +380,13 @@
         Location 头在响应体带了新资源时 SHOULD、没带时 MUST。
   修订（同窗口）：原写「并带 Location 头」，改为有能读的地址才带。RFC 9110 第 15.3.2 节允许不带，此时以请求的地址为准。
   修订（第六窗口，问 478 A）：括号里的例子「如登录新建的会话」不再成立：登录回 200、响应体带当前用户，会话只经 Cookie（API-53）。上面原文不改。
+  补充（第十一窗口，问 590 A）：注册回 201 不带 Location。能读到这个用户的只有「当前用户」接口，那个地址随会话指向不同的人，不是这个用户自己的地址。RFC 9110 第 15.3.2 节写不带时「by the target URI」，新资源就以注册接口的地址为准，读起来别扭，接受。见第一节第 5 小节。
 - API-26 错误外壳的 instance 填每次出错生成的随机编号，写成 urn:uuid: 开头（RFC 9562 第 4 节的 URN 写法）。
   由全局异常过滤器生成（API-23），同一编号写进服务端日志；日志怎么记，留到讲可观测性那一课。
   依据：RFC 9457 第 3.1.5 节，instance 标「the specific occurrence of the problem」，打不开时只作唯一标识；
         「it is RECOMMENDED that absolute URIs be used」。urn:uuid: 是绝对 URI，又不用写域名（API-13）。
   没选：填请求路径，标的是资源不是这一次；相对路径加编号，RFC 说相对写法「can cause confusion」。
+  补充（第十一窗口，问 594 A）：随机编号用 UUID 第 4 版，见第一节第 7 小节。依据：RFC 9562 第 5.4 节「UUIDv4 is meant for generating UUIDs from truly random or pseudorandom numbers.」。没选第 7 版：按时间有序，不是纯随机。
 - API-27 有请求体的接口只收 application/json。Content-Type 不对回 415，性质名「格式不支持」，
   同样经全局异常过滤器收成 RFC 9457 形状。本条在 API-14 的码表上加一行。
   依据：RFC 9110 第 15.5.16 节；主参考 Zalando 状态码表 415
@@ -412,9 +414,12 @@
         #108 客户端「Be tolerant with unknown fields in the payload」；OWASP Mass Assignment「Explicitly allow-list fields」。
   没选：静默剔除（Zod 默认），前端多传了不报错，错误被藏住；剔除加敏感键黑名单，OWASP 说黑名单不能当唯一防护。
   落点：第一节第 2、4 小节两处「待第 3 组定」，第五批起草时写。
+  已落（第一节第 2、4、5 小节）。第 5 小节是响应方向的「前端解析响应时容忍多出来的字段」，上面落点没列。
 - API-32 标题、描述、项目名称都必填：去掉首尾空白后为空的，回「参数不合法」；存的是去掉首尾空白后的值。最大长度归 05-类型 在 schema 里定。
   依据：ADR-DB-005「tasks.description 必填」（Lec 5 主人拍板）；PRD「US-P01 创建项目」名称必填；PRD 澄清注记 13。Zalando #109 建议给字符串定长度范围。
   没选：描述可为空串；都允许空串。
+  补充（第十窗口，问 481 A）：第一节只写必填的规则，适用哪些字段归 schema（API-1），见第一节第 4 小节「必填与空白」。
+  补充（第十窗口，问 576 A）：密码不照上面的规则：原样收，不去首尾空白，也不截断，见第一节第 4 小节。依据：OWASP Authentication Cheat Sheet「Allow usage of all characters including unicode and whitespace.」「Do not silently truncate passwords.」
 - API-33 更新接口照 JSON Merge Patch（RFC 7396）的规则：没传的字段不改，传 null 表示清空。null 只对可空字段有效（任务的负责人、截止日期），对不可空字段传 null 回「参数不合法」。
   负责人把任务改回未分配（PRD 审定决策 D16），就是把负责人传 null。媒体类型仍只收 application/json（API-27），偏离理由见 docs/arch/STANDARDS.md「偏离登记」。
   依据：RFC 7396「Null values in the merge patch are given special meaning to indicate the removal of existing values in the target.」；
@@ -426,12 +431,14 @@
   参考：GitHub「Get the authenticated user」（GET /user），同类产品做法，只作参考。
   没选：只靠登录响应、前端自存，刷新就丢；身份塞进项目信息，项目列表页拿不到。
   落点：第一节第 3 小节「待第 3 组定」，第五批起草时写；路径、所属模块与 schema 名随接口清单定。
+  已落（第一节第 3 小节）。路径、所属模块与 schema 名照旧随接口清单定。
 - API-35 改任务拆两个接口。负责人专用的「改任务」接口管标题、描述、截止日期、负责人，执行者调用时由 AuthzGuard 按角色回「不许做」；
   「改状态」接口两种角色都能调，执行者只能改分给自己的任务，归属在 Service 里判，先判「看不见」（ARCHITECTURE 第三节 R2-6、R2-7 同一顺序）。两个接口的请求体都照 API-31、API-33。
   理由：PRD 审定决策 D15、D16 与权限矩阵把内容与分配划给负责人，状态两种角色都能改；按 T6，只凭角色能判的归 Guard，字段级权限变成路由级。
   后果：执行者往「改状态」接口多带别的字段，按 API-31 回「参数不合法」，不是「不许做」。
   没选：一个接口由 Service 按字段判（GitHub 是一个接口，但对无权字段悄悄扔掉，与 API-31 相反）；内容、分配、状态拆三个。
   落点：第一节第 6 小节「待第 3 组定」，第五批起草时写；路径随接口清单定。
+  已落（第一节第 6 小节）。路径照旧随接口清单定。
 - API-36 转让负责人用 PUT 写「本项目的负责人」这个子资源，请求体放新负责人的 userId；只有负责人能调。
   一个事务内改两行：原负责人降为执行者，新负责人升为负责人；加行锁，防止两个转让同时发生。
   转让完成后调用者已是执行者，按 PRD 审定决策 D11 看不见成员列表，响应不带成员列表，具体回什么随接口清单定。
@@ -458,6 +465,7 @@
   本版没有接口收时间点；以后要收，也只收以 Z 结尾的写法。
   依据：主参考 Zalando #169（必须）「APIs MUST use the upper-case T as a separator between date and time」，结尾用大写 Z，并建议「only use times without offsets」；#238 date-time 一行「UTC time defined in RFC 3339」。
   没选：输入另收带偏移的写法、由后端换成 UTC；输出带用户所在时区的偏移，后端没存用户时区。
+  补充（第十窗口，问 482 A）：时间格式整条写进第一节第 4 小节，请求与响应通用；第 5 小节放指针。
 - API-42 任务列表只设一个接口，由 Service 按角色强制过滤：执行者只拿到分给自己的任务，负责人拿到全项目任务。项目汇总（US-04）与成员列表（US-P03）是负责人专用接口，执行者调用时由 AuthzGuard 回「不许做」（403），因为他看得见这个项目（API-21）。
   理由：PRD 审定决策 D6 单页面按角色渲染、D11 执行者可见范围；过滤不靠前端传什么；与 API-35 同一条界线（T6）。
   依据：OWASP Authorization Cheat Sheet 最小权限（必须）。
@@ -469,6 +477,7 @@
   理由：PRD 要「刷新就看到最新的」，被缓存的列表会违反它；响应里有会话凭据与项目数据。
   依据：OWASP Session Management Cheat Sheet「Use Cache-Control: no-store on responses containing session identifiers or sensitive session data.」；RFC 9111 第 5.2.2.5 节提醒它「not a reliable or sufficient mechanism for ensuring privacy」，只作多一层保护。
   没选：只给登录、注册发；不定，交给浏览器默认。
+  补充（第十一窗口，问 596 A）：也要盖住框架自己挡下的退回（路径不存在、请求体不是合法 JSON）；网关错误不经后端，不带这个头，见第一节第 9 小节。属推导，挂在哪一层写后端骨架时实测。
 - API-45 本版契约不列通知接口。notifications 模块本版是空壳（ARCHITECTURE 第一节决策 4），唯一的通知类型「可能卡住」预警属 US-02b，已延后；Lec 13 做 US-02b 时再加接口。
   理由：写没人调用的接口，违反「MVP 先跑通，不为以后可能用提前堆」（CLAUDE.md 第二层 D）。
   没选：列出接口标「本版不实现」，前端可能当真去调；本版就做通知列表与已读，推翻决策 4。
@@ -476,9 +485,12 @@
   依据：NestJS 官方「请求生命周期」一页，中间件、Guard、拦截器（进控制器前）、Pipe 依次执行。
   没选：放在中间件里、排在 Guard 前，非成员也会先收到 415；不单独检查，格式不对时请求体解析成空，由 Zod 回 400，API-27 落空。
   补充（第六窗口，问 479 A）：这里的「格式」只指 Content-Type。请求体不是合法 JSON，由框架在 Guard 之前解析失败、回 400（API-47）；解析在任何查询之前，不论项目在不在都回同样的 400，不泄露项目在不在。解析时机写后端代码时实测。
+  补充（第十一窗口，问 592 A）：照上面这条补充推下去，没登录时发来不合法的 JSON，先回「参数不合法」（400），不回「未登录」（401），前端这时跳不了登录页，写进第一节第 6 小节「谁先回」。属推导，解析时机写后端代码时实测。
 - API-47 框架自己拦下的退回（不是本项目代码抛的），能对上现有性质的就并进去：路径不存在算「看不见」（404），请求体不是合法 JSON 算「参数不合法」（400）。对不上的保留标准码，type 用 RFC 9457 登记的 about:blank，title 照该状态码的标准短语；前端对它出通用提示。
   依据：RFC 9457 第 4.2.1 节；API-14、API-17、API-19。
   没选：全部单设一种「框架退回」type，前端分不开路径不存在与 JSON 坏了；全部用 about:blank。
+  补充（第十窗口，问 484 A）：about:blank 什么时候用由本文件定（第一节第 7 小节），这个字面值同样收进 ProblemType（API-24）。
+  补充（第十窗口，问 485 A）：路径不存在算「看不见」，所以前端打错路径时界面同样显示「权限不足」，见第一节第 8 小节；接受这个后果，不单设 type。
 - API-48 服务端渲染只发读请求。写请求一律从浏览器经 api client 发（ARCHITECTURE 第二节前端分层「数据访问层」），本版不用 Next.js Server Actions。
   理由：跨站检查只守浏览器这一条写路径；服务端渲染直连后端时不带 Sec-Fetch-Site 与 Origin，按 NestJS 官方 CSRF 一页会被放行（推导，见 API-29 同类说明）。
   没选：允许 Server Actions 发写请求，写路径变两条，跨站防护要另想办法。
@@ -489,6 +501,7 @@
 - API-50 部分更新用 PATCH，「改任务」「改状态」两个接口（API-35）都是；转让负责人仍用 PUT（API-36），它整个替换「本项目的负责人」这个子资源。API-9 所列被 SameSite=Lax 拦下的方法补上 PATCH。
   依据：主参考 Zalando #148「MUST use HTTP methods correctly」，PATCH「to update parts of the resource objects」；更新规则照 API-33。
   没选：用 PUT，整个替换与「没传不改」对不上；用 POST，路径要带动作，违反 Zalando #141。
+  补充（第十一窗口，问 588 A）：推广成全局约定：整个替换一个资源用 PUT，见第一节第 4 小节「方法」。依据：RFC 9110 第 9.3.4 节「The PUT method requests that the state of the target resource be created or replaced」；主参考 Zalando #148「PUT requests are used to update (and sometimes to create) entire resources – single or collection resources.」
 - API-51 六项照标准的小项（问 476 A）：
   一，instance 的生成规则（API-26）归本文件，schema 只定它是字符串；与 API-3、API-24 同一分法。
   二，成功响应的媒体类型是 application/json（主参考 Zalando #167），出错时是 application/problem+json（API-17）。
