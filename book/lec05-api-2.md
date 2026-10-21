@@ -96,6 +96,28 @@ Prisma 的 schema 里查到能直接写的是第一种（@db.Citext，要先启�
 
 请求体里多出没定义的字段要拒绝（API-31），查询参数同理。主参考 Zalando 第 109 条原话：「Unknown input fields in payload or URL should not be ignored」（问 578 A）。
 
+## 第四块　第十一窗口的接口知识
+
+### 1. 注册回 201，但不带 Location
+
+注册新建了一个用户，所以回 201；可这个用户没有自己的地址，能读到他的只有「当前用户」接口，而那个地址随会话指向不同的人。RFC 9110 第 15.3.2 节允许不带 Location，原话是新资源由 Location「or, if no Location header field is received, by the target URI」标识。不带时，标准把注册接口的地址当作新资源的标识，读起来别扭，这个代价接受了（问 590 A）。
+
+### 2. 部分更新用 PATCH，整个替换用 PUT
+
+两种方法分工照标准本义。RFC 9110 第 9.3.4 节：「The PUT method requests that the state of the target resource be created or replaced」。主参考 Zalando 第 148 条：「PUT requests are used to update (and sometimes to create) entire resources – single or collection resources.」用 PUT 只传改动的字段，没传的会被当成「换成空」，所以部分更新只能用 PATCH（问 588 A）。
+
+### 3. 没登录时发坏 JSON，先回 400
+
+请求体由框架在查身份之前解析，写坏的 JSON 在这一步就被挡下，回「参数不合法」。所以没登录的人发坏 JSON，收到的是 400 而不是 401，前端靠 401 跳登录页的逻辑这时不会触发。这是从解析顺序推出来的，写后端代码时要实测（问 592 A）。
+
+### 4. 出错编号用 UUID 第 4 版
+
+错误外壳里的 instance 是每次出错的随机编号。RFC 9562 第 5.4 节：「UUIDv4 is meant for generating UUIDs from truly random or pseudorandom numbers.」第 7 版按时间有序，日志里好排，但不是纯随机，和「随机编号」的定义对不上，没选（问 594 A）。
+
+### 5. 「不缓存」要盖住框架自己挡下的退回
+
+所有响应都带 Cache-Control: no-store。框架自己挡下的退回，比如路径不存在、JSON 写坏，可能绕过统一加头的那一层；挂在哪一层，要把这几种都盖住。网关错误不经后端，本来就不带（问 596 A）。
+
 ---
 
 ## 本草稿的依据
@@ -108,5 +130,6 @@ Prisma 的 schema 里查到能直接写的是第一种（@db.Citext，要先启�
 - NestJS 官方文档「请求生命周期」；MDN「Date.prototype.toISOString」。
 - 第二块（第七窗口取）：PostgreSQL 18 文档 citext、表达式索引、排序规则三页；Prisma 7 文档 schema 参考、不支持的数据库功能、大小写三页。
 - 第三块（第十窗口取）：OWASP Authentication Cheat Sheet（2026-10-20）。
+- 第四块（第十一窗口取，2026-10-21）：RFC 9110 第 9.3.4、15.3.2 节；RFC 9562 第 5.4 节；Zalando 第 148 条。
 
-项目里的出处：docs/DECISIONS-R1.md 的 R1-453 到 R1-481；契约 API-40 到 API-55。第二块见 R1-492 第四点，第三块见 R1-525、R1-527 与 ADR-DB-008。原先的「怎样不漏掉一整块」「开课读得太多，中途会漂」两块已挪进附录 H（book/appendix-h.md），出处跟着搬了过去（问 515 A、516 A）。
+项目里的出处：docs/DECISIONS-R1.md 的 R1-453 到 R1-481；契约 API-40 到 API-55。第二块见 R1-492 第四点，第三块见 R1-525、R1-527 与 ADR-DB-008。第四块见 R1-530 到 R1-533 与契约汇总里第十一窗口的补充行。原先的「怎样不漏掉一整块」「开课读得太多，中途会漂」两块已挪进附录 H（book/appendix-h.md），出处跟着搬了过去（问 515 A、516 A）。
