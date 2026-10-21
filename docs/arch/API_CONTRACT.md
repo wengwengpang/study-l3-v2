@@ -93,15 +93,59 @@
 
 ### 4. 请求格式
 
+媒体类型：
 - 有请求体的接口只收 `application/json`（API-27）。
+- 比对时忽略媒体类型的参数，`application/json; charset=utf-8` 也收（API-51 第三点）。
 - Content-Type 不对，回「格式不支持」（API-27）。
-- 框架会不会自动回 415，未核。写后端代码时实测（API-27）。
+- 这道检查用拦截器做，排在 Guard 之后、Pipe 之前（API-46）。
+- 几种退回同时成立时谁先回，见第 6 小节（API-46）。
+- 框架会不会在 Guard 之前自己回 415，未核。写后端代码时实测（API-27、API-46）。
+- 「格式不支持」只看 Content-Type。请求体不是合法 JSON，回「参数不合法」，见第 6 小节（API-46、API-47）。
+
+命名与校验：
 - 字段名与查询参数名用 camelCase（API-22、ARCHITECTURE 第二节「命名规范」）。
 - 这一条偏离主参考 Zalando 第 118、130 条，理由见「偏离登记」（API-22）。
 - 请求体与查询参数的形状和类型，由后端自写的 Zod 管道按共享 schema 校验（T1、T3）。
 - 校验不过，回「参数不合法」（API-14）。
-- 必填、空值、多余字段剔除还是拒绝：待第 3 组定。
-- 时间格式与时区：待第 3 组定。
+
+多余字段：
+- 请求体出现 schema 没列的字段，一律拒绝，回「参数不合法」（API-31）。
+- 外壳用 ValidationProblemDetails，逐项列出多出来的键（API-31）。
+- 不照 Zod 的默认把多余字段静默剔除（API-31）。
+- 查询参数里出现 schema 没定义的参数，同样拒绝，回「参数不合法」，外壳与列法同上（API-56）。
+
+必填与空白：
+- 必填文本字段照下面两条处理。适用哪些字段、最大长度多少，归 schema（API-1、API-32）。
+- 去掉首尾空白后为空的，按没填处理，回「参数不合法」（API-32）。
+- 存的是去掉首尾空白后的值（API-32）。
+- 密码不照上面两条：原样收，不去首尾空白，也不截断（API-32 补充，问 576 A）。
+- 去空白在哪一层做，见 BACKLOG 79（ADR-DB-008）。
+
+没传与 null：
+- 新建接口里，可空字段没传与传 null 同义，都表示空（API-54）。
+- 如新建任务不带负责人，和负责人传 null 一样（API-54）。
+- 更新接口照 JSON Merge Patch（RFC 7396）的规则：没传的字段不改，传 null 表示清空（API-33）。
+- null 只对可空字段有效，如任务的负责人、截止日期（API-33）。
+- 对不可空字段传 null，回「参数不合法」（API-33）。
+- 负责人把任务改回未分配，就是把负责人传 null（API-33、PRD 审定决策 D16）。
+- 哪些字段可空，归 schema（API-1）。
+- 更新请求仍只收 `application/json`，不用 RFC 7396 登记的 `application/merge-patch+json`。偏离理由见「偏离登记」（API-33、API-27）。
+
+方法：
+- 部分更新用 PATCH，请求体照上面的更新规则（API-50、API-33）。
+- 整个替换一个资源用 PUT（API-50 补充，问 588 A）。
+
+时间格式（请求与响应通用）：
+- 时间点一律用 UTC，照 RFC 3339 写（API-41）。
+- 日期与时刻之间用大写 T，结尾用大写 Z，如 `2019-07-30T06:43:40.252Z`（API-41）。
+- 截止日期是纯日期，写成 `YYYY-MM-DD`，不带时刻与时区（API-41、ADR-DB-003 修订）。
+- 本版没有接口收时间点。以后要收，也只收以 Z 结尾的写法（API-41）。
+
+邮箱：
+- 邮箱存用户输入的原样，只去掉首尾空白（API-55）。
+- 注册查重、登录、按邮箱邀请成员时，整个地址不分大小写比较（API-55）。
+- 这条规则由数据库列类型兜住：users.email 用 citext，带唯一约束（API-55、ADR-DB-008）。
+- 三个入口照常按邮箱查，不各自处理大小写（ADR-DB-008）。
 
 ### 5. 成功响应
 
@@ -408,3 +452,7 @@
   依据：OWASP Email Validation and Verification Cheat Sheet「Domain part: always case-insensitive」，本地部分「technically case-sensitive under SMTP, though many providers do not enforce this in practice」，并要求「Define an explicit comparison policy for the local part」「Preserve the original email address as entered by the user」。
   没选：只把域名转小写，本地部分大小写不同就是两个账号；整个地址转小写再存，不保留原样。
   修订（第十窗口，问 574 甲）：选 citext 后（ADR-DB-008，问 572 A），不分大小写的唯一约束写得进 Prisma schema（@db.Citext）；「Prisma schema 写不出」只对 lower(email) 唯一索引那条路成立。扩展怎么启用随 BACKLOG 74 定。上面原文不改。
+- API-56 查询参数里出现 schema 没定义的参数，同样拒绝，回「参数不合法」（400），外壳照 API-31 逐项列出多出来的参数名（问 578 A）。
+  依据：主参考 Zalando #109「Unknown input fields in payload or URL should not be ignored;」，URL 含查询参数；本版列表不收参数（API-40），选它几乎没有代价。
+  没选：忽略没定义的查询参数，前端把参数名拼错时，错误被藏住。
+  落点：第一节第 4 小节「多余字段」。
