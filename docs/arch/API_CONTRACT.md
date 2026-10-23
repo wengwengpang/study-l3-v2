@@ -66,7 +66,9 @@
 - 这一条偏离 OWASP 会话管理，理由见「偏离登记」（API-10）。
 - 纯读请求不写 sessions（T4）。
 - 每次注册、登录都新建会话（API-8、API-53）。
+- 注册、登录的请求里带着一个有效的旧会话时，同一次请求里先删掉它（API-8 补充）。
 - 登出删掉服务端会话，并让浏览器清掉 Cookie（API-8）。
+- 会话已经失效时调登出，照样回「未登录」，前端照常跳登录页（API-8 补充）。
 - 服务端渲染把浏览器带来的 Cookie 原样转发给后端（API-8、T15）。
 
 跨站请求伪造：
@@ -315,6 +317,8 @@
   Cookie 属性：Secure（本地也加）、HttpOnly、SameSite 显式写（API-9）、不设 Domain、Path 为 /、
   Max-Age 与服务端会话期限一致，过期以服务端为准。登出删服务端会话并让浏览器清 Cookie；每次登录新建会话。
   服务端渲染把浏览器带来的 Cookie 原样转发（T15）。
+  补充（第十二窗口，问 613 B）：注册、登录的请求里带着一个有效的旧会话时（已登录又去注册或登录，换不换账号都算），同一次请求里先删掉旧会话，再新建会话。两个接口照旧是公开接口，不挂 AuthGuard，只是多读一次 Cookie。依据：OWASP Session Management Cheat Sheet「Renew the Session ID After Any Privilege Level Change」一节「the old or previous session ID must be destroyed」（必须），该节指认证是最常见的必须换新会话的场景。没选：不管旧会话、留到过期（核对轮 architect 的推荐，当时标了这一节未核），违反上面的必须；已登录时拒绝注册与登录，想换账号要先登出，前端多一种拒绝。
+  补充（第十二窗口，问 614 A）：会话已经失效（过期或被删）时调登出，照样经 AuthGuard 回 401「未登录」，前端照 API-16 跳登录页；不为登出开公开接口的特例。依据：OWASP Session Management Cheat Sheet「Logout Button」一节「the web application must invalidate the session at least on server side.」，会话已失效，服务端没有可作废的；401 的意思保持一个（API-14）。没选：登出不挂 AuthGuard、一律回 204 并清 Cookie，登出成了要另外记住的特例接口。
 - API-9 SameSite 取 Lax。拦跨站的 POST、PUT、PATCH、DELETE（PATCH 由 API-50 补）；外链进来的页面请求仍带凭据。
   只作纵深防护，正式防护见 API-11。
 - API-10 会话固定 30 天，不设空闲超时（PRD D7、T4）。偏离 OWASP 会话管理的空闲超时与绝对超时建议，
