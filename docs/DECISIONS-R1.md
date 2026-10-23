@@ -11954,3 +11954,14 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 六，出问 604（重拍 602：A 改单数、B 维持复数集合、C 改状态与汇总换建模）、605（第 1、2、3、10 条照核对轮推荐写进起草稿、不单独出题、读起草稿时认）、606（第 4 条当前用户的路径与所属模块）。
 七，传播面：本条只记账、存报告、登 G63、补登 STANDARDS 一行；契约、PRD、UI_DESIGN、ARCHITECTURE、CLAUDE.md、PROJECT_STRUCTURE 等问 604 拍完再扫（目录树要加 PENDING-C2-DRAFT.md 一行，收尾 W2 改）。
 进 HARNESS：本条为记账，不判；三处错的教训随 G63 结课判。
+
+--- R1-539 · 对照 736、737 已落；问 604 A（推翻问 602 A，只有一个的子资源改写单数，偏离 #134 登偏离登记）、605 A（第 1、2、3、10 条照推荐写进起草稿，读稿时认）、606 A（当前用户 GET /api/users/self，代码放 auth）；取回 RFC 5789、RFC 9110 第 15.3.1 节、Zalando #148 PATCH 原文；出对照 738 到 742 与问 607 到 609（学生：「604 选 A；605 选 A；606 选 A；同意 736、737」）---
+一，落盘，命令判过才提交：736 26ae128（交付物清单 143 行，增 1 删 0，与预拼版 cmp 相同，覆盖核对无输出）；737 9c8d86e（STANDARDS 48 行，增 1 删 0，cmp 相同）。
+二，问 604 A（按推荐）：推翻问 602 A。只有一个的子资源（本项目的负责人、任务的状态、项目的汇总）写单数，偏离 Zalando #134 必须档，理由登进 STANDARDS「偏离登记」：同一层 Google AIP-156「Singleton resources are always singular.」；照复数写，两个写接口的请求体要多一层数组，改状态要把 PATCH 改成 PUT，「状态们」像状态的历史；唯一调用方是同仓同发的自家前端（API-6），将来放开多负责人时改路径代价小。API-50 不动。未选 B：维持复数集合，API-50 的改状态改 PUT；C：改状态写成新建一次状态变化、汇总写成按状态的计数集合。落点：契约 API-57 加修订、由来、已定三行，原文不改；第一节第 2 小节单例那一行改写；第 1 小节偏离清单加 API-57；API-36 那一行补充原地改写（问 602 A 当窗写的补充行是推导出的说明，不是裁决原文；原句在 40df94d 与 R1-537）。
+三，问 605 A（按推荐）：第 1 条注册 POST /api/users、第 2 条登录 POST /api/sessions（照 API-53 回 200）、第 3 条登出 DELETE /api/sessions/self、第 10 条项目列表 GET /api/projects（后端只回调用者所在的项目）照核对轮推荐写进起草稿，不单独出题；学生读起草稿时逐条认，不认的那条再出题。授权清单只这四条（规则 79）。未选 B：逐条出题。
+四，问 606 A（按推荐）：「当前用户」接口 GET /api/users/self（#134、#143 的 self 例外，不算偏离），代码放 auth 模块。未选 B：放 users 模块；C：GET /api/me，偏离 #134。落点：契约 API-34 加补充行；ARCHITECTURE 第一节 auth 职责补「返回当前用户」。
+五，原文（2026-10-23 WebFetch，为问 608）：RFC 5789 第 2.1 节例子回「HTTP/1.1 204 No Content」，「The 204 response code is used because the response does not carry a message body (which a response with the 200 code would have).」「Note that other success codes could be used as well.」；RFC 9110 第 15.3.1 节「The content sent in a 200 response depends on the request method.」，表里 GET 为「the target resource」、POST 为「the status of, or results obtained from, the action」、PUT 与 DELETE 为「the status of the action」，PATCH 不在表里；Zalando #148 PATCH 一段「Successful PATCH requests return 200 or 204 (if the resource was updated — with or without returning the resource)」，PUT 一句同样写法，要害句单独再核一次。
+六，完成率由前端还是后端算：没有文件定过，核对报告也没列；不牵涉标准，登进待执行文件进度表，起草轮列选项、读稿时拍。
+七，传播面（规则 69，打开文件核）：契约要改（对照 738，五处）；STANDARDS 要改（路径写法一行拍板列、偏离登记加一条，对照 739）；ARCHITECTURE 要改（auth 职责，对照 740；依赖图已有 auth → users，不加边，不影响）；PRD 不影响（转让、状态、汇总各处只讲行为）；UI_DESIGN 不影响；CLAUDE.md 不影响；PROJECT_STRUCTURE 收尾 W2 改。另：交付物清单三行（对照 741）；待执行文件进度表（对照 742）。规则 69 追加回扫：契约第 1 小节偏离清单要改（加 API-57）；API-34 要改（加补充）；API-50「改状态用 PATCH」「转让负责人仍用 PUT」仍成立；API-35、API-39、API-52 仍成立；API-42「项目汇总是负责人专用接口」仍成立；STANDARDS 路径写法一行要改（原写「写复数集合见 API-57」）。
+八，出问 607（第 5 条路径、第 6 条、第 9 条照问 604 A 推下来写进起草稿）、608（改状态成功回什么）、609（第 7 条，页 5 成员任务状态区谁供数）。
+进 HARNESS：问 604、605、606 判否（不是框架层），是本项目接口口径；其余为记账，不判。
