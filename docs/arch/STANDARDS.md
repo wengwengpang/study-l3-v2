@@ -18,7 +18,7 @@
 | HTTP 语义（状态码、方法、认证头） | RFC 9110 HTTP Semantics | https://www.rfc-editor.org/rfc/rfc9110 | 协议层，必须照做；状态码见 API-14 到 API-16、API-25、API-27、API-37 到 API-39、API-52、API-53，401 的认证头见 API-20；方法见 API-50（主参考 Zalando #148），challenge 不带 realm 见 API-51 | 2026-10-15（第 11、15 节）；2026-10-17（第 11.5 节）；2026-10-21（第 9.3.4 节）；2026-10-23（第 9.2.2、15.3.1 节） |
 | PATCH 方法 | RFC 5789 PATCH Method for HTTP | https://www.rfc-editor.org/rfc/rfc5789 | API-35 补充（问 608 A：成功码与带什么不限死，例子回 204） | 2026-10-23（第 2、2.1 节） |
 | 提交信息 | Conventional Commits | 见 CLAUDE.md 第一层 C | 已在 CLAUDE.md 第一层 C | 未核 |
-| 会话管理 | OWASP Session Management Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html | API-8、API-9、API-10、API-44 | 2026-10-15；2026-10-17（Web Content Caching and Clear-Site-Data 一节） |
+| 会话管理 | OWASP Session Management Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html | API-8（含补充，问 613 B、614 A）、API-9、API-10、API-44 | 2026-10-15；2026-10-17（Web Content Caching and Clear-Site-Data 一节）；2026-10-23（Renew the Session ID After Any Privilege Level Change、Logout Button 两节） |
 | 跨站请求伪造防护 | OWASP Cross-Site Request Forgery Prevention Cheat Sheet；实现用 NestJS 自带防护 | https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html ；https://docs.nestjs.com/security/csrf | API-11 | 2026-10-15 |
 | Cookie 属性 | MDN Set-Cookie | https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie | API-8、API-9 | 2026-10-15 |
 | 错误响应格式 | RFC 9457 Problem Details for HTTP APIs；主参考 Zalando #176、#177 | https://www.rfc-editor.org/rfc/rfc9457.html | API-17、API-47 | 2026-10-15；2026-10-17（第 4.2.1 节） |
