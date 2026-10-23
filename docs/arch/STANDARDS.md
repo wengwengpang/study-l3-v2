@@ -30,7 +30,7 @@
 | 日期与时间格式 | RFC 3339；主参考 Zalando #169、#238 | https://www.rfc-editor.org/rfc/rfc3339 | API-41、ADR-DB-003 修订 | 2026-10-16（RFC 3339 第 2、5.6 节）；2026-10-17（Zalando #169、#238） |
 | HTTP 缓存 | RFC 9111 HTTP Caching | https://www.rfc-editor.org/rfc/rfc9111 | API-44（no-store 只作多一层保护） | 2026-10-17（第 5.2.2.5 节） |
 | JSON 媒体类型 | RFC 8259；主参考 Zalando #167 | https://www.rfc-editor.org/rfc/rfc8259 | API-51 第二、三点 | 2026-10-17（IANA 一节） |
-| 路径写法 | 主参考 Zalando #129、#134、#141 | https://opensource.zalando.com/restful-api-guidelines/ | API-51 第六点；只有一个的子资源写复数集合见 API-57；#141（URL 不带动词）定为全局约定见 API-58，API-36、API-50 也引了它 | 2026-10-16（#141）；2026-10-17（#129、#134）；2026-10-23（#134 单例与 self 例外、#141、#143 self） |
+| 路径写法 | 主参考 Zalando #129、#134、#141 | https://opensource.zalando.com/restful-api-guidelines/ | API-51 第六点；只有一个的子资源写单数、偏离 #134，见 API-57 修订与「偏离登记」；#141（URL 不带动词）定为全局约定见 API-58，API-36、API-50 也引了它 | 2026-10-16（#141）；2026-10-17（#129、#134）；2026-10-23（#134 单例与 self 例外、#141、#143 self） |
 | 后端框架行为 | NestJS 官方文档：请求生命周期、Guards、异常过滤器 | https://docs.nestjs.com/faq/request-lifecycle ；https://docs.nestjs.com/guards ；https://docs.nestjs.com/exception-filters | API-23、API-46 | 2026-10-15（Guards、异常过滤器）；2026-10-17（请求生命周期） |
 | 错误处理 | OWASP Error Handling Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html | API-49 | 2026-10-17 |
 | 邮箱比较 | OWASP Email Validation and Verification Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Email_Validation_and_Verification_Cheat_Sheet.html | API-55 | 2026-10-17（Case Sensitivity、Email Canonicalization 两节） |
@@ -42,6 +42,7 @@
 - 401 认证方案名（API-20）：自定方案名 Session 没在 IANA HTTP Authentication Scheme Registry 登记，RFC 9110 第 11.1 节写的是「ought to be registered」，属建议档。理由：登记表 14 个方案里没有会话 Cookie 类的；登记要走 IETF 评审，本项目不对外提供接口，唯一调用方是自家前端，前端不读这个头（API-6）。核对 2026-10-15。
 - 字段命名（API-22）：API 字段名与查询参数名用 camelCase，偏离 Zalando 第 118 条「MUST property names must be snake_case (and never camelCase)」与第 130 条（查询参数同）。理由：同层另一家主流规范微软 Azure 要求「DO use camel case for all JSON field names.」；Zalando 第 118 条自述「No established industry standard exists」；本项目前后端与 Prisma 都用 TypeScript，全链路不做命名转换（ARCHITECTURE 第二节「命名规范」）。核对 2026-10-15。
 - 部分更新的媒体类型（API-33）：照 RFC 7396 的规则处理 null 与没传，但请求只收 application/json，不用它登记的 application/merge-patch+json。理由：唯一调用方是自家前端（API-6），换媒体类型要修订 API-27、改前端 api client，收益只是类型名对得上，规则本身照 RFC 7396 走。核对 2026-10-16。
+- 只有一个的子资源用单数（API-57 修订）：本项目的负责人、任务的状态、项目的汇总写单数，偏离 Zalando 第 134 条「The special case of a resource singleton must be modeled as a collection with cardinality 1」（必须）。理由：同一层另一家 Google AIP-156（https://google.aip.dev/156，状态 Approved）「Singleton resources are always singular.」；照复数写，两个写接口的请求体要多一层只含一个元素的数组，改状态还要把 PATCH 改成 PUT，「状态们」会被读成状态的历史；唯一调用方是同仓同发的自家前端（API-6），将来放开多负责人时改路径代价小。核对 2026-10-23。
 
 ## 三、待登记
 
