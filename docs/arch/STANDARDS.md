@@ -34,6 +34,7 @@
 | 后端框架行为 | NestJS 官方文档：请求生命周期、Guards、异常过滤器 | https://docs.nestjs.com/faq/request-lifecycle ；https://docs.nestjs.com/guards ；https://docs.nestjs.com/exception-filters | API-23、API-46 | 2026-10-15（Guards、异常过滤器）；2026-10-17（请求生命周期） |
 | 错误处理 | OWASP Error Handling Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html | API-49 | 2026-10-17 |
 | 邮箱比较 | OWASP Email Validation and Verification Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Email_Validation_and_Verification_Cheat_Sheet.html | API-55 | 2026-10-17（Case Sensitivity、Email Canonicalization 两节） |
+| 认证（密码规则） | OWASP Authentication Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html | API-32 补充（问 576 A） | 2026-10-20；2026-10-23（Implement Proper Password Strength Controls 一节） |
 
 ## 二、偏离登记
 
