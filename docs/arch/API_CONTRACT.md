@@ -455,6 +455,7 @@
   首版单负责人，且没有通用的改角色接口（API-36），「把唯一负责人直接降为执行者」从接口上触发不了，本条只管移出这一种。
   依据：RFC 9110 第 15.5.10 节「This code is used in situations where the user might be able to resolve the conflict and resubmit the request.」：先转让即可化解。
   没选：400 配专门 type；403「不许做」，前端会显示「权限不足」，与 PRD 要求的提示对不上。
+  补充（第十二窗口，问 612 A）：移出一个本来就不是本项目成员的人（如负责人连点两下「移出」、手里的成员列表是旧的），回「看不见」404，与 API-15 同一口径；界面显示「权限不足」（API-4），与 API-47 已接受的后果同类。依据：主参考 Zalando #148「Failed DELETE requests will usually generate 404 (if the resource cannot be found)」；RFC 9110 第 9.2.2 节的幂等管的是「the intended effect on the server」，第二次删回 404 不违反幂等。没选：当成功回 204，前端分不清「刚移出」与「本来就不在」；回 409，目标资源不存在，谈不上与它的当前状态冲突（API-38）。
 - API-38 400 与 409 按「目标资源」分：请求与它要新建、修改、删除的资源（或该资源所在的集合）的当前状态冲突，回 409「冲突」；请求本身不合法，或它引用的别的资源不符合要求，回 400「参数不合法」。
   对照现有：邮箱已被使用、已在项目中、唯一负责人移出自己（API-37）回 409；assignee 不是本项目成员（决策 E）、转给非成员（API-39）回 400。
   依据：RFC 9110 第 15.5.10 节「due to a conflict with the current state of the target resource.」；第 15.5.1 节「due to something that is perceived to be a client error」。
