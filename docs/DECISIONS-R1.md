@@ -11965,3 +11965,16 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 七，传播面（规则 69，打开文件核）：契约要改（对照 738，五处）；STANDARDS 要改（路径写法一行拍板列、偏离登记加一条，对照 739）；ARCHITECTURE 要改（auth 职责，对照 740；依赖图已有 auth → users，不加边，不影响）；PRD 不影响（转让、状态、汇总各处只讲行为）；UI_DESIGN 不影响；CLAUDE.md 不影响；PROJECT_STRUCTURE 收尾 W2 改。另：交付物清单三行（对照 741）；待执行文件进度表（对照 742）。规则 69 追加回扫：契约第 1 小节偏离清单要改（加 API-57）；API-34 要改（加补充）；API-50「改状态用 PATCH」「转让负责人仍用 PUT」仍成立；API-35、API-39、API-52 仍成立；API-42「项目汇总是负责人专用接口」仍成立；STANDARDS 路径写法一行要改（原写「写复数集合见 API-57」）。
 八，出问 607（第 5 条路径、第 6 条、第 9 条照问 604 A 推下来写进起草稿）、608（改状态成功回什么）、609（第 7 条，页 5 成员任务状态区谁供数）。
 进 HARNESS：问 604、605、606 判否（不是框架层），是本项目接口口径；其余为记账，不判。
+
+--- R1-540 · 对照 738 到 742 已落；问 607 A、608 A、609 B；取回 Zalando #148 DELETE、RFC 9110 第 9.2.2 节原文；核对命令按固定行号切偏一次；RFC 5789 漏登，补登；出对照 743 到 746 与问 610 到 612（学生：「同意 738 到 742；607 选 A；608 选 A；609 选 B」）---
+一，落盘，命令判过才提交：738 8e828aa（契约 545 行，增 7 删 3，与预拼版 cmp 相同，「API-57」4 次、「问 604 A」2 次、「问 606 A」2 次）；739 ca425aa（STANDARDS 49 行，增 2 删 1，cmp 相同，偏离登记 5 条，「复数集合」0 次）；740 c75d4c8（ARCHITECTURE 637 行，增 1 删 1，cmp 相同）；741 225d1e5（交付物清单 143 行，增 3 删 3，cmp 相同，覆盖核对无输出）；742 713cce6（待执行文件 350 行，cmp 相同）。
+二，CC 认一处小错：提交 742 时，「报告正文没动」那一项按固定行号 29 切，进度表多了 5 行，切偏，打出「报告变了」；这一项没进提交条件，提交照常。随后按「## 甲、核对报告」标题定位重核，报告正文与导出逐字节相同，0261b9f 到 713cce6 只动了进度表（增 7 删 2）。往后这类核对按标题定位，不按行号。同交付物清单 G60 一族：核对命令假定了文件的形状，写的与做的不一致。
+三，问 607 A（按推荐）：改状态 PATCH /api/projects/{projectId}/tasks/{taskId}/status、项目汇总 GET /api/projects/{projectId}/summary、转让负责人 PUT /api/projects/{projectId}/owner 照写进起草稿，读稿时逐条认。授权清单只这三条（规则 79）。未选 B：逐条出题。
+四，问 608 A（按推荐）：改状态成功回 200，带整个任务，形状同任务详情、按角色给，负责人那份带后端重算的「可能卡住」。未选 B：只带状态子资源本身；C：回 204。落点：契约 API-35 补充行（对照 743）。
+五，问 609 B（按推荐）：项目汇总只给 US-04 的四个数；页面上的成员任务状态区由前端用任务列表加成员列表来拼。未选 A：汇总多带按成员分的计数；C：不设汇总接口，要推翻 API-42 半句。落点：契约 API-42 补充行（对照 743）。
+六，原文（2026-10-23 WebFetch，为问 612）：Zalando #148 DELETE 一段「Successful DELETE requests return 200 or 204 (if the resource was deleted — with or without returning the resource), or 202 (if the request was accepted for asynchronous processing).」「Failed DELETE requests will usually generate 404 (if the resource cannot be found) or 410 (if the resource was already traceably deleted before).」，要害句单独再核一次；RFC 9110 第 9.2.2 节「A request method is considered "idempotent" if the intended effect on the server of multiple identical requests with that method is the same as the effect for a single such request.」「Of the request methods defined by this specification, PUT, DELETE, and safe request methods are idempotent.」；第 9.3.5 节这次没取到，未核。
+七，报告外一项：邀请一个没注册的邮箱，PRD 要提示「该用户不存在」，architect 在第一组第 9 条那一行照 API-38 推为 400，标了待确认。照 API-38「它引用的别的资源不符合要求，回 400」推得出，登进待执行文件进度表，起草时照写，读稿时认。
+八，CC 自己漏登一份标准：608 A 的补充行引了 RFC 5789，STANDARDS 登记表里没有（0 次），与核对报告第 20 条同一种漏；出对照 746 在「HTTP 语义」一行下补登。
+九，传播面（规则 69，打开文件核）：契约要改（对照 743）；STANDARDS 要改（对照 746）；ARCHITECTURE 不影响（tasks 模块「覆盖 US-01」「决策 5 汇总并入 tasks」仍成立）；PRD 不影响；UI_DESIGN 不影响（页 5 成员任务状态区照旧，数据怎么拼是前端的事）；CLAUDE.md 不影响；PROJECT_STRUCTURE 收尾 W2 改。另：交付物清单 C3（对照 744）、待执行文件进度表（对照 745）。规则 69 追加回扫：API-25「更新回 200，带资源」仍成立（608 A 是它的一种读法，补充行写明）；API-40、API-43 仍成立；API-42 主文仍成立。
+十，出问 610（第 8 条成员子资源叫什么、路径里用哪个编号）、611（第 11 条第二节的退回写到哪一级）、612（第 13 条移出一个本来就不是成员的人）。
+进 HARNESS：问 607、608、609 判否（不是框架层），是本项目接口口径；第二点的教训随 G60 结课判；其余为记账，不判。
