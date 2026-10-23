@@ -1,8 +1,8 @@
 # 补课 05-API　接口契约（下）
 
 > 草稿。每个窗口收尾，把那个窗口定下的接口知识写进来；课程做法类的问题写进附录 H（book/appendix-h.md）。整节课结课时照 book/OUTLINE.md 统稿成十节，项目主人读过认了才算定稿（问 491 A、515 A）。
-> 现在收两块：第六窗口拍板的接口知识，第七窗口的邮箱约束三种写法。
-> 统稿时，两块都按契约的小节编进第三、五节。
+> 现在收五块：第六窗口拍板的接口知识，第七窗口的邮箱约束三种写法，第十、十一、十二窗口各一块接口知识。
+> 统稿时，各块都按契约的小节编进第三、五节。
 
 ---
 
@@ -118,6 +118,28 @@ Prisma 的 schema 里查到能直接写的是第一种（@db.Citext，要先启�
 
 所有响应都带 Cache-Control: no-store。框架自己挡下的退回，比如路径不存在、JSON 写坏，可能绕过统一加头的那一层；挂在哪一层，要把这几种都盖住。网关错误不经后端，本来就不带（问 596 A）。
 
+## 第五块　第十二窗口的接口知识
+
+### 1. 路径不带动词，登录看成「新建一个会话」
+
+主参考 Zalando 第 141 条：「The API describes resources, so the only place where actions should appear is in the HTTP methods.」这一条定为全局约定（API-58）。口语里是动词的接口，换成名词来写：注册是新建一个用户，POST /api/users；登录是新建一个会话，POST /api/sessions；登出是删掉当前会话，DELETE /api/sessions/self。NestJS 官方认证一页的例子写 auth 下的 sign-in，那是教程例子，不是框架约定。
+
+### 2. 只有一个的子资源，两家规范说法相反
+
+Zalando 第 134 条要单例也写成集合：「modeled as a collection with cardinality 1」。Google AIP-156 写：「Singleton resources are always singular.」本项目有三个单例：项目的负责人、任务的状态、项目的汇总。照集合写，两个写接口的请求体都要多一层数组，「状态们」还会被读成状态的历史，所以写单数，偏离登进 STANDARDS（API-57 修订）。第一次拍板时只数了负责人这一个单例，理由站不住，重拍了一次。
+
+### 3. PATCH 成功后带什么，标准没限死
+
+Zalando 第 148 条：「Successful PATCH requests return 200 or 204 (if the resource was updated — with or without returning the resource)」。RFC 5789 的例子回 204，又写「other success codes could be used as well」。改状态会让「可能卡住」重新计时，这个标记只在后端算，所以改状态回 200，带整个任务（API-35 补充）。
+
+### 4. 删一个本来就不在的成员，回 404
+
+Zalando 第 148 条：「Failed DELETE requests will usually generate 404 (if the resource cannot be found)」。DELETE 是幂等的，但 RFC 9110 第 9.2.2 节的幂等管的是「the intended effect on the server」，不管每次回什么码（API-37 补充）。
+
+### 5. 登录时把旧会话删掉
+
+OWASP 会话管理一页「Renew the Session ID After Any Privilege Level Change」一节：「the old or previous session ID must be destroyed」。所以注册、登录的请求里带着有效的旧会话时，同一次请求里先删掉它，再新建（API-8 补充）。
+
 ---
 
 ## 本草稿的依据
@@ -131,5 +153,6 @@ Prisma 的 schema 里查到能直接写的是第一种（@db.Citext，要先启�
 - 第二块（第七窗口取）：PostgreSQL 18 文档 citext、表达式索引、排序规则三页；Prisma 7 文档 schema 参考、不支持的数据库功能、大小写三页。
 - 第三块（第十窗口取）：OWASP Authentication Cheat Sheet（2026-10-20）。
 - 第四块（第十一窗口取，2026-10-21）：RFC 9110 第 9.3.4、15.3.2 节；RFC 9562 第 5.4 节；Zalando 第 148 条。
+- 第五块（第十二窗口取，2026-10-23）：Zalando 第 134、141、143、148 条；Google AIP-156；RFC 5789 第 2、2.1 节；RFC 9110 第 9.2.2、15.3.1 节；OWASP 会话管理（Renew the Session ID After Any Privilege Level Change、Logout Button 两节）；NestJS 官方认证一页。
 
-项目里的出处：docs/DECISIONS-R1.md 的 R1-453 到 R1-481；契约 API-40 到 API-55。第二块见 R1-492 第四点，第三块见 R1-525、R1-527 与 ADR-DB-008。第四块见 R1-530 到 R1-533 与契约汇总里第十一窗口的补充行。原先的「怎样不漏掉一整块」「开课读得太多，中途会漂」两块已挪进附录 H（book/appendix-h.md），出处跟着搬了过去（问 515 A、516 A）。
+项目里的出处：docs/DECISIONS-R1.md 的 R1-453 到 R1-481；契约 API-40 到 API-55。第二块见 R1-492 第四点，第三块见 R1-525、R1-527 与 ADR-DB-008。第四块见 R1-530 到 R1-533 与契约汇总里第十一窗口的补充行。第五块见 R1-537 到 R1-543 与契约汇总里第十二窗口的补充、修订行。原先的「怎样不漏掉一整块」「开课读得太多，中途会漂」两块已挪进附录 H（book/appendix-h.md），出处跟着搬了过去（问 515 A、516 A）。
