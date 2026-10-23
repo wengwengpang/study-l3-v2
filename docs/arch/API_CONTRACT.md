@@ -43,6 +43,8 @@
 - 出现第二个调用方时，按当时的主参考加版本（API-6）。
 - 路径段一律小写，单词之间用连字符（API-51 第六点）。
 - 资源名用复数（API-51 第六点）。
+- 只有一个的子资源（如本项目的负责人）也写成复数集合，集合里恰好一个；请求体里用只含一个元素的数组，「恰好一个」由 schema 约束（API-57）。
+- 路径只写名词，不带动词；动作只用 HTTP 方法表达（API-58）。
 - 接口都在 NestJS。本版 Next.js 不写 Route Handler（API-7）。
 - 将来 Next.js 要写 Route Handler，不得用 `/api` 前缀（API-7）。
 - 浏览器发请求用相对路径（`/api/...`），不写域名（API-13）。
@@ -446,6 +448,7 @@
   没选：动作式 POST，路径带动词，违反 #141；借通用的改成员角色接口隐式降级，副作用出人意料。
   已定：转给非成员、转给自己见 API-39；路径写法随接口清单定。
   已定（第六窗口，问 477 A）：成功回什么见 API-52。
+  补充（第十二窗口，问 602 A）：「本项目的负责人」照 API-57 写成复数集合，集合里恰好一个；上面「请求体放新负责人的 userId」，这个 userId 放进只含一个元素的数组。上面原文不改。
 - API-37 唯一负责人移出自己，回 409「冲突」，配一个专门的 type，前端据此提示「需先转让负责人身份」（PRD「US-P04 移出项目成员」与错误规则）。
   首版单负责人，且没有通用的改角色接口（API-36），「把唯一负责人直接降为执行者」从接口上触发不了，本条只管移出这一种。
   依据：RFC 9110 第 15.5.10 节「This code is used in situations where the user might be able to resolve the conflict and resubmit the request.」：先转让即可化解。
@@ -527,3 +530,12 @@
   依据：主参考 Zalando #109「Unknown input fields in payload or URL should not be ignored;」，URL 含查询参数；本版列表不收参数（API-40），选它几乎没有代价。
   没选：忽略没定义的查询参数，前端把参数名拼错时，错误被藏住。
   落点：第一节第 4 小节「多余字段」。
+- API-57 只有一个的子资源，也照 Zalando #134 写成复数集合，规定集合里恰好一个。「本项目的负责人」就是这样：转让用 PUT 整个替换这个集合（API-50），请求体是一个对象，里面一个字段放只含一个元素的数组；字段名与「恰好一个」归 schema（05-类型，API-1）。被换下的原负责人变回执行者，仍是 API-36 那个事务里改两行。
+  依据：主参考 Zalando #134（必须）「The special case of a resource singleton must be modeled as a collection with cardinality 1 including definition of maxItems = minItems = 1 for the returned array structure to make the cardinality constraint explicit.」。例外只有 self：编号从登录信息里来时，用它作伪编号（#134、#143）。负责人的编号不从登录信息里来，套不上。
+  理由：照主参考做，不添偏离；代价只落在这一个接口的请求体上；首版单负责人（PRD 审定决策 D10），将来放开时路径不用改。
+  没选：照 Google AIP-156「Singleton resources are always singular.」写单数，偏离 #134 必须档，要登偏离、第一节第 2 小节加例外句；不设子资源、改项目本身，推翻 API-36、API-50，原负责人被降成执行者变成改项目的副作用。
+  未定：「当前用户」接口（API-34）的编号从登录信息里来，落在 self 例外里，路径随接口清单定。
+- API-58 路径只写名词，不带动词；动作只用 HTTP 方法表达。全部接口适用，写进第一节第 2 小节。登录、登出、注册这类口语里是动词的接口，按资源来写，具体名字随接口清单定。
+  依据：主参考 Zalando #141（必须）「The API describes resources, so the only place where actions should appear is in the HTTP methods.」「In URLs, use only nouns.」。同一行登记的 #129、#134 已是全局约定（API-51 第六点）；API-36、API-50 已引 #141。
+  参考：NestJS 官方认证一页的例子在 auth 下写 sign-in、sign-up，页内没说这是约定，只当教程例子，不压过主参考（判断）。
+  没选：不写全局约定，第二节逐个接口落实（第十窗口起草稿的推荐，当时理由是没有裁决可挂）；写全局约定，但登录、登出、注册现在就定为例外，那几个接口还没核对。
