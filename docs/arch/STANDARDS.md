@@ -36,7 +36,7 @@
 | 错误处理 | OWASP Error Handling Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html | API-49 | 2026-10-17 |
 | 邮箱比较 | OWASP Email Validation and Verification Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Email_Validation_and_Verification_Cheat_Sheet.html | API-55 | 2026-10-17（Case Sensitivity、Email Canonicalization 两节） |
 | 认证（密码规则） | OWASP Authentication Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html | API-32 补充（问 576 A） | 2026-10-20；2026-10-23（Implement Proper Password Strength Controls 一节） |
-| schema 命名（请求体、列表项） | 框架约定：NestJS 官方 CRUD 生成器；设计规范：Google AIP-133、AIP-132 | https://docs.nestjs.com/recipes/crud-generator ；https://google.aip.dev/133 ；https://google.aip.dev/132 | API-30 补充（问 626 A、628 A） | 2026-10-26 |
+| schema 命名（请求体、列表项） | 框架约定：NestJS 官方 CRUD 生成器；设计规范：Google AIP-133、AIP-132 | https://docs.nestjs.com/recipes/crud-generator ；https://google.aip.dev/133 ；https://google.aip.dev/132 | API-30 补充（问 626 A、628 A、631 A） | 2026-10-26 |
 
 ## 二、偏离登记
 
