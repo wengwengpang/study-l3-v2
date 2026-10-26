@@ -1,7 +1,7 @@
 # 补课 05-API　接口契约（下）
 
 > 草稿。每个窗口收尾，把那个窗口定下的接口知识写进来；课程做法类的问题写进附录 H（book/appendix-h.md）。整节课结课时照 book/OUTLINE.md 统稿成十节，项目主人读过认了才算定稿（问 491 A、515 A）。
-> 现在收五块：第六窗口拍板的接口知识，第七窗口的邮箱约束三种写法，第十、十一、十二窗口各一块接口知识。
+> 现在收六块：第六窗口拍板的接口知识，第七窗口的邮箱约束三种写法，第十到十三窗口各一块接口知识。
 > 统稿时，各块都按契约的小节编进第三、五节。
 
 ---
@@ -140,6 +140,32 @@ Zalando 第 148 条：「Failed DELETE requests will usually generate 404 (if th
 
 OWASP 会话管理一页「Renew the Session ID After Any Privilege Level Change」一节：「the old or previous session ID must be destroyed」。所以注册、登录的请求里带着有效的旧会话时，同一次请求里先删掉它，再新建（API-8 补充）。
 
+## 第六块　第十三窗口的接口知识
+
+### 1. 失败时不动旧会话
+
+第五块第 5 条说，登录时把旧会话删掉。那一条依据的 OWASP 一节，标题是「Renew the Session ID After Any Privilege Level Change」，管的是权限变化之后。登录密码错、注册邮箱已被使用，权限都没变，所以只在成功时删旧会话，失败时旧会话照旧（API-8 补充）。原文没直接说失败的情形，这一条是推出来的。反过来做，已登录的人在登录页输错一次密码就被登出。
+
+### 2. 请求体与列表响应怎么起名
+
+两层标准说法一致。框架层，NestJS 官方 CRUD 生成器给的是 CreateUserDto、UpdateUserDto。设计规范层，Google AIP-133 写「The request message must match the RPC name, with a `Request` suffix.」；AIP-132 写「The request and response messages must match the RPC name, with `Request` and `Response` suffixes.」，例子是 ListBooksResponse。所以请求体写「动作 + 资源 + Request」，如 CreateUserRequest；列表响应写「List + 资源复数 + Response」，如 ListProjectsResponse（API-30 补充）。只照请求那一半、列表另写 TaskList，就成了两套规则。
+
+### 3. 列表项和详情用同一个形状
+
+AIP-132 还写：「The response should usually include fully-populated resources unless there is a reason to return a partial response」。所以列表每一项与详情同一形状、同一个名字。改状态回来的整个任务，前端可以直接替换列表里那一行（API-30 补充）。同一个资源按调用者角色给不同形状时，也用一个名字，几种形状在 schema 里怎么写，归共享类型那一层。
+
+### 4. type 按退回性质给，要分提示的才另起
+
+前端照错误外壳里的 type 出中文提示。同一种退回性质提示一样，就共用一个 type；同一性质里要分出不同提示的，才另起专门的 type。比如同是 409「冲突」，「邮箱已被使用」要单独提示（API-24 补充）。并发下两个请求同时写，后到的撞上数据库唯一约束，回的 type 与先查就查到时一样，用户看到同一个提示（API-28 补充）。
+
+### 5. self 是规范自己给的例外
+
+Zalando 第 143 条是必须档，标题「MUST identify resources and sub-resources via path segments」。同一条里写：「Here, it is reasonable to use self as pseudo-identifier path segment.」所以登出 DELETE /api/sessions/self、当前用户 GET /api/users/self 用 self 当编号，不算偏离。
+
+### 6. 路径里的每一种编号都要有去处
+
+路径里有几种编号，就要定几种「转不成数字」的去处。本项目有三种：项目 id 在 AuthzGuard 退回，任务 id 和成员的用户 id 在 Service 退回，都按「看不见」回 404（ARCHITECTURE 决策 B 及其补充）。成员的用户 id 是后来才加进路径的，加路径时要回头补上它的去处。
+
 ---
 
 ## 本草稿的依据
@@ -154,5 +180,6 @@ OWASP 会话管理一页「Renew the Session ID After Any Privilege Level Change
 - 第三块（第十窗口取）：OWASP Authentication Cheat Sheet（2026-10-20）。
 - 第四块（第十一窗口取，2026-10-21）：RFC 9110 第 9.3.4、15.3.2 节；RFC 9562 第 5.4 节；Zalando 第 148 条。
 - 第五块（第十二窗口取，2026-10-23）：Zalando 第 134、141、143、148 条；Google AIP-156；RFC 5789 第 2、2.1 节；RFC 9110 第 9.2.2、15.3.1 节；OWASP 会话管理（Renew the Session ID After Any Privilege Level Change、Logout Button 两节）；NestJS 官方认证一页。
+- 第六块（第十三窗口取，2026-10-26）：Google AIP-132、AIP-133；Zalando 第 143 条；NestJS 官方 controllers、CRUD 生成器两页。
 
-项目里的出处：docs/DECISIONS-R1.md 的 R1-453 到 R1-481；契约 API-40 到 API-55。第二块见 R1-492 第四点，第三块见 R1-525、R1-527 与 ADR-DB-008。第四块见 R1-530 到 R1-533 与契约汇总里第十一窗口的补充行。第五块见 R1-537 到 R1-543 与契约汇总里第十二窗口的补充、修订行。原先的「怎样不漏掉一整块」「开课读得太多，中途会漂」两块已挪进附录 H（book/appendix-h.md），出处跟着搬了过去（问 515 A、516 A）。
+项目里的出处：docs/DECISIONS-R1.md 的 R1-453 到 R1-481；契约 API-40 到 API-55。第二块见 R1-492 第四点，第三块见 R1-525、R1-527 与 ADR-DB-008。第四块见 R1-530 到 R1-533 与契约汇总里第十一窗口的补充行。第五块见 R1-537 到 R1-543 与契约汇总里第十二窗口的补充、修订行。第六块见 R1-546 到 R1-551 与契约汇总里第十三窗口的补充、已定行和 API-59。原先的「怎样不漏掉一整块」「开课读得太多，中途会漂」两块已挪进附录 H（book/appendix-h.md），出处跟着搬了过去（问 515 A、516 A）。
