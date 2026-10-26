@@ -283,7 +283,7 @@
 
 第一节写过的不再重复（API-1）。第 1 到 3 小节是各接口共用的读法，第 4 到 6 小节逐个列接口，第 7 小节列本版没有接口的部分。
 
-（第 5 到 7 小节随 projects、tasks 两组落，进度见 docs/arch/PENDING-C2-DRAFT.md。）
+（第 6、7 小节随 tasks 组落，进度见 docs/arch/PENDING-C2-DRAFT.md。）
 
 ### 1. 鉴权级别
 
@@ -309,6 +309,7 @@
 - 只定名字主体。写不写后缀，照 05-类型 为全部 schema 定的命名规则（API-1、API-30）。
 - 请求体的名字写成「动作 + 资源 + Request」。动作跟着方法走：POST 写 Create，PATCH 写 Update，PUT 写 Replace（API-30 补充，问 626 A）。
 - 响应用资源名。列表接口顶层是一个外壳对象，数组放在外壳的哪个字段里，归 schema（API-18）。
+- 列表接口响应的外壳写成「List + 资源复数 + Response」，如 ListProjectsResponse（API-30 补充，问 631 A）。
 - 列表的每一项与这个资源的详情同一形状，用同一个名字（API-30 补充，问 628 A）。
 - 一个资源按调用者角色给不同形状时，仍用一个名字。几种形状在 schema 里怎么写，归 05-类型（API-30 补充，问 629 A）。
 
@@ -355,6 +356,79 @@
 - 成功：200
 - 退回：只有第 2 小节的共有退回。
 - 依据：US-A02；API-34、API-34 补充（问 606 A）、API-53。
+
+### 5. projects 模块
+
+#### 我所在的项目列表
+
+- 方法与路径：`GET /api/projects`
+- 鉴权级别：只要登录。只回调用者是成员的项目。由 Service 按当前用户过滤，不收过滤参数。这照 OWASP Authorization Cheat Sheet 的最小权限，必须档，与 API-42 同一思路。
+- 请求：无
+- 响应：ListProjectsResponse，每一项是 Project
+- 成功：200
+- 退回：只有第 2 小节的共有退回。
+- 依据：PRD 权限矩阵「查看我所在的项目列表」一行；PRD 审定决策 D11、D17；API-2、API-18、API-34、API-40、API-42、API-58 已定。
+
+#### 创建项目
+
+- 方法与路径：`POST /api/projects`
+- 鉴权级别：只要登录（API-2）
+- 请求：CreateProjectRequest
+- 响应：Project
+- 成功：201，响应体带新项目，带 Location 指向这个项目的项目详情。创建者成为负责人（API-2）。
+- 退回：参数不合法（如名称去空白后为空，API-32）。
+- 依据：US-P01；PRD 审定决策 D4；API-2、API-25、API-32、API-34。
+
+#### 项目详情
+
+- 方法与路径：`GET /api/projects/{projectId}`
+- 鉴权级别：本项目成员
+- 请求：无
+- 响应：Project。执行者那份只带名称与自己的角色（PRD 审定决策 D11、D17）；负责人那份带什么、两份是否同形，归 05-类型（API-1、API-34 补充）。
+- 成功：200
+- 退回：只有第 2 小节的共有退回。
+- 依据：US-P02、US-R02；PRD 审定决策 D11、D17；API-34、API-34 补充（问 632 A）、API-52；ARCHITECTURE 第二节决策 Q1。
+
+#### 成员列表
+
+- 方法与路径：`GET /api/projects/{projectId}/members`
+- 鉴权级别：只有负责人
+- 请求：无
+- 响应：ListMembersResponse，每一项是 Member，按用户 id 升序（第一节第 5 小节、API-59）
+- 成功：200
+- 退回：不许做（执行者）。
+- 依据：US-P03；US-01（项目主页的成员任务状态区要用它，API-42 补充）；PRD 审定决策 D11；PRD 澄清注记 4；API-40、API-42、API-42 补充（问 609 B）、API-59。
+
+#### 邀请成员
+
+- 方法与路径：`POST /api/projects/{projectId}/members`
+- 鉴权级别：只有负责人
+- 请求：CreateMemberRequest
+- 响应：Member
+- 成功：201，响应体带新成员。不带 Location，因为没有读单个成员的接口（API-25 补充）。
+- 退回：参数不合法（邀请的邮箱没有注册），专门的 type（API-38）。冲突（已在项目中），专门的 type；并发下撞上成员唯一约束也回这一种（API-28 补充）。不许做（执行者）。
+- 依据：US-P02、US-R02；PRD 审定决策 D5、D10；API-24 补充、API-25 补充、API-28、API-28 补充、API-31、API-38、API-55、API-59。
+
+#### 移出成员
+
+- 方法与路径：`DELETE /api/projects/{projectId}/members/{userId}`。{userId} 用被移出者的用户 id（API-59）。
+- 鉴权级别：只有负责人
+- 请求：无
+- 响应：无响应体
+- 成功：204
+- 退回：冲突（负责人移出自己，也就是移出唯一的负责人），专门的 type（API-37）。看不见（被移的人不是本项目成员，API-37 补充；{userId} 转不成数字，在 Service 里退回，ARCHITECTURE 第三节决策 B）。不许做（执行者，含移出自己，PRD 审定决策 D14）。
+- 代码落点：随「成员移出编排」，建后端骨架时定（ARCHITECTURE 第一节「依赖方向」）。
+- 依据：US-P04；PRD 审定决策 D14；API-25、API-37、API-37 补充（问 612 A）、API-38、API-59；ARCHITECTURE 第三节决策 B。
+
+#### 转让负责人
+
+- 方法与路径：`PUT /api/projects/{projectId}/owner`
+- 鉴权级别：只有负责人
+- 请求：ReplaceProjectOwnerRequest
+- 响应：无响应体
+- 成功：204（API-52）。转给自己也回 204，什么都不改（API-39）。
+- 退回：参数不合法（新负责人不是本项目成员，API-39）。不许做（执行者）。
+- 依据：US-R02；PRD 审定决策 D10、D17；API-36、API-36 补充（问 604 A）、API-39、API-50、API-52、API-57 修订、API-57 已定。
 
 ## 三、本节裁决汇总
 
