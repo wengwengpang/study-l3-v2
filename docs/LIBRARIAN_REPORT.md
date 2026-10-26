@@ -1,14 +1,14 @@
-**资料体检报告(第八次体检)**
+**资料体检报告（第九次体检）**
 
-我先读了 `.claude/agents/librarian.md`,再读了上一份报告 `docs/LIBRARIAN_REPORT.md`。`git log --oneline -- docs/LIBRARIAN_REPORT.md` 有 10 条输出,最新是 4a4d6fd,文件在,所以不是首次体检。
+我先读了 `.claude/agents/librarian.md`，再读了上一份报告 `docs/LIBRARIAN_REPORT.md`。`git log --oneline -- docs/LIBRARIAN_REPORT.md` 有 10 条输出，最新是 4c3b4d5，文件在，所以不是首次体检。本次没有跑 `scripts/report-check.sh`，它要等报告存档后由主对话跑。
 
 ## 栏 1　脚本原样输出
 
-脚本是 `bash scripts/doc-check.sh`。下面是它的输出,没删没改没转述。
+脚本是 `bash scripts/doc-check.sh`。下面是它的输出，没删没改没转述。
 
 ```
-== 资料体检 2026-10-23 09:53:11  提交 cf406df  未提交改动 0 处
-== 范围：67 份文件
+== 资料体检 2026-10-26 08:32:22  提交 ff8cace  未提交改动 0 处
+== 范围：69 份文件
 
 == S1、S2 编号清单
   规则（COURSE_RULES）：共 85 条，最大号 87；缺号：42 68 ；重号：无
@@ -20,7 +20,7 @@
   问题（HARNESS 第三节）：共 16 条，最大号 16；缺号：无；重号：无
   决策边界 D（CLAUDE.md）：共 8 条，最大号 8；缺号：无；重号：无
   规则 57 自检项（9 起，1 到 8 在 SESSION_START J 节）：共 12 条，最大号 20；缺号：无；重号：无
-  DECISIONS-R1 条目：共 535 条，最大号 535；缺号：无；重号：无
+  DECISIONS-R1 条目：共 545 条，最大号 545；缺号：无；重号：无
   DECISIONS-G1 补遗：共 170 条，最大号 170；缺号：无；重号：无
 
 == S3 指空的引用（写了号，清单里没有）
@@ -162,7 +162,7 @@
   原则（参考，不是删并信号）：无
 
 == S5 各文件行数
-    52293 total
+    53288 total
      5901 docs/web_course5_sample5.md
      5018 docs/web_course5_sample2.md
      4751 docs/web_course_sample4.md
@@ -175,25 +175,27 @@
      2268 docs/web_course_sample6.md
      2045 docs/web_course5_sample1.md
      2034 docs/web_course_sample5.md
+      752 docs/arch/PENDING-C2-DRAFT.md
       643 docs/COURSE_RULES.md
       637 docs/arch/ARCHITECTURE.md
-      550 docs/lessons/05-api-full.md
-      529 docs/arch/API_CONTRACT.md
+      595 docs/lessons/05-api-full.md
+      552 docs/arch/API_CONTRACT.md
       521 docs/PENDING-TUNER-REFACTOR.md
       432 docs/KNOWLEDGE_BASE.md
       387 docs/HARNESS.md
-      353 docs/design/PRD.md
+      356 docs/design/PRD.md
       331 docs/lessons/anti-patterns.md
+      244 docs/lessons/05-api-cheatsheet.md
       229 docs/BRIDGE-05-api-w6.md
-      226 docs/lessons/05-api-cheatsheet.md
-      221 docs/design/UI_DESIGN.md
+      227 docs/design/UI_DESIGN.md
       219 docs/lessons/05-arch-full.md
       190 docs/BRIDGE-05-api-w8.md
       172 CLAUDE.md
       158 docs/SESSION_START.md
       157 docs/BRIDGE-05-api-w7.md
-      153 docs/PROJECT_STRUCTURE.md
-      142 docs/lessons/05-api-wbs.md
+      155 docs/PROJECT_STRUCTURE.md
+      145 docs/lessons/05-api-wbs.md
+      140 docs/BRIDGE-05-api-w13.md
       138 docs/BRIDGE-05-api-w12.md
       137 docs/BRIDGE-05-api-w11.md
       136 docs/REFACTOR-HANDBOOK.md
@@ -211,8 +213,8 @@
        64 docs/arch/TECH_STACK.md
        56 docs/lessons/05-full.md
        51 docs/lessons/06-full.md
+       50 docs/arch/STANDARDS.md
        50 .claude/agents/librarian.md
-       47 docs/arch/STANDARDS.md
        46 docs/LESSON_TEMPLATE.md
        44 docs/lessons/04-full.md
        41 docs/lessons/01-full.md
@@ -232,12 +234,12 @@
        14 docs/lessons/04-cheatsheet.md
 
 == S6 上次体检以来新增、删除、改名的文件（A 新增、D 删除、R 改名；请对 SESSION_START M 节送审命令清单：要不要加、要不要改）
-  起点：上次报告提交 4a4d6fd
-  A	docs/BRIDGE-05-api-w12.md
-  D	docs/arch/PENDING-C1-DRAFT.md
+  起点：上次报告提交 4c3b4d5
+  A	docs/BRIDGE-05-api-w13.md
+  A	docs/arch/PENDING-C2-DRAFT.md
 
 == S7 开头 15 行没有「去留：」的文件（补一行「去留：长期」或「去留：一次性，某某时删」；哪节课改到哪份，顺手补那份）
-  共 67 份，缺 63 份
+  共 69 份，缺 64 份
   .claude/agents/architect.md
   .claude/agents/client.md
   .claude/agents/designer.md
@@ -250,6 +252,7 @@
   docs/BRIDGE-05-api-w10.md
   docs/BRIDGE-05-api-w11.md
   docs/BRIDGE-05-api-w12.md
+  docs/BRIDGE-05-api-w13.md
   docs/BRIDGE-05-api-w6.md
   docs/BRIDGE-05-api-w7.md
   docs/BRIDGE-05-api-w8.md
@@ -305,124 +308,145 @@
 
 ## 栏 2　和上次比
 
-规则总数:
-- 脚本数 85 条,上次 85 条,没涨。最大号 87、缺号 42 68、占位 2 3 21 34 都没变。
-- 文件头「号段 1-87、实际条数 81、下一个可用号 88」也没变(docs/COURSE_RULES.md:7-10)。
-- 没涨,所以没有「涨了要对应删并」的问题。
-- 但 COURSE_RULES 有改条目:`git diff 4a4d6fd HEAD` 显示规则 22(docs/COURSE_RULES.md:59)、规则 44(:100-102)、规则 83 第 2 与第 5 项(:590 起)因取消检验题而改。没新开号。规则 83 第 2 项变成「已取消,编号留空不重排」(:590)。
+规则总数：
+- 脚本数 85 条，上次 85 条，没涨。最大号 87、缺号 42 68、占位 2 3 21 34 都没变。
+- docs/COURSE_RULES.md 行数 643 不变，`git diff 4c3b4d5 HEAD --stat` 里也没有它。
+- 文件头「号段 1-87、实际条数 81、下一个可用号 88」没变（docs/COURSE_RULES.md:7-10）。
+- 没涨，所以没有「涨了要对应删并」的问题。
 
-其他清单变化:
-- DECISIONS-R1 528 变 535(新增 R1-529 到 R1-535),是历史记录,不查旧号。
+其他清单变化：
+- DECISIONS-R1 535 变 545，新增 R1-536 到 R1-545。它是历史记录，不查旧号。
 - 反模式 46、BACKLOG 80、原则 20、问题 16、D 条 8、规则 57 自检项 12、补遗 170 都没变。
-- S4:规则 23 这次不再列零引用,只剩 8、9、13。我没查是谁新引了 23。
-- S4:BACKLOG 77 的产品引用从 3 次变 2 次。
+- S4 的三类零引用（规则 8、9、13，BACKLOG 一长串）与上次逐字相同。
 
-各文件行数(上次报告栏 1 的数到本次):
-- 总数 52701 变 52293,减 408。
-- 删除 docs/arch/PENDING-C1-DRAFT.md,减 742 行(S6)。
-- 新增 docs/BRIDGE-05-api-w12.md,138 行(S6)。
-- docs/arch/API_CONTRACT.md 402 变 529,加 127。
-- docs/lessons/05-api-full.md 502 变 550,加 48。
-- docs/lessons/05-api-cheatsheet.md 208 变 226,加 18。
-- docs/lessons/05-api-wbs.md 140 变 142,加 2。
-- docs/COURSE_RULES.md 642 变 643,加 1。
-- docs/TEACHING_STYLE.md 72 变 73,加 1。
-- docs/CHECKPOINTS.md 113 变 112,减 1。
-- 其余行数没变,含 HARNESS 387、SESSION_START 158、CLAUDE.md 172、PROJECT_STRUCTURE 153。
-- docs/arch/STANDARDS.md 和 docs/PROJECT_STRUCTURE.md 的 `git diff --stat` 有改动行,总行数不变。
+各文件行数（上次报告栏 1 到本次）：
+- 总数 52293 变 53288，加 995。
+- 新增 docs/arch/PENDING-C2-DRAFT.md，752 行（S6）。
+- 新增 docs/BRIDGE-05-api-w13.md，140 行（S6）。
+- docs/lessons/05-api-full.md 550 变 595，加 45。
+- docs/arch/API_CONTRACT.md 529 变 552，加 23。
+- docs/lessons/05-api-cheatsheet.md 226 变 244，加 18。
+- docs/design/UI_DESIGN.md 221 变 227，加 6。
+- docs/lessons/05-api-wbs.md 142 变 145，加 3。
+- docs/design/PRD.md 353 变 356，加 3。
+- docs/arch/STANDARDS.md 47 变 50，加 3。
+- docs/PROJECT_STRUCTURE.md 153 变 155，加 2。
+- 以上相加 995，与总数差对得上。
+- docs/BACKLOG.md 和 docs/arch/ARCHITECTURE.md 总行数没变，`git diff` 各改一行。
+- 没有文件被删或改名。
+- 本次起点 4c3b4d5 之后共有 47 个提交。
 
-上一份「学生选择」的复查:
-- 上一份报告存档版(提交 4a4d6fd)的栏 6 是空的。`git log` 里 4a4d6fd 之后没有再提交过 LIBRARIAN_REPORT.md,所以没有学生选择可对。
-- 本次无法逐条写「已落」或「没落」。这一点我已写进栏 5。
+上一份「学生选择」的复查：
+- 上一份报告存档版（提交 4c3b4d5）的栏 6 是空的。`git log` 里 4c3b4d5 之后没有再提交过 docs/LIBRARIAN_REPORT.md。
+- 所以没有学生选择可逐条对。这是连续第二次栏 6 为空，我已写进栏 5。
 
-更早遗留(我只核文件现状):
-- 问 560 A(规则 57 第 12 项三处不对齐,退回结课 E9,交付物清单 G49):没落,时点未到。docs/lessons/05-api-wbs.md:129 的 G49 仍是「待做(结课 E9)」。
-- 旧桥梁 w6 到 w11 照原定整节课结课时删:没落,时点未到。六份都在。
-- 问 321(把网页版样本和 vide_coding 排出体检范围):没落。S3 里的外来样本引用还在,范围仍是 67 份。
-- 问 323(缺「去留：」的文件顺手补):没落。S7 缺 63 份,上次 62 份,多出的是 w12。
-- 问 333(改管理员定义文件还是改核对脚本,结课时定):没落,时点未到。
+更早遗留，我只核文件现状：
+- 问 560 A（规则 57 第 12 项三处不对齐，G49）：没落。docs/lessons/05-api-wbs.md:132 的 G49 仍是「待做（结课 E9）」。
+- 旧桥梁 w6 到 w11 照原定整节课结课时删：没落，时点未到。现在 w12 也写成「已用完」，共七份。
+- 问 321（把网页版样本和 vide_coding 排出体检范围）：没落。S3 的外来样本引用还在，范围从 67 份涨到 69 份。
+- 问 323（缺「去留：」的文件顺手补）：没落。S7 缺 64 份，上次 63 份，多出的是 w13。
+- 问 333（改管理员定义文件还是改核对脚本，结课时定）：没落，时点未到。
+- G58（密码规则 PRD 对 OWASP）：没落，仍是「待做」（docs/lessons/05-api-wbs.md 的 G58 行）。
 
 ## 栏 3　发现
 
-1. S6 新增文件:docs/BRIDGE-05-api-w12.md(138 行)。要不要进 SESSION_START M 节送审命令清单,学生判。
-   - 按 .claude/agents/librarian.md:26,docs/BRIDGE-*.md 是一次性桥梁,已定不进(问 567 A),只列不问。
-   - docs/PROJECT_STRUCTURE.md:59 写「第十二窗口暂存桥梁(第十二窗口以它为准)」。
-2. S6 删除文件:docs/arch/PENDING-C1-DRAFT.md。
-   - 对应提交 4426b13「删待执行文件 PENDING-C1-DRAFT.md(学生亲跑,回 CONFIRM)」。
-   - 删除后常驻文件里残留引用已清:CLAUDE.md、docs/PROJECT_STRUCTURE.md、docs/SESSION_START.md 里没有对它的活引用。
-   - 仍提到它的是 docs/BRIDGE-05-api-w12.md:40、:71、:96 和 docs/PROJECT_STRUCTURE.md:118 的窗口回顾,都是过去时说明。
-   - docs/lessons/05-api-wbs.md:8 的「本窗口目标」还写着「照 docs/arch/PENDING-C1-DRAFT.md 从第 3 小节起」。这是第十一窗口的目标句,文件已不在。
-   - 上份报告栏 4 的候选 3(该文件)已执行,不再列。
-3. 桥梁状态:docs/PROJECT_STRUCTURE.md:53-58 写 w6 到 w11 六份「已用完,只作存档,整节课结课时删」。w12 是当前(:59)。
-   - 已用完的六份合计 229+157+190+129+133+137=975 行(上次五份 838 行)。
-   - 这是现状,不是现在要删。见栏 4。
-4. 取消检验题的传播面(判断:一致,依据是下面的 grep)。
-   - docs/COURSE_RULES.md:59(规则 22)写「3 种情况」。
-   - docs/TEACHING_STYLE.md:10 写「只在这三种情况停下等学生」。
-   - 我 grep 了 CLAUDE.md、HARNESS、SESSION_START、CHECKPOINTS、LESSON_TEMPLATE、anti-patterns 里的「4 种情况」「每段讲完出一道」「概念检验」「检验题」,没有再命中旧说法。
-   - 规则 83 背景段(docs/COURSE_RULES.md:596)和规则 44 来历(:102)仍写「概念检验」「选择题」。这是历史说明,不算打架。
-   - docs/COURSE_RULES.md:101 写「要学生拍板的选择题照旧出(规则 25)」。规则 25 在 :63,是「所有要学生回答的问题,都给填空或选择模板」。两处对得上。
-5. 规则 57 第 12 项三处仍未对齐。[判断:学生已认定是真问题(问 560 A),改法还没落]
-   - docs/COURSE_RULES.md:313:「规则 57 追加第 12 项(05-ARCH 下半场加)」标题还在,没有作废标记。
-   - docs/COURSE_RULES.md:451-452:「规则 57 第 12 项删除(05-API 加)」,取消的说明在这里。
-   - docs/COURSE_RULES.md:9 写「实际条数:81 条」,与规则 57 自检项脚本数 12 条口径不同,两者数的对象不同,我没判。
-   - docs/COURSE_RULES.md:174 的「见本文件末尾该条」这次我没重读,沿用上次判断。[假设:未变]
-   - 以谁为准、怎么改,已退回结课 E9(docs/lessons/05-api-wbs.md:129),本次不再另出。
-6. 交付物清单待做项,我只记状态,不判:
-   - docs/lessons/05-api-wbs.md:138 G58:PRD 定密码「至少 8 位、含字母和数字」,OWASP 写「There should be no requirement for upper or lower case or numbers or special characters.」。两份打架,以谁为准由学生定(决策边界 D8、D3)。出处双方都在该行里,我不给结论。
-   - docs/lessons/05-api-wbs.md:119 G39:示例邮箱改写法,留第十二窗口。
-   - docs/lessons/05-api-wbs.md:142 G62:课程做法类问题进附录 H 的候选,待做。
-7. 规则 8、9、13 仍零引用(S4)。上次学生拍板留。本次没读原文,没有新理由。[假设:理由未变]
-8. BACKLOG 的 S4 零引用列表是参考,不是删并信号。75、76、78 零引用,77 产品引用 2 次,80 产品引用 1 次。
-9. S3 的假指空引用没变。规则 42:docs/LESSON_TEMPLATE.md:23 是常驻真引用,其余在网页版样本里。规则 68、反模式 57 都在外来样本里。与问 321 未落直接相关。
-10. 两份文件的数字对比:docs/arch/API_CONTRACT.md 从 402 行涨到 529 行(加 127)。docs/BRIDGE-05-api-w12.md:40 写契约汇总到 API-56,补了十行「补充」、三行「已落」。我没读 API_CONTRACT 新增内容,没核这两处说法。
+1. S6 新增 docs/BRIDGE-05-api-w13.md（140 行）。要不要进 SESSION_START M 节送审命令清单，学生判。
+   - 按 .claude/agents/librarian.md:26，docs/BRIDGE-*.md 是一次性桥梁，已定不进（问 567 A），只列不问。
+   - docs/PROJECT_STRUCTURE.md:60 写「第十三窗口以它为准」。
+2. S6 新增 docs/arch/PENDING-C2-DRAFT.md（752 行）。要不要进 SESSION_START M 节送审命令清单，学生判。
+   - 文件头自己写了去留：docs/arch/PENDING-C2-DRAFT.md:3「一次性。第二节接口清单落完、学生认过后删；删除走学生亲跑与 CONFIRM」。
+   - docs/PROJECT_STRUCTURE.md:72 也登了同样的去留。
+   - 这是待执行文件，里面有子代理报告原样存档，不是说明书。
+3. G64 与新文件的行数相关（判断：提交纪律相关，我不判对错）。
+   - 项目 CLAUDE.md 第一层 B 第 3 条写「一次改动不超过 100 行」。
+   - docs/lessons/05-api-wbs.md 的 G64 行记了：先例 9b50b4f（742 行）一次提交；第十二窗口 0261b9f（345 行）没先报拆法；起草稿存档时停下问（问 619）；往后怎么定，结课定（待做，结课 E9）。
+   - 本次新文件 752 行，与 G64 登记的情形同类，已在清单里，不另出题。
+4. 桥梁状态。
+   - docs/PROJECT_STRUCTURE.md:53-59 写 w6 到 w12 七份「已用完，只作存档，整节课结课时删」。w13 是当前（:60）。
+   - 七份合计 229+157+190+129+133+137+138=1113 行（上次六份 975 行）。
+   - 这是现状，不是现在要删。见栏 4。
+5. 单数与复数的新旧措辞（判断：已被同文件标注，不算打架；列出供学生知道）。
+   - docs/arch/API_CONTRACT.md:45 写「资源名用复数（API-51 第六点）」。
+   - docs/arch/API_CONTRACT.md:46 紧接着写「只有一个的子资源……用单数，偏离 Zalando #134」。
+   - docs/arch/API_CONTRACT.md:522（API-51 第六点）仍写「资源名用复数」，没有加例外指针。
+   - docs/arch/API_CONTRACT.md:541（API-57 原文）写复数集合；:546 写「修订……推翻上面的复数写法，改写单数」。原文保留，修订另起一行。
+   - docs/lessons/05-api-full.md:561 记「602 A 照复数」，:565 记重拍后改单数；docs/lessons/05-api-cheatsheet.md:233 写单数。
+   - 以后读的人只看到 :522 或 :541 会读成复数。要不要在这两处加指针，学生判（D8：我只给出处，不给结论）。
+6. 旧「本窗口目标」句还在。
+   - docs/lessons/05-api-wbs.md:8 的「本窗口目标」写的是第十二窗口，桥梁 w12 第 5 节。
+   - 现在是第十三窗口。规则 W6（:54）要求每个窗口开头写一句本窗口目标。
+   - 上份发现 2 说的 PENDING-C1-DRAFT 引用，这次 grep 已不命中，说明那句已改过。
+7. PRD 本窗口新增条目与其他文件的呼应，我只核了这几处，没有发现冲突。
+   - docs/design/PRD.md 新增 D18「任务删除，首版不做」，与 CLAUDE.md 第二层 B「Out of Scope」列表没写任务删除。CLAUDE.md 写的是「不做项目删除」。两处不矛盾，但 CLAUDE.md 没列任务删除。要不要同步，学生判。
+   - docs/design/UI_DESIGN.md 新增三条「针对」注记（页 5 风险提示区、负责人转让、移出唯一负责人），指向 PRD 澄清注记 5、D10、D14、契约 API-36、API-37。我没逐条核被指的条目内容。
+8. 规则 57 第 12 项三处仍未对齐（G49，已退回结课 E9）。本次没重读，沿用上次判断。[假设：未变]
+   - docs/COURSE_RULES.md:313「规则 57 追加第 12 项」标题、:451「规则 57 第 12 项删除」，两处还在，COURSE_RULES.md 没有改动。
+9. G58 两份打架的状态没变。
+   - docs/design/PRD.md:151、:293 写「至少 8 位，含字母和数字」。
+   - OWASP 原句「There should be no requirement for upper or lower case or numbers or special characters.」在 docs/lessons/05-api-wbs.md 的 G58 行。
+   - docs/arch/STANDARDS.md:38 已登 OWASP Authentication（API-32 补充，问 576 A）。以谁为准由学生定（决策边界 D8、D3），我不给结论。
+10. G65 与 STANDARDS 的现状。
+    - docs/arch/STANDARDS.md 这次新增 RFC 5789 一行和 OWASP Authentication 一行（:38），正是 G65 登记的两个漏登。
+    - G65 仍写「待做（结课 E9）」，指的是「当场查有没有登」这个做法进不进检查单，不是这两行。没矛盾。
+11. 规则 8、9、13 仍零引用（S4），上次学生拍板留，本次没读原文，没有新理由。[假设：理由未变]
+12. BACKLOG 的 S4 零引用列表是参考，不是删并信号。75、76、78 零引用，77 产品引用 2 次，80 产品引用 1 次，与上次相同。
+13. S3 的假指空引用没变。规则 42 有一处常驻真引用：docs/LESSON_TEMPLATE.md:23。其余在网页版样本里。规则 68、反模式 57 也在外来样本里。与问 321 未落相关。
 
 ## 栏 4　可删/可并
 
-候选清单:
+候选清单：
 
-1. docs/BRIDGE-05-api-w6.md、w7.md、w8.md、w9.md、w10.md、w11.md(共 975 行)。
-   - 可删的理由:docs/PROJECT_STRUCTURE.md:53-58 写「已用完,只作存档,整节课结课时删」,w12 已接棒。
-   - 该留的理由:05-API 还没结课,docs/BRIDGE-05-api-w12.md:8 也写「w6 到 w11 只作存档,整节课结课时删」。存档用途未到期。
-   - 删除时点按文件自己写的结课,不是现在。删除走学生亲跑与 CONFIRM,不归我。
-2. docs/lessons/05-api-wbs.md(142 行)。
-   - docs/PROJECT_STRUCTURE.md 的去留说明写「一次性,整节课结课时删」。具体行号我没单独核。
-   - 现在不到时点,列出只是登记。
-3. docs/lessons/05-api-wbs.md:8 的「本窗口目标」句(第十一窗口目标)。
-   - 判断:已是过期的目标句,它引用的 PENDING-C1-DRAFT.md 已删。
-   - 该留的理由:该文件是交付物清单,目标句可能是收尾时对照 W6 用的。
-   - 并不并、改不改,学生判。
+1. docs/BRIDGE-05-api-w6.md、w7.md、w8.md、w9.md、w10.md、w11.md、w12.md（共 1113 行）。
+   - 可删的理由：docs/PROJECT_STRUCTURE.md:53-59 写「已用完，只作存档，整节课结课时删」，w13 已接棒。
+   - 该留的理由：05-API 还没结课，存档用途未到期。
+   - 删除时点按文件自己写的结课，不是现在。删除走学生亲跑与 CONFIRM，不归我。
+2. docs/lessons/05-api-wbs.md:8 的「本窗口目标」句（第十二窗口）。
+   - 判断：已过期，现在是第十三窗口。
+   - 该留的理由：W6（:54）要求收尾时对着目标说达没达到，可能收尾还要用。
+   - 并不并、改不改，学生判。
+3. docs/lessons/05-api-wbs.md 整份（145 行）。
+   - 它自己写的去留是「整节课结课时删」（:3）。现在不到时点，列出只是登记。
+4. docs/arch/PENDING-C2-DRAFT.md（752 行）。
+   - 它自己写的去留是「第二节接口清单落完、学生认过后删」（:3）。现在还没落完，列出只是登记。
+   - 可删的理由：落完后内容已进 docs/arch/API_CONTRACT.md。
+   - 该留的理由：现在是第十三窗口读稿阶段，还没落。
 
-可并:无。理由:
-- 本次规则总数没涨,没有新增规则需要对照旧规则。
-- 规则 8、9、13 的零引用,本次没有新理由推翻上次学生的「留」。
-- 规则 22、44、83 这次是改写,不是新增,没有出现一条被另一条完全盖住的情形。
+可并：无。理由：
+- 本次规则总数没涨，没有新增规则需要对照旧规则。
+- 规则 8、9、13 的零引用，本次没有新理由推翻上次学生的「留」。
+- 本次新增内容主要是契约裁决、PRD 决策 D18、STANDARDS 登记，不是规则编号，没有出现一条被另一条完全盖住的情形。
 
-另有一处需要学生拍板,不属于删并:发现 5(规则 57 第 12 项三处不对齐)已退回 E9(G49)。发现 6 的 G58 是两份资料打架,由学生定以谁为准。
+另有两处需要学生拍板，不属于删并：
+- 发现 5（API-51 第六点和 API-57 原文还写复数）。
+- 发现 9（G58，PRD 与 OWASP 打架）。
 
 ## 栏 5　我拿不准的
 
-1. 发现 1:w12 要不要进送审命令清单。按 librarian.md:26 已定不进(只列不问),我无异议。
-2. 栏 2 复查:上一份报告栏 6 是空的,4a4d6fd 之后也没有填栏 6 的提交。我不知道是学生没给选择,还是 CC 还没填。上次的选择没法逐条对。
-3. 发现 4:S4 里规则 23 不再零引用,我没查是哪份文件新引了它。
-4. 发现 5:docs/COURSE_RULES.md:174 的「见本文件末尾该条」我这次没重读。
-5. 发现 10:API_CONTRACT 新增 127 行、05-api-full 新增 48 行、05-api-cheatsheet 新增 18 行,我都没读内容。
-6. 我没有逐份读 12 份外来样本,不知道里面「规则 N」是否都是网页版编号。与上次相同。[假设]
-7. 我没有比对 CLAUDE.md、PRD、UI_DESIGN、ARCHITECTURE、API_CONTRACT 之间有没有矛盾。这一块至今未审。
-8. 我没有读 DECISIONS-R1 新增的 R1-529 到 R1-535 全文。它是历史记录,职责 4 说不查旧号。
-9. 我没有逐条读 46 条反模式、80 条 BACKLOG,也没有读 HARNESS 第五节套「形状相同」判据。
-10. 我没有跑 scripts/report-check.sh。它要等报告存档后由主对话跑。
-11. 任务消息没有要我少查或跳过什么。
+1. 发现 1、2：w13 和 PENDING-C2-DRAFT 要不要进送审命令清单。w13 按 librarian.md:26 已定不进，我无异议。PENDING-C2-DRAFT 不是桥梁，我没有现成口径，学生判。
+2. 栏 2 复查：上一份报告栏 6 是空的，4c3b4d5 之后也没有填栏 6 的提交。我不知道是学生没给选择，还是 CC 还没填。上次的选择没法逐条对。
+3. 发现 3：752 行存档是否算一百行上限，G64 已登记为结课定，我不判。
+4. 发现 5：API-51 第六点（:522）和 API-57 原文（:541）要不要加指针，我只给出处，不判。
+5. 发现 7：D18 是否要同步到 CLAUDE.md 第二层 B，我没找到规定哪些 PRD 决策要同步进宪法，所以标不准。
+6. 发现 8：docs/COURSE_RULES.md:174 的「见本文件末尾该条」我这次没重读。
+7. 我没读 docs/arch/PENDING-C2-DRAFT.md 的甲节和乙节正文，只读了头部。里面 17 个接口的名字、鉴权、schema 与 API_CONTRACT 有没有矛盾，我没比。
+8. 我没读 docs/arch/API_CONTRACT.md 新增的 23 行以外的部分，也没读 docs/lessons/05-api-full.md 新增 45 行、docs/lessons/05-api-cheatsheet.md 新增 18 行全文，只抽读了涉及单复数的几行。
+9. 我没有逐份读 12 份外来样本，不知道里面「规则 N」是否都是网页版编号。与上次相同。[假设]
+10. 我没有比对 CLAUDE.md、PRD、UI_DESIGN、ARCHITECTURE、API_CONTRACT 之间有没有其他矛盾。这一块至今只抽查。
+11. 我没有读 DECISIONS-R1 新增的 R1-536 到 R1-545 全文，职责 4 说不查旧号。
+12. 我没有逐条读 46 条反模式、80 条 BACKLOG，也没有读 HARNESS 第五节套「形状相同」判据。
+13. 任务消息没有要我少查或跳过什么。
 
 ## 栏 6　学生选择
 
-(空,由 CC 照学生原话填。)
+（空，由 CC 照学生原话填。）
 
-相关文件:
+相关文件：
 - /home/michael/projects/study-l3-v2/.claude/agents/librarian.md
 - /home/michael/projects/study-l3-v2/docs/LIBRARIAN_REPORT.md
-- /home/michael/projects/study-l3-v2/docs/COURSE_RULES.md
 - /home/michael/projects/study-l3-v2/docs/PROJECT_STRUCTURE.md
 - /home/michael/projects/study-l3-v2/docs/lessons/05-api-wbs.md
-- /home/michael/projects/study-l3-v2/docs/BRIDGE-05-api-w12.md
+- /home/michael/projects/study-l3-v2/docs/arch/PENDING-C2-DRAFT.md
+- /home/michael/projects/study-l3-v2/docs/arch/API_CONTRACT.md
+- /home/michael/projects/study-l3-v2/docs/arch/STANDARDS.md
+- /home/michael/projects/study-l3-v2/docs/BRIDGE-05-api-w13.md
 - /home/michael/projects/study-l3-v2/scripts/doc-check.sh
