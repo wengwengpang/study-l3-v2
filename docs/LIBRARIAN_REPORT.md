@@ -438,7 +438,9 @@
 
 ## 栏 6　学生选择
 
-（空，由 CC 照学生原话填。）
+- 发现 2（docs/arch/PENDING-C2-DRAFT.md 要不要进送审命令清单）：问 621 A，不进。理由同问 567 A：送审清单管长期约束 CC 的说明书，这份是一次性待执行文件。学生原话「621 选 A」。
+- 发现 5、7（契约 API-51 第六点没指向 API-57 修订；CLAUDE.md 第二层 B 关键决策缺 D18）算不算 SESSION_START M 节试行期第一条的「主会话没发现的真问题」：问 622 A，两处都算。学生原话「622 选 A」。D18 已补（对照 767，0b6a53c）；API-51 照问 623 A 加补充（对照 770）。
+- 抽查偏差：栏 2 复查里 G49 写在 docs/lessons/05-api-wbs.md:132，实为第 129 行；报告原文不改，以 DECISIONS-R1 R1-546 第四点为准。
 
 相关文件：
 - /home/michael/projects/study-l3-v2/.claude/agents/librarian.md
