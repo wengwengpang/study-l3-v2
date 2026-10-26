@@ -394,6 +394,7 @@
   服务端渲染把浏览器带来的 Cookie 原样转发（T15）。
   补充（第十二窗口，问 613 B）：注册、登录的请求里带着一个有效的旧会话时（已登录又去注册或登录，换不换账号都算），同一次请求里先删掉旧会话，再新建会话。两个接口照旧是公开接口，不挂 AuthGuard，只是多读一次 Cookie。依据：OWASP Session Management Cheat Sheet「Renew the Session ID After Any Privilege Level Change」一节「the old or previous session ID must be destroyed」（必须），该节指认证是最常见的必须换新会话的场景。没选：不管旧会话、留到过期（核对轮 architect 的推荐，当时标了这一节未核），违反上面的必须；已登录时拒绝注册与登录，想换账号要先登出，前端多一种拒绝。
   补充（第十二窗口，问 614 A）：会话已经失效（过期或被删）时调登出，照样经 AuthGuard 回 401「未登录」，前端照 API-16 跳登录页；不为登出开公开接口的特例。依据：OWASP Session Management Cheat Sheet「Logout Button」一节「the web application must invalidate the session at least on server side.」，会话已失效，服务端没有可作废的；401 的意思保持一个（API-14）。没选：登出不挂 AuthGuard、一律回 204 并清 Cookie，登出成了要另外记住的特例接口。
+  补充（第十三窗口，问 625 A）：上面「先删掉旧会话」只在注册、登录成功时做；失败时（凭据错、邮箱已被使用、参数不合法）旧会话照旧，人还是原来的登录状态。依据：OWASP Session Management Cheat Sheet 那一节管的是「after any privilege level change」，失败时权限没变，原文不管这一种（推导）。没选：请求一来就删，成败都删，已登录的人在登录页输错一次密码就被登出。
 - API-9 SameSite 取 Lax。拦跨站的 POST、PUT、PATCH、DELETE（PATCH 由 API-50 补）；外链进来的页面请求仍带凭据。
   只作纵深防护，正式防护见 API-11。
 - API-10 会话固定 30 天，不设空闲超时（PRD D7、T4）。偏离 OWASP 会话管理的空闲超时与绝对超时建议，
@@ -454,6 +455,7 @@
   type 的字面值归共享 schema，本文件点名那份 schema，名字见 API-30。与 API-1、API-3 同一口径。
   由来：第零节「本文件管退回性质到状态码的映射」与「取值范围归 schema」两句，
         对 type 能读出两个答案（第三窗口 architect 核对报出）。
+  补充（第十三窗口，问 611 A、627 A）：第二节每个接口写退回性质，并标出哪几种要专门的 type，只标要不要，字面值照本条仍归 ProblemType。每种退回性质默认一个 type；只有前端要在同一性质里分出不同提示的，才另起专门的 type。依据：前端照 type 出提示（API-19）；第一节第 8 小节「跨站被拒」有单独的 type，也是按性质给。没选：只写退回性质、不标 type；写 type 字面值（要推翻本条）；每个接口的每种退回各给一个 type；没标的一律用 about:blank（要推翻 API-47）。
 - API-25 成功码照 RFC 9110 三分：读取、更新回 200，带资源；新建回 201，响应体带新资源与它的 id，
   新资源有能读的地址时带 Location 头，没有就不带（如登录新建的会话）；成功但没有内容回 204（如登出）。
   依据：RFC 9110 第 15.3.1、15.3.2、15.3.5 节；主参考 Zalando：POST 新建
@@ -479,6 +481,7 @@
         Service 不用懂数据库的错误码。
   没选：统一出口认数据库错误，分不清撞的是哪条约束；不翻，落成 500，给用户错的提示。
   未定：Prisma 报这类错的错误码随版本不同，版本未锁（见 BACKLOG），写代码时按锁定的版本查官方错误参考。
+  补充（第十三窗口，问 630 A）：撞的是 users.email、成员表「用户 + 项目」这两条唯一约束的，回注册、邀请成员各自那一种专门的 type（「邮箱已被使用」「已在项目中」），与先查就查到时同一个提示；撞的是「每个项目至多一个负责人」的（ADR-DB-006），回冲突的默认 type。依据：上面理由里「Repository 知道每条唯一约束对应什么」。没选：一律回冲突的默认 type，同一件事两种提示。
 - API-29 跨站请求伪造被拒单列一种退回性质「跨站被拒」，也回 403，type 单独一个；前端出什么提示由前端定（API-19）。
   统一出口认得出它：本项目代码只抛退回性质（API-23），Guard 不许只返回 false，
   所以过滤器收到的框架 ForbiddenException 只可能来自跨站检查（推导，写后端代码时实测）。
@@ -489,6 +492,8 @@
   理由：名字是本文件与 05-类型 的接缝（API-1），主体对得上即可；后缀牵涉全部 schema，归 05-类型。
         主体取 RFC 9457 的原词 problem details。
   参考：Zod 官方「基本用法」页的例子，schema 与类型同名、不带后缀（Player）；该页没有命名规定，只作 05-类型 的参考。
+  补充（第十三窗口，问 626 A）：第二节其余 schema 同样只定主体。请求体照方法起名：POST 写 Create，PATCH 写 Update，PUT 写 Replace，后接资源名，再加 Request，如 CreateUserRequest。依据：NestJS 官方 CRUD 生成器给的是 CreateUserDto、UpdateUserDto；Google AIP-133「The request message must match the RPC name, with a `Request` suffix.」。PUT 写 Replace 是推导，AIP 没有对应的标准方法。没选：照业务词起，如 RegisterRequest、LoginRequest，名字与路径对不上。
+  补充（第十三窗口，问 628 A、629 A）：列表的每一项与这个资源的详情同一形状、同一个名字；一个资源按调用者角色给不同形状时仍用一个名字，几种形状怎么写归 05-类型（API-1）。依据：Google AIP-132「The response should usually include fully-populated resources unless there is a reason to return a partial response」；改状态回整个任务（API-35 补充），前端可直接替换列表那一行。没选：列表另设摘要形状；按角色分两个名字。
 - API-31 请求体出现 schema 没列的字段，一律拒绝，回「参数不合法」（400），外壳逐项列出多出来的键（ValidationProblemDetails）。
   请求体里多带的项目 id 同样拒绝；新任务归哪个项目仍只从路径取（决策 D）。响应方向反过来：前端解析响应时容忍多出来的字段。
   依据：主参考 Zalando #109「Unknown input fields in payload or URL should not be ignored;」「servers should provide error feedback to clients via an HTTP 400 response code.」；
@@ -626,3 +631,4 @@
   依据：主参考 Zalando #141（必须）「The API describes resources, so the only place where actions should appear is in the HTTP methods.」「In URLs, use only nouns.」。同一行登记的 #129、#134 已是全局约定（API-51 第六点）；API-36、API-50 已引 #141。
   参考：NestJS 官方认证一页的例子在 auth 下写 sign-in、sign-up，页内没说这是约定，只当教程例子，不压过主参考（判断）。
   没选：不写全局约定，第二节逐个接口落实（第十窗口起草稿的推荐，当时理由是没有裁决可挂）；写全局约定，但登录、登出、注册现在就定为例外，那几个接口还没核对。
+  已定（第十三窗口，问 605 A）：注册 POST /api/users，登录 POST /api/sessions，登出 DELETE /api/sessions/self，见第二节第 4 小节。
