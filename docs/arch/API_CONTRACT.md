@@ -568,6 +568,7 @@
   参考：Zod 官方「基本用法」页的例子，schema 与类型同名、不带后缀（Player）；该页没有命名规定，只作 05-类型 的参考。
   补充（第十三窗口，问 626 A）：第二节其余 schema 同样只定主体。请求体照方法起名：POST 写 Create，PATCH 写 Update，PUT 写 Replace，后接资源名，再加 Request，如 CreateUserRequest。依据：NestJS 官方 CRUD 生成器给的是 CreateUserDto、UpdateUserDto；Google AIP-133「The request message must match the RPC name, with a `Request` suffix.」。PUT 写 Replace 是推导，AIP 没有对应的标准方法。没选：照业务词起，如 RegisterRequest、LoginRequest，名字与路径对不上。
   补充（第十三窗口，问 628 A、629 A）：列表的每一项与这个资源的详情同一形状、同一个名字；一个资源按调用者角色给不同形状时仍用一个名字，几种形状怎么写归 05-类型（API-1）。依据：Google AIP-132「The response should usually include fully-populated resources unless there is a reason to return a partial response」；改状态回整个任务（API-35 补充），前端可直接替换列表那一行。没选：列表另设摘要形状；按角色分两个名字。
+  补充（第十三窗口，问 631 A）：列表接口响应的外壳也照方法起名，写「List + 资源复数 + Response」，如 ListProjectsResponse、ListMembersResponse、ListTasksResponse。依据：Google AIP-132「The request and response messages must match the RPC name, with `Request` and `Response` suffixes.」，与问 626 A 同一家同一思路。没选：照起草稿写「资源名 + List」（ProjectList、MemberList、TaskList），请求按动作、列表按资源，两套规则。
 - API-31 请求体出现 schema 没列的字段，一律拒绝，回「参数不合法」（400），外壳逐项列出多出来的键（ValidationProblemDetails）。
   请求体里多带的项目 id 同样拒绝；新任务归哪个项目仍只从路径取（决策 D）。响应方向反过来：前端解析响应时容忍多出来的字段。
   依据：主参考 Zalando #109「Unknown input fields in payload or URL should not be ignored;」「servers should provide error feedback to clients via an HTTP 400 response code.」；
@@ -593,6 +594,7 @@
   落点：第一节第 3 小节「待第 3 组定」，第五批起草时写；路径、所属模块与 schema 名随接口清单定。
   已落（第一节第 3 小节）。路径、所属模块与 schema 名照旧随接口清单定。
   补充（第十二窗口，问 606 A）：路径为 GET /api/users/self，照 Zalando #134、#143 的 self 例外，不算偏离；代码放 auth 模块：注册已在 auth，/api/users 下的路由在同一个模块，auth 依赖 users 这条线本来就有，不加新依赖。schema 名照旧随接口清单定。
+  补充（第十三窗口，问 632 A）：项目详情与项目列表的每一项都叫 Project；执行者那份只带名称与自己的角色（PRD 审定决策 D11、D17），负责人那份带什么、两份是否同形，归 05-类型（API-1）。没选：第二节写定「两种角色同一形状」，D17 只管执行者，那是推导。
 - API-35 改任务拆两个接口。负责人专用的「改任务」接口管标题、描述、截止日期、负责人，执行者调用时由 AuthzGuard 按角色回「不许做」；
   「改状态」接口两种角色都能调，执行者只能改分给自己的任务，归属在 Service 里判，先判「看不见」（ARCHITECTURE 第三节 R2-6、R2-7 同一顺序）。两个接口的请求体都照 API-31、API-33。
   理由：PRD 审定决策 D15、D16 与权限矩阵把内容与分配划给负责人，状态两种角色都能改；按 T6，只凭角色能判的归 Guard，字段级权限变成路由级。
@@ -701,8 +703,14 @@
   修订（第十二窗口，问 604 A）：推翻上面的复数写法，改写单数。只有一个的子资源（本项目的负责人、任务的状态、项目的汇总）写单数，偏离 #134，理由登在 docs/arch/STANDARDS.md「偏离登记」。转让负责人照旧用 PUT 整个替换这个子资源，请求体照 API-36 原话放新负责人的 userId，不再包数组；改状态照旧用 PATCH，API-50 不动。上面原文不改。
   由来：上面理由里「代价只落在这一个接口的请求体上」不成立（第十二窗口 architect 核对轮报出）：改状态（API-35 要它和改任务分开路径）、项目汇总也是只有一个的子资源。照复数写，两个写接口的请求体都要多一层数组，改状态还得把 PATCH 改成 PUT，「状态们」也会被读成状态的历史。依据：同一层 Google AIP-156「Singleton resources are always singular.」。
   已定（第十二窗口，问 606 A）：「当前用户」接口的路径与所属模块，见 API-34 补充。
+  已定（第十三窗口，问 607 A）：转让负责人 PUT /api/projects/{projectId}/owner，见第二节第 5 小节。
 - API-58 路径只写名词，不带动词；动作只用 HTTP 方法表达。全部接口适用，写进第一节第 2 小节。登录、登出、注册这类口语里是动词的接口，按资源来写，具体名字随接口清单定。
   依据：主参考 Zalando #141（必须）「The API describes resources, so the only place where actions should appear is in the HTTP methods.」「In URLs, use only nouns.」。同一行登记的 #129、#134 已是全局约定（API-51 第六点）；API-36、API-50 已引 #141。
   参考：NestJS 官方认证一页的例子在 auth 下写 sign-in、sign-up，页内没说这是约定，只当教程例子，不压过主参考（判断）。
   没选：不写全局约定，第二节逐个接口落实（第十窗口起草稿的推荐，当时理由是没有裁决可挂）；写全局约定，但登录、登出、注册现在就定为例外，那几个接口还没核对。
   已定（第十三窗口，问 605 A）：注册 POST /api/users，登录 POST /api/sessions，登出 DELETE /api/sessions/self，见第二节第 4 小节。
+  已定（第十三窗口，问 605 A）：项目列表 GET /api/projects，后端只回调用者是成员的项目，见第二节第 5 小节。
+- API-59 项目成员这个子资源叫 members，路径里的编号用用户 id：成员列表与邀请成员用 /api/projects/{projectId}/members，移出成员用 /api/projects/{projectId}/members/{userId}。
+  理由：PRD 与界面都叫「成员」；编号用用户 id，与任务的 assignee、转让负责人的请求体（API-36）是同一种 id；成员表在「用户 + 项目」上有唯一约束，一个用户在一个项目里只有一行，用户 id 就能定位。
+  没选：memberships 加成员表自己的 id；memberships 加用户 id。
+  由来：第十二窗口 architect 核对轮第一组第 8 条，问 610 A；第十三窗口照问 624 A 编号。{userId} 转不成数字的退回见第二节第 5 小节「移出成员」。
