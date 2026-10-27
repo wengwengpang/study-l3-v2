@@ -283,7 +283,7 @@
 
 第一节写过的不再重复（API-1）。第 1 到 3 小节是各接口共用的读法，第 4 到 6 小节逐个列接口，第 7 小节列本版没有接口的部分。
 
-（第 6、7 小节随 tasks 组落，进度见 docs/arch/PENDING-C2-DRAFT.md。）
+（第 7 小节待落，进度见 docs/arch/PENDING-C2-DRAFT.md。）
 
 ### 1. 鉴权级别
 
@@ -429,6 +429,73 @@
 - 成功：204（API-52）。转给自己也回 204，什么都不改（API-39）。
 - 退回：参数不合法（新负责人不是本项目成员，API-39）。不许做（执行者）。
 - 依据：US-R02；PRD 审定决策 D10、D17；API-36、API-36 补充（问 604 A）、API-39、API-50、API-52、API-57 修订、API-57 已定。
+
+### 6. tasks 模块
+
+项目汇总的路径挂在项目下，代码在 tasks（ARCHITECTURE 第一节决策 5）。
+
+#### 任务列表
+
+- 方法与路径：`GET /api/projects/{projectId}/tasks`
+- 鉴权级别：本项目成员。Service 按角色过滤：负责人拿全项目任务，执行者只拿分给自己的（API-42）。
+- 请求：无
+- 响应：ListTasksResponse，每一项是 Task，按调用者角色给（API-43）。
+- 成功：200
+- 退回：只有第 2 小节的共有退回。
+- 依据：US-03、US-06、US-07、US-02a、US-08；US-01（项目主页的成员任务状态区由前端拿本接口加成员列表拼，API-42 补充）；PRD 审定决策 D6、D11、D13；API-40、API-41、API-42、API-42 补充（问 609 B）、API-43；T2。
+
+#### 任务详情
+
+- 方法与路径：`GET /api/projects/{projectId}/tasks/{taskId}`
+- 鉴权级别：本项目成员。执行者只能看分给自己的，由 Service 判（API-15）。
+- 请求：无
+- 响应：Task，按调用者角色给（API-43）。
+- 成功：200
+- 退回：看不见（任务不存在、不属于本项目，或执行者看的不是分给自己的任务，API-4、API-15；{taskId} 转不成数字，在 Service 里退回，ARCHITECTURE 第三节决策 B）。
+- 依据：US-03、US-06、US-07、US-08；API-4、API-15、API-43；T2、决策 B。
+
+#### 创建任务
+
+- 方法与路径：`POST /api/projects/{projectId}/tasks`
+- 鉴权级别：只有负责人
+- 请求：CreateTaskRequest
+- 响应：Task
+- 成功：201，响应体带新任务，带 Location 指向这个任务的任务详情（API-25）。
+- 退回：参数不合法（任务负责人不是本项目成员，决策 E）。不许做（执行者）。
+- 依据：US-03、US-06、US-08、US-02a；PRD 审定决策 D2、D3；API-25、API-31、API-32、API-38、API-41、API-43、API-54；T5、决策 D、决策 E；ADR-DB-006（分配要拿的锁，见 ARCHITECTURE 第一节「依赖方向」）、ADR-DB-007。
+
+#### 改任务
+
+- 方法与路径：`PATCH /api/projects/{projectId}/tasks/{taskId}`
+- 鉴权级别：只有负责人（API-35）
+- 请求：UpdateTaskRequest。没传与 null 照第一节第 4 小节（API-33）。
+- 响应：Task
+- 成功：200
+- 退回：
+  - 参数不合法，有三种。任务负责人不是本项目成员（决策 E）。对不可空字段传 null（API-33）。请求体带了状态：状态归改状态接口，按多余字段处理（API-31、API-35）。
+  - 看不见（任务不存在或不属于本项目；{taskId} 转不成数字，在 Service 里退回，ARCHITECTURE 第三节决策 B）。
+  - 不许做（执行者）。
+- 依据：US-02a、US-06、US-08；PRD 审定决策 D3、D15、D16；API-33、API-35、API-38、API-43、API-50；决策 B、决策 E；ADR-DB-006、ADR-DB-007。
+
+#### 改状态
+
+- 方法与路径：`PATCH /api/projects/{projectId}/tasks/{taskId}/status`
+- 鉴权级别：本项目成员。执行者只能改分给自己的，由 Service 先判归属（API-35）。
+- 请求：UpdateTaskStatusRequest
+- 响应：Task，与任务详情同一形状，按调用者角色给（API-35 补充）。
+- 成功：200。改成原来的值也回 200，不算状态变化（PRD 澄清注记 12）。
+- 退回：看不见（任务不存在、不属于本项目，或执行者改的不是分给自己的任务，API-35；{taskId} 转不成数字，在 Service 里退回，ARCHITECTURE 第三节决策 B）。参数不合法（请求体带了状态以外的字段，API-35）。
+- 依据：US-07；PRD 审定决策 D12、D13；PRD 澄清注记 12；API-35、API-35 补充（问 608 A）、API-43、API-50、API-57 修订、API-57 已定；决策 B。
+
+#### 项目汇总
+
+- 方法与路径：`GET /api/projects/{projectId}/summary`
+- 鉴权级别：只有负责人（API-42）
+- 请求：无
+- 响应：ProjectSummary。内容范围见 API-42 补充。
+- 成功：200
+- 退回：不许做（执行者）。
+- 依据：US-04 第一、二条；API-25、API-42、API-42 补充（问 609 B、634 B）、API-57 修订、API-57 已定；ARCHITECTURE 第一节决策 5。
 
 ## 三、本节裁决汇总
 
