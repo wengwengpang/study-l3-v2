@@ -4,10 +4,10 @@
 > 格式：编号 | 类型 | 一句话 | 何时做
 > 类型：下沉 / 收敛 / 取经 / 加课
 > 维护：本文件是开课必读 7 个之一（唯一清单见规则 55）；结课逐条问有无新待办（规则 54 配套）。
-> 号段：1-80。
+> 号段：1-81。
 > 留空：无。
-> 实际条数：80 条。
-> 下一个可用号：81。
+> 实际条数：81 条。
+> 下一个可用号：82。
 
 1 | 取经 | 抄 Superpowers 的 eval 思路，验证规则真不真生效 | 结课收敛
 2 | 取经 | 抄 Spec Kit 的跨工具持久 spec + 自动一致性检查 | 结课收敛
@@ -89,3 +89,4 @@
 78 | 下沉 | 列表分页：本版不分页（API-40），压在 PRD 假设账本的规模假设上（每个项目任务几百条以内、成员十人以内，未验证）。主参考 Zalando #159 对「(potentially) larger than just a few hundred entries」的列表是 MUST。假设被推翻时照 #159、#160 加游标分页，排序筛选随之移到后端，负责人进度视图（US-01「无需翻页」）另出不分页的汇总。来源 DECISIONS-R1 R1-454 问 455 A | 规模假设被真实数字推翻时
 79 | 收敛 | 去掉首尾空白在哪一层做：API-32（标题、描述、项目名称）与 API-55（邮箱）都要存去掉首尾空白后的值，都没写在共享 Zod schema 还是 Service 里做；两条该放同一层。邮箱的 citext 只管大小写不管空白，三个入口漏一处就多一个账号或查不到人（ADR-DB-008）。来源 DECISIONS-R1 R1-525 | 05-类型（定共享 Zod schema 时）
 80 | 下沉 | 数据库区域设置定死：citext 的大小写规则随数据库的 LC_CTYPE（PostgreSQL 18 citext 一页原文「citext's case-folding behavior depends on the LC_CTYPE setting of your database」，2026-10-17 取回），本项目库的区域设置没定（ADR-DB-008）。来源 DECISIONS-R1 R1-525 | 05-环境
+81 | 下沉 | 账号自己的操作（改密码、改邮箱、找回密码、注销账号）首版都不做（PRD 审定决策 D19，问 636 A）。后果：首版用户忘了密码无法找回，没有管理员能代为重置，同一邮箱也不能重新注册。找回密码一般要靠系统外的渠道证明身份，如邮件，本版不做邮件（推导）。做时照 OWASP Authentication Cheat Sheet「Change Password Feature」「Implement Secure Password Recovery Mechanism」「Changing A User's Registered Email Address」三节，另核 OWASP ASVS 有没有要求（DECISIONS-R1 R1-556 第五点） | Lec 13 功能迭代时评估；最晚 Lec 15 上线前定
