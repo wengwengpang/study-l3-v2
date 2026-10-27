@@ -1,7 +1,7 @@
 # 补课 05-API　接口契约（下）
 
 > 草稿。每个窗口收尾，把那个窗口定下的接口知识写进来；课程做法类的问题写进附录 H（book/appendix-h.md）。整节课结课时照 book/OUTLINE.md 统稿成十节，项目主人读过认了才算定稿（问 491 A、515 A）。
-> 现在收六块：第六窗口拍板的接口知识，第七窗口的邮箱约束三种写法，第十到十三窗口各一块接口知识。
+> 现在收七块：第六窗口拍板的接口知识，第七窗口的邮箱约束三种写法，第十到十四窗口各一块接口知识。
 > 统稿时，各块都按契约的小节编进第三、五节。
 
 ---
@@ -168,6 +168,28 @@ Zalando 第 143 条是必须档，标题「MUST identify resources and sub-resou
 
 ---
 
+## 第七块　第十四窗口的接口知识
+
+### 1. 一个词在同一个接口里只指一样东西
+
+「负责人」在这个项目里有两个意思：一是项目角色，派活、看全局的那一方；二是一个任务分给了谁。创建任务这个接口，鉴权级别写「只有负责人」，指的是项目角色。退回里要说「分给的人不是本项目成员」，如果也写「负责人」，读的人就分不清。PRD 澄清注记 10 定了读法：说任务分给谁，写「任务负责人」。契约写到 tasks 组时照它改写（第二节第 6 小节）。
+
+### 2. 能由别的数算出来的，接口里不必再给
+
+项目主页要显示完成率。汇总接口已经给了四个数：任务总数、已完成、进行中、未开始。完成率就是「已完成」除以「任务总数」，前端一除就有，后端没有别处要用它，所以接口里不另给（API-42 补充）。这段算法也不放进前后端共享的那一层：判断标准第一问是「前后端是不是都真的用它」，只有前端用，就不进。任务总数为 0 时，页面本来就有空态，汇总显示 0，并引导去建第一个任务，前端不做除法。将来要在后端判断项目风险时，再往汇总里加一个字段，只加不改，老的前端不受影响。
+
+### 3. 「本版没有接口的」也要列全
+
+接口清单最后一小节，列本版没有接口的东西（第二节第 7 小节）。它分三类：没有接口的模块，是 users、authz、notifications；本版不做、所以没有接口的操作，是删任务、删项目、成员自己退出、把成员直接改成执行者，以及用户对自己账号的四样操作；本版延后的功能。列这一节，是为了让写后端、写前端的人不去写、不去调根本不存在的接口，也不把「没做」当成「漏了」补上。
+
+用户对自己账号的四样操作，是改密码、改邮箱、找回密码、注销账号。需求文档里一句都没提，「不做」的清单里也没写。认证这块的主参考 OWASP Authentication Cheat Sheet 有三节讲这些，开头分别是：「When developing a change password feature, ensure to have:」「It is common for an application to have a mechanism that provides a means for a user to gain access to their account in the event they forget their password.」「User email addresses often change.」。三句讲的都是做的话该怎么做，没有写必须提供。本版定为都不做，并写明后果：忘了密码就进不去，也没有管理员能代为重置（PRD 审定决策 D19）。
+
+### 4. 示例里的域名用 example.com
+
+文档里的示例邮箱原先写成 Bob@x.com。x.com 是一个真实在用的域名，拿它当示例，照着测试就可能把请求发到别人的服务器上。RFC 2606 第 3 节写：「The Internet Assigned Numbers Authority (IANA) also currently has the following second level domain names reserved which can be used as examples.」，保留的是 example.com、example.net、example.org。示例邮箱都改成了 example.com 的写法。
+
+---
+
 ## 本草稿的依据
 
 以下原文都在 2026-10-17 用网页取回核过：
@@ -181,5 +203,6 @@ Zalando 第 143 条是必须档，标题「MUST identify resources and sub-resou
 - 第四块（第十一窗口取，2026-10-21）：RFC 9110 第 9.3.4、15.3.2 节；RFC 9562 第 5.4 节；Zalando 第 148 条。
 - 第五块（第十二窗口取，2026-10-23）：Zalando 第 134、141、143、148 条；Google AIP-156；RFC 5789 第 2、2.1 节；RFC 9110 第 9.2.2、15.3.1 节；OWASP 会话管理（Renew the Session ID After Any Privilege Level Change、Logout Button 两节）；NestJS 官方认证一页。
 - 第六块（第十三窗口取，2026-10-26）：Google AIP-132、AIP-133；Zalando 第 143 条；NestJS 官方 controllers、CRUD 生成器两页。
+- 第七块（第十四窗口取，2026-10-27）：OWASP Authentication Cheat Sheet（Change Password Feature、Implement Secure Password Recovery Mechanism、Changing A User's Registered Email Address 三节）；RFC 2606 第 3 节。
 
-项目里的出处：docs/DECISIONS-R1.md 的 R1-453 到 R1-481；契约 API-40 到 API-55。第二块见 R1-492 第四点，第三块见 R1-525、R1-527 与 ADR-DB-008。第四块见 R1-530 到 R1-533 与契约汇总里第十一窗口的补充行。第五块见 R1-537 到 R1-543 与契约汇总里第十二窗口的补充、修订行。第六块见 R1-546 到 R1-551 与契约汇总里第十三窗口的补充、已定行和 API-59。原先的「怎样不漏掉一整块」「开课读得太多，中途会漂」两块已挪进附录 H（book/appendix-h.md），出处跟着搬了过去（问 515 A、516 A）。
+项目里的出处：docs/DECISIONS-R1.md 的 R1-453 到 R1-481；契约 API-40 到 API-55。第二块见 R1-492 第四点，第三块见 R1-525、R1-527 与 ADR-DB-008。第四块见 R1-530 到 R1-533 与契约汇总里第十一窗口的补充行。第五块见 R1-537 到 R1-543 与契约汇总里第十二窗口的补充、修订行。第六块见 R1-546 到 R1-551 与契约汇总里第十三窗口的补充、已定行和 API-59。第七块见 R1-555 到 R1-560 与契约第二节第 6、7 小节、API-42 补充（问 634 B）、PRD 审定决策 D19。原先的「怎样不漏掉一整块」「开课读得太多，中途会漂」两块已挪进附录 H（book/appendix-h.md），出处跟着搬了过去（问 515 A、516 A）。
