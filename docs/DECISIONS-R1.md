@@ -12166,3 +12166,12 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 三，G39 两处：PRD 澄清注记 14 一行、书章草稿 book/lec05-api-2.md 一行（git grep「@x.com」，排除历史与外来材料）。
 四，出对照 799（交付物清单 C2「进行中」改「已完」，末尾写验证全过与删除提交号；153 行，增 1 删 1，C 开头各行「进行中」0 次，覆盖核对无输出）；出问 637（剩下的用量怎么分）。
 进 HARNESS：本条为记账，不判。
+
+--- R1-560 · 对照 799 已落；问 637 A；取回 RFC 2606 原文；出 G39 对照 800、801 与清单对照 802（学生：「同意 799；637 选 A」）---
+一，落盘，命令判过才提交：799 2204c63（交付物清单 153 行，增 1 删 1，C 开头各行「进行中」0 次，覆盖核对无输出，与预拼版 cmp 相同）。契约一项在清单上全部已完。
+二，问 637 A（按推荐）：落 799，做 G39，然后收尾；D6 留下个窗口；整节课结课 E1 到 E12 留下个窗口。未选 B 直接收尾、C 连 D6 一起做。理由：G39 拖了四个窗口、只两行；D6 要取官方权限模式页原文、照全书骨架写一条附录，分量大一截；窗口已深，本窗口 CC 三处错都在落盘前拦下（R1-554 第六点、R1-557 第四点），G40 记过用量过半后错误变多。D6 一行随对照 802 改为第十五窗口（卡 9 第 3 条，当场登）。
+三，原文（2026-10-27 WebFetch，为 G39）：RFC 2606（Best Current Practice，BCP 32）第 3 节「The Internet Assigned Numbers Authority (IANA) also currently has the following second level domain names」「reserved which can be used as examples.」，下列 example.com、example.net、example.org。两次取，第二次单取要害句，一致。
+四，G39 两处（git grep「@x.com」，排除历史与外来材料，R1-559 第三点）：PRD 澄清注记 14「Bob@x.com 与 bob@x.com」、书章草稿「`Bob@x.com` 和 `bob@x.com`」，照 book/lec05.md 已有的小写 example.com 写法改为 Bob@example.com、bob@example.com，保留前半段大小写不同，因为那两句要演示的正是这一点。
+五，出对照，整份预拼、预期先数：800 PRD（358 行，增 1 删 1，「x.com」2 到 0、「example.com」0 到 2）；801 书章草稿（185 行，增 1 删 1，「x.com」2 到 0、「example.com」0 到 2）；802 交付物清单（G39 改已完、D6 改第十五窗口；153 行，增 2 删 2，「x.com」2 到 3，多出的一处在 G39 新状态里，覆盖核对无输出）。
+六，传播面（规则 69，打开文件核）：PRD、书章草稿要改（对照 800、801）；契约、UI_DESIGN、ARCHITECTURE、CLAUDE.md 不影响（git grep 没有别处）；STANDARDS 不影响（正文没有引 RFC 2606，只是照它写示例）；PROJECT_STRUCTURE 不影响。
+进 HARNESS：问 637 判否（不是框架层），是本窗口用量安排；G39 为记账，不判。
