@@ -12159,3 +12159,10 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 四，谁还指着它（卡 8 第 2 条，git grep，排除它自己）：PROJECT_STRUCTURE 3 处（契约一行、目录树一行、补课链进度一处），收尾 W2 改；交付物清单 2 处（第 8 行本窗口目标、C2 一行），C2 删后出对照改已完、写删除提交号，第 8 行是本窗口目标原话不改；桥梁 w13 7 处、w14 3 处，一次性桥梁不改；DECISIONS-R1 5 处、体检报告 9 处、完整笔记 2 处，是历史记录不改。契约里已没有指向它的地方（对照 793 删了临时说明）。
 五，影响与回滚（卡 8 第 3 条，决策边界 D5）：删 docs/arch/PENDING-C2-DRAFT.md 一个文件，765 行；正本文件不受影响。回滚：git restore --source=f38c433 -- docs/arch/PENDING-C2-DRAFT.md，随时可恢复；推送后远端历史里也有。照 R1-535 先例：学生回 CONFIRM 后亲跑 rm 与 git status --short（rm 在禁止档），CC 再提交。
 进 HARNESS：本条为记账，不判。
+
+--- R1-559 · 学生回 CONFIRM 后亲跑删除，待执行文件已删 1c256a7；出对照 799 与问 637（学生：「CONFIRM」；CC 查文件仍在，请学生跑命令；学生随后亲跑「rm docs/arch/PENDING-C2-DRAFT.md; git status --short」，输出「 D docs/arch/PENDING-C2-DRAFT.md」）---
+一，学生先只回 CONFIRM，没跑命令；CC 跑 git status 与 ls，文件仍在，请学生把那一行整行粘进输入框回车（自动记忆接续点「学生要亲手跑的命令常只回字不跑」又一例）。学生随后亲跑，输出一行「 D docs/arch/PENDING-C2-DRAFT.md」。规则 83 第 1 条弱点训练：学生亲手走了一次协议 12 双确认。
+二，提交前看 status 只有这一行、文件已不在，CC 提交 1c256a7（765 行全删）。回滚：git restore --source=f38c433 -- docs/arch/PENDING-C2-DRAFT.md。指着它的 PROJECT_STRUCTURE 三处收尾 W2 改（R1-558 第四点）。
+三，G39 两处：PRD 澄清注记 14 一行、书章草稿 book/lec05-api-2.md 一行（git grep「@x.com」，排除历史与外来材料）。
+四，出对照 799（交付物清单 C2「进行中」改「已完」，末尾写验证全过与删除提交号；153 行，增 1 删 1，C 开头各行「进行中」0 次，覆盖核对无输出）；出问 637（剩下的用量怎么分）。
+进 HARNESS：本条为记账，不判。
