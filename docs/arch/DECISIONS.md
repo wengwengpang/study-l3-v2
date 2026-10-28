@@ -83,3 +83,4 @@
 - 背景：API-55 定邮箱存用户输入的原样（去掉首尾空白后），注册查重、登录、按邮箱邀请成员时整个地址不分大小写比较，并要求数据库有不分大小写的唯一约束。users.email 原为 String @unique，区分大小写。Prisma 版本未锁（BACKLOG 74）。库还没建，没有数据要迁。
 - 决策：users.email 改用 PostgreSQL 的 citext 类型（Prisma @db.Citext），保留 @unique（问 572 A）。扩展的启用照 ADR-DB-006 的做法随 BACKLOG 74 定：锁的版本支持 datasource 的 extensions 就写进 schema，否则在建 users 表的迁移开头手写 CREATE EXTENSION。查询照常按邮箱查，不用 mode。去掉首尾空白不归本约束管，在哪一层做见 BACKLOG 79。改前经 architect 确认不挡路。
 - 后果：大小写规则落在列类型上，三个入口不用各写一遍；撞约束按 API-28 回 409。代价：多依赖一个 PostgreSQL 扩展，换库要改写；比较随数据库的 LC_CTYPE，库的区域设置要在环境设计里定死（BACKLOG 80）。放弃了 PostgreSQL 文档建议考虑的不区分大小写的排序规则（有性能代价、部分模式匹配用不了、要手写 SQL），放弃了 lower(email) 唯一表达式索引（schema 写不出、三个入口查询都要特殊写），也放弃了小写影子列（多一列，数据库不保证两列一致，不算满足 API-55，问 573 甲）。锁版本后的实测见 BACKLOG 74。
+- 后续（补课 05-API，问 648 A）：后果里放弃不区分大小写的排序规则这一处，偏离的是 PostgreSQL 文档的建议，登进 docs/arch/STANDARDS.md「偏离登记」，理由以那里为准；登记表同时加「数据库与 ORM」一行。上面原文不改。
