@@ -1,7 +1,7 @@
 # 补课 05-API　接口契约（下）
 
 > 草稿。每个窗口收尾，把那个窗口定下的接口知识写进来；课程做法类的问题写进附录 H（book/appendix-h.md）。整节课结课时照 book/OUTLINE.md 统稿成十节，项目主人读过认了才算定稿（问 491 A、515 A）。
-> 现在收七块：第六窗口拍板的接口知识，第七窗口的邮箱约束三种写法，第十到十四窗口各一块接口知识。
+> 现在收八块：第六窗口拍板的接口知识，第七窗口的邮箱约束三种写法，第十到十五窗口各一块接口知识。
 > 统稿时，各块都按契约的小节编进第三、五节。
 
 ---
@@ -190,6 +190,30 @@ Zalando 第 143 条是必须档，标题「MUST identify resources and sub-resou
 
 ---
 
+## 第八块　第十五窗口的接口知识
+
+### 1. 密码规则照认证的安全基线定
+
+注册接口要校验密码。本项目原来定「至少 8 位，含字母和数字」。认证这一块的主参考是 OWASP Authentication Cheat Sheet，它在「Implement Proper Password Strength Controls」一节写了三样：
+
+- 「If MFA is not enabled passwords shorter than 15 characters are considered to be weak」：没开多因素认证时，少于 15 位就算弱；开了多因素认证，门槛是 8 位。
+- 「There should be no requirement for upper or lower case or numbers or special characters.」：不该要求大小写、数字或特殊字符。
+- 「"Maximum" password length should be "at least 64 characters" to allow passphrases」：最长至少允许 64 位，好用一整句话当密码。
+
+本项目没有多因素认证，于是改为最短 15 位、最长不少于 64 位、不限字符种类（PRD 审定决策 D20，取代 D9）。长度比字符种类管用：「Password1」满足旧规则，却在泄露密码表里排得很靠前；一句没有数字的长话，难猜得多。
+
+注册接口的契约只点名这条决策，不抄规则本身，规则的正本在需求文档。拦常见与泄露过的密码、强度提示、哈希算法与具体上限，本版没做，记在待办里。
+
+### 2. 偏离了主参考的建议，要登进偏离登记
+
+邮箱不分大小写的唯一约束，本项目用 PostgreSQL 的 citext 类型。PostgreSQL 文档 citext 一页写「Consider using nondeterministic collations (see Section 23.2.2.4) instead of this module.」，建议考虑改用不区分大小写的排序规则。这是一条建议，项目没照它走，理由是排序规则有性能代价、部分模式匹配用不了、要手写 SQL，而 citext 写得进 schema。
+
+标准登记表的规矩是：偏离主参考的地方，理由写在登记表的「偏离登记」里，决策记录只写指针。这一条当初只写进了决策记录，登记表里连 PostgreSQL 这一栏都没有。补登之后，别处说「照什么标准」，都指到同一处。
+
+### 3. 核过一句不等于核过整节
+
+密码规则这一处打架，原先登记时只核了「不该要求字母数字」一句。这次把整节取回来读，才看见最短长度也对不上。要拿一节标准下结论，就把整节读完；只核过的那一句，只能当那一句的依据。
+
 ## 本草稿的依据
 
 以下原文都在 2026-10-17 用网页取回核过：
@@ -204,5 +228,6 @@ Zalando 第 143 条是必须档，标题「MUST identify resources and sub-resou
 - 第五块（第十二窗口取，2026-10-23）：Zalando 第 134、141、143、148 条；Google AIP-156；RFC 5789 第 2、2.1 节；RFC 9110 第 9.2.2、15.3.1 节；OWASP 会话管理（Renew the Session ID After Any Privilege Level Change、Logout Button 两节）；NestJS 官方认证一页。
 - 第六块（第十三窗口取，2026-10-26）：Google AIP-132、AIP-133；Zalando 第 143 条；NestJS 官方 controllers、CRUD 生成器两页。
 - 第七块（第十四窗口取，2026-10-27）：OWASP Authentication Cheat Sheet（Change Password Feature、Implement Secure Password Recovery Mechanism、Changing A User's Registered Email Address 三节）；RFC 2606 第 3 节。
+- 第八块（第十五窗口取，2026-10-28）：OWASP Authentication Cheat Sheet（Implement Proper Password Strength Controls 一节）；PostgreSQL 18.6 文档 citext 一页。
 
-项目里的出处：docs/DECISIONS-R1.md 的 R1-453 到 R1-481；契约 API-40 到 API-55。第二块见 R1-492 第四点，第三块见 R1-525、R1-527 与 ADR-DB-008。第四块见 R1-530 到 R1-533 与契约汇总里第十一窗口的补充行。第五块见 R1-537 到 R1-543 与契约汇总里第十二窗口的补充、修订行。第六块见 R1-546 到 R1-551 与契约汇总里第十三窗口的补充、已定行和 API-59。第七块见 R1-555 到 R1-560 与契约第二节第 6、7 小节、API-42 补充（问 634 B）、PRD 审定决策 D19。原先的「怎样不漏掉一整块」「开课读得太多，中途会漂」两块已挪进附录 H（book/appendix-h.md），出处跟着搬了过去（问 515 A、516 A）。
+项目里的出处：docs/DECISIONS-R1.md 的 R1-453 到 R1-481；契约 API-40 到 API-55。第二块见 R1-492 第四点，第三块见 R1-525、R1-527 与 ADR-DB-008。第四块见 R1-530 到 R1-533 与契约汇总里第十一窗口的补充行。第五块见 R1-537 到 R1-543 与契约汇总里第十二窗口的补充、修订行。第六块见 R1-546 到 R1-551 与契约汇总里第十三窗口的补充、已定行和 API-59。第七块见 R1-555 到 R1-560 与契约第二节第 6、7 小节、API-42 补充（问 634 B）、PRD 审定决策 D19。第八块见 R1-569 到 R1-572、PRD 审定决策 D20 与 docs/arch/STANDARDS.md「偏离登记」。原先的「怎样不漏掉一整块」「开课读得太多，中途会漂」两块已挪进附录 H（book/appendix-h.md），出处跟着搬了过去（问 515 A、516 A）。
