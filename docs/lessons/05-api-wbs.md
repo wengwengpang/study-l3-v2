@@ -142,7 +142,7 @@ grep -E "^#{2,3} " docs/arch/API_CONTRACT.md | sed -E 's/^#+ //' | while IFS= re
 | G55 | 交付物清单 G8、G10、G12、G41、G50、E9 六行状态随问 569 A、570 A 改；G8（闸门首测没拦住的原因）在测试取消后还查不查，出对照时问学生；另加 C1（第一节进度）、D6、G39 三行状态跟上第十窗口 | R1-523 第七点、R1-527 第八点 | 已完（对照 684 到 692，第十一窗口） |
 | G56 | 体检报告栏 6「学生选择」照学生原话填：问 567 A、568 A | R1-522 第六点 | 已完（对照 678） |
 | G57 | docs/arch/STANDARDS.md 登记表没有「数据库与 ORM 官方文档」一栏，architect 判属框架约定层，要不要加由学生定 | R1-525 | 已完（对照 820 到 823：STANDARDS 登记表加「数据库与 ORM」一行、偏离登记加 citext 一条，ADR-DB-008 加后续一行指过去，Prisma 那半进 BACKLOG 74；问 648 A） |
-| G58 | PRD 定密码「至少 8 位、含字母和数字」，OWASP Authentication Cheat Sheet 写「There should be no requirement for upper or lower case or numbers or special characters.」；两份打架，以谁为准由学生定（决策边界 D8、D3） | R1-527 | 待做 |
+| G58 | PRD 定密码「至少 8 位、含字母和数字」，OWASP Authentication Cheat Sheet 写「There should be no requirement for upper or lower case or numbers or special characters.」；两份打架，以谁为准由学生定（决策边界 D8、D3） | R1-527 | 已完（对照 825 到 831：PRD 新编审定决策 D20 取代 D9、加澄清注记 16，UI_DESIGN、CLAUDE.md、STANDARDS、契约跟着改，余下三样进 BACKLOG 82；问 649 A、650 A） |
 | G59 | 子代理的报告回来当场存进仓库，不只留在会话记录里（第六窗口的第一节核对报告只在本机，R1-527 第三点）；进不进检查单卡 3，结课定 | R1-527、R1-528 | 待做 |
 | G60 | 对照里写的预期数与 Edit 覆盖范围，写之前照文字数过（661 说一次 Edit 实为两次，668 漏算空行，676 少数一行；第十一窗口 715 说三次 Edit 实为四次，R1-534 预期少数两行；第十三窗口 773 预期只拿半句去数，那半句汇总里还有一处，计数闸拦下；第十四窗口核对命令自己出错两次：grep -c 数到 0 次退出码是 1、&& 链中断，按旧行号比待执行文件甲乙两节报 differ，都改了命令重跑）；与 G27 同族，结课一起判 | R1-524、R1-526、R1-527、R1-528、R1-534、R1-535、R1-550、R1-554、R1-557 | 待做 |
 | G61 | 问 582：另一台机器上的别家模型（如 OpenAI 的 Codex）放哪个位置：只当审查、改造后主做、不用；学生回「回到我们课程」，没选 | R1-529 第七、八点 | 待做 |
