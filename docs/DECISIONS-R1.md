@@ -12219,3 +12219,11 @@ BACKLOG 71 要求在复课第一节结课时，按规则 60 的「结课自检�
 四，落盘，每份与预拼版 cmp 相同、命令判过才提交：810、811、813 三次 Edit，6b6939f（交付物清单 157 行，「一到三十五」0 次，「本课挂账（第五节各行）」1 次，「BACKLOG 59」2 次，G 行 70，「| G70 」1 次，便利贴 0，覆盖核对无输出）；812 一次 Edit，传播面扫完后落，637a378（检查单 112 行，「不写「选 _」填空」1 次，「R1-564」1 次）。弹窗 4 次。自动记忆（不进 git）：MEMORY.md「安全退出选项」一行改写，补格式要点；safe-exit-option.md 正文补记第三次。
 五，传播面（卡 5 第 2 条、规则 74 事前半；在 KNOWLEDGE_BASE、SESSION_START、COURSE_RULES、anti-patterns、TEACHING_STYLE、LESSON_TEMPLATE、AGENT_SPEC、PROJECT_STRUCTURE、BACKLOG、桥梁 w15、交付物清单、HARNESS、手册、检查单、两份 CLAUDE.md、管理员定义文件、PRD、UI_DESIGN、ARCHITECTURE、契约与 ~/.claude/templates/ 下逐个搜「你可以回」「卡 12」「一到三十五」「BACKLOG 59」）：641 只在交付物清单，别处不影响；642 交付物清单 E2 新写、G48 顺带提到不影响，BACKLOG 59 本就写规则 54 第 1 项不改；644 手册第四节与模板副本写基本格式，卡上加的是不给推荐这一种情形的做法，不冲突，手册不改；G28 仍在挂账，G70 已写同族；五类项目文档与 HARNESS 不影响；检查单别的卡没有指着卡 12 第 1 条（卡 5 第 6 条）。
 进 HARNESS：问 641、642 判否（不是框架层），是本节交付物清单的记账口径；问 644 判否（不是框架层），是 CC 给学生排回复区的做法，同规则 86 判此项。
+
+--- R1-566 · 段 0 收完；段 1 附录 A 初稿 0806eb9；推前扫描与推送 d37c0b2..0806eb9，两边差 0（学生没有新回复；本条记 R1-565 之后到推送的落盘与核查）---
+一，起草前第三次取官方权限模式页原文（2026-10-28 WebFetch，逐字分句）：disableAutoMode 写在 permissions 下（「To remove auto mode so nobody can select it, set `permissions.disableAutoMode` to `"disable"` instead」，锁给组织写管理员配置）；deny 规则（auto 一节「`permissions.deny` rules can still block push commands as written in every mode.」「For a hard guarantee, add a deny rule instead.」）；较早版本（「On earlier versions, it's the built-in starting permission mode only on Pro, Max, and Team plans.」「On earlier versions, the built-in default is Manual.」）。项目事实：.claude/settings.json 是 permissions.defaultMode "default"；05-ARCH 笔记把那次叫「加 defaultMode」，没用「决策 14」这个名字，书里不写这个编号。
+二，新建 book/appendix-a.md（新文件直接建）：五个小节（是什么、原理、怎么用、本书哪一章用到、出处），93 行、3493 字符。交前 CC 拿官方原文逐句对，自己收紧五处：dontAsk 一行补「装了的 mod 仍可放行其中一部分」；起步顺序第 1 条补 --dangerously-skip-permissions；「deny 规则在每种模式下都照样拦」改为只说 auto 下（官方原句只在 auto 一节）；项目设置里写 bypassPermissions 同样不生效；「选第一项『Yes』」删「第一项」（官方没写弹窗选项顺序，核不了）。写法约定核：「老师」「你当时」「未核」「等裁决」「没核实」「待定」「待确认」0 次。提交 0806eb9。
+三，推前八类敏感扫描（卡 11 第 3 条）：脚本照八类重写，存会话临时目录 scan8.sh，先拿造的样本自测，八类各 1 行；扫 @{u}..HEAD 8 次提交新增的 247 行：七类 0 行，家目录路径 3 行，都在 docs/LIBRARIAN_REPORT.md 末尾「相关文件」段（G52；报告要原样存，同前几个窗口照推）。最后那个找文件的小循环因最后一份文件 0 行返回退出码 1，扫描本身没错（G60 同形）。
+四，推送：2026-10-28 11:08:28 d37c0b2..0806eb9，8 次提交，远端 reflog「update by push」；fetch 后本机与远端差 0 和 0，工作区干净。
+五，下一步：学生在 GitHub 读 book/appendix-a.md，认了出对照把交付物清单 D6 改已完；之后进段 2，先出挂账分组表。
+进 HARNESS：本条为记账，不判。
