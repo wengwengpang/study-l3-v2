@@ -37,6 +37,7 @@
 | 邮箱比较 | OWASP Email Validation and Verification Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Email_Validation_and_Verification_Cheat_Sheet.html | API-55 | 2026-10-17（Case Sensitivity、Email Canonicalization 两节） |
 | 认证（密码规则） | OWASP Authentication Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html | API-32 补充（问 576 A） | 2026-10-20；2026-10-23（Implement Proper Password Strength Controls 一节） |
 | schema 命名（请求体、列表项） | 框架约定：NestJS 官方 CRUD 生成器；设计规范：Google AIP-133、AIP-132 | https://docs.nestjs.com/recipes/crud-generator ；https://google.aip.dev/133 ；https://google.aip.dev/132 | API-30 补充（问 626 A、628 A、631 A） | 2026-10-26 |
+| 数据库与 ORM | 框架约定：PostgreSQL 官方文档（citext 一页）；Prisma 官方文档在锁版本时补（BACKLOG 74） | https://www.postgresql.org/docs/current/citext.html | ADR-DB-008（问 572 A）；偏离见「偏离登记」 | 2026-10-17；2026-10-28（18.6 版，LC_CTYPE 一句与 nondeterministic collations 一句） |
 
 ## 二、偏离登记
 
@@ -45,6 +46,7 @@
 - 字段命名（API-22）：API 字段名与查询参数名用 camelCase，偏离 Zalando 第 118 条「MUST property names must be snake_case (and never camelCase)」与第 130 条（查询参数同）。理由：同层另一家主流规范微软 Azure 要求「DO use camel case for all JSON field names.」；Zalando 第 118 条自述「No established industry standard exists」；本项目前后端与 Prisma 都用 TypeScript，全链路不做命名转换（ARCHITECTURE 第二节「命名规范」）。核对 2026-10-15。
 - 部分更新的媒体类型（API-33）：照 RFC 7396 的规则处理 null 与没传，但请求只收 application/json，不用它登记的 application/merge-patch+json。理由：唯一调用方是自家前端（API-6），换媒体类型要修订 API-27、改前端 api client，收益只是类型名对得上，规则本身照 RFC 7396 走。核对 2026-10-16。
 - 只有一个的子资源用单数（API-57 修订）：本项目的负责人、任务的状态、项目的汇总写单数，偏离 Zalando 第 134 条「The special case of a resource singleton must be modeled as a collection with cardinality 1」（必须）。理由：同一层另一家 Google AIP-156（https://google.aip.dev/156，状态 Approved）「Singleton resources are always singular.」；照复数写，两个写接口的请求体要多一层只含一个元素的数组，改状态还要把 PATCH 改成 PUT，「状态们」会被读成状态的历史；唯一调用方是同仓同发的自家前端（API-6），将来放开多负责人时改路径代价小。核对 2026-10-23。
+- 邮箱不分大小写用 citext（ADR-DB-008）：没照 PostgreSQL 文档 citext 一页「Consider using nondeterministic collations (see Section 23.2.2.4) instead of this module.」改用不区分大小写的排序规则，属建议档。理由：排序规则有性能代价、部分模式匹配用不了、要手写 SQL；citext 写得进 schema，注册查重、登录、按邮箱邀请成员三个入口照常查（问 572 A）。代价是多依赖一个 PostgreSQL 扩展，比较随数据库的 LC_CTYPE（BACKLOG 80）。核对 2026-10-28。
 
 ## 三、待登记
 
