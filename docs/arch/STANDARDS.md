@@ -35,7 +35,7 @@
 | 后端框架行为 | NestJS 官方文档：请求生命周期、Guards、异常过滤器 | https://docs.nestjs.com/faq/request-lifecycle ；https://docs.nestjs.com/guards ；https://docs.nestjs.com/exception-filters | API-23、API-46 | 2026-10-15（Guards、异常过滤器）；2026-10-17（请求生命周期） |
 | 错误处理 | OWASP Error Handling Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html | API-49 | 2026-10-17 |
 | 邮箱比较 | OWASP Email Validation and Verification Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Email_Validation_and_Verification_Cheat_Sheet.html | API-55 | 2026-10-17（Case Sensitivity、Email Canonicalization 两节） |
-| 认证（密码规则） | OWASP Authentication Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html | API-32 补充（问 576 A） | 2026-10-20；2026-10-23（Implement Proper Password Strength Controls 一节） |
+| 认证（密码规则） | OWASP Authentication Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html | API-32 补充（问 576 A）；PRD 审定决策 D20（问 649 A、650 A） | 2026-10-20；2026-10-23（Implement Proper Password Strength Controls 一节）；2026-10-28（同一节：最短 15 位、组成规则、最长 64 位） |
 | schema 命名（请求体、列表项） | 框架约定：NestJS 官方 CRUD 生成器；设计规范：Google AIP-133、AIP-132 | https://docs.nestjs.com/recipes/crud-generator ；https://google.aip.dev/133 ；https://google.aip.dev/132 | API-30 补充（问 626 A、628 A、631 A） | 2026-10-26 |
 | 数据库与 ORM | 框架约定：PostgreSQL 官方文档（citext 一页）；Prisma 官方文档在锁版本时补（BACKLOG 74） | https://www.postgresql.org/docs/current/citext.html | ADR-DB-008（问 572 A）；偏离见「偏离登记」 | 2026-10-17；2026-10-28（18.6 版，LC_CTYPE 一句与 nondeterministic collations 一句） |
 
