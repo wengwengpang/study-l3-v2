@@ -166,6 +166,8 @@ PostgreSQL 的 citext 页其实建议考虑改用排序规则：「Consider usin
 
 **成功码三个。** 读取、更新成功回 200，带资源；新建成功回 201，带新资源和它的 id；成功但没有内容回 204，比如登出（API-25）。
 
+**改状态回 200，带整个任务。** PATCH 成功后回什么，标准没限死。Zalando 第 148 条：「Successful PATCH requests return 200 or 204 (if the resource was updated — with or without returning the resource)」。RFC 5789 的例子回 204，又写「other success codes could be used as well」。改状态会让「可能卡住」重新计时，这个标记只在后端算，所以改状态回 200，带回整个任务（API-35）。
+
 **注册回 201，但不带 Location。** 新建成功时，标准做法是用 Location 头告诉对方新东西的地址。注册新建了一个用户，所以回 201；可这个用户没有自己的地址，能读到他的只有「当前用户」接口，而那个地址随会话指向不同的人。RFC 9110 第 15.3.2 节允许不带 Location，原话是新资源由 Location「or, if no Location header field is received, by the target URI」标识。不带时，标准把注册接口的地址当作新资源的标识，读起来别扭，这个代价接受了（API-25）。
 
 **转让负责人回 204。** 转让成功后，调用的人自己就成了执行者；按产品规定，执行者看不见负责人是谁。所以转让成功只回 204，不把新负责人带回去。RFC 9110 第 9.3.4 节允许：PUT 成功「MUST send either a 200 (OK) or a 204 (No Content)」。前端收到 204，重新取一次项目信息，按调用者的新角色渲染（API-52）。
@@ -200,6 +202,8 @@ PostgreSQL 的 citext 页其实建议考虑改用排序规则：「Consider usin
 **看不见和不许做，为什么分开。** 「看不见」回 404，是不让对方知道这个东西存在：一个不是成员的人来探某个项目，收到的 404 和这个项目真的不存在时一模一样。「不许做」回 403，是对方本来就看得见，只是这个动作不归他。界面上两种都显示「权限不足」（API-4、API-21）。
 
 **400 还是 409，看目标资源。** 请求要新建、修改、删除的那个东西（或它所在的那一组），现状和请求冲突，回 409；请求本身不合法，或它引用的别的东西不合要求，回 400（API-38）。比如注册时邮箱已被使用，冲突的是用户这一组，回 409；创建任务时派给了一个不是本项目成员的人，派给谁是引用的别的东西，回 400。这条线照的是 RFC 9110 对 409 的说法：和目标资源的现状冲突。
+
+**删一个本来就不在的成员，回 404。** 移出成员时，被移出的人本来就不在项目里，回 404（API-37）。Zalando 第 148 条：「Failed DELETE requests will usually generate 404 (if the resource cannot be found)」。前面说过 DELETE 是幂等的：移一次和移两次，结果都是他不在项目里了。可 RFC 9110 第 9.2.2 节的幂等，管的是「the intended effect on the server」，不管每次回什么码。所以第二次移出回 404，并不违反幂等。
 
 **401 要带一个头。** 回 401 时必须带 WWW-Authenticate 头，说明该怎么认证（API-20）。本项目写方案名 `Session`，不带 realm。照 RFC 写 Basic 也合规矩，可浏览器看到 Basic，会自己弹出一个要账号密码的框。`Session` 这个名字没在 IANA 登记过，所以算偏离，理由登了记。
 
