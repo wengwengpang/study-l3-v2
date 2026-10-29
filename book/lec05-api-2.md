@@ -304,7 +304,13 @@ PostgreSQL 的 citext 页其实建议考虑改用排序规则：「Consider usin
 - 删任务本版不做（D18）；账号自己的四样操作本版不做（D19）。
 - 密码最短 15 位、最长不少于 64 位、不限字符种类（D20，取代 D9）。
 
-密码这一条，原来定的是「至少 8 位，含字母和数字」。认证这块的主参考 OWASP Authentication Cheat Sheet，在「Implement Proper Password Strength Controls」一节写了三样：「If MFA is not enabled passwords shorter than 15 characters are considered to be weak」；「There should be no requirement for upper or lower case or numbers or special characters.」；「"Maximum" password length should be "at least 64 characters" to allow passphrases」。本项目没有多因素认证，于是改成现在这样。注册接口的契约只点名这条决策，不抄规则本身，规则的正本在需求文档。拦常见的与泄露过的密码、强度提示、哈希算法与具体上限，本版没做，记在待办里。
+密码这一条，原来定的是「至少 8 位，含字母和数字」。认证这块的主参考 OWASP Authentication Cheat Sheet，在「Implement Proper Password Strength Controls」一节写了三样：
+
+- 「If MFA is not enabled passwords shorter than 15 characters are considered to be weak」：没开多因素认证时，少于 15 位就算弱；开了多因素认证，门槛是 8 位。
+- 「There should be no requirement for upper or lower case or numbers or special characters.」：不该要求大小写、数字或特殊字符。
+- 「"Maximum" password length should be "at least 64 characters" to allow passphrases」：最长至少允许 64 位，好用一整句话当密码。
+
+本项目没有多因素认证，于是改成现在这样。注册接口的契约只点名这条决策，不抄规则本身，规则的正本在需求文档。拦常见的与泄露过的密码、强度提示、哈希算法与具体上限，本版没做，记在待办里。
 
 ### 连带的数据改动
 
