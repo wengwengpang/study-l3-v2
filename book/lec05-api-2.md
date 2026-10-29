@@ -1,7 +1,7 @@
 # 补课 05-API　接口契约（下）
 
 > 统稿中（问 697 A）：照 book/OUTLINE.md 分三批写，第一批第一到三节，第二批第四、五节，第三批第六到十节；每批推一次，项目主人在 GitHub 读过认了才算定稿。
-> 下面「---」以后的八块是统稿前的草稿，内容编进第三节后逐块删掉；文末「本草稿的依据」留到写第十节时并入。
+> 第一批已写完，等项目主人读；第四到十节还没写。文末「本草稿的依据」是统稿前草稿的出处清单，留到写第十节时并入。
 
 ## 一、本章位置
 
@@ -322,52 +322,6 @@ PostgreSQL 的 citext 页其实建议考虑改用排序规则：「Consider usin
 - 邮箱列改用 citext，见前面「请求格式」（ADR-DB-008）。
 
 ---
-
-## 第七块　第十四窗口的接口知识
-
-### 1. 一个词在同一个接口里只指一样东西
-
-「负责人」在这个项目里有两个意思：一是项目角色，派活、看全局的那一方；二是一个任务分给了谁。创建任务这个接口，鉴权级别写「只有负责人」，指的是项目角色。退回里要说「分给的人不是本项目成员」，如果也写「负责人」，读的人就分不清。PRD 澄清注记 10 定了读法：说任务分给谁，写「任务负责人」。契约写到 tasks 组时照它改写（第二节第 6 小节）。
-
-### 2. 能由别的数算出来的，接口里不必再给
-
-项目主页要显示完成率。汇总接口已经给了四个数：任务总数、已完成、进行中、未开始。完成率就是「已完成」除以「任务总数」，前端一除就有，后端没有别处要用它，所以接口里不另给（API-42 补充）。这段算法也不放进前后端共享的那一层：判断标准第一问是「前后端是不是都真的用它」，只有前端用，就不进。任务总数为 0 时，页面本来就有空态，汇总显示 0，并引导去建第一个任务，前端不做除法。将来要在后端判断项目风险时，再往汇总里加一个字段，只加不改，老的前端不受影响。
-
-### 3. 「本版没有接口的」也要列全
-
-接口清单最后一小节，列本版没有接口的东西（第二节第 7 小节）。它分三类：没有接口的模块，是 users、authz、notifications；本版不做、所以没有接口的操作，是删任务、删项目、成员自己退出、把成员直接改成执行者，以及用户对自己账号的四样操作；本版延后的功能。列这一节，是为了让写后端、写前端的人不去写、不去调根本不存在的接口，也不把「没做」当成「漏了」补上。
-
-用户对自己账号的四样操作，是改密码、改邮箱、找回密码、注销账号。需求文档里一句都没提，「不做」的清单里也没写。认证这块的主参考 OWASP Authentication Cheat Sheet 有三节讲这些，开头分别是：「When developing a change password feature, ensure to have:」「It is common for an application to have a mechanism that provides a means for a user to gain access to their account in the event they forget their password.」「User email addresses often change.」。三句讲的都是做的话该怎么做，没有写必须提供。本版定为都不做，并写明后果：忘了密码就进不去，也没有管理员能代为重置（PRD 审定决策 D19）。
-
-### 4. 示例里的域名用 example.com
-
-文档里的示例邮箱原先写成 Bob@x.com。x.com 是一个真实在用的域名，拿它当示例，照着测试就可能把请求发到别人的服务器上。RFC 2606 第 3 节写：「The Internet Assigned Numbers Authority (IANA) also currently has the following second level domain names reserved which can be used as examples.」，保留的是 example.com、example.net、example.org。示例邮箱都改成了 example.com 的写法。
-
----
-
-## 第八块　第十五窗口的接口知识
-
-### 1. 密码规则照认证的安全基线定
-
-注册接口要校验密码。本项目原来定「至少 8 位，含字母和数字」。认证这一块的主参考是 OWASP Authentication Cheat Sheet，它在「Implement Proper Password Strength Controls」一节写了三样：
-
-- 「If MFA is not enabled passwords shorter than 15 characters are considered to be weak」：没开多因素认证时，少于 15 位就算弱；开了多因素认证，门槛是 8 位。
-- 「There should be no requirement for upper or lower case or numbers or special characters.」：不该要求大小写、数字或特殊字符。
-- 「"Maximum" password length should be "at least 64 characters" to allow passphrases」：最长至少允许 64 位，好用一整句话当密码。
-
-本项目没有多因素认证，于是改为最短 15 位、最长不少于 64 位、不限字符种类（PRD 审定决策 D20，取代 D9）。长度比字符种类管用：「Password1」满足旧规则，却在泄露密码表里排得很靠前；一句没有数字的长话，难猜得多。
-
-注册接口的契约只点名这条决策，不抄规则本身，规则的正本在需求文档。拦常见与泄露过的密码、强度提示、哈希算法与具体上限，本版没做，记在待办里。
-
-### 2. 偏离了主参考的建议，要登进偏离登记
-
-邮箱不分大小写的唯一约束，本项目用 PostgreSQL 的 citext 类型。PostgreSQL 文档 citext 一页写「Consider using nondeterministic collations (see Section 23.2.2.4) instead of this module.」，建议考虑改用不区分大小写的排序规则。这是一条建议，项目没照它走，理由是排序规则有性能代价、部分模式匹配用不了、要手写 SQL，而 citext 写得进 schema。
-
-标准登记表的规矩是：偏离主参考的地方，理由写在登记表的「偏离登记」里，决策记录只写指针。这一条当初只写进了决策记录，登记表里连 PostgreSQL 这一栏都没有。补登之后，别处说「照什么标准」，都指到同一处。
-
-### 3. 核过一句不等于核过整节
-
-密码规则这一处打架，原先登记时只核了「不该要求字母数字」一句。这次把整节取回来读，才看见最短长度也对不上。要拿一节标准下结论，就把整节读完；只核过的那一句，只能当那一句的依据。
 
 ## 本草稿的依据
 
