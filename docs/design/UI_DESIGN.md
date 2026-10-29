@@ -1,4 +1,5 @@
 # UI 设计 · study-l3-v2
+> 去留：长期。
 > designer 角色基于 docs/design/PRD.md 十七条用户故事产出。
 > 口径：以权限矩阵 + 审定决策记录 D1-D9 为准（Lec 3 确认）。
 > 可追溯性用 US 编号标注（US 编号随 PRD 稳定，比行号可靠）。
