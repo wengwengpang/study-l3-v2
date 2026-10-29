@@ -5,18 +5,18 @@
 > 格式：编号 | 类型 | 一句话 | 何时做
 > 类型：下沉 / 收敛 / 取经 / 加课
 > 维护：本文件是开课必读 7 个之一（唯一清单见规则 55）；结课逐条问有无新待办（规则 54 配套）。
-> 号段：1-82。
+> 号段：1-83。
 > 留空：无。
-> 实际条数：82 条。
-> 下一个可用号：83。
+> 实际条数：83 条。
+> 下一个可用号：84。
 
 1 | 取经 | 抄 Superpowers 的 eval 思路，验证规则真不真生效 | 结课收敛
 2 | 取经 | 抄 Spec Kit 的跨工具持久 spec + 自动一致性检查 | 结课收敛
 3 | 取经 | 抄 BMAD 的就绪闸 PASS/CONCERNS/FAIL 做成真机制 | 结课收敛
-4 | 收敛 | 给 harness 加减法机制（规则只增不减的洞） | 结课收敛
+4 | 收敛 | 给 harness 加减法机制（规则只增不减的洞） | 已做：问 669 A，不立一进一出；规则 54 结课加一问「这节有哪些能删」，规则 65 结课问待办时连带梳理 BACKLOG，HARNESS 原则 4 补一层「加和删的触发要对等」（DECISIONS-R1 R1-588）。本条关闭
 5 | 收敛 | 给规则加验证机制（未验证散文的洞） | 结课收敛
 6 | 加课 | 补一节 plugin 收尾课，把 harness 抽成可移植 plugin | Lec 19 后
-7 | 下沉 | diff<100、提交格式、git status 等做成 hook；压缩后提醒重读行为标准（HARNESS 原则 17，DECISIONS-R1 R1-18 第四点） | Lec 8
+7 | 下沉 | diff<100、提交格式、git status 等做成 hook；压缩后提醒重读行为标准（HARNESS 原则 17，DECISIONS-R1 R1-18 第四点）；开课与体检闸门要钩子的乙类四件（DECISIONS-R1 R1-523 第三点：SessionStart 查权限模式，SubagentStart 与 SubagentStop 跑指纹，SessionStart 跑 fetch 报差几条，记账文件从 ask 挪进 allow），与每条消息附一行提醒的 UserPromptSubmit 钩子（R1-488、R1-494），一起在这时定；settings.json 由学生亲写（规则 66）。来源 R1-588 问 667 A | Lec 8
 8 | 下沉 | 软删除：MVP 选硬删除未预留 deleted_at，将来出现删除故事时用 Expand-Migrate-Contract 演进（加列→改查询过滤→数据迁移），注意软删除与 email/(user_id,project_id) 唯一约束的冲突 | 出现删除故事时（大概率 Lec 13 功能迭代）
 9 | 下沉 | 配置文件是攻击面：settings.json / hooks 能在同意前自动跑代码（见 CVE、PyPI 蠕虫经 SessionStart hook）。上 hooks 时加防护，settings.json 权限文件纳入 code review | Lec 8（上 hooks 时）
 10 | 下沉 | 沙箱（sandboxing）：权限规则管得住 CC 的文件工具与 Bash 重定向，管不住自己打开文件的子进程（如 python 脚本）。OS 级封堵需启用沙箱 | Lec 8（与第 9 条同组）
@@ -92,3 +92,4 @@
 80 | 下沉 | 数据库区域设置定死：citext 的大小写规则随数据库的 LC_CTYPE（PostgreSQL 18 citext 一页原文「citext's case-folding behavior depends on the LC_CTYPE setting of your database」，2026-10-17 取回），本项目库的区域设置没定（ADR-DB-008）。来源 DECISIONS-R1 R1-525 | 05-环境
 81 | 下沉 | 账号自己的操作（改密码、改邮箱、找回密码、注销账号）首版都不做（PRD 审定决策 D19，问 636 A）。后果：首版用户忘了密码无法找回，没有管理员能代为重置，同一邮箱也不能重新注册。找回密码一般要靠系统外的渠道证明身份，如邮件，本版不做邮件（推导）。做时照 OWASP Authentication Cheat Sheet「Change Password Feature」「Implement Secure Password Recovery Mechanism」「Changing A User's Registered Email Address」三节，另核 OWASP ASVS 有没有要求（DECISIONS-R1 R1-556 第五点） | Lec 13 功能迭代时评估；最晚 Lec 15 上线前定
 82 | 下沉 | 密码规则里本版没定的三样（PRD 审定决策 D20，问 650 A）：一，拦常见的与泄露过的密码（OWASP Authentication Cheat Sheet「Block common and previously breached passwords」，可查 Pwned Passwords 或自建名单）；二，注册页的密码强度提示（同一节「Include a password strength meter」，如 zxcvbn-ts）；三，密码哈希算法与允许的具体最长上限（D20 只定不少于 64 位；同一节提醒有的哈希实现遇到长密码会被拖垮，细则指向 OWASP Password Storage Cheat Sheet）。来源 DECISIONS-R1 R1-571 | 第三样 Lec 10 写后端时定；前两样 Lec 13 功能迭代时评估
+83 | 收敛 | 精简专场，开课那一套的精简方案（问 325 A）里的两件大活一次做：一，七个必读逐条过，每条写当初防什么、现在还防不防得住，建议留、改成命令、删或并，学生逐条裁，说明书照规则 78；含 BACKLOG 37、39、63（问 504 A）与体检报出的规则 26 和项目宪法第一层 B 第 6 条重复、规则 29、36 同类（问 663 A）；开课读量（DECISIONS-R1 R1-499、R1-507 实测）随它定。二，自动记忆逐份过：已有正本的删，别处没有的搬进仓库，只关这台机器的留（问 554 A）。另一并定：DECISIONS-R1 往后每条写多细、笔记补记与决策记录谁当正本（问 530 A）。体量见 DECISIONS-R1 R1-587 第二点。来源 DECISIONS-R1 R1-517 问 557 A、R1-588 问 667 A | 补课链（05-类型、05-环境）上完、Lec 7 开课前
