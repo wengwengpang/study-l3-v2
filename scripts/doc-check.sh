@@ -1,13 +1,13 @@
 #!/bin/bash
 # 资料管理员机械体检（S1 到 S7）：只读，不改任何文件，结果打印到屏幕。
-# 范围：docs/ 下全部 .md（除 DECISIONS-* 历史记录、LIBRARIAN_REPORT 体检报告本身）、CLAUDE.md、.claude/agents/。
+# 范围：docs/ 下全部 .md（除 DECISIONS-* 历史记录、LIBRARIAN_REPORT 体检报告本身、外来材料：网页版课堂记录样本 docs/web_course*、docs/vide_coding.md，问 321 A）、CLAUDE.md、.claude/agents/。
 # 引用来源分三列：常驻、历史（docs/lessons/、PENDING-TUNER-REFACTOR）、产品（docs/arch/、docs/design/）。
 # 出处：DECISIONS-R1 R1-99、R1-100、R1-108；审查 2-4、2-5（R1-3）、F67 到 F70（R1-104）。
 # 用法：在项目里任意目录跑 bash scripts/doc-check.sh
 set -u
 cd "$(git rev-parse --show-toplevel)" || exit 1
 
-files=$(git ls-files 'docs/*.md' 'CLAUDE.md' '.claude/agents/*.md' | grep -v '^docs/DECISIONS-' | grep -vx 'docs/LIBRARIAN_REPORT.md')
+files=$(git ls-files 'docs/*.md' 'CLAUDE.md' '.claude/agents/*.md' | grep -v '^docs/DECISIONS-' | grep -vx 'docs/LIBRARIAN_REPORT.md' | grep -v '^docs/web_course' | grep -vx 'docs/vide_coding.md')
 
 col() {  # 文件归哪列。BRIDGE 复课要用，暂归常驻；用完改归历史，以后新的 BRIDGE 同理（审查 F83）
   case "$1" in
