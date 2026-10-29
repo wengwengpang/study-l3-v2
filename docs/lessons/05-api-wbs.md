@@ -68,7 +68,7 @@ grep -E "^#{2,3} " docs/arch/API_CONTRACT.md | sed -E 's/^#+ //' | while IFS= re
 | E2 | 新反模式入库 | 挂账里的候选逐条判，入库的判自检与 HARNESS；含 BACKLOG 59 三条候选 | 待做 |
 | E3 | 新规则入库 | 同上，含 BACKLOG 48 | 待做 |
 | E4 | 两份笔记定稿 | 速查卡压回 800 字内（挂账三十三） | 待做 |
-| E5 | 目录树 | 排在所有文件落盘之后（规则 52） | 待做 |
+| E5 | 目录树 | 排在所有文件落盘之后（规则 52） | 待做（DECISIONS-R1 那一行照问 668 A 改；G22 剩的 PROJECT_STRUCTURE「去留：」随它补） |
 | E6 | 送审 | 照 SESSION_START M 节；第一次另附 git diff pre-trial-c -- docs/；欠账 21 到 27 随这一趟 | 待做 |
 | E7 | 结课自检实跑 | 照规则 60「结课自检」一行逐项跑（BACKLOG 71），问学生哪段太粗 | 待做 |
 | E8 | 书章「05-API（下）」 | 照 book/OUTLINE.md 十节写，推 GitHub，学生读过认了 | 待做 |
