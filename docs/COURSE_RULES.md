@@ -145,6 +145,7 @@ PROJECT_STRUCTURE.md 的更新必须是结课的最后一个文件动作，排�
 ## 54 · 结课固定动作清单
 每课结课按固定顺序逐项执行，老师逐条向学生报，不靠记忆：
 第 1 项之前：执行本节开课体检里学生选的删并，逐条出对照，学生说「帮我改」才改（SESSION_START J 节第 2 件；DECISIONS-R1 R1-117 问 122A）。
+第 1 项之前还问一句：这节有哪些能删。CC 列候选：本节用完的一次性文件；检查单里从没拦下过的条目（照卡 12 记下的「拦下」数）；本节查出重复或过期的条目。每条写留与删各自的理由，学生逐条裁；删文件照规则 75 先核第二个家，走 CONFIRM（问 669 A，DECISIONS-R1 R1-588）。
 1. 新反模式入库（anti-patterns.md）——每条同时判定进不进自检，写进条目末尾（规则 73）
 2. 新规则入库（COURSE_RULES.md）——每条同时判定进不进自检，写进条目末尾（规则 73）
 3. 写两份笔记（NN-full.md、NN-cheatsheet.md），并写本节书章（照 book/OUTLINE.md 写，推 GitHub，学生读过认了；BACKLOG 73、问 326 A）
@@ -258,7 +259,7 @@ COURSE_RULES、anti-patterns、TEACHING_STYLE、PROJECT_STRUCTURE、AGENT_SPEC�
 
 ## 65 · BACKLOG 跨课待办纳入开课必读与结课动作
 开课必读升级为 7 个：原有六个 + docs/BACKLOG.md。清单见 docs/PROJECT_STRUCTURE.md 的「课程标准文件清单」小节。读法见规则 55。
-结课固定动作（规则 54）追加一项：逐条问学生本课有无该进 backlog 的待办。
+结课固定动作（规则 54）追加一项：逐条问学生本课有无该进 backlog 的待办。同时梳理 BACKLOG：该关没关的、重复的、时机已过的列出来，学生逐条裁关、并、改时机（问 669 A，DECISIONS-R1 R1-588；Scrum 指南 Product Backlog refinement，原文见 R1-480）。
 落点判据见规则 64：BACKLOG 装「该做但本课不做」的跨课待办，与桥梁（一次性用完即弃）、COURSE_RULES（已生效规则）区分。
 与规则 54/58 关系：叠加扩充，不替代。
 
