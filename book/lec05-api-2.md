@@ -248,6 +248,69 @@ PostgreSQL 的 citext 页其实建议考虑改用排序规则：「Consider usin
 
 **框架挡下的也要盖住。** 框架自己挡下的退回，比如路径不存在、坏 JSON、在中间件之前就退回的跨站被拒，可能绕过统一加头的那一层。挂在哪一层，写后端骨架时定，但要把这几种都盖住。网关出的错不经后端，本来就带不了这个头（API-44）。
 
+### 接口清单怎么写
+
+打个比方。前面几块是公司统一的公文格式；这一块是每一类公文的样张。格式里写过的，样张上不再重复。
+
+**每个接口写七样。** 方法与路径、鉴权级别、请求的校验规则、响应的校验规则、成功码、可能的退回、依据。退回只写性质，状态码照第一节的映射表。
+
+**鉴权分四档。**
+
+- 公开：不挂 AuthGuard。只有注册、登录两个接口。
+- 只要登录：只挂 AuthGuard。路径里没有项目 id 的接口用这一档，因为 AuthzGuard 要拿路径里的项目 id 查成员表，没有就判不了。
+- 本项目成员：两道守卫都挂，负责人、执行者都放行。执行者只能碰分给自己的任务，这一条在业务代码里判。
+- 只有负责人：两道守卫都挂。执行者调用，由 AuthzGuard 回「不许做」（API-35、API-42）。
+
+**共有的退回只写一处。** 内部错误、路径不存在、未登录、跨站被拒、格式不支持、参数不合法、并发撞上唯一约束，这几种很多接口都会有，写在接口清单开头一处，各接口不再列。
+
+**名字怎么起。** 请求体照「动作 + 资源 + Request」起：POST 写 Create，PATCH 写 Update，PUT 写 Replace，比如 CreateUserRequest。列表响应照「List + 资源复数 + Response」起，比如 ListProjectsResponse（API-30）。两层标准说法一致。框架层，NestJS 官方的 CRUD 生成器给的是 CreateUserDto、UpdateUserDto。设计规范层，Google AIP-133 写「The request message must match the RPC name, with a `Request` suffix.」；AIP-132 写「The request and response messages must match the RPC name, with `Request` and `Response` suffixes.」，例子是 ListBooksResponse。只照请求那一半起名、列表另写一个 TaskList，就成了两套规则。名字后面写不写 Schema 这类后缀，归共享类型那一节。
+
+**列表项和详情，用同一个形状。** AIP-132 还写：「The response should usually include fully-populated resources unless there is a reason to return a partial response」。所以列表的每一项和详情同一个形状、同一个名字。改状态回来的整个任务，前端可以直接替换列表里那一行（API-30）。同一个资源按调用者的角色给不同形状时，也用一个名字；几种形状在校验规则里怎么写，归共享类型那一节。
+
+**17 个接口，分三个模块。** 按代码放在哪个模块分组：
+
+- auth，四个：注册 `POST /api/users`、登录 `POST /api/sessions`、登出 `DELETE /api/sessions/self`、当前用户 `GET /api/users/self`。
+- projects，七个：我所在的项目列表、创建项目、项目详情、成员列表、邀请成员、移出成员、转让负责人。
+- tasks，六个：任务列表、任务详情、创建任务、改任务、改状态、项目汇总。
+
+**改任务拆成两个接口。** 字段级的权限，变成路由级：负责人专用的「改任务」，两种角色都能调的「改状态」（API-35）。执行者调「改任务」，回「不许做」；执行者用「改状态」改不分给自己的任务，回「看不见」；往「改状态」里多带别的字段，按多余的字段回「参数不合法」。
+
+**一个词在同一个接口里只指一样东西。** 「负责人」在这个项目里有两个意思：一是项目角色，派活、看全局的那一方；二是一个任务分给了谁。创建任务的鉴权级别写「只有负责人」，指的是项目角色。退回里要说「分给的人不是本项目成员」，如果也写「负责人」，读的人就分不清。需求文档澄清注记 10 定了读法：说任务分给谁，写「任务负责人」。
+
+**能由别的数算出来的，接口里不另给。** 项目主页要显示完成率。汇总接口已经给了四个数：任务总数、已完成、进行中、未开始。完成率就是「已完成」除以「任务总数」，前端一除就有，后端没有别处要用它，所以接口里不另给（API-42）。这段算法也不放进前后端共享的那一层：判断的第一问是「前后端是不是都真的用它」，只有前端用，就不进。任务总数为 0 时，页面本来就有空态，前端不做除法。将来要在后端判断项目风险，再往汇总里加一个字段，只加不改，老的前端不受影响。
+
+**「本版没有接口的」也要列全。** 接口清单最后一小节，列本版没有接口的东西，分三类：没有接口的模块，是 users、authz、notifications；本版不做、所以没有接口的操作，是删任务、删项目、成员自己退出、把成员直接改成执行者，以及用户对自己账号的四样操作；本版延后的功能。列这一节，是为了让写后端、写前端的人不去写、不去调根本不存在的接口，也不把「没做」当成「漏了」补上。
+
+账号的四样操作，是改密码、改邮箱、找回密码、注销账号。需求文档里一句都没提，「不做」的清单里也没写。认证这块的主参考 OWASP Authentication Cheat Sheet 有三节讲这些，开头分别是：「When developing a change password feature, ensure to have:」「It is common for an application to have a mechanism that provides a means for a user to gain access to their account in the event they forget their password.」「User email addresses often change.」三句讲的都是做的话该怎么做，没有写必须提供。本版定为都不做，并写明后果：忘了密码就进不去，也没有管理员能代为重置（需求文档审定决策 D19）。
+
+**文档里的示例，用 example.com。** 示例邮箱原先写成 Bob@x.com。x.com 是一个真实在用的域名，拿它当示例，照着测试就可能把请求发到别人的服务器上。RFC 2606 第 3 节写：「The Internet Assigned Numbers Authority (IANA) also currently has the following second level domain names reserved which can be used as examples.」保留的是 example.com、example.net、example.org。示例邮箱都改成了 example.com 的写法。
+
+### 产品口径回需求文档定
+
+打个比方。交接单上要写「谁能签收」，可谁能签收是公司的规定，不归交接单定。规定先在规章里写好，交接单照着办。
+
+上半章定过三份文件的分工：需求文档管「能不能」，契约管「怎么调」，校验规则管「长什么样」。写契约时碰到的产品规则，回需求文档去定：派 pm 只核对、出选项，拍板归项目主人。真人确认过的故事原文不动，只加澄清注记；pm 推导、经项目主人审定的，可以直接改。这一章回去定了这些审定决策：
+
+- 首版单负责人，成员一律以执行者身份加入；负责人可以转让，原负责人同时变成执行者（D10）。
+- 执行者只看得见自己所在的项目和分给自己的任务，看不见成员列表和未认领的任务（D11），也看不见项目负责人是谁（D17）。依据是 OWASP 授权速查表的最小权限。
+- 任务三种状态任意互转，谁能改照权限矩阵（D12）。
+- 「可能卡住」只看已分配、未完成的任务，从最近一次状态变化和最近一次分配里较晚的那个起算，满 7×24 小时（D13）。
+- 负责人可以移出成员，被移出的人立即失去访问，名下任务变成未认领；成员不能自己退出（D14）。
+- 只有负责人能改任务的标题与描述（D15）；负责人可以把任务改回未分配（D16）。
+- 删任务本版不做（D18）；账号自己的四样操作本版不做（D19）。
+- 密码最短 15 位、最长不少于 64 位、不限字符种类（D20，取代 D9）。
+
+密码这一条，原来定的是「至少 8 位，含字母和数字」。认证这块的主参考 OWASP Authentication Cheat Sheet，在「Implement Proper Password Strength Controls」一节写了三样：「If MFA is not enabled passwords shorter than 15 characters are considered to be weak」；「There should be no requirement for upper or lower case or numbers or special characters.」；「"Maximum" password length should be "at least 64 characters" to allow passphrases」。本项目没有多因素认证，于是改成现在这样。注册接口的契约只点名这条决策，不抄规则本身，规则的正本在需求文档。拦常见的与泄露过的密码、强度提示、哈希算法与具体上限，本版没做，记在待办里。
+
+### 连带的数据改动
+
+写契约时还牵出了几处表结构的改动。改表结构之前，先回 architect 确认写法，再出改动给项目主人看（决策边界 D2）。
+
+- 截止日期说的是某一天，改存纯日期：字段 dueDate，列 due_date，推翻了第 5 课「存时间点、界面只显示到日」的做法（ADR-DB-003 修订）。
+- 每个项目至多一个负责人，用部分唯一索引兜底；写法随 Prisma 锁定的版本定（ADR-DB-006）。
+- 任务加一列分配时间 assigned_at，可空：「可能卡住」要从最近一次分配起算，没有这一列算不出来。不存分配历史，也不加检查约束（ADR-DB-007）。
+- 邮箱列改用 citext，见前面「请求格式」（ADR-DB-008）。
+
 ---
 
 ## 第一块　第六窗口拍板的接口知识
