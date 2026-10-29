@@ -1,6 +1,7 @@
 # ARCHITECTURE · 系统架构
 
 > 项目：study-l3-v2（团队任务协作工具）
+> 去留：长期。
 > 产出：补课 Lec 05-ARCH。architect 角色推导，Michael 逐项拍板。
 > 依据：docs/design/PRD.md、prisma/schema.prisma、docs/arch/TECH_STACK.md。
 > 本文四节，随补课链逐节追加：模块划分 / 分层架构 / 数据流 / 部署拓扑。
