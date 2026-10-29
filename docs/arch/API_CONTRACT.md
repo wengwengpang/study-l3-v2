@@ -1,6 +1,7 @@
 # API_CONTRACT · 接口契约
 
 > 项目：study-l3-v2（团队任务协作工具）
+> 去留：长期。
 > 产出：补课 Lec 05-API。architect 角色推导，Michael 逐项拍板。
 > 依据：docs/arch/ARCHITECTURE.md 四节、docs/design/PRD.md、prisma/schema.prisma。
 > 本文随本课逐节追加。
