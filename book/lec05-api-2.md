@@ -123,6 +123,61 @@
 
 **角色怎么到前端。** 项目列表的每一项、项目详情，都带「我在本项目的角色」（API-34）。前端只拿它决定显示哪些入口，不当授权用；每个受限的接口，都由后端的守卫自己查成员表判定，前端传来的角色一概不信（架构文档决策 Q1）。当前登录的是谁，由单设的「当前用户」接口给（API-34）。
 
+### 请求格式
+
+打个比方。寄快递有统一的面单：寄件人、收件人、物品各写在哪一栏，都是定好的。填错一栏、多写一栏，快递站都会退回来。请求格式就是这张面单的规矩。
+
+**只收 JSON。** 带请求体的接口只收 `application/json`；`application/json; charset=utf-8` 这种带参数的写法也收（API-27、API-51）。Content-Type 不对，回「格式不支持」（415）。
+
+**字段名用 camelCase。** 字段名和查询参数名都用 camelCase，比如 `dueDate`（API-22）。本项目的命名规范在架构文档里早定了：数据库的列用 snake_case，代码和接口全用 camelCase。接口照架构文档走，偏离了主参考 Zalando 第 118、130 条，理由登在标准登记表。
+
+**多出来的字段，一律拒绝。** 请求体里出现校验规则没列的字段，回「参数不合法」（400），出错的外壳里逐项列出多出来的是哪几个（API-31）。Zod 默认会把多余的字段悄悄剔掉，本项目不照这个默认。依据是 OWASP 的批量赋值速查表：请求里多塞一个字段，后端照单收进数据，就是批量赋值。
+
+**没定义的查询参数，也拒绝。** 查询参数同理（API-56）。主参考 Zalando 第 109 条：「Unknown input fields in payload or URL should not be ignored」。
+
+**必填的文字，先去首尾空白。** 必填的文字字段，去掉首尾空白后为空的，当作没填，回「参数不合法」；存进去的，是去掉首尾空白后的值（API-32）。哪些字段必填、最长多少，归校验规则。
+
+**密码例外，原样收。** OWASP 认证速查表写「Allow usage of all characters including unicode and whitespace.」，又写「Do not silently truncate passwords.」用户设的密码里带空格，服务端悄悄去掉，下次照原样输入就登不上。所以密码原样收，不去空白，也不截断（API-32）。
+
+**没传和传 null。** 新建时，可空的字段没传和传 null 是一个意思，都是空（API-54）。更新时照 JSON Merge Patch（RFC 7396）的规则：没传的字段不改，传 null 表示清空（API-33）。null 只对可空的字段有效，比如任务的负责人、截止日期；对不可空的字段传 null，回「参数不合法」。负责人把任务改回未分配，就是把负责人传 null。更新请求仍只收 `application/json`，不用 RFC 7396 登记的那个专门的媒体类型，这一条偏离也登了记（API-33）。
+
+**改一部分用 PATCH，整个换用 PUT。** RFC 9110 第 9.3.4 节：「The PUT method requests that the state of the target resource be created or replaced」。主参考 Zalando 第 148 条也这么分：PATCH 是「to update parts of the resource objects」；「PUT requests are used to update (and sometimes to create) entire resources – single or collection resources.」用 PUT 只传改动的字段，没传的会被当成「换成空」。所以改任务、改状态这类只改一部分的，用 PATCH；转让负责人是把「本项目的负责人」整个换掉，用 PUT（API-50）。
+
+**时间的两种写法。** 接口里的时间分两种。一种是「某一刻」，比如创建时间，一律用世界标准时间，照 RFC 3339 写成 `2019-07-30T06:43:40.252Z` 这样（API-41）。Zalando 第 169 条原话：「APIs MUST use the upper-case T as a separator between date and time」，结尾也用大写 Z，Z 就表示世界标准时间。JavaScript 自带的写法正好一样，MDN 原话：「The timezone is always UTC, as denoted by the suffix Z.」另一种是「某一天」，比如截止日期，写成 `2019-07-30`，不带时刻，也不带时区。
+
+**邮箱怎么比。** `Bob@example.com` 和 `bob@example.com` 是不是同一个邮箱？OWASP 邮箱校验速查表说，@ 后面的域名部分「always case-insensitive」，前面那部分「technically case-sensitive under SMTP, though many providers do not enforce this in practice」。它要求项目自己「Define an explicit comparison policy for the local part」，并且「Preserve the original email address as entered by the user」。本项目定的是：存用户输入的原样，只去掉首尾空白；注册查重、登录、按邮箱邀请成员时，整个地址不分大小写比较（API-55）。
+
+**这条规则由数据库兜住。** 比较规则要落到数据库的唯一约束上。architect 比了四种写法：
+
+- citext 列：换成扩展里「不分大小写的文字」类型。PostgreSQL 官方页写「The citext module provides a case-insensitive character string type」。
+- 表达式唯一索引：在 lower(email) 上建唯一索引。官方原话是，它「would prevent creation of rows whose col1 values differ only in case」。
+- 不区分大小写的排序规则：官方提醒「their use leads to a performance penalty」，有的模式匹配也用不了。
+- 小写影子列：另存一列全小写的邮箱，对它建唯一约束。
+
+选了 citext（ADR-DB-008）。理由有三条：规则落在列的类型上，注册、登录、邀请三处照常按邮箱查，不各自处理大小写；Prisma 的 schema 写得出（@db.Citext）；库还没建，改列类型没有迁移成本。代价是多依赖一个 PostgreSQL 扩展，而且比较规则随数据库的区域设置变，官方原话「citext's case-folding behavior depends on the LC_CTYPE setting of your database」，所以区域设置要在环境设计里定死。影子列没选：数据库只保证小写的那一份不重复，不分大小写要靠程序每次都转对，漏一处就拦不住。排序规则也没选：有性能代价，有的模式匹配用不了，Prisma 那边还要手写 SQL。
+
+PostgreSQL 的 citext 页其实建议考虑改用排序规则：「Consider using nondeterministic collations (see Section 23.2.2.4) instead of this module.」本项目没照这条建议走，理由写进了标准登记表的「偏离登记」，决策记录里只留指针。
+
+### 成功响应
+
+打个比方。快递员把包裹交到手上，不会再套一个信封，上面写「本次投递成功」。成功的响应也是这样，直接给东西。
+
+**不加外包装。** 成功的响应直接回资源本身，不套一层统一的外壳（API-18）。单个资源直接回对象。列表的顶层也回对象，数组放在其中一个字段里，这样以后加分页，响应的形状不用改。前端解析时，容忍多出来的字段（API-31）。
+
+**成功码三个。** 读取、更新成功回 200，带资源；新建成功回 201，带新资源和它的 id；成功但没有内容回 204，比如登出（API-25）。
+
+**注册回 201，但不带 Location。** 新建成功时，标准做法是用 Location 头告诉对方新东西的地址。注册新建了一个用户，所以回 201；可这个用户没有自己的地址，能读到他的只有「当前用户」接口，而那个地址随会话指向不同的人。RFC 9110 第 15.3.2 节允许不带 Location，原话是新资源由 Location「or, if no Location header field is received, by the target URI」标识。不带时，标准把注册接口的地址当作新资源的标识，读起来别扭，这个代价接受了（API-25）。
+
+**转让负责人回 204。** 转让成功后，调用的人自己就成了执行者；按产品规定，执行者看不见负责人是谁。所以转让成功只回 204，不把新负责人带回去。RFC 9110 第 9.3.4 节允许：PUT 成功「MUST send either a 200 (OK) or a 204 (No Content)」。前端收到 204，重新取一次项目信息，按调用者的新角色渲染（API-52）。
+
+**登录回 200，不带会话。** 登录虽然新建了会话，仍回 200，不回 201；响应里带当前用户，和「当前用户」接口同一个形状（API-53）。会话凭据只放在 HttpOnly Cookie 里，响应体里从不出现会话或它的编号：放进响应体，页面上的脚本就读得到，HttpOnly 就白设了。
+
+**一个响应带什么，不只看接口规范怎么说，还要看此刻谁在看、他该看什么。**
+
+**列表不分页，但要知道门槛在哪。** 分页，就是数据太多时一次只给一页。主参考 Zalando 第 159 条是必须档，但它有门槛：「This holds true for all lists that are (potentially) larger than just a few hundred entries.」只管可能超过几百条的列表。本项目的规模是一个没验证过的假设：每个项目几百条任务以内。这正卡在门槛上，所以本版不分页，同时记进待办：假设被推翻，就照第 159、160 条加游标分页，第 160 条要求避开按页码分页（API-40）。不分页时，后端按 id 升序返回，只为每次顺序一致；按截止日期排序、筛选，在前端做。
+
+**标准里的「必须」，常带着适用的门槛。用之前，先看门槛。**
+
 ---
 
 ## 第一块　第六窗口拍板的接口知识
