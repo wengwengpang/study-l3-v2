@@ -1,7 +1,7 @@
 # 补课 05-API　接口契约（下）
 
 > 统稿中（问 697 A）：照 book/OUTLINE.md 分三批写，第一批第一到三节，第二批第四、五节，第三批第六到十节；每批推一次，项目主人在 GitHub 读过认了才算定稿。
-> 第一批已写完，等项目主人读；第四到十节还没写。文末「本草稿的依据」是统稿前草稿的出处清单，留到写第十节时并入。
+> 第一批项目主人读过认了；第二批（第四、五节）在写，第六到十节还没写。文末「本草稿的依据」是统稿前草稿的出处清单，留到写第十节时并入。
 
 ## 一、本章位置
 
@@ -320,6 +320,38 @@ PostgreSQL 的 citext 页其实建议考虑改用排序规则：「Consider usin
 - 每个项目至多一个负责人，用部分唯一索引兜底；写法随 Prisma 锁定的版本定（ADR-DB-006）。
 - 任务加一列分配时间 assigned_at，可空：「可能卡住」要从最近一次分配起算，没有这一列算不出来。不存分配历史，也不加检查约束（ADR-DB-007）。
 - 邮箱列改用 citext，见前面「请求格式」（ADR-DB-008）。
+
+## 四、动手
+
+这一节照推荐的做法走，一共十一步，第 0 步到第 10 步。头两步核对一组待定项，定下用标准的方针；中间分批拍板，产品规则回需求文档定；最后两节正文各走「核对、起草」两轮，按小节落盘，跑验证命令收尾。每步四样：目的，要发的 prompt 或要敲的命令，应该看到什么，出了错怎么办。
+
+**architect 和 pm 都用子代理。** 理由和上半章一样：每一轮都要读好几份长文件，只要它交结论，用不着来回问答。它交回主对话的只是摘要，全文在子代理的记录里，取法见第六节。
+
+**模式。** 状态栏保持 `manual mode on`，每一步都先问。不进计划模式，原因见上半章第六节。
+
+### 第 0 步　核对前提
+
+**目的。** 这一章要用到前几章留下的七份文件，外加 architect、pm 两个角色的定义文件。
+
+```
+ls .claude/agents/architect.md .claude/agents/pm.md docs/arch/API_CONTRACT.md docs/arch/ARCHITECTURE.md docs/arch/TECH_STACK.md docs/arch/DECISIONS.md docs/design/PRD.md docs/design/UI_DESIGN.md prisma/schema.prisma
+```
+
+**应该看到。** 九个路径原样打出来：
+
+```
+.claude/agents/architect.md
+.claude/agents/pm.md
+docs/arch/API_CONTRACT.md
+docs/arch/ARCHITECTURE.md
+docs/arch/DECISIONS.md
+docs/arch/TECH_STACK.md
+docs/design/PRD.md
+docs/design/UI_DESIGN.md
+prisma/schema.prisma
+```
+
+**出了错怎么办。** 缺哪个，回到建它的那一章：需求文档和 pm 是第 2 课，界面设计是第 3 课，技术选型、决策记录和 architect 是第 4 课，schema 是第 5 课，架构文档是 05-ARCH 一章，契约的骨架是上半章。
 
 ---
 
