@@ -1403,6 +1403,66 @@ git show 1c256a7^:docs/arch/PENDING-C2-DRAFT.md
 
 几处读法：括号里的「API-n」是汇总里的裁决；「T2」「决策 B」「决策 Q1」这类，是架构文档里的裁决；「问 576 A」这类，是项目主人拍板的题号，原话记在决策记录里；「05-类型」就是下一章补课 05-类型，共享类型那一节。
 
+### 标准登记表
+
+`docs/arch/STANDARDS.md`，这一章新建。第四节第 2 步收过它刚建出来的第一版：登记表三行，偏离登记是「无」。下面是现在的全文，53 行：登记表 24 行，偏离登记 6 条。
+
+```
+# STANDARDS · 本项目采用的标准
+
+> 项目：study-l3-v2（团队任务协作工具）
+> 去留：长期。
+> 用途：登记本项目每个领域认哪一份主参考。单一信息源：别处要说「照什么标准」，指向本文件，不另抄。
+> 做法（05-API 第二窗口问 339 A、343 A、345 A 定）：
+> - 按层定先后：协议层正式标准 → 安全基线 → 框架约定 → 设计规范 → 都没有才自定。
+> - 冲突：层与层冲突时，排在前面的层说了算：协议层压过安全基线，安全基线压过框架约定，框架约定压过设计规范。同层几家不一，列出来由项目主人拍，拍完记 ADR 或契约。
+> - 每条标准分三档：必须（照做）、建议（便宜就做）、可选（不做但不堵死，记 BACKLOG）。档次按条判，写在用到它的那条裁决里；登记表不设档次栏。
+> - 标准管怎么做，不管做多少；凡称「标准」须给原文出处并当场核过，没核过的标「未核」。
+> - 偏离主参考的地方，理由写在本文件「偏离登记」，对应的 ADR 或契约条目只写指针。
+
+## 一、登记表
+
+| 领域 | 主参考 | 原文 | 拍板 | 核对 |
+|---|---|---|---|---|
+| API 设计 | Zalando RESTful API Guidelines | https://opensource.zalando.com/restful-api-guidelines/ | API-5（docs/arch/API_CONTRACT.md「本节裁决汇总」） | 2026-10-15；2026-10-26（#143） |
+| HTTP 语义（状态码、方法、认证头） | RFC 9110 HTTP Semantics | https://www.rfc-editor.org/rfc/rfc9110 | 协议层，必须照做；状态码见 API-14 到 API-16、API-25、API-27、API-37 到 API-39、API-52、API-53，401 的认证头见 API-20；方法见 API-50（主参考 Zalando #148），challenge 不带 realm 见 API-51 | 2026-10-15（第 11、15 节）；2026-10-17（第 11.5 节）；2026-10-21（第 9.3.4 节）；2026-10-23（第 9.2.2、15.3.1 节） |
+| PATCH 方法 | RFC 5789 PATCH Method for HTTP | https://www.rfc-editor.org/rfc/rfc5789 | API-35 补充（问 608 A：成功码与带什么不限死，例子回 204） | 2026-10-23（第 2、2.1 节） |
+| 提交信息 | Conventional Commits | 见 CLAUDE.md 第一层 C | 已在 CLAUDE.md 第一层 C | 未核 |
+| 会话管理 | OWASP Session Management Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html | API-8（含补充，问 613 B、614 A、625 A）、API-9、API-10、API-44 | 2026-10-15；2026-10-17（Web Content Caching and Clear-Site-Data 一节）；2026-10-23（Renew the Session ID After Any Privilege Level Change、Logout Button 两节） |
+| 跨站请求伪造防护 | OWASP Cross-Site Request Forgery Prevention Cheat Sheet；实现用 NestJS 自带防护 | https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html ；https://docs.nestjs.com/security/csrf | API-11 | 2026-10-15 |
+| Cookie 属性 | MDN Set-Cookie | https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie | API-8、API-9 | 2026-10-15 |
+| 错误响应格式 | RFC 9457 Problem Details for HTTP APIs；主参考 Zalando #176、#177 | https://www.rfc-editor.org/rfc/rfc9457.html | API-17、API-47 | 2026-10-15；2026-10-17（第 4.2.1 节） |
+| 出错实例编号 | RFC 9562 UUID（URN 写法 urn:uuid:） | https://www.rfc-editor.org/rfc/rfc9562 | API-26 | 2026-10-15（第 4 节）；2026-10-21（第 5.4、5.7 节） |
+| JSON 顶层结构 | 主参考 Zalando #167、#110（顶层用对象） | https://opensource.zalando.com/restful-api-guidelines/ | API-18 | 2026-10-15 |
+| 授权（最小权限） | OWASP Authorization Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html | PRD 审定决策 D11（执行者可见范围，问 399 A）、D14（移出成员，问 405 B）、D15（编辑任务内容，问 428 A）、D17（执行者看不见项目负责人，问 430 A）、API-42（列表按角色过滤，问 457 A） | 2026-10-16（Enforce Least Privileges 一节） |
+| 部分更新（PATCH 语义） | RFC 7396 JSON Merge Patch；主参考 Zalando #123 | https://www.rfc-editor.org/rfc/rfc7396 | API-33、API-54 | 2026-10-16（第 1 节） |
+| 批量赋值防护 | OWASP Mass Assignment Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Mass_Assignment_Cheat_Sheet.html | API-31 | 2026-10-16 |
+| 列表分页 | 主参考 Zalando #159、#160 | https://opensource.zalando.com/restful-api-guidelines/ | API-40（本版不分页，压在规模假设上） | 2026-10-17 |
+| 日期与时间格式 | RFC 3339；主参考 Zalando #169、#238 | https://www.rfc-editor.org/rfc/rfc3339 | API-41、ADR-DB-003 修订 | 2026-10-16（RFC 3339 第 2、5.6 节）；2026-10-17（Zalando #169、#238） |
+| HTTP 缓存 | RFC 9111 HTTP Caching | https://www.rfc-editor.org/rfc/rfc9111 | API-44（no-store 只作多一层保护） | 2026-10-17（第 5.2.2.5 节） |
+| JSON 媒体类型 | RFC 8259；主参考 Zalando #167 | https://www.rfc-editor.org/rfc/rfc8259 | API-51 第二、三点 | 2026-10-17（IANA 一节） |
+| 路径写法 | 主参考 Zalando #129、#134、#141 | https://opensource.zalando.com/restful-api-guidelines/ | API-51 第六点；只有一个的子资源写单数、偏离 #134，见 API-57 修订与「偏离登记」；#141（URL 不带动词）定为全局约定见 API-58，API-36、API-50 也引了它 | 2026-10-16（#141）；2026-10-17（#129、#134）；2026-10-23（#134 单例与 self 例外、#141、#143 self） |
+| 后端框架行为 | NestJS 官方文档：请求生命周期、Guards、异常过滤器 | https://docs.nestjs.com/faq/request-lifecycle ；https://docs.nestjs.com/guards ；https://docs.nestjs.com/exception-filters | API-23、API-46 | 2026-10-15（Guards、异常过滤器）；2026-10-17（请求生命周期） |
+| 错误处理 | OWASP Error Handling Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html | API-49 | 2026-10-17 |
+| 邮箱比较 | OWASP Email Validation and Verification Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Email_Validation_and_Verification_Cheat_Sheet.html | API-55 | 2026-10-17（Case Sensitivity、Email Canonicalization 两节） |
+| 认证（密码规则） | OWASP Authentication Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html | API-32 补充（问 576 A）；PRD 审定决策 D20（问 649 A、650 A） | 2026-10-20；2026-10-23（Implement Proper Password Strength Controls 一节）；2026-10-28（同一节：最短 15 位、组成规则、最长 64 位） |
+| schema 命名（请求体、列表项） | 框架约定：NestJS 官方 CRUD 生成器；设计规范：Google AIP-133、AIP-132 | https://docs.nestjs.com/recipes/crud-generator ；https://google.aip.dev/133 ；https://google.aip.dev/132 | API-30 补充（问 626 A、628 A、631 A） | 2026-10-26 |
+| 数据库与 ORM | 框架约定：PostgreSQL 官方文档（citext 一页）；Prisma 官方文档在锁版本时补（BACKLOG 74） | https://www.postgresql.org/docs/current/citext.html | ADR-DB-008（问 572 A）；偏离见「偏离登记」 | 2026-10-17；2026-10-28（18.6 版，LC_CTYPE 一句与 nondeterministic collations 一句） |
+
+## 二、偏离登记
+
+- 会话期限（API-10）：固定 30 天、无空闲超时，偏离 OWASP 会话管理「should implement an idle or inactivity timeout」与「absolute timeout」。理由：PRD D7 经项目主人确认；空闲超时要求读请求写 sessions，会推翻 T4；补救为登出即删服务端会话、角色改即时生效、Cookie 加 HttpOnly 与 Secure。将来风险变高时加空闲超时，见 BACKLOG。
+- 401 认证方案名（API-20）：自定方案名 Session 没在 IANA HTTP Authentication Scheme Registry 登记，RFC 9110 第 11.1 节写的是「ought to be registered」，属建议档。理由：登记表 14 个方案里没有会话 Cookie 类的；登记要走 IETF 评审，本项目不对外提供接口，唯一调用方是自家前端，前端不读这个头（API-6）。核对 2026-10-15。
+- 字段命名（API-22）：API 字段名与查询参数名用 camelCase，偏离 Zalando 第 118 条「MUST property names must be snake_case (and never camelCase)」与第 130 条（查询参数同）。理由：同层另一家主流规范微软 Azure 要求「DO use camel case for all JSON field names.」；Zalando 第 118 条自述「No established industry standard exists」；本项目前后端与 Prisma 都用 TypeScript，全链路不做命名转换（ARCHITECTURE 第二节「命名规范」）。核对 2026-10-15。
+- 部分更新的媒体类型（API-33）：照 RFC 7396 的规则处理 null 与没传，但请求只收 application/json，不用它登记的 application/merge-patch+json。理由：唯一调用方是自家前端（API-6），换媒体类型要修订 API-27、改前端 api client，收益只是类型名对得上，规则本身照 RFC 7396 走。核对 2026-10-16。
+- 只有一个的子资源用单数（API-57 修订）：本项目的负责人、任务的状态、项目的汇总写单数，偏离 Zalando 第 134 条「The special case of a resource singleton must be modeled as a collection with cardinality 1」（必须）。理由：同一层另一家 Google AIP-156（https://google.aip.dev/156，状态 Approved）「Singleton resources are always singular.」；照复数写，两个写接口的请求体要多一层只含一个元素的数组，改状态还要把 PATCH 改成 PUT，「状态们」会被读成状态的历史；唯一调用方是同仓同发的自家前端（API-6），将来放开多负责人时改路径代价小。核对 2026-10-23。
+- 邮箱不分大小写用 citext（ADR-DB-008）：没照 PostgreSQL 文档 citext 一页「Consider using nondeterministic collations (see Section 23.2.2.4) instead of this module.」改用不区分大小写的排序规则，属建议档。理由：排序规则有性能代价、部分模式匹配用不了、要手写 SQL；citext 写得进 schema，注册查重、登录、按邮箱邀请成员三个入口照常查（问 572 A）。代价是多依赖一个 PostgreSQL 扩展，比较随数据库的 LC_CTYPE（BACKLOG 80）。核对 2026-10-28。
+
+## 三、待登记
+
+- 代码风格：Lec 8。
+```
+
 ---
 
 ## 本草稿的依据
