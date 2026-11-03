@@ -13,6 +13,7 @@
 | 一 | 开课读得太多，中途会漂 | 补课 05-API 第七窗口 |
 | 二 | 答进度时漏了一整块 | 补课 05-API 第六窗口 |
 | 三 | 规矩只增不减 | 补课 05-API 第八窗口 |
+| 四 | 人工闸门要算总账 | 补课 05-API 第十窗口 |
 
 ---
 
@@ -558,3 +559,58 @@ sed -n '/^--- R1-519 /,$p' docs/DECISIONS-R1.md | grep -oE '拦下：卡 [0-9]+ 
 - Claude Code 官方文档 Best practices（2026-10-19）。
 - 维基百科 Chesterton's fence，转引《The Thing: Why I Am a Catholic》（2026-10-19）。
 - 维基百科「Sunset provision」条目（2026-11-03）。
+
+---
+
+## 案例四　人工闸门要算总账
+
+### 一、问题是什么
+
+2026-10-20，补课 05-API 第十窗口开课。开课和体检的闸门刚走完，项目主人打断：
+
+> 先停下补充个问题：上面所做的存档的报告和管理员自测和指纹检测对比等开课和体检闸门，也就是刚做的以上动作能做成自动吗？非必要不要我手动选择。这样太浪费我时间。整体解析集中到一处
+
+### 二、症状与实据
+
+Claude Code 数了这个窗口从开课到闸门走完，项目主人被叫停的次数：看状态栏，答精力，第 563 问，亲手跑两次指纹，回「测」，弹窗选 No，说「发」，三道检验题，第 567 问，第 568 问，同意两份对照。一共十五次，另有五次改文件的弹窗。
+
+真正需要动脑的，两三次。
+
+其中还有一道是白造出来的。第 568 问，起因是核对脚本的一个旧问题没修，每个窗口都会再造一次。
+
+人被问多了，问题就不起作用了。更早有一次重温检验，项目主人回了一句「按你推荐」，那道检验就等于没做。
+
+### 三、为什么会这样
+
+**一句话：每道闸门都是撞了坑才加的，单看都有理；可是都加在人身上，没人算过加起来有多少。**
+
+打个比方。一条路每出一次事故，就加一个检查岗。每个岗单看都有理。可没人从头开到尾算一算，要停多少次车。
+
+再往下拆，有两层：
+- 当初的理由是对的。第 121 问定下核查命令由项目主人亲手跑，不经 Claude Code 的手，理由是不让被查方自己查自己。
+- 能替人站岗的机器排得太后。钩子排在第 8 课，中间这段时间，只能人来站。
+
+### 四、行业怎么解决
+
+**一句话：先问这件事要不要人的判断。不要的，交给机器；要的，才留给人。**
+
+Google 的《Site Reliability Engineering》管这类活叫苦活（toil）：「Toil is the kind of work tied to running a production service that tends to be manual, repetitive,」「automatable, tactical, devoid of enduring value, and that scales linearly as a service grows.」
+
+它给的判据，正好能拿来分闸门：「If a machine could accomplish the task just as well as a human, or the need for the task could be designed away,」「that task is toil.」「If human judgment is essential for the task, there's a good chance it's not toil.」
+
+它还有一句容易漏：人亲手跑脚本，也算。「the hands-on time a human spends running that script (not the elapsed time) is still toil time.」让项目主人亲手跑指纹命令，就是这一条。
+
+在 Claude Code 里，这台机器就是钩子。案例一第四节引过官方的话：写在 CLAUDE.md 里的话是建议，钩子是确定会执行的。
+
+### 五、考虑过哪几种
+
+先把所有闸门分成三类：
+- 甲类，不用钩子就能去掉人的，五件：核对脚本按编号去重；桥梁文件不问送审；固定派单直接派；指纹改由 Claude Code 跑；取消改 .gitignore 测弹窗，只看状态栏。
+- 乙类，要钩子才能去掉的，四件：开会话时查权限模式；子代理前后跑指纹；开会话时跑 fetch 报差几条；记账文件放宽护栏。
+- 丙类，留给人的：精力，真取舍，改说明书时说的「帮我改」，检验题。
+
+**甲类什么时候做。** 三种（问 569）：只做前三件；全放结课；五件现在都做。选了最后一种。
+
+**乙类什么时候做。** 三种（问 570）：这个窗口用量够就上；照原计划放第 8 课；结课时一起定。选了最后一种。到结课定的时候，并回了第 8 课，和别的钩子一起做（问 667）。
+
+**这里有个真取舍。** 指纹改由 Claude Code 跑，等于推翻第 121 问：站岗的成了被查方。当时把这个代价写明了，等钩子上了再交给机器。
