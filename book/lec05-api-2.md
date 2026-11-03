@@ -1702,6 +1702,16 @@ Pipe、Service、Repository 三层各改一句：
 - 后续（补课 05-API，问 648 A）：后果里放弃不区分大小写的排序规则这一处，偏离的是 PostgreSQL 文档的建议，登进 docs/arch/STANDARDS.md「偏离登记」，理由以那里为准；登记表同时加「数据库与 ORM」一行。上面原文不改。
 ```
 
+### 数据库设计图
+
+`prisma/schema.prisma`。这一章动了三行：邮箱用 citext（ADR-DB-008），加分配时间（ADR-DB-007），截止日期改成纯日期（ADR-DB-003 的修订行）。每个项目至多一个负责人的部分唯一索引（ADR-DB-006），写法随 Prisma 锁版本定，还不在这个文件里。
+
+```
+  email        String   @unique @db.Citext
+  assignedAt      DateTime?  @map("assigned_at") @db.Timestamptz(6)
+  dueDate         DateTime?  @map("due_date") @db.Date
+```
+
 ---
 
 ## 本草稿的依据
