@@ -1712,6 +1712,14 @@ Pipe、Service、Repository 三层各改一句：
   dueDate         DateTime?  @map("due_date") @db.Date
 ```
 
+### 技术栈
+
+`docs/arch/TECH_STACK.md`。只加一行，和 ADR-003 的修订行说的是同一件事：通知模块本版是空壳。
+
+```
+   修订（补课 05-API，问 469 A）：本版通知模块是空壳，表已建、MVP 内不产生任何通知（ARCHITECTURE 第一节决策 4）。本条与扩展点 1、第四节说的「本版通知表」只指表已建、做法是轮询；课程硬底线的「通知」那一支在 Lec 13 兑现。上面原文不改。
+```
+
 ---
 
 ## 本草稿的依据
