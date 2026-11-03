@@ -1,7 +1,7 @@
 # 补课 05-API　接口契约（下）
 
 > 统稿中（问 697 A）：照 book/OUTLINE.md 分三批写，第一批第一到三节，第二批第四、五节，第三批第六到十节；每批推一次，项目主人在 GitHub 读过认了才算定稿。
-> 第一批项目主人读过认了；第二批（第四、五节）写完，等项目主人读；第六到十节还没写。文末「本草稿的依据」是统稿前草稿的出处清单，留到写第十节时并入。
+> 第一、二批项目主人读过认了；第三批（第六到十节）写完，等项目主人读。
 
 ## 一、本章位置
 
@@ -1964,22 +1964,56 @@ EOF
 
 只属于本项目、不往外带的：API-3 到 API-59 的具体裁决，17 个接口，需求文档审定决策 D10 到 D20，ADR-DB-006 到 ADR-DB-008。
 
----
+## 十、本章依据
 
-## 本草稿的依据
+**核对日期。** Claude Code 的说法，对的是 2026 年 11 月 3 日的官方文档。行业标准的原文，各批取回的日子不一样，写在下面「标准的原文」里。
 
-以下原文都在 2026-10-17 用网页取回核过：
+**命令的输出。** 第四节第 0 步的命令，第 8 步 `cmp` 的两种情况，第 10 步的三条命令，第六节取记录的命令，写书时都实跑过，输出照录。第 8 步的副本放在会话的临时目录，书里把路径写成 `/tmp/contract-after.md`。
 
-- Zalando RESTful API Guidelines：第 129、134、141、148、159、160、167、169、238 条。
-- RFC 3339、RFC 8259、RFC 9110（第 9.3.4、11.5 节）、RFC 9111（第 3.5、5.2.2.5、7.3 节）、RFC 9457（第 4.2.1 节）。
-- OWASP 速查表：会话管理、错误处理、邮箱校验。
-- NestJS 官方文档「请求生命周期」；MDN「Date.prototype.toISOString」。
-- 第二块（第七窗口取）：PostgreSQL 18 文档 citext、表达式索引、排序规则三页；Prisma 7 文档 schema 参考、不支持的数据库功能、大小写三页。
-- 第三块（第十窗口取）：OWASP Authentication Cheat Sheet（2026-10-20）。
-- 第四块（第十一窗口取，2026-10-21）：RFC 9110 第 9.3.4、15.3.2 节；RFC 9562 第 5.4 节；Zalando 第 148 条。
-- 第五块（第十二窗口取，2026-10-23）：Zalando 第 134、141、143、148 条；Google AIP-156；RFC 5789 第 2、2.1 节；RFC 9110 第 9.2.2、15.3.1 节；OWASP 会话管理（Renew the Session ID After Any Privilege Level Change、Logout Button 两节）；NestJS 官方认证一页。
-- 第六块（第十三窗口取，2026-10-26）：Google AIP-132、AIP-133；Zalando 第 143 条；NestJS 官方 controllers、CRUD 生成器两页。
-- 第七块（第十四窗口取，2026-10-27）：OWASP Authentication Cheat Sheet（Change Password Feature、Implement Secure Password Recovery Mechanism、Changing A User's Registered Email Address 三节）；RFC 2606 第 3 节。
-- 第八块（第十五窗口取，2026-10-28）：OWASP Authentication Cheat Sheet（Implement Proper Password Strength Controls 一节）；PostgreSQL 18.6 文档 citext 一页。
+**派单和回报的原文。** 第四节收了六份派单。每一份都用命令从当时会话的子代理记录里取出，一字不改。「应该看到」里的行数，数的是回报的原文。记录只在本机，默认 30 天就删，所以派单和回报都原样存了一份，在 `book/notes/lec05-api-subagents.md`。对应关系：
 
-项目里的出处：docs/DECISIONS-R1.md 的 R1-453 到 R1-481；契约 API-40 到 API-55。第二块见 R1-492 第四点，第三块见 R1-525、R1-527 与 ADR-DB-008。第四块见 R1-530 到 R1-533 与契约汇总里第十一窗口的补充行。第五块见 R1-537 到 R1-543 与契约汇总里第十二窗口的补充、修订行。第六块见 R1-546 到 R1-551 与契约汇总里第十三窗口的补充、已定行和 API-59。第七块见 R1-555 到 R1-560 与契约第二节第 6、7 小节、API-42 补充（问 634 B）、PRD 审定决策 D19。第八块见 R1-569 到 R1-572、PRD 审定决策 D20 与 docs/arch/STANDARDS.md「偏离登记」。原先的「怎样不漏掉一整块」「开课读得太多，中途会漂」两块已挪进附录 H（book/appendix-h.md），出处跟着搬了过去（问 515 A、516 A）。
+| 第四节 | 子代理记录 | 日期 | 派单行数 | 回报行数 |
+|---|---|---|---|---|
+| 第 1 步 | agent-ae5a62cdf0e21f521 | 2026-10-15 | 44 | 364 |
+| 第 5 步 | agent-a9e075da0f03713fa | 2026-10-16 | 51 | 237 |
+| 第 6 步 | agent-a0283d28a5805af87 | 2026-10-17 | 26 | 185 |
+| 第 7 步 | agent-a337985d228648780 | 2026-10-20 | 50 | 520 |
+| 第 9 步核对轮 | agent-aea92e132b6e599bc | 2026-10-23 | 28 | 317 |
+| 第 9 步起草轮 | agent-ab805addb90e4c3d9 | 2026-10-23 | 28 | 397 |
+
+这份文件一共十一份，另外五份书里没收。
+
+**产出物的原文。** 第五节收的原文都用命令从文件里取，不手打，落完再和取出来的逐行比。契约第一、二节和标准登记表，收的是现在的全文。别的文件，收的是这一章改动的行，用 `git diff -U0 123325d HEAD` 找；123325d 是第二窗口开课时的提交，这一章从那里算起。
+
+**项目内的出处。**
+
+- 接口契约 `docs/arch/API_CONTRACT.md`：第一、二节全文；第三节「本节裁决汇总」从 API-1 到 API-59，每条写着裁决。API-1、API-2 在上半章。
+- 每条裁决从哪来：第一次进契约的提交，用 `git log -S'API-40' --format='%h %ad %s' --date=short -- docs/arch/API_CONTRACT.md | tail -1` 查，把 API-40 换成要查的编号。当时怎么拍的，看决策记录 `docs/DECISIONS-R1.md` 的 R1-385 到 R1-608；下面「标准的原文」每一批后面，也写了对应的几条。
+- 标准登记表 `docs/arch/STANDARDS.md` 全文：每份标准的原文网址、拍板出处、核对日期都在表里。
+- 完整笔记 `docs/lessons/05-api-full.md`：第四节的经过和「出了错」，第七节的素材，都出自第二到十八窗口的补记。
+- 反模式库 `docs/lessons/anti-patterns.md`：第 37、40、46、47 号。
+- 决策记录里这一章怎么写的：R1-612 知识点清单与问 696、697；R1-635、R1-636 第五节收多少（问 702）；R1-639 第七节与记录文件（问 703、704）。
+
+**标准的原文。** 每份标准的网址和核对日期，以标准登记表为准。下面是各窗口取回核过的部分，取回的日子写在前面：
+
+- 第六窗口（2026-10-17）：Zalando RESTful API Guidelines 第 129、134、141、148、159、160、167、169、238 条；RFC 3339、RFC 8259、RFC 9110（第 9.3.4、11.5 节）、RFC 9111（第 3.5、5.2.2.5、7.3 节）、RFC 9457（第 4.2.1 节）；OWASP 速查表：会话管理、错误处理、邮箱校验；NestJS 官方文档「请求生命周期」；MDN「Date.prototype.toISOString」。对应 R1-453 到 R1-481，契约 API-40 到 API-55。
+- 第七窗口：PostgreSQL 18 文档 citext、表达式索引、排序规则三页；Prisma 7 文档 schema 参考、不支持的数据库功能、大小写三页。对应 R1-492 第四点。
+- 第十窗口（2026-10-20）：OWASP Authentication Cheat Sheet。对应 R1-525、R1-527 与 ADR-DB-008。
+- 第十一窗口（2026-10-21）：RFC 9110 第 9.3.4、15.3.2 节；RFC 9562 第 5.4 节；Zalando 第 148 条。对应 R1-530 到 R1-533 与契约汇总里第十一窗口的补充行。
+- 第十二窗口（2026-10-23）：Zalando 第 134、141、143、148 条；Google AIP-156；RFC 5789 第 2、2.1 节；RFC 9110 第 9.2.2、15.3.1 节；OWASP 会话管理（Renew the Session ID After Any Privilege Level Change、Logout Button 两节）；NestJS 官方认证一页。对应 R1-537 到 R1-543 与契约汇总里第十二窗口的补充、修订行。
+- 第十三窗口（2026-10-26）：Google AIP-132、AIP-133；Zalando 第 143 条；NestJS 官方 controllers、CRUD 生成器两页。对应 R1-546 到 R1-551 与契约汇总里第十三窗口的补充、已定行和 API-59。
+- 第十四窗口（2026-10-27）：OWASP Authentication Cheat Sheet（Change Password Feature、Implement Secure Password Recovery Mechanism、Changing A User's Registered Email Address 三节）；RFC 2606 第 3 节。对应 R1-555 到 R1-560 与契约第二节第 6、7 小节、API-42 补充（问 634 B）、PRD 审定决策 D19。
+- 第十五窗口（2026-10-28）：OWASP Authentication Cheat Sheet（Implement Proper Password Strength Controls 一节）；PostgreSQL 18.6 文档 citext 一页。对应 R1-569 到 R1-572、PRD 审定决策 D20 与标准登记表「偏离登记」。
+
+**Claude Code 官方文档，code.claude.com/docs。** 2026 年 11 月 3 日取回核过。子代理页（Create custom subagents）：记录的位置，压缩不影响记录，`cleanupPeriodDays` 默认 30 天，最佳实践第一条。模型配置页：推理强度的档位，`/effort` 滑杆的操作，`max` 只管当前会话。工具参考页（Tools reference）的 WebFetch tool behavior：结果是另一次模型调用处理过的，100,000 字符的上限，拒绝 `localhost`。费用页：用量随上下文涨，每次都带整段对话。
+
+**标了「示意」的例子。** 本章没有。
+
+**相对网页版改了什么。** 这一章没有对应的网页版课堂。网页版只上了 05-API 第一窗口，全收在上半章。这一章的内容出自第二到十八窗口，都在 Claude Code 里上。相对当时上课的经过，改了这几处：
+
+1. 原理和动手照最终的做法写。当时改过口的几处只写最终，经过放进第七节。
+2. 动手一节整理成十一步。当时跨了十七个窗口。
+3. 派单照原文收，不改一个字。第 7 步派单里那条临时目录路径也照收，后面加一句交代。
+4. 这门课怎么上的，没有进本章：检查单、交付物清单、开课闸门、中断复查。
+5. 统稿前的草稿有课堂口吻和过程性的话，都去掉了；重复的合并。
+6. 草稿原有的「怎样不漏掉一整块」「开课读得太多，中途会漂」两块，挪进了附录 H（`book/appendix-h.md`），出处跟着搬了过去（问 515 A、516 A）。
