@@ -961,3 +961,16 @@ M  docs/lessons/anti-patterns.md
 git commit -m "feat: 第 4 课技术选型，建 architect 角色与 TECH_STACK、DECISIONS"
 ```
 
+**应该看到。** 下面是写书时照这些步骤跑的结果。提交号和行数每人不同。
+
+```
+[master e9d3328] feat: 第 4 课技术选型，建 architect 角色与 TECH_STACK、DECISIONS
+ 7 files changed, 204 insertions(+), 2 deletions(-)
+ create mode 100644 .claude/agents/architect.md
+ create mode 100644 docs/BACKLOG.md
+ create mode 100644 docs/arch/DECISIONS.md
+ create mode 100644 docs/arch/TECH_STACK.md
+```
+
+**出了错怎么办。** 多了不认识的文件，先弄清是什么，不要一起带走。
+
