@@ -23,7 +23,7 @@
 │   ├── build.py             把每章 Markdown 转成网页，只用 Python 标准库；在项目根目录跑 python3 book/build.py。学生改在 GitHub 上读，现在不用（问 302 A），去留没定
 │   ├── lec-intro.md         开篇导读，照全书骨架第四节的提纲写（学生已认，DECISIONS-R1 R1-314、R1-320）
 │   ├── lec00.md             第 0 课 全局观，照全书骨架十节写（学生已认，DECISIONS-R1 R1-310、R1-327）
-│   ├── lec01.md             第 1 课 用户研究，照全书骨架十节写（DECISIONS-R1 R1-675）
+│   ├── lec01.md             第 1 课 用户研究，照全书骨架十节写（学生已认，DECISIONS-R1 R1-675、R1-676）
 │   ├── lec05.md             第 5 课 数据库设计，照全书骨架十节写（学生已认，DECISIONS-R1 R1-347、R1-353）
 │   ├── lec05-arch.md        补课 05-ARCH 系统架构，照全书骨架十节写（学生已认，DECISIONS-R1 R1-361、R1-362、R1-383）
 │   ├── lec05-api-1.md       补课 05-API 接口契约（上），照全书骨架十节写（学生已认，DECISIONS-R1 R1-366 到 R1-371、R1-373）
