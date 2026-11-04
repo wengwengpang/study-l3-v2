@@ -123,6 +123,9 @@ M 节 · 送审（网页版审查，只算半独立）
 由学生查，不由 CC 判断。中一条就送。
 1. 本节改了说明书、宪法、权限或角色文件。结课前学生在 CC 里跑下面的命令，有输出就中：
    ! git diff --stat <开课提交号> -- docs/COURSE_RULES.md docs/lessons/anti-patterns.md docs/TEACHING_STYLE.md docs/LESSON_TEMPLATE.md docs/AGENT_SPEC.md docs/SESSION_START.md docs/KNOWLEDGE_BASE.md docs/HARNESS.md CLAUDE.md .claude/settings.json .claude/agents/ scripts/
+   再跑这一条，查没提交的改动和还没进 git 的新文件（上一条看不到未跟踪的文件），有输出也中：
+   ! git status --porcelain -- docs/COURSE_RULES.md docs/lessons/anti-patterns.md docs/TEACHING_STYLE.md docs/LESSON_TEMPLATE.md docs/AGENT_SPEC.md docs/SESSION_START.md docs/KNOWLEDGE_BASE.md docs/HARNESS.md CLAUDE.md .claude/settings.json .claude/agents/ scripts/
+   git 管不到的三份（.claude/settings.local.json、~/.claude/settings.json、~/.claude/CLAUDE.md），上面两条都看不到。开课时 CC 跑 sha256sum 记进决策记录，结课再跑一次比，不同就中。换了机器对不上的，打开看内容再判。
 2. 本节是一个阶段的最后一节。阶段划分见 KNOWLEDGE_BASE 第七节。
 3. 学生说「请反方」。
 开课提交号：开课时 CC 跑 git log --oneline -1，报给学生记下。
