@@ -398,3 +398,103 @@ grep -c '待验证' docs/design/USER_RESEARCH.md
 
 **目的。** 把这一章踩的坑存下来，把文件清单记下来，存一次档。
 
+把第五节「反模式库新增」的五条，追加到 `docs/lessons/anti-patterns.md` 末尾。编号沿用本项目的，所以会跳号，不要紧。
+
+然后新建 `docs/PROJECT_STRUCTURE.md`，贴入第五节的目录树。目录树要放在最后更新。先更新目录树再建文件，它就少记一样。这是 21 号的坑。
+
+看一眼要提交什么：
+
+```
+git status --short
+```
+
+**应该看到。** 两个 `M`（改过的文件），`??` 开头的是新的。
+
+```
+ M CLAUDE.md
+ M docs/lessons/anti-patterns.md
+?? .claude/
+?? docs/AGENT_SPEC.md
+?? docs/PROJECT_STRUCTURE.md
+?? docs/design/
+```
+
+点名把它们加进来，不用 `git add -A`，免得把别的文件一起收进去：
+
+```
+git add CLAUDE.md .claude/agents/client.md .claude/agents/persona.md docs/AGENT_SPEC.md docs/PROJECT_STRUCTURE.md docs/design/USER_RESEARCH.md docs/lessons/anti-patterns.md
+git commit -m "feat: 第 1 课用户研究，建 client、persona 与研究报告"
+```
+
+**应该看到。** 下面是写书时照这些步骤跑的结果。提交号每人不同，行数看你第二栏写了多少。
+
+```
+[master e0bdc48] feat: 第 1 课用户研究，建 client、persona 与研究报告
+ 7 files changed, 223 insertions(+), 1 deletion(-)
+ create mode 100644 .claude/agents/client.md
+ create mode 100644 .claude/agents/persona.md
+ create mode 100644 docs/AGENT_SPEC.md
+ create mode 100644 docs/PROJECT_STRUCTURE.md
+ create mode 100644 docs/design/USER_RESEARCH.md
+```
+
+**要核的是那个数字。** `7 files changed` 的 7，要等于你这次动过的文件数：两个改的，五个新建的。不要只看「成功」两个字。数字对不上，就有文件漏了或者多了，用 `git show --stat` 看。
+
+**出了错怎么办。** 数对不上时，再改一轮再提交就好。提交时如果加了 `--allow-empty`，会留下一个没有内容的提交，无害，但它不算存了档。
+
+## 五、产出物
+
+下面是这些文件现在的样子。角色文件在写这本书时照标准补齐过，第十节有说明。
+
+### docs/AGENT_SPEC.md
+
+```markdown
+# 角色文件标准 · AGENT_SPEC.md
+
+> 所有 .claude/agents/*.md 角色文件的唯一图纸。建任何角色都照此。
+> 立于 Lec 2 前置整改，吸收 Lec 1（client/persona）与 Lec 2 草案（pm）双方优点。
+
+## 落盘方式
+角色文件由 CC 按本文件起草，学生看过说「帮我改」才落盘（规则 31、防反模式 18）。
+
+## YAML 头（四字段，顺序固定）
+- name：角色名，小写英文。
+- description：英文。说明角色是谁 + 能做什么 + 一句「Use when ...」触发语（帮 CC 判断何时调用）。
+- tools：按角色类型给最小权限，见下方权限表。
+- model：sonnet 为默认；重思考角色（如 architect 做权衡）可标 opus；轻活可 haiku。
+
+## 权限表（规则：最小权限）
+- 文档类角色（client / persona / pm / designer / architect）：只给 Read。
+  它们只产出内容，落盘交主对话或 cat，角色本身不碰文件系统。
+- 写码类角色（backend / frontend 等，Lec 10+）：给 Read, Write, Edit。
+- 检查类角色（librarian 等，只查不改）：给 Read, Grep, Glob, Bash。Bash 只用来跑只读检查脚本和只读命令（DECISIONS-R1 R1-102 问 109A）。
+- 除检查类外，任何角色都不默认给 Bash，需要才显式加并说明理由；检查类的 Bash 理由写进角色文件硬规则。
+
+## 正文段落（五段，顺序固定，人称统一用「你」）
+1. 你是谁：背景 + 核心信念一句话。
+2. 硬规则：第一条永远是「每次激活先读本文件 .claude/agents/<name>.md」（防反模式 3）。
+3. 你的职责：编号列，这个角色负责产出什么。
+4. 你的边界（你不做）：明确划走属于别的角色的活，防越界（防反模式 5）。
+5. 你的产出：交付物的文件路径 + 包含什么。
+
+## 诚实底线（涉及需求的角色必带）
+来源是「AI 假设」的内容，产出里必须标「假设」，不得擅自升级为「已验证」（防反模式 19）。
+
+## 方法论落点（点名即落地 · Lec 4 加）
+角色的硬规则或职责里点名的任何方法论（如 architect 的「6 必问」「四象限」、pm 的 JTBD、tester 的 OWASP 4 类用例），其具体内容必须有持久落点：
+- 要么写进角色文件自身的「方法论附录」段；
+- 要么在点名处指向某个持久文件（路径写清）。
+禁止只在角色文件里留方法名字、内容只活在某次对话或 prompt 里。
+为什么：只留名字，下个窗口角色重激活时不知道方法具体是什么，会自己编（反模式 18）或反复问。这是反模式 25（制度不传承）、27（好东西没固化）在角色层的复发。
+与规则 61 关系：本条是传承链元检查在「角色方法」这类产物上的具体化，叠加生效。
+```
+
+里面提到的规则号、「课程」和 `librarian`，是本项目后来加的，读者现在不用管。权限表里的写码类、检查类角色，后面的章才用到。
+
+### .claude/agents/client.md
+
+```markdown
+---
+name: client
+description: User research interviewer. Asks questions, probes pain points, synthesizes needs using JTBD. Never role-plays the user. Use when the project needs user research: who the users are, what they struggle with, and what to hand to the pm.
+tools: Read
