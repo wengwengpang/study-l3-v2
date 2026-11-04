@@ -698,3 +698,103 @@ grep -c '^## 待验证盲区' docs/design/PRD.md
 **应该看到。** 一个 claude.ai 的链接，默认只有你自己能开。官方说要「Open the published artifact in a desktop browser to review the artboards」，所以用电脑的浏览器打开。写书时画了三张：项目主页（负责人）、任务页（负责人）、任务页（执行者）。示例数据是编的，邮箱都用 `example.com`。
 
 **再补两样。** 三张是不够的，也不用十页全画。标准不管张数，这是本书的判断：再补任务详情，它是执行者主流程的终点，状态在这里改；再补任务页的加载态、空态和错误态，三态的规矩最集中在这一页。回：
+
+```text
+再画两样：一，任务详情页（执行者）。二，任务页的加载态、空态（负责人和执行者各一张）、错误态。都照 UI_DESIGN 第四节。
+```
+
+这句是把写书时的要求写成了一句话，当时是分开说的，没有一字不差地跑过。
+
+**看什么。** AI 没看渲染结果，好不好看、有没有错位，只有你能判断。除了看样子，还要带着这几个问题看：
+
+- 一页是不是只突出一个核心任务？
+- 负责人和执行者看到的，差别对吗？执行者那张有没有不该有的入口？
+- 有没有文字写了、一画就不通的地方？
+
+第三个问题最值钱。本项目第一次画就露出四处：
+
+1. 执行者的任务页，每一行的「任务负责人」都是他本人。文字要求显示，照画了，可看着多余。
+2. US-01 要求全员任务状态同屏、不用翻页。示例十条放得下，假设账本写的几百条放不下。
+3. 进度汇总的四个数含未认领的任务，成员表里没有这些任务，两边加不到一起。样稿里只好加一句「另有 2 个未认领的任务」，这句 UI_DESIGN 没写。
+4. 页头没放当前登录的是谁。US-A02 写了需要展示时能取到，页面清单里没列。
+
+这些都是读文字时没人发现的。发现了不是当场改设计，是记下来，由人决定。
+
+**它说发布不了怎么办。** 官方写不可用时，Claude 会写本地 HTML 或者告诉你发布不了。退路是让它写一个单文件的 HTML，用浏览器打开：
+
+```text
+照 docs/design/UI_DESIGN.md 第一节，把任务页写成一个单文件 HTML，放在 docs/design/mockups/tasks.html。示例数据用编的，邮箱用 example.com。不要改别的文件。
+```
+
+这条退路写书时没有实跑。
+
+**还有别的工具。** 都不是必须的，写的是 2026 年 11 月 4 日查到的，价格以官网为准。Figma 有 MCP 服务，能「Create and modify native Figma content from your MCP client」，写入功能 beta 期间免费，以后按用量收费，要 Full 席位才能写到草稿之外。v0 是专门从文字生成界面的工具，免费档写着「7 message/day limit」。都要另开账号。
+
+**存进项目。** 网页只在线上，要留一份底稿。回：
+
+```text
+把这份样稿的源文件取回来，放进 docs/design/mockups/，再写一份 README，写明示例数据是编的，文字规范仍以 docs/design/UI_DESIGN.md 为准。
+```
+
+然后在 `docs/design/UI_DESIGN.md` 的文件头加一行，指过去：
+
+```text
+> 界面样稿（只看样子，文字规范仍以本文件为准）：docs/design/mockups/（问 728 A）。
+```
+
+括号里的编号是本项目的记录号，你的项目可以不写。
+
+```
+ls docs/design/mockups
+```
+
+**应该看到。** 文件名每次不同。写书时是：
+
+```
+Main.dc.html
+README.md
+TaskDetailExecutor.dc.html
+TasksEmptyExecutor.dc.html
+TasksEmptyOwner.dc.html
+TasksError.dc.html
+TasksExecutor.dc.html
+TasksLoading.dc.html
+TasksOwner.dc.html
+canvas.json
+```
+
+这些 `.dc.html` 里引用了一个运行文件，没有存下来。离开网页直接打开是什么效果，写书时没有实测。要图片的话，官方说「You can export each artboard as PNG or PDF.」
+
+**出了错怎么办。** 提示套餐不够或发布失败，走上面的退路。画错了，告诉它哪里和 UI_DESIGN 对不上，以文字为准重画。
+
+### 第 9 步　写规则书第二层
+
+**目的。** 让 AI 每次进项目都知道这几条硬结论。
+
+在 VS Code 里打开 `CLAUDE.md`，把第五节「规则书第二层 C」贴到第二层 B 后面，存盘。
+
+```
+grep -c '第二层 C' CLAUDE.md
+```
+
+**应该看到。** `1`。
+
+**出了错怎么办。** 是 0，是没存盘。
+
+### 第 10 步　记坑，更新目录树，提交
+
+**目的。** 存一次档。
+
+把第五节的 31 号追加到 `docs/lessons/anti-patterns.md` 末尾。第三节列的「这一版还缺什么」，下一章会建待办清单 `docs/BACKLOG.md`，到时候记进去。
+
+更新 `docs/PROJECT_STRUCTURE.md`，贴入第五节的目录树。这一步放在最后。
+
+```
+git status --short
+```
+
+**应该看到。**
+
+```
+ M CLAUDE.md
+ M docs/PROJECT_STRUCTURE.md
