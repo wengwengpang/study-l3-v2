@@ -1303,7 +1303,7 @@ Button（主要动作）、Input（单行输入）、Textarea（任务描述）�
 **外部出处。**
 
 - W3C，WCAG 2.2（w3.org/TR/WCAG22），W3C Recommendation，2024-12-12；各条的 Understanding 页。
-- NN/g：UX Prototypes: Low Fidelity vs. High Fidelity（2016-12-18）；Skeleton Screens（2023-06-04，2026-09-02 复审）；Empty States（2021-09-19）；How to Conduct a Heuristic Evaluation（2023-06-25）。
+- NN/g：UX Prototypes: Low Fidelity vs. High Fidelity（2016-12-18）；Skeleton Screens 101（2023-06-04，2026-09-02 复审）；Designing Empty States in Complex Applications: 3 Guidelines（2021-09-19）；How to Conduct a Heuristic Evaluation（2023-06-25）。
 - GOV.UK Service Manual，Making prototypes（2016-10-18）。英国政府公共服务的手册，约束不到本项目。
 - OWASP，Authentication Cheat Sheet，Authentication and Error Messages 一节。
 - Figma，Guide to Dev Mode（help.figma.com）；Figma MCP 官方文档（developers.figma.com）。
