@@ -297,7 +297,7 @@ Level 1 阶段（在 Claude 网页版）已学完：本文件第二到第六块�
 - Slash 命令：/clear、/compact、/cost、/init、/resume 等。
 - Rewind / Resume：回退 / 续接（Esc Esc 双击回退）。
 - Worktrees：多工作树，并行开发。
-- Memory 系统：官方是两套，不叫三层。一套是人写的 CLAUDE.md，四个位置：组织级、用户级 ~/.claude/CLAUDE.md、项目级 ./CLAUDE.md、本地级 ./CLAUDE.local.md。一套是自动记忆，Claude Code 自己记的笔记，在 ~/.claude/projects/<项目>/memory/，每次会话开头读进索引 MEMORY.md 的前 200 行或 25KB。会话上下文不算记忆，每次会话从空白开始。（官方记忆页，2026-10-13 查）
+- Memory 系统：官方是两套，不叫三层。一套是人写的 CLAUDE.md，四个位置：组织级、用户级 ~/.claude/CLAUDE.md、项目级 ./CLAUDE.md、本地级 ./CLAUDE.local.md。一套是自动记忆，Claude Code 自己记的笔记，在 ~/.claude/projects/<项目>/memory/，每次会话开头读进索引 MEMORY.md 的前 200 行或 25KB。会话上下文不算记忆。每次会话是新的上下文窗口，上次的对话不带过来；CLAUDE.md 和自动记忆在开头加载。（官方记忆页，2026-10-13 查）
 
 ---
 
