@@ -187,3 +187,74 @@ JWT 的麻烦在第一条。它的标准 RFC 7519 写的是「a compact, URL-saf
 
 **四，校验用什么。** 候选 Zod 和 class-validator。NestJS 官方写「Nest works well with the class-validator library, which provides decorator-based validation.」这条路最常规，可它只能后端用。Zod 一份规则两边共用，贴合「一种语言走到底」。代价是要自己接一层，官方文档「Schema based validation」一节给了示例。定的是 Zod。
 
+### 决策记录
+
+TECH_STACK 记的是选了什么，是结论。决策记录记的是当时为什么这么选、放弃了什么，是理由。
+
+打个比方，它是决策的病历。不只记开了什么药，还记当时什么症状，吃了会怎样，有什么副作用。换个医生接手，看病历就懂为什么这么治，不会乱改。
+
+**不写会怎样。** 半年后你看到「登录用数据库会话」，想不起为什么不用更轻的 JWT，手一痒改了，把「登出立即失效」这条硬验收撞坏。
+
+**它有出处。** 英文叫 Architecture Decision Record，简称 ADR。Michael Nygard 2011 年写的一篇文章提出来，开头就说：「One of the hardest things to track during the life of a project is the motivation behind certain decisions.」他定了五段：标题、背景、决策、状态、后果。后来 AWS、微软的架构指南都收了它。它是主流做法，不是正式标准，专门讲它的网站 adr.github.io 也没有这样称呼。
+
+**本项目用三行。** 叫 ADR-Lite：
+
+- **背景。** 当时面对什么约束或问题。
+- **决策。** 定了什么。
+- **后果。** 换来什么，放弃了什么。
+
+这正好是 AWS 写的最低要求：「At a minimum, each ADR should define the context of the decision, the decision itself, and the consequences of the decision」。和 Nygard 的五段比，少了「状态」一段，是有意简化。
+
+**后果要写代价。** 只写好处的不叫决策记录，叫自夸。Nygard 的原话是「All consequences should be listed here, not just the "positive" ones.」微软写「Avoid hiding consequences of decisions intentionally or accidentally.」选了 A，就没有 B 的某个好处，写下来，后人才知道这是权衡，不是拍脑袋。
+
+**写哪些，不写哪些。** 微软写「Only include choices that affect the system's structure, key quality attributes, or are difficult to reverse.」甜区里没有纠结的选型不写，写了只会稀释真正重要的那几条。本项目第一批写五条。
+
+**定了以后要改怎么办。** 这里本项目和标准不一样。AWS 写「Changes to an existing ADR requires creating a new ADR」，微软写「If a decision changes, write a new record that supersedes the original and link the two together.」都是新开一条，旧的标「已被取代」。本项目的做法是旧条目原文不动，在它下面加一行修订。好处是读一条就能看全它后来怎么变，代价是现在算数的结论要读到这一条末尾。这个偏离是项目主人定的，理由和代价都登记了。第五节的文件是第一版，所以还没有这种行，后面几章你会看到。
+
+### 结论上墙，理由留档
+
+TECH_STACK 和 DECISIONS 放在 `docs/arch/`，AI 不会每次进项目都读。可「登录用数据库会话」这样的结论，它每次都得知道。不然下一章它可能顺手写个 JWT。
+
+所以把结论钉进规则书第二层 D。只写结论，指向那两份文件，不抄理由。这是第 1 章讲过的单一信息源：理由只在一处维护。
+
+### 方法只有名字，等于没有
+
+当年踩过一个坑。architect 的定义文件里写着「走 6 必问」「用四象限」，可这两样的具体内容，全在当时的 prompt 里。文件里只有名字。
+
+下一个窗口它重新上岗，读到「用四象限」，不知道两根轴是什么。它要么问你，要么自己编一套。
+
+所以补了两件事。一是把内容写进 architect 文件末尾的方法论附录。二是在角色标准 `docs/AGENT_SPEC.md` 加了一条通则：点名的方法，内容必须有持久的落点，要么写在角色文件里，要么指向某个文件。第 1 章第三节那张限制表里「方法」一行，来历就在这里。
+
+### 拍过的事要落进文件
+
+这一条是写书时才查出来的。
+
+当年第 5 步拍了四条约束，也说了「连同 TECH_STACK 一起落」。可落下去的文件里，只有部署那条，规模、团队、预算都没写。那几条只活在当时的对话和 prompt 里。到后面的补课，architect 做约束分析时又提了一次规模，这次是另一个数：每个项目任务几百条、成员十人以内。它手上的文件里，查不到之前拍过什么。
+
+所以本书让你的 TECH_STACK 多一节，把这四条写进去。第五节的文件就是这样的。
+
+规律是一样的：**对话会结束，文件才活得下去。** 拍了板，当场落进文件，第 3 章讲信息分层时说过。
+
+## 四、动手
+
+**先说一件事。** 第 2、3、4、6、8 步的 prompt 取自本项目当年的课堂，改了几处称呼和叫法。结果是写书时跑的，用的是 Sonnet，放在一个临时目录里，里面只有第 3 课结束时的文件。模型不同，你看到的也不会一字不差，当年的结果和这次也不一样。要学的是怎么审，不是背它的输出。
+
+第 4、6、8 步的结果都只在对话里。如果弹窗问要不要写文件，选 No。
+
+### 第 0 步　确认起点
+
+```
+git status
+```
+
+**应该看到。**
+
+```
+On branch master
+nothing to commit, working tree clean
+```
+
+连了远端的话，中间还多一行说和远端的差距。
+
+**出了错怎么办。** 列出了文件，就先把第 3 课的东西提交了。
+
