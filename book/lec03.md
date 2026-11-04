@@ -198,3 +198,103 @@ designer 读需求时可能发现，文档自己跟自己对不上。本项目�
 
 **改之前看一眼它是叶子还是根。** `UI_DESIGN.md` 这种文件，别的文件不依赖它的内部结构，改起来自由，叫叶子产物。角色标准、规则书这种，后面都照着它们来，改一处要看下游，叫根产物。
 
+### 规则书只摘硬结论
+
+设计写完了，为什么还要动规则书？因为两份文件的读者不同。`UI_DESIGN.md` 给读设计的人看。规则书第二层，每次进项目的 AI 都会读，而 `UI_DESIGN.md` 它不一定读全文。
+
+所以把写代码时一定要守住的摘过去，其余指回原文件。摘三条：口径，任务入口结构，三态铁律。再加一句视觉方向和页面总数。不抄全文，同一件事只记一处。
+
+### 界面要守哪些标准
+
+**标准管怎么做，不管做多少。** 没有哪份标准规定一个产品要画几张图。可「做出来的界面要达到什么」，是有成文标准的。
+
+**WCAG。** 全称 Web Content Accessibility Guidelines，W3C 的网页无障碍指南，现行 2.2 版。本项目后来定了 AA 级当主参考，第 11 课照它验收。AA 级里和这一章相关的几条：
+
+| 条目 | 要求 | 设计时要想什么 |
+|---|---|---|
+| 1.4.3 | 文字对比度「at least 4.5:1」 | 浅灰字别放白底上 |
+| 1.4.1 | 「Color is not used as the only visual means of conveying information」 | 状态除了颜色，还要有文字 |
+| 2.5.8 | 点击目标「at least 24 by 24 CSS pixels」 | 按钮别太小 |
+| 1.4.10 | 「Vertical scrolling content at a width equivalent to 320 CSS pixels」 | 窄屏时不能左右上下都要滚 |
+| 2.4.7 | 「the keyboard focus indicator is visible」 | 用键盘时看得见焦点在哪 |
+| 3.2.3 | 重复出现的导航「occur in the same relative order」 | 导航每页同样的顺序 |
+| 3.3.1 | 错误「is described to the user in text」 | 错误要用文字说明 |
+| 4.1.3 | 状态提示不抢焦点也能被读屏软件读到（「without receiving focus」） | 保存成功之类的提示 |
+
+W3C 自己不建议把最高的 AAA 级定成全站要求：「It is not recommended that Level AAA conformance be required as a general policy for entire sites」。所以定 AA。
+
+**防账号枚举。** 登录失败统一提示「邮箱或密码不正确」，不说是哪个错了，免得别人试出谁注册过。这一条需求文档已经有。注册是另一回事，下一节说。
+
+### 这一版还缺什么
+
+对着上面的标准回头查，第 3 课结束时这份设计有几处没写。照实列出来：
+
+- **写操作的反馈。** 提交中、成功、失败长什么样。三态只管取数据。比如执行者改状态时断网了，界面该怎么办，没定。
+- **窄屏。** 手机上怎么排，做不做，都没写。做不做归人拍。
+- **键盘焦点。** 没写。
+- **页面外框。** 全局导航放哪，当前身份放哪，没有统一设计。
+- **界面走查。** 没人拿设计对着常见问题过一遍。NN/g 说启发式评估可以用在原型上，「Ideally, three to five people should independently evaluate the same interface.」本项目没做过。
+
+这些现在不挡路，代码还没开始写。本项目把它们连同骨架屏那处出入，一起记进待办，第 11 课之前定。
+
+**还有一处是有意的偏离。** 需求文档定了注册时提示「该邮箱已被使用」。OWASP 的认证速查表把同类的写法「This user ID is already in use.」列为错误例，因为这会告诉别人某个邮箱注册过。它给的正确例是「A link to activate your account has been emailed to the address provided.」也就是一律发邮件。可本项目首版不发邮件，做不到统一回复。所以维持原样，把偏离和代价登记下来。第 5 课之后的补课里有专门登记偏离的地方。这也是一种做法：**偏离标准可以，但要写明理由和代价。**
+
+## 四、动手
+
+**先说一件事。** 第 2 到第 6 步的 prompt 取自本项目当年的课堂，只改了几处路径和页码。结果是写书时跑的，用的是 Sonnet，放在一个临时目录里，里面只有第 2 课结束时的文件。模型不同，你看到的也不会一字不差，当年的结果和这次也不一样。要学的是怎么审，不是背它的输出。
+
+这几步的结果都只在对话里。designer 说的「我只有 Read 权限」，在主对话里并不是机器拦着的，第六节讲。如果弹窗问要不要写文件，选 No。
+
+### 第 0 步　确认起点
+
+```
+git status
+```
+
+**应该看到。**
+
+```
+On branch master
+nothing to commit, working tree clean
+```
+
+连了远端的话，中间还多一行说和远端的差距。
+
+**出了错怎么办。** 列出了文件，就先把第 2 课的东西提交了。
+
+### 第 1 步　建 designer 角色
+
+**目的。** 给 designer 一份职责说明书。
+
+在 VS Code 里新建 `.claude/agents/designer.md`，把第五节的原文贴进去，存盘。
+
+```
+ls .claude/agents
+```
+
+```
+file .claude/agents/designer.md
+```
+
+```
+grep -c '^## [1-5]\. ' .claude/agents/designer.md
+```
+
+**应该看到。** 依次是：
+
+```
+client.md
+designer.md
+persona.md
+pm.md
+```
+
+```
+.claude/agents/designer.md: Unicode text, UTF-8 text, with very long lines (320)
+```
+
+```
+5
+```
+
+**对着图纸审。** 第 1 课的 `docs/AGENT_SPEC.md` 就是图纸，逐项对：开头四个字段，正文五段，第一条硬规则是先读本文件，引用要给出处，新功能标「设计提案，待确认」，边界写清不定义需求、不写代码。
