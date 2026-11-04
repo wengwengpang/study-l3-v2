@@ -25,7 +25,8 @@
 │   ├── lec00.md             第 0 课 全局观，照全书骨架十节写（学生已认，DECISIONS-R1 R1-310、R1-327）
 │   ├── lec01.md             第 1 课 用户研究，照全书骨架十节写（学生已认，DECISIONS-R1 R1-675、R1-676）
 │   ├── lec02.md             第 2 课 需求文档，照全书骨架十节写（学生已认，DECISIONS-R1 R1-678、R1-680）
-│   ├── lec03.md             第 3 课 界面设计，照全书骨架十节写（DECISIONS-R1 R1-685）
+│   ├── lec03.md             第 3 课 界面设计，照全书骨架十节写（学生已认，DECISIONS-R1 R1-685、R1-687）
+│   ├── lec04.md             第 4 课 技术选型，照全书骨架十节写（DECISIONS-R1 R1-690 到 R1-692）
 │   ├── lec05.md             第 5 课 数据库设计，照全书骨架十节写（学生已认，DECISIONS-R1 R1-347、R1-353）
 │   ├── lec05-arch.md        补课 05-ARCH 系统架构，照全书骨架十节写（学生已认，DECISIONS-R1 R1-361、R1-362、R1-383）
 │   ├── lec05-api-1.md       补课 05-API 接口契约（上），照全书骨架十节写（学生已认，DECISIONS-R1 R1-366 到 R1-371、R1-373）
@@ -33,7 +34,7 @@
 │   ├── lec06.md             第 6 课 决策边界与权限系统（学生已认的样章，问 243A）
 │   ├── appendix-a.md        附录 A Claude Code 速查：现收「设置与权限」里的权限模式一项，每项写是什么、原理、怎么用、本书哪一章用到（第十五窗口建，问 513 A、643 A，学生在 GitHub 读过认了）
 │   ├── appendix-h.md        附录 H 问题与解法：课上提出的课程做法类问题，一个问题一个案例，每个案例十一节；现收五个案例（第八窗口建，问 515 A 到 517 A；第二十一窗口加三个，问 672 A、707 A；学生在 GitHub 读过认了，DECISIONS-R1 R1-648）
-│   ├── notes/               网页版样本的摘要报告，一份样本一份（第七、八份各分两轮，sample7-lec1.md、sample7-part2.md、sample8-lec2.md、sample8-part2.md），写书参考用；另有 lec05-api-subagents.md，补课 05-API 十一份子代理记录的派单与回报原文（问 703 B）；lec01-interview-run.md、lec01-interview-run2.md，第 1 课两次实跑访谈的记录（问 718 A）；lec02-pm-run.md、lec02-pm-run2.md，第 2 课两次实跑 pm 的记录（问 723 A）；lec03-designer-run.md，第 3 课实跑 designer 的记录（问 724 A）；lec04-architect-draft-run.md，让 AI 起草 architect 的试跑记录（问 731 A）。去留：一次性，教科书写完后删
+│   ├── notes/               网页版样本的摘要报告，一份样本一份（第七、八份各分两轮，sample7-lec1.md、sample7-part2.md、sample8-lec2.md、sample8-part2.md），写书参考用；另有 lec05-api-subagents.md，补课 05-API 十一份子代理记录的派单与回报原文（问 703 B）；lec01-interview-run.md、lec01-interview-run2.md，第 1 课两次实跑访谈的记录（问 718 A）；lec02-pm-run.md、lec02-pm-run2.md，第 2 课两次实跑 pm 的记录（问 723 A）；lec03-designer-run.md，第 3 课实跑 designer 的记录（问 724 A）；lec04-architect-draft-run.md，让 AI 起草 architect 的试跑记录（问 731 A）；lec04-architect-run.md，第 4 课实跑 architect 的记录（R1-690）。去留：一次性，教科书写完后删
 │   └── out/                 导出的网页，git 不跟踪
 ├── prisma/
 │   └── schema.prisma       Prisma 数据模型，6 model + 3 enum + onDelete（Lec 5 建）
