@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>任务页 空态（执行者）</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:#1d4ed8}a:hover{color:#1e40af}
+</style>
+</helmet>
+<div style="box-sizing: border-box; min-height: 100vh; background: #fafafa; color: #18181b; font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif; font-size: 14px; line-height: 1.5">
+
+<header style="background: #ffffff; border-bottom: 1px solid #e4e4e7">
+<div style="box-sizing: border-box; max-width: 1200px; margin: 0 auto; padding: 0 clamp(16px, 3vw, 32px); min-height: 64px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px">
+<a href="#" style="display: inline-flex; align-items: center; gap: 4px; min-height: 44px; color: #52525b; text-decoration: none"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"></path></svg>我的项目</a>
+<span aria-hidden="true" style="color: #a1a1aa">/</span>
+<span style="font-size: 16px; font-weight: 600">官网改版</span>
+<span style="padding: 2px 8px; border-radius: 6px; background: #f4f4f5; color: #3f3f46; font-size: 13px; line-height: 20px">执行者</span>
+</div>
+</div>
+</header>
+
+<main style="box-sizing: border-box; max-width: 1200px; margin: 0 auto; padding: 24px clamp(16px, 3vw, 32px) 40px; display: flex; flex-direction: column; gap: 16px">
+
+<h1 style="margin: 0; font-size: 24px; font-weight: 600; line-height: 32px">我的任务</h1>
+
+<section aria-labelledby="empty-title" style="box-sizing: border-box; background: #ffffff; border: 1px solid #e4e4e7; border-radius: 12px; padding: 48px 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center">
+<svg aria-hidden="true" width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#52525b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="5" width="20" height="22" rx="3"></rect><path d="M11 12h10M11 17h10M11 22h6"></path></svg>
+<h2 id="empty-title" style="margin: 0; font-size: 16px; font-weight: 600">当前没有分配给你的任务</h2>
+<p style="margin: 0; color: #52525b">任务分配给你之后，会显示在这里。</p>
+</section>
+
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":380}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

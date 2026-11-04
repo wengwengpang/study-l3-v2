@@ -13,6 +13,11 @@
 | Main.dc.html | 页 5 项目主页（负责人） |
 | TasksOwner.dc.html | 页 6 任务页（负责人） |
 | TasksExecutor.dc.html | 页 6 任务页（执行者） |
+| TaskDetailExecutor.dc.html | 页 7 任务详情（执行者） |
+| TasksLoading.dc.html | 页 6 任务页 加载态 |
+| TasksEmptyOwner.dc.html | 页 6 任务页 空态（负责人） |
+| TasksEmptyExecutor.dc.html | 页 6 任务页 空态（执行者） |
+| TasksError.dc.html | 页 6 任务页 错误态（负责人） |
 
 ## 怎么看
 
@@ -20,8 +25,8 @@
 
 源文件里引用的 ./support.js 是 Design 类型的运行文件，这里不存。脱离网页直接在浏览器打开是什么效果，没实测。
 
-现有样稿只画了正常态，加载、空、错误三态没画。
+任务页画了加载、空、错误三态，其余页面只画了正常态。
 
 ## 来历
 
-2026-11-04 从网页版取回，版本 1793770414-b23a，和当时写入的内容逐字节比过，相同。经过见 docs/DECISIONS-R1.md 的 R1-681、R1-682。
+前三张 2026-11-04 从网页版取回，版本 1793770414-b23a，和当时写入的内容逐字节比过，相同。后五张是 2026-11-04 补画的，发布为第 5 版 1793806498-87a1。经过见 docs/DECISIONS-R1.md 的 R1-681、R1-682、R1-684。

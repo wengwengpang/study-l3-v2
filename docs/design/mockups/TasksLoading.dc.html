@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>任务页 加载态</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:#1d4ed8}a:hover{color:#1e40af}
+</style>
+</helmet>
+<div style="box-sizing: border-box; min-height: 100vh; background: #fafafa; color: #18181b; font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif; font-size: 14px; line-height: 1.5">
+
+<header style="background: #ffffff; border-bottom: 1px solid #e4e4e7">
+<div style="box-sizing: border-box; max-width: 1200px; margin: 0 auto; padding: 0 clamp(16px, 3vw, 32px); min-height: 64px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px">
+<a href="#" style="display: inline-flex; align-items: center; gap: 4px; min-height: 44px; color: #52525b; text-decoration: none"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"></path></svg>我的项目</a>
+<span aria-hidden="true" style="color: #a1a1aa">/</span>
+<div aria-hidden="true" style="width: 96px; height: 20px; border-radius: 4px; background: #e4e4e7"></div>
+</div>
+</div>
+</header>
+
+<main aria-busy="true" style="box-sizing: border-box; max-width: 1200px; margin: 0 auto; padding: 24px clamp(16px, 3vw, 32px) 40px; display: flex; flex-direction: column; gap: 16px">
+
+<p role="status" style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0">正在加载任务</p>
+
+<div aria-hidden="true" style="width: 120px; height: 32px; border-radius: 6px; background: #e4e4e7"></div>
+
+<div aria-hidden="true" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px">
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<div style="width: 112px; height: 44px; border-radius: 8px; background: #e4e4e7"></div>
+<div style="width: 136px; height: 44px; border-radius: 8px; background: #e4e4e7"></div>
+</div>
+<div style="width: 72px; height: 16px; border-radius: 4px; background: #e4e4e7"></div>
+</div>
+
+<div aria-hidden="true" style="overflow-x: auto; background: #ffffff; border: 1px solid #e4e4e7; border-radius: 12px">
+<div style="min-width: 760px; display: flex; flex-direction: column">
+
+<div style="display: grid; grid-template-columns: 1fr 150px 240px 130px; align-items: center; min-height: 60px; padding: 0 16px; gap: 16px">
+<div style="width: 45%; height: 16px; border-radius: 4px; background: #e4e4e7"></div>
+<div style="width: 72px; height: 24px; border-radius: 999px; background: #e4e4e7"></div>
+<div style="width: 160px; height: 16px; border-radius: 4px; background: #e4e4e7"></div>
+<div style="width: 88px; height: 16px; border-radius: 4px; background: #e4e4e7"></div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 150px 240px 130px; align-items: center; min-height: 60px; padding: 0 16px; gap: 16px; border-top: 1px solid #e4e4e7">
+<div style="width: 60%; height: 16px; border-radius: 4px; background: #e4e4e7"></div>
+<div style="width: 72px; height: 24px; border-radius: 999px; background: #e4e4e7"></div>
+<div style="width: 160px; height: 16px; border-radius: 4px; background: #e4e4e7"></div>
+<div style="width: 88px; height: 16px; border-radius: 4px; background: #e4e4e7"></div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 150px 240px 130px; align-items: center; min-height: 60px; padding: 0 16px; gap: 16px; border-top: 1px solid #e4e4e7">
+<div style="width: 38%; height: 16px; border-radius: 4px; background: #e4e4e7"></div>
+<div style="width: 72px; height: 24px; border-radius: 999px; background: #e4e4e7"></div>
+<div style="width: 160px; height: 16px; border-radius: 4px; background: #e4e4e7"></div>
+<div style="width: 88px; height: 16px; border-radius: 4px; background: #e4e4e7"></div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 150px 240px 130px; align-items: center; min-height: 60px; padding: 0 16px; gap: 16px; border-top: 1px solid #e4e4e7">
+<div style="width: 52%; height: 16px; border-radius: 4px; background: #e4e4e7"></div>
+<div style="width: 72px; height: 24px; border-radius: 999px; background: #e4e4e7"></div>
+<div style="width: 160px; height: 16px; border-radius: 4px; background: #e4e4e7"></div>
+<div style="width: 88px; height: 16px; border-radius: 4px; background: #e4e4e7"></div>
+</div>
+
+</div>
+</div>
+
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":560}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>
