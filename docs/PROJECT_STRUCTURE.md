@@ -23,6 +23,7 @@
 │   ├── build.py             把每章 Markdown 转成网页，只用 Python 标准库；在项目根目录跑 python3 book/build.py。学生改在 GitHub 上读，现在不用（问 302 A），去留没定
 │   ├── lec-intro.md         开篇导读，照全书骨架第四节的提纲写（学生已认，DECISIONS-R1 R1-314、R1-320）
 │   ├── lec00.md             第 0 课 全局观，照全书骨架十节写（学生已认，DECISIONS-R1 R1-310、R1-327）
+│   ├── lec01.md             第 1 课 用户研究，照全书骨架十节写（DECISIONS-R1 R1-675）
 │   ├── lec05.md             第 5 课 数据库设计，照全书骨架十节写（学生已认，DECISIONS-R1 R1-347、R1-353）
 │   ├── lec05-arch.md        补课 05-ARCH 系统架构，照全书骨架十节写（学生已认，DECISIONS-R1 R1-361、R1-362、R1-383）
 │   ├── lec05-api-1.md       补课 05-API 接口契约（上），照全书骨架十节写（学生已认，DECISIONS-R1 R1-366 到 R1-371、R1-373）
@@ -30,7 +31,7 @@
 │   ├── lec06.md             第 6 课 决策边界与权限系统（学生已认的样章，问 243A）
 │   ├── appendix-a.md        附录 A Claude Code 速查：现收「设置与权限」里的权限模式一项，每项写是什么、原理、怎么用、本书哪一章用到（第十五窗口建，问 513 A、643 A，学生在 GitHub 读过认了）
 │   ├── appendix-h.md        附录 H 问题与解法：课上提出的课程做法类问题，一个问题一个案例，每个案例十一节；现收五个案例（第八窗口建，问 515 A 到 517 A；第二十一窗口加三个，问 672 A、707 A；学生在 GitHub 读过认了，DECISIONS-R1 R1-648）
-│   ├── notes/               网页版样本的摘要报告，一份样本一份，写书参考用；另有 lec05-api-subagents.md，补课 05-API 十一份子代理记录的派单与回报原文（问 703 B）。去留：一次性，教科书写完后删
+│   ├── notes/               网页版样本的摘要报告，一份样本一份（第七份分两轮，sample7-lec1.md、sample7-part2.md），写书参考用；另有 lec05-api-subagents.md，补课 05-API 十一份子代理记录的派单与回报原文（问 703 B）；lec01-interview-run.md、lec01-interview-run2.md，第 1 课两次实跑访谈的记录（问 718 A）。去留：一次性，教科书写完后删
 │   └── out/                 导出的网页，git 不跟踪
 ├── prisma/
 │   └── schema.prisma       Prisma 数据模型，6 model + 3 enum + onDelete（Lec 5 建）
@@ -53,7 +54,7 @@
     ├── REFACTOR-HANDBOOK.md     重构手册：从本次重构提炼、换项目可用的做法（学生复制到 ~/.claude/templates/）
     ├── REVIEW-DEBT.md           审查欠账表：没送审的改动，每条记处置方式与处置状态（BACKLOG 57 反方审建，DECISIONS-R1 R1-226）
     ├── BRIDGE-05-types-w1.md    05-类型第一窗口桥梁（补课 05-API 结课产出，下一节以它为准）
-    ├── web_course_sample1.md 至 web_course_sample6.md  网页版课堂记录样本六份（依次是 Lec 3、4、2、05-API 第一窗口、6、0），教科书参考用，不是正本。去留：一次性，教科书写完后删（BACKLOG 73，DECISIONS-R1 R1-279 问 238A）
+    ├── web_course_sample1.md 至 web_course_sample7.md  网页版课堂记录样本七份（依次是 Lec 3、4、2、05-API 第一窗口、6、0、1），教科书参考用，不是正本。去留：一次性，教科书写完后删（BACKLOG 73，DECISIONS-R1 R1-279 问 238A）
     ├── web_course5_sample1.md 至 web_course5_sample5.md  网页版课堂记录样本五份（依次是 Lec 5、05-ARCH 第一、二、三、四窗口），教科书参考用，不是正本。去留：一次性，教科书写完后删（BACKLOG 73，DECISIONS-R1 R1-336 问 290 A）
     ├── vide_coding.md           学生学过的另一门课的整页记录（Claude Code 提示词工程与上下文工程），教科书参考用，不是正本。入库时去掉了前 135 行网页侧栏，原件在仓库外。去留没定（DECISIONS-R1 R1-289、R1-331 问 286 A）
     ├── KNOWLEDGE_BASE.md        课程知识库（唯一真相，粘贴版已作废）
