@@ -13463,3 +13463,11 @@ HARNESS 第三节：没有答到。问题 3 有一条新实据，见第四点。
   问 734（D8，不给推荐）：CLAUDE.md 第 57 行「目前第二栏六条全部"待验证"，无一条真人确认」与第二层 B「九条用户故事均经真人 Michael 逐条确认」。A 第 57 行改成写明当时状态与后来确认，要「帮我改」（规则 78）。B 不改，读作第 1 课当时的记录。
 八，还挂着：问 716；规则 78 那五处（R1-680 第一点）；第 1 章新加那节学生还没读。STANDARDS 补登（ADR、JWT、选型旁证）等问 733 后出对照 1123。
 进 HARNESS：不判。「prompt 说派子代理不等于派了」和「拍板要落盘」都已有条目（反模式 39、规则 33），这次是实例。
+
+--- R1-691 · 问 732 A、733 A；问 734 学生要推荐，应要求给 A；补核两条出处；出对照 1123 到 1126（学生：「732 A；733 A；734 要推荐」）---
+一，拍板。问 732 A，未选 B（项目文件不动，只在书里写这个坑）。问 733 A，未选 B（从下一条起新开，旧条只标状态）。问 734 没拍，学生要推荐。
+二，补核（2026-11-05，WebFetch）。微软页地址 learn.microsoft.com/en-us/azure/well-architected/architect-role/architecture-decision-record，标题 Maintain an architecture decision record (ADR)，日期 2026-04-10：「The ADR serves as an append-only log. Don't go back and edit accepted records. If a decision changes, write a new record that supersedes the original and link the two together.」；「Status, such as Proposed, Accepted, or Superseded.」。RFC 7519 全文没有 revoke、revoked、revocation（R1-690 第二点「引用前再核」了结）。
+三，问 734 的推荐，应学生要求给的，拍板仍归学生：A。理由：规则书每次进项目都读，这句写的是「目前」，现在读就是错的；这次实跑 architect 为它停下报了一次矛盾，以后还会报；只改一句，第 1 课的历史在 git 和书里都还在。book/lec01.md 第 255 行是第 1 课产物，当时属实，不动；book/lec02.md 第 7 行不动。选 A 的话，第 4 章第 9 步让读者同样改这一句。
+四，落点。约束节放 TECH_STACK 文件末尾，不放开头：ARCHITECTURE 与 book/lec05-arch.md 按行号引 TECH_STACK，放末尾不漂移。书里读者的版本标题写「第 4 课拍板」，不写问号与补记的话，第十节写明。DECISIONS 文件头加一行指针，因为 STANDARDS 文件头要求偏离理由写在偏离登记、条目只写指针。
+五，传播面。规则书第二层 D 不动；PRD 假设账本不动，新节指向它；BACKLOG 不动；书里已写的章不动；目录树没有新文件。HARNESS 不判：这是本项目的约定，第 4 章第九节按做法列。
+进 HARNESS：不判。
