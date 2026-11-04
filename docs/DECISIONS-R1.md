@@ -13308,3 +13308,22 @@ HARNESS 第三节：没有答到。问题 3 有一条新实据，见第四点。
 问 725（「出图」一段写到哪）：A（CC 推荐）讲清不出图的理由与缺口，核过的行业情况，再给一步可选实操，在临时目录把 UI_DESIGN 变成一页能在浏览器打开的 HTML，不动 designer.md；框架决策留到全课走完。B 只讲，不实操。C 现在就定框架决策，推翻学生 09-03「完成整个课程再回头补」。理由：写法约定第 2 条；读者没有开发背景，光看文字想不出界面。问 716 仍挂着，不算题数。
 七，对照 1114（BACKLOG 登出图待办，按问 725 A 写，选 C 就重出）：表头号段 1-84 改 1-85，实际条数 84 改 85，下一个可用号 85 改 86，文件末尾加第 85 条。不在 M 节清单，回「同意」即可。
 进 HARNESS：不判。第三点是反模式 24 的新实例，写进书里当案例；要不要补进反模式库，第 3 章写完一起问。
+
+--- R1-680 · 第 2 章认了；问 724 A、725 A；对照 1114 已落；第 3 章授权；答「UI 这步要不要出图」；CC 更正问 725 的推荐；出问 726（学生：「第 2 章没意见；724 A；725 A；同意 1114；第 3 章也照第 1 章；补充：先回答这个，ui这个步骤不要出图吗？或调用外部工具出ui图什么的」）---
+一，第 2 章学生认了。问 724 A；问 725 A，问 726 可能改它的「可选」。未选：724 B；725 B、C。对照 1114 落 47fcaf9：97 行，编号行 85，新行 1 次，表头三行各 1 次。授权：第 3 章照 R1-675 第一点范围，按 CC 推荐定，事后照实报；规则 78 所管文件、D8、问 716 照旧。规则 78 那五处（反模式 3 号、pm.md、把计划写成已发生、designer.md 两句）学生没答，挂着。
+二，CC 更正：上一条推荐 725 A 时没查官方，只写了「写前对官方核」。卡 4 第 3 条与自动记忆「尽量按行业标准」要的是出推荐前查。查完推荐要改，见第五点。
+三，要不要出，查到的（2026-11-04，WebFetch 原文）。
+  GOV.UK Service Manual「Making prototypes」（发布于 2016-10-18）：「You must use prototypes in the alpha phase of your service」；「allows your team to explore design ideas much faster and at lower risk than using your production code」；「Sketches are useful for exploring and discussing basic ideas with colleagues.」；「Code prototypes are better for user research because they're more realistic.」；「Do not just copy prototype code into production.」。它是英国政府公共服务的手册，约束不到本项目。
+  NN/g「UX Prototypes: Low Fidelity vs. High Fidelity」（2016-12-18）：「The fidelity of the prototype refers to how closely it matches the look-and-feel of the final system.」；「Low-fidelity prototypes put less pressure on users.」。
+  sample1 第 3844 到 3853 行「B 端常不出高保真」：没找到一手出处，不当事实写。
+四，能不能出，查到的（同日）。
+  Claude Code 官方 artifacts 页：「To mock up a UI, a screen flow, a landing page, or a poster rather than build a page, run /design with a brief.」；「Claude drafts the design as artboards on one canvas and publishes the canvas as a Claude Design artifact.」；「Open the published artifact in a desktop browser to review the artboards.」；「You can export each artboard as PNG or PDF.」。模板写着 beta；要 v2.1.265 以上、Pro 及以上套餐、claude.ai 登录；-p 下默认关；不可用时 Claude 写本地 HTML 或说发布不了。本机 2.1.318。本窗口 Artifact 类型清单里有 Design。/design 本身没实跑。
+  support.claude.com「Get started with Claude Design」：「The standalone version at claude.ai/design closes on December 14, 2026.」；「When a design is ready to become software, you can hand it off to Claude Code」。它写 Free 也有；artifacts 页写 Pro 起，两处范围不同，在 Claude Code 里用按 artifacts 页。
+  桌面版页：「In a local session, click an HTML, PDF, or video path in the chat to open it in the Browser pane.」。Chrome 页：「Chrome integration isn't supported in Windows Subsystem for Linux (WSL).」。学生机器是 WSL，这条用不了。
+  Figma MCP 官方：「Create and modify native Figma content from your MCP client.」；写入要远程服务器，「is free during the beta period and will eventually become a usage-based paid feature」；「a Full seat to write outside your drafts」；Claude Code 在支持列表。限额页：Starter 的 View 或 Collab 席位「Up to 20 per month」，只限读，写不计。
+  v0.app/pricing：Free「7 message/day limit」；Plus 显示「$30$90/user/month」，取到的文本没有格式，$30 是现价是推断。shadcn MCP 官方：让 AI 浏览、搜索、安装组件，不出图。
+  CC 纠记录：sample1 第 3748 到 3751 行「CC 看不到渲染」已过时。第 3661 行「物理上出不了效果图」只对子代理成立：第 818 行 prompt 贴进主对话，主对话能写文件。R1-679 清单第三栏第 4、5 条这里核了一部分，书里引用前再核到句。
+五，问 726（出图在第 3 章的地位）：A（CC 推荐）正式一步，放在 UI_DESIGN 落盘之后，用 /design；Claude Code 发布不了时退回单文件 HTML；Figma、v0 写成可选，列清要什么账号、多少钱。designer.md 不改，主对话出图；文字规范仍是准绳；框架决策照学生 09-03 的话留到全课走完（BACKLOG 85）。改问 725 A 的「可选」与「临时目录 HTML」。B 维持 725 A。C 默认用 Figma，读者要另开账号。理由：GOV.UK 把原型列为必做且写明比正式代码快、风险低；读者没有开发背景；学生到现在也没见过这十个页面长什么样。
+六，传播面：R1-679 清单第二栏第 5 条、第三栏第 4、5 条随问 726 改。BACKLOG 85 不动，框架决策没动。拍板后 GOV.UK、NN/g 补登 docs/arch/STANDARDS.md（卡 5 第 7 条）。
+七，下一步：问 724 A 实跑不受问 726 影响，学生回话后开始。
+进 HARNESS：不判，框架决策在 BACKLOG 85。卡 4 第 3 条这次漏了，是执行问题，已有条目。
