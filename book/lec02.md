@@ -398,3 +398,103 @@ US-02 ……
 7. pm 推导的基础需求，加权限矩阵、错误与边界规则、审定决策记录。
 
 假设账本可以是空的。空着恰恰说明账本在工作：该确认的确认了，没确认的不混进来。盲区要单写，不然 AI 假设出身的需求看起来就板上钉钉了。
+
+验三条：
+
+```
+file docs/design/PRD.md
+```
+
+```
+grep -c '^#### US-' docs/design/PRD.md
+```
+
+```
+grep -c '来源：pm 推导的基础需求' docs/design/PRD.md
+```
+
+**应该看到。** 依次是：
+
+```
+docs/design/PRD.md: Unicode text, UTF-8 text
+```
+
+```
+18
+```
+
+```
+9
+```
+
+十八条故事：九条已验证，九条 pm 推导。基础需求原来是八条，第 9 条移出成员是补课 05-API 补的。来源那一行数出来也是九。
+
+**出了错怎么办。** 数不对，是贴漏了。
+
+### 第 6 步　写规则书第二层
+
+**目的。** 让 AI 每次进项目都知道大框架，又不把需求抄两份。
+
+在 VS Code 里打开 `CLAUDE.md`，把第五节「规则书第二层 B」贴到第二层 A 后面，存盘。
+
+```
+grep -c '第二层 B' CLAUDE.md
+```
+
+**应该看到。** `1`。
+
+**出了错怎么办。** 是 0，是没存盘。
+
+### 第 7 步　记坑，更新目录树，提交
+
+**目的。** 存一次档。这次要看清带走了什么。
+
+把 `docs/lessons/anti-patterns.md` 里的 3 号换成第五节的新版，把第五节其余几条追加到末尾。
+
+更新 `docs/PROJECT_STRUCTURE.md`，贴入第五节的目录树。这一步放在最后。
+
+提交之前，先看：
+
+```
+git status --short
+```
+
+**应该看到。**
+
+```
+ M CLAUDE.md
+ M docs/PROJECT_STRUCTURE.md
+ M docs/lessons/anti-patterns.md
+?? .claude/agents/pm.md
+?? docs/design/PRD.md
+```
+
+一个一个核：这些是不是都是这次要带走的？有没有不认识的文件？多出来的，要么在提交信息里写明，要么分开提交。然后点名加：
+
+```
+git add .claude/agents/pm.md docs/design/PRD.md CLAUDE.md docs/PROJECT_STRUCTURE.md docs/lessons/anti-patterns.md
+git commit -m "feat: 第 2 课需求文档，建 pm 角色与 PRD"
+```
+
+**应该看到。** 下面是写书时照这些步骤跑的结果。提交号每人不同。
+
+```
+[master e1820b0] feat: 第 2 课需求文档，建 pm 角色与 PRD
+ 5 files changed, 412 insertions(+), 2 deletions(-)
+ create mode 100644 .claude/agents/pm.md
+ create mode 100644 docs/design/PRD.md
+```
+
+`5 files changed` 要等于你动过的文件数。
+
+**出了错怎么办。** 想撤回一次提交，先别急着敲回滚命令。先看 `git status` 和 `git log --oneline -5`，弄清现在是什么状态。第七节讲了一次差点回滚错的事。
+
+## 五、产出物
+
+下面是这些文件现在的样子。
+
+### .claude/agents/pm.md
+
+```markdown
+---
+name: pm
