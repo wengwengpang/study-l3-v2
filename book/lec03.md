@@ -268,6 +268,8 @@ nothing to commit, working tree clean
 
 在 VS Code 里新建 `.claude/agents/designer.md`，把第五节的原文贴进去，存盘。
 
+**这份文件的来历。** 职责和边界照第 2 章总图里 designer 那一行：用户看到什么、怎么操作归它，需求和技术实现不归它。格式照 `docs/AGENT_SPEC.md`。当年这份文字也是课程一方写好、用命令写进文件的。自己的项目不用贴，用第 1 章第三节的 prompt 起草，再照下面的办法审。
+
 ```
 ls .claude/agents
 ```
