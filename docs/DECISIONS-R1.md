@@ -13123,3 +13123,10 @@ HARNESS 第三节：没有答到。问题 3 有一条新实据，见第四点。
 五，/model 对官方核（2026-11-04 WebFetch，model-config、commands、prompt-caching 三页）。能在本窗口切：「to switch immediately」。对话还在：切后「the next request reads the entire conversation history with no cache hits」，下一条慢且贵一次。直接敲 /model sonnet 或按 Enter 存成新会话默认；不带参数进选单按 s 只切本窗口。effort 按模型各存：「each model keeps its own saved level」；~/.claude/settings.json 只存了 claude-opus-5-5 的 xhigh，Sonnet 5.5 默认 medium，切过去实际是哪档没实测。Opus 5.5 与 Sonnet 5.5 都默认 1M 窗口。继承主对话模型的子代理也跟着切。
 六，CC 的判断：上一条写的 Sonnet 5.5 是子代理参数，不用学生切。主窗口现行 Opus 5.5 加 xhigh（问 536 A、561 A）。建议不切，学生定。派单与问 716 仍等回话。
 进 HARNESS：本条为记账，不判。
+
+--- R1-666 · 学生选不切、发；派第一轮；出对照 1104（学生：「不切，发」）---
+一，裁定：主窗口不切，留 Opus 5.5 加 xhigh。两轮都派，第一轮报告存好提交后跑第二轮。未选：只发第一轮、切 Sonnet、先推送。问 716 没答，挂着。
+二，第一轮已派：general-purpose，Sonnet 5.5，读 docs/web_course_sample7.md 第 1 到 2995 行。用命令比过，派单与给学生看的原文逐字相同。
+三，对照 1104：BACKLOG 83 加一句（R1-665 第四点）。搜过 BACKLOG：83 已有「J 节没说中断后开新会话算不算开课」（问 705 A、706 A），相关但不是同一件，这句并进 83，不另开。搜过 SESSION_START：没有同类。
+四，下一步：报告回来照卡 3 核，存 book/notes/sample7-lec1.md，提交后派第二轮。
+进 HARNESS：本条为记账，不判。
