@@ -13429,3 +13429,37 @@ HARNESS 第三节：没有答到。问题 3 有一条新实据，见第四点。
 三，第 4 章做法。走 book/OUTLINE.md 第六节。来源 docs/web_course_sample2.md，通读报告 book/notes/sample2-lec4.md。段 3 有两版，用第二版（第 1042-1234 行）。prompt 代码块：第 702-723 行 6 必问；第 1171-1200 行选型；第 1731-1754 行 ADR。讲解已读：410-455、642-687、795-806、1064-1074、1093-1144。没读：1322-1377、1577-1629、1666-1715、1934-1942、2044-2073。第五节：architect.md 取现在的（17bfce1 后没改）；TECH_STACK（63 行）、DECISIONS（30 行）、BACKLOG（14 行）、第二层 D、反模式 32 号取 17bfce1。BACKLOG 要带上第 3 章第三节的五处缺口与骨架屏出入（R1-685 第三点第 4 条）。第 1 步用起草 prompt，结果已在 book/notes/lec04-architect-draft-run.md，审完贴第五节（R1-687 第六点）。其余三段在临时目录 claude -p 实跑，文件取 17bfce1 之前的状态。
 四，本窗口用量：会话记录 5.6MB，按上一窗口 6.8MB 时 73% 粗算约六成，写完一章多半过八成，建议收。CC 看不到准确数，以学生 /context 为准。
 进 HARNESS：不判。
+
+--- R1-690 · 写书会话开场；第 4 章查证、实跑、三栏清单；课堂那句没派出子代理；出问 732 到 734（学生：「开始」）---
+一，开场。上一窗口 5a24b9b8 正常结束，最后一条是完整消息。本窗口开头本机与远端差 0、0，工作区干净。这是写书会话，照 R1-662 的做法只做接续复查，SESSION_START J 节的体检留给 05-类型 开课。第 4 章授权照 R1-687 第一点。
+二，查证（2026-11-05，WebFetch；R1-689 第一点的不重取）。
+  OWASP JWT：R1-689 那个地址 404，GitHub 目录里现在叫 JSON_Web_Token_Cheat_Sheet。JWT revocation 一节：「However, if you use JWTs for user sessions, you will need a solution for managing session invalidation.」「This can be achieved using a deny list of revoked sessions/tokens.」
+  RFC 7519（2015-05，Standards Track）：「JSON Web Token (JWT) is a compact, URL-safe means of representing claims to be transferred between two parties.」；取回的摘要说它没定义吊销机制，引用前再核。
+  AWS Prescriptive Guidance，ADR process：「At a minimum, each ADR should define the context of the decision, the decision itself, and the consequences of the decision」；「The team should treat ADRs as immutable documents after the team accepts or rejects them.」；「Changes to an existing ADR requires creating a new ADR」。
+  Nygard 同页：「If a decision is reversed, we will keep the old one around, but mark it as superseded.」「Numbers will not be reused.」
+  NestJS Pipes 页「Schema based validation」一节给了 ZodValidationPipe 的示例；「Nest works well with the class-validator library, which provides decorator-based validation.」First steps 页「Nest is written in TypeScript and runs on Node.js」。Next.js「Next.js is a React framework for building full-stack web applications.」Django「Django is a high-level Python web framework that encourages rapid development and clean, pragmatic design.」
+  shadcn/ui 安装页列 Next.js、Vite、TanStack Start、Laravel、React Router、Astro、React，没有 Vue；shadcn-vue 页脚「Ported by unovue」。
+  MDN WebSockets：「without having to poll the server for a reply」。Fowler，Yagni（2015-05-26）：「it does not apply to effort to make the software easier to modify.」McKinley，Choose Boring Technology（2015-03-30）：「Let’s say every company gets about three innovation tokens.」NN/g，Using Prioritization Matrices to Inform UX Decisions（2018-05-27）：「A 2D-visual that shows the relative importance of a set of items based on two weighted criteria.」只作同类旁证，四象限的两根轴仍是课程自定。
+  官方子代理页（读到 10 万字符）：@ 提及「guarantees the subagent runs for one task」；「Name the subagent and Claude typically delegates」；「Each subagent invocation creates a new instance rather than continuing an earlier one.」；手写 `@agent-<name>` 仍可用，第 1、5 章不用改。
+三，实跑 2f50085，book/notes/lec04-architect-run.md，640 行，Claude Code 2.1.318，主对话 Sonnet，总计 0.88 美元。临时目录是读者第 3 课结束时的状态，没动仓库。依据 R1-689 第三点。四段接成一个会话：复述、6 必问、选型、ADR，退出码都是 0，错误输出都空。
+四，实跑查出的。
+  1. 课堂原句「请以 architect 子代理身份工作」这次没派出子代理：主对话自己 Read，模型只有 Sonnet，没有 subagents/ 目录。「用 architect 子代理做这件事」与 `@"architect (agent)"` 都派了，子代理记录模型 claude-opus-5-5，只调 Read。各跑一次，不等于每次如此。第 5 章「第 4 课验过」靠后两种成立，所以第 4 章用第 5 章讲过的「用 architect 子代理做……」，课堂原句不进书。
+  2. 第二段当场指出谁能建项目：PRD 矩阵写执行者否，US-P01 写已登录用户。后来是 API-2。
+  3. 第二段指出 763360d 的 CLAUDE.md 第 54-55 行「第二栏六条全部待验证，无一条真人确认」与第 60 行九条都确认对不上。现行 CLAUDE.md 第 57 行还在，BACKLOG 没登。D8，问 734。
+  4. 第三段列五个分叉：Redis、实时、会话、校验，加一个前端运行模式（Next.js 用不用服务端渲染）。前四个当年拍了，第五个当年没单独拍，ARCHITECTURE 有两条取数路径。另提 TanStack Query、react-hook-form、测试框架、域名，TECH_STACK 都没列。实时它推荐聚焦时重新拉取加低频轮询，当年选的是通知表加轮询。书里要讲清：它提的不都要收，分叉按意思拍，字母不同。
+  5. 第四段指出 TECH_STACK 没有 MySQL，属实（0 次）；CSRF 要补，后来是 API-11；「实时/通知」的斜杠可能是「和」。项目原话在 COURSE_RULES 第 541 行：「必须有至少一个实时或通知的场景」，是「或」，读者的文件里只有斜杠，书里写明。
+  6. 第四段质疑「角色即时生效，无状态 JWT 做不干净」。拆开看：令牌里写角色、请求时不查库，原文成立；每次现查成员表，它说的成立，但那样 JWT 已不是无状态。schema 的 Session 没有角色字段，角色本来就在成员表，所以对本项目真正分出高下的是登出立即失效。CC 裁定：决策不变，项目文件不动，书里讲清，属第 4 章写法选择，事后报。第 0 章「这两样都要求服务器自己手里握着状态」也成立，不改。
+  7. 抽查：第二、三段 30 处错 4 处（PRD.md:271 的 D1 实在 265；D4 的 269 实在 268；PRD.md:10 实在 9；PRD.md:60 实在 62）。第四段 8 处都对。
+五，写书时查出的两件。
+  1. 第 4 课决策闸（sample2 第 855-864 行）拍的约束，当时说「落盘动作在段 3 结尾连同 TECH_STACK 一起做」，实际只写了部署。搜「5-50」「零预算」「学习节奏」「单人全栈」「单人开发」「低并发」，CLAUDE.md、docs/arch/、PRD、04-full、BACKLOG 都是 0 次。05-API 第 3 组 architect 又提规模，进了假设账本（任务几百条、成员十人以内，未验证）。两个数量度不同，不算打架，但前一个丢了。对规则 33 这是漏。问 732。
+  2. DECISIONS.md 现有 9 行加在旧条目下（修订 4、更正 2、后续 3），至少 3 行改了决策内容（ADR-003 通知空壳、ADR-DB-003 改 date、ADR-DB-005 不再指定角色）。「上面原文不改」是老规矩（R1 问 648 A 那条这样称呼），没有专门一问定过。AWS、Nygard 写的是新开一条、旧条标 superseded，微软写「Don't go back and edit accepted records.」。STANDARDS 没登 ADR。问 733。
+六，第 4 章知识点清单。
+  第一栏，网页版讲过的（sample2-lec4 第二节十八条）。全收：architect 角色与文件结构；激活不等于生效；6 必问；有预算的侦察、证据、假设账本三协议在一步里连用；教学驱动与约束驱动；四象限（第二版，附 PG 对 MySQL 上秤）；继承项快确认、开放点认真权衡；MVP 先跑通、扩展留接口；看似矛盾按时间线拆；四个分叉；框架答疑（React 对 Vue、NestJS 对 Django）；ADR-Lite 与后果写代价；结论上墙与单一信息源；方法点名即落地；待办清单及四种类型；目录树先看真实结构、来历不明的目录先查再处置、精确 git add；不轻信「通过」「已删除」；读终端杂讯。信息分层第 3 章讲过，这里只用不重讲。结课六步是课程流程，不进书，收成第 10 步。
+  第二栏，要补的。十三样选型各是什么（读者没有开发背景）；读者没有上一个项目时第 2 问怎么答（写书判断，写明没有一手出处）；ADR 的来历与同行写法，三行正好是 AWS 写的最低要求，少了状态；Yagni、Boring 作旁证；OWASP JWT、RFC 7519 作鉴权依据；起草 prompt 第一次真跑（R1-687 第六点）；待办带第 3 章五处缺口与骨架屏出入（R1-685 第三点第 4 条）；实跑查出的第四点各条；派子代理的三种叫法与 model 字段只在派出去时管用；后来几课改了什么（Nginx 收窄、通知空壳、ZodValidationPipe 更正、扩展点 4 措辞、Docker 环境一致、密码 15 位）。
+  第三栏，要纠的。段 3 两版四象限只用第二版；「请以 architect 子代理身份工作」换叫法；`/agents` 验证（第 2 章第六节已讲）换成 ls、grep、派一次；「通知表已满足硬底线」后来修订；「无状态 JWT 做不干净」讲清主次；shadcn「只长在 React 上」改成官方只列 React 系、Vue 有别人移植的版本；NestJS「约等于」Django 不这样比，都是后端框架，语言不同；「已确认」的规模是主人定的设计假设，不是用户验证；「给它配重思考预算」只在派出去时成立；「harness 对照表」「标准产出物」没出处，不写成事实；cat 落盘改 VS Code 贴入；课上点的规则号、反模式号按库核，不带多余编号；PostgreSQL 16 课上说过，文件没写版本，锁版本在 BACKLOG 74；跨课文档的行号后来改了规矩（宪法第一层 B 第 2 条），这两份文件留着行号并写明时点。
+  动手十步：0 确认起点；1 起草 architect、审、贴第五节；2 派一次子代理验字段；3 主对话读定义、复述；4 6 必问；5 拍约束；6 四象限选型；7 拍分叉、落 TECH_STACK；8 ADR、落 DECISIONS；9 写规则书第二层 D；10 建待办、记 32 号、目录树、提交。第 0、1、7、8、9、10 步写时在临时仓库实跑。
+七，问 732（第 4 课拍的约束落不落盘）：A（CC 推荐）项目 TECH_STACK 加一节补记四条约束，规模一条写明是主人定的设计假设、指向假设账本；书里读者的文件也带这一节，第十节写明比 17bfce1 多这一节。B 项目文件不动，只在书里写这个坑。理由：05-类型、05-环境的 architect 都读 TECH_STACK；这次实跑它第二段就说文件里查不到；规则 33。
+  问 733（ADR 怎么改）：A（CC 推荐）维持原文不动、下面加修订行，STANDARDS 登 ADR 一行，偏离登记写明与「新开一条、旧条标 superseded」不同，理由是一条读到底就看全后来的变化、已有 9 行不用动，代价是没有状态字段、现在算数的结论要读到末尾。B 从下一条起照标准新开，旧条只标状态，已有 9 行不动。
+  问 734（D8，不给推荐）：CLAUDE.md 第 57 行「目前第二栏六条全部"待验证"，无一条真人确认」与第二层 B「九条用户故事均经真人 Michael 逐条确认」。A 第 57 行改成写明当时状态与后来确认，要「帮我改」（规则 78）。B 不改，读作第 1 课当时的记录。
+八，还挂着：问 716；规则 78 那五处（R1-680 第一点）；第 1 章新加那节学生还没读。STANDARDS 补登（ADR、JWT、选型旁证）等问 733 后出对照 1123。
+进 HARNESS：不判。「prompt 说派子代理不等于派了」和「拍板要落盘」都已有条目（反模式 39、规则 33），这次是实例。
