@@ -861,3 +861,103 @@ grep -c '目前第二栏六条' CLAUDE.md
 
 **出了错怎么办。** 不对，是没存盘。
 
+### 第 10 步　建待办，记坑，更新目录树，提交
+
+**目的。** 存一次档。
+
+**建待办清单。** 当时不做、以后要做的事，只留在对话里就会丢。新建 `docs/BACKLOG.md`，把第五节的原文贴进去。每条四栏：编号，类型，一句话，什么时候做。类型四种：
+
+- **下沉。** 现在写在文字里的规矩，以后做成机器能执行的。
+- **收敛。** 删掉没用的规矩，打包。
+- **取经。** 看别家的做法，抄长处。前三条的 Superpowers、Spec Kit、BMAD 是别家的做法，名字先记着，到时候再看。
+- **加课。** 补一节课。
+
+第 8 条是第 3 章留下的：界面设计还缺的五处，和骨架屏那处出入。
+
+**记坑。** 把第五节的 32 号追加到 `docs/lessons/anti-patterns.md` 末尾。
+
+```
+grep -c '^[0-9]* | ' docs/BACKLOG.md
+```
+
+```
+grep -c '^## 32 号' docs/lessons/anti-patterns.md
+```
+
+**应该看到。** 依次是 `8` 和 `1`。
+
+**更新目录树前，先看真实的样子。** 这一步放在最后。目录树是下一章看项目的地图，不能凭记忆写。先列出实际有哪些文件：
+
+```
+find . -path ./.git -prune -o -type f -print | sort
+```
+
+**应该看到。** 写书时是这样，样稿的文件数每人不同：
+
+```
+./.claude/agents/architect.md
+./.claude/agents/client.md
+./.claude/agents/designer.md
+./.claude/agents/persona.md
+./.claude/agents/pm.md
+./.gitignore
+./CLAUDE.md
+./docs/AGENT_SPEC.md
+./docs/BACKLOG.md
+./docs/PROJECT_STRUCTURE.md
+./docs/arch/DECISIONS.md
+./docs/arch/TECH_STACK.md
+./docs/design/PRD.md
+./docs/design/UI_DESIGN.md
+./docs/design/USER_RESEARCH.md
+./docs/design/mockups/README.md
+./docs/lessons/anti-patterns.md
+```
+
+**这一步当年查出过东西。** 根目录多了一个叫 `lesson-04` 的文件，260 行，来历不明。一查，是第 4 步的一段输出被写进了文件。如果不看，它会进目录树，下一章当成正经文件；也会跟着提交进仓库。当时先看内容，再列影响和退路，由人拍板删掉，删完再验一次。你如果也看到不认识的文件，照这个顺序来，先别删。
+
+没有杂物，就更新 `docs/PROJECT_STRUCTURE.md`，贴入第五节的目录树。
+
+```
+git status --short
+```
+
+**应该看到。**
+
+```
+ M CLAUDE.md
+ M docs/PROJECT_STRUCTURE.md
+ M docs/lessons/anti-patterns.md
+?? .claude/agents/architect.md
+?? docs/BACKLOG.md
+?? docs/arch/
+```
+
+**点名加，先看暂存区，再提交。** 不用 `git add -A`，它会把不认识的东西一起带走。
+
+```
+git add .claude/agents/architect.md docs/arch/TECH_STACK.md docs/arch/DECISIONS.md docs/BACKLOG.md CLAUDE.md docs/PROJECT_STRUCTURE.md docs/lessons/anti-patterns.md
+```
+
+```
+git status --short
+```
+
+**应该看到。**
+
+```
+A  .claude/agents/architect.md
+M  CLAUDE.md
+A  docs/BACKLOG.md
+M  docs/PROJECT_STRUCTURE.md
+A  docs/arch/DECISIONS.md
+A  docs/arch/TECH_STACK.md
+M  docs/lessons/anti-patterns.md
+```
+
+一个一个核，然后提交：
+
+```
+git commit -m "feat: 第 4 课技术选型，建 architect 角色与 TECH_STACK、DECISIONS"
+```
+
