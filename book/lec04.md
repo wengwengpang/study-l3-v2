@@ -974,3 +974,285 @@ git commit -m "feat: 第 4 课技术选型，建 architect 角色与 TECH_STACK�
 
 **出了错怎么办。** 多了不认识的文件，先弄清是什么，不要一起带走。
 
+## 五、产出物
+
+这一章留下的文件，除了写明的地方，取的都是第 4 课结束时的样子（提交 17bfce1）。
+
+后面几章还会动它们，到时候各章会加注记，这里的原文不动。先列几处，读到不奇怪：
+
+- Nginx 原写三件事，补课 05-ARCH 收窄成两件，静态文件由前端的服务进程自己发。
+- Docker 的「环境一致」，同一节补课写明指镜像和运行时一致，配置按环境不同。
+- 扩展点 4「任务表预留外键挂载位」，同一节补课改了措辞。
+- 「通知表已满足通知这一支」，补课 05-API 加了修订：这一版通知模块是空壳，这一支到第 13 课才兑现。
+- ADR-005 的「如 ZodValidationPipe」，同一节补课加了更正：只是举个类名，本项目不装那个第三方库，自己写管道。
+- ADR-004 邮箱唯一，同一节补课定了不分大小写。
+- 文件里引的「密码规则」，当时是至少 8 位，后来改成最短 15 位。
+
+行号也是当时的。这两份文件引需求文档用的是「文件名:行号」，文件头写明了是第 4 课时的行号。规则书后来定了规矩：跨课存活的文档不写行号，写小节名，因为行号会漂。这两份留着当时的样子。
+
+### .claude/agents/architect.md
+
+这份文件 17bfce1 之后没有改过。
+
+```markdown
+---
+name: architect
+description: System architect with 12 years of experience. Makes technical stack decisions via four-quadrant tradeoff analysis, runs a six-question constraint check before deciding, and records important decisions as three-line ADRs. Use when the project needs technology selection, architecture design, database modeling, API contracts, shared types, or environment design. Always offers options and a recommendation, but never finalizes technical direction alone — the project owner decides.
+tools: Read
+model: opus
+---
+
+# architect · 架构师
+
+## 1. 你是谁
+你有 12 年系统架构经验。
+核心信念一句话：选型不是选最酷的，是在约束下选最划算的那条路，并把"为什么选它"写下来，让三年后接手的人看懂。
+
+## 2. 硬规则
+1. 每次激活，先读本文件 .claude/agents/architect.md，确认身份、职责、边界，再开始干活。
+2. 做任何技术决策前，先走一遍"6 必问"约束分析，把项目硬约束摸清，不拍脑袋。
+3. 在多个候选之间选型时，用"四象限决策法"权衡，不靠直觉。
+4. 重要决策写成 ADR-Lite 三行格式：背景 / 决策 / 后果。
+5. 引用 PRD、UI 设计或任何已有文档时，给具体出处，写成 文件路径:行号（证据契约）。禁止凭印象描述。
+6. 你只给方向和选项，不替项目主人拍板。每个待定选型给 A/B/C 候选 + 你推荐哪个 + 一句理由，最终由项目主人 Michael 决定。
+7. 发现 PRD 或 UI 设计内部有矛盾，先停下指出，等项目主人裁决，不擅自硬编一个解释。
+8. 没定下来的选型，标"待确认（假设）"，进假设账本，不擅自升级为"已确认决策"。
+
+## 3. 你的职责
+1. 约束分析：用 6 必问摸清项目硬约束。
+2. 技术选型：用四象限决策法，对关键选型逐个权衡，产出技术栈。
+3. 决策记录：把重要决策写成 ADR-Lite，留档可追溯。
+4. （Lec 5 起）系统架构、数据库设计、API 契约、共享类型、环境设计。
+
+## 4. 你的边界（你不做）
+1. 不写业务代码——那是 backend / frontend 的活。
+2. 不定义产品需求——那是 client / pm 的活。
+3. 不做 UI 设计——那是 designer 的活。
+4. 不替项目主人拍板技术方向——你给选项和推荐，最终决定权在 Michael。
+
+## 5. 你的产出
+- docs/arch/TECH_STACK.md：技术栈选型 + 每项的四象限理由。
+- docs/arch/DECISIONS.md：ADR-Lite 决策记录。
+- （Lec 5 起）docs/arch/ 下的 ARCHITECTURE、DATABASE、API_CONTRACT、SHARED_TYPES、ENV_DESIGN。
+
+## 诚实底线
+来源是"你自己的假设/推断"的内容，产出里必须标"假设"或"待确认"，不得擅自当成"已确认决策"（防反模式 19）。
+
+## 方法论附录（硬规则 2、3 点名的方法，内容在此，防只留名字 / 反模式 25）
+
+### 6 必问（硬规则 2 · 选型前约束分析）
+做任何技术决策前，先逐条问清，摸清项目硬约束：
+1. 规模与并发：目标用户多少、峰值并发多少？（决定要不要缓存/队列/水平扩展）
+2. 团队与技能：谁写、谁维护、熟悉什么栈？（选型落在维护者 hold 得住的范围）
+3. 数据特征：数据量级、结构化程度、事务/一致性、实时性？（决定 SQL/NoSQL、要不要 Redis、要不要 WebSocket）
+4. 部署与运维：部署到哪、预算多少、谁管运维？（决定容器化程度、托管还是自建）
+5. 时间与成本：多久交付、预算上限？（决定用现成方案还是自研）
+6. 演进与扩展：未来 1-3 年怎么变、哪里要预留扩展点？（避免选三年后必换的死路）
+文件里查不到的（尤其规模/预算/运维能力），列「需项目主人确认」+ 建议默认值（标假设），不自己编（防反模式 19）。
+
+### 四象限决策法（硬规则 3 · 多候选权衡）
+两根轴：
+- 横轴=契合度：多大程度满足项目约束与需求（左低右高）。这轴吃的是 6 必问摸出的约束。
+- 纵轴=代价：学习 + 维护 + 运维 + 长期风险（下低上高）。
+四个格子：
+- 右下（高契合+低代价）= 甜区，直接选。
+- 右上（高契合+高代价）= 权衡区。写清为什么仍值得，或有无更轻替代。教学驱动的需求归这。
+- 左下（低契合+低代价）= 可有可无。非教学不进 MVP。
+- 左上（低契合+高代价）= 排除。
+铁律：选型没有绝对好坏，只有配不配这组约束。同一方案换组约束，象限会变。
+```
+
+### docs/arch/TECH_STACK.md
+
+比 17bfce1 多最后一节。原因见第三节「拍过的事要落进文件」。
+
+```markdown
+# TECH_STACK · 技术栈选型
+
+> 本表为 MVP 选型，随课扩展（Lec 4 产出）。
+> 方针：MVP 先跑通，扩展留接口。不为「以后可能用」提前堆，但每个选择留清晰扩展点。
+> 每项标：象限（甜区/权衡/可有可无/排除）+ 驱动来源（约束驱动 / 教学驱动）。
+> 行号出处指向 PRD.md / UI_DESIGN.md / CLAUDE.md，为 Lec 4 时点行号，文件后续编辑可能漂移。
+
+## 一、已定选型（约束已锁，全部约束驱动）
+
+语言
+- TypeScript —— 甜区。全栈同语言、前后端共享类型；栈已锁、生态成熟。
+
+工程
+- pnpm workspaces（Monorepo）—— 甜区（兼服务 Lec 5 共享类型）。比 Turborepo/Nx 轻，无额外构建编排。
+- Zod（数据校验）—— 甜区。前后端共享一份 schema，写一次两端复用（密码规则 PRD.md:149）。
+
+前端
+- Next.js（App Router）—— 甜区。10 个页面（UI_DESIGN.md:14）、受保护路由满足未登录重定向（PRD.md:168）、SSR 利于首屏。
+- Tailwind CSS + shadcn/ui —— 甜区。设计已锁（UI_DESIGN.md:165-166）；三态所需组件齐备（UI_DESIGN.md:166）。
+
+后端
+- NestJS —— 甜区（结构偏重但已锁）。Guards 承载权限拦截（PRD.md:193-199），模块化 DI 适合多实体。
+
+数据
+- PostgreSQL —— 甜区。强一致 + 唯一约束（邮箱唯一 PRD.md:148）、多对多关系（user×project×role PRD.md:173）。
+- Prisma（ORM）—— 甜区。类型安全直通 TS；migration 支持 EMC 演进。
+
+部署
+- Docker + Docker Compose —— 甜区。单 VPS 多服务编排，环境一致。
+- Nginx —— 甜区。反向代理 + 静态托管 + TLS 终止。
+
+## 二、四个分叉的裁决（Michael 拍板，已验证）
+
+1. 鉴权 → Session 存 PostgreSQL（经 Prisma）
+   驱动：约束驱动。
+   为什么：PRD 要登出立即失效（PRD.md:167-168）+ 角色改后即时生效（PRD.md:207），需服务端存状态，无状态 JWT 做不干净。DB session 用已有 PG 即满足，不为此拉起 Redis。
+   对比上一项目：TaskFlow 用 JWT。本项目约束变了（多了即时失效），选型随约束变。
+
+2. Redis → MVP 不引入，留接口
+   驱动：暂非约束、暂无明确教学课节。
+   为什么：鉴权走 DB session 后，Redis 在 MVP 无活可干。无缓存压力仍引入即过度设计，违反「不提前堆」方针。扩展点 #2 已留可替换接口。
+   备注：若后续加专门缓存/Redis 教学课，再升级为引入（教学驱动），属「加课」决定。
+
+3. 实时通信 → MVP 不做，通知表 + 刷新/轮询
+   驱动：本版约束驱动；WebSocket 留 Lec 13（教学驱动）。
+   为什么：PRD 验收只要「刷新可见」（PRD.md:23、PRD.md:42、PRD.md:71），主动推送 US-02b 已 P2 延后（PRD.md:96）。课程硬底线（CLAUDE.md:52）要「实时或通知」——通知表已满足「通知」支。WebSocket 作为教学驱动功能在 Lec 13 加入，扩展点 #1 已铺路。
+   关键区分：实时这个功能，产品不需要，课程需要。两个时间线，不是两个打架的需求。
+
+4. 数据校验 → Zod（已并入第一节）
+   驱动：约束驱动。一份 schema 两端复用，贴合共享类型目标。
+
+## 三、扩展点（为后续加课预留）
+1. 通知层抽象：首版仅「站内通知表 + 轮询」；预留 NotificationChannel 接口，未来 US-02b 预警（PRD.md:94）、邮件（Out of Scope PRD.md:112）作为新 channel 接入，不改调用方。
+2. 会话存储可替换：DB session 读写封装在独立 provider，未来换 Redis 只换实现不动业务。
+3. 成员-角色多对多表：(user, project, role) 关系表（PRD.md:173），为未来多负责人（D4 首版单负责人 PRD.md:268）预留，不把负责人写成项目表单一外键。
+4. 任务实体可挂载：任务表预留外键挂载位，为后续子任务/附件/评论（PRD.md:114）留地，首版不建这些表。
+5. 共享类型包：packages/shared 承载 SHARED_TYPES，前后端引用同一份 DTO/枚举（任务状态 PRD.md:51、角色 PRD.md:206）。
+6. Schema 演进走 EMC：Prisma migration 先扩展兼容、迁移、再收缩（信仰 3，CLAUDE.md:13）。
+
+## 四、驱动来源小结
+- 约束驱动：语言/工程/前端/后端/数据/部署全部；鉴权（DB session）；实时（本版通知表）。
+- 教学驱动（非本版兑现）：WebSocket（Lec 13）。
+- 延后留接口：Redis。
+
+## 五、选型依据的约束（第 4 课拍板）
+- 规模：小规模团队级（5-50 人，低并发）。这是项目主人定的设计假设，不是用户验证过的数字。
+- 团队：单人全栈，栈沿用上一项目（React/Node/TS/NestJS/Next.js/PostgreSQL/Prisma/Redis/Docker/Nginx）。
+- 部署：单 VPS + Docker Compose + Nginx。
+- 时间与成本：学习节奏，无硬期限；零预算，全开源自托管。
+```
+
+### docs/arch/DECISIONS.md
+
+```markdown
+# DECISIONS · ADR-Lite 决策记录
+
+> 每条三行：背景 / 决策 / 后果。后果诚实写代价，明确写「放弃了什么」。
+> 决策内容以 docs/arch/TECH_STACK.md 定稿为准（Lec 4 产出）。
+> 行号为 Lec 4 时点，文件后续编辑可能漂移。
+
+## ADR-001 · 鉴权用 DB session 而非 JWT
+- 背景：PRD 要求登出立即失效（PRD.md:167-168）、角色改后即时生效（PRD.md:207），需服务端可控的会话状态；无状态 JWT 在「主动失效」上做不干净。
+- 决策：会话存 PostgreSQL（经 Prisma），用已有 PG 承载，不为此引入新组件。
+- 后果：换来即时失效与即时权限变更的可控性；代价是每次请求多一次 DB 往返（比 JWT 纯签名校验重），且会话状态需自己维护清理。放弃了 JWT 的无状态与水平扩展便利。
+
+## ADR-002 · Redis 在 MVP 延后引入
+- 背景：鉴权改走 DB session 后（见 ADR-001），Redis 在 MVP 已无明确职责；无缓存压力、无专门教学课节。
+- 决策：MVP 不引入 Redis，会话读写封装在独立 provider（扩展点 #2），留可替换接口。
+- 后果：换来更少的运维组件、更简单的环境，守住「不提前堆」方针；代价是会话查询直压主库 PG，未来真出现缓存/会话压力时需补一次引入改造。放弃了「现在就备好缓存层」的前置便利。
+
+## ADR-003 · 实时通信 MVP 延后，WebSocket 留 Lec 13（教学驱动与约束驱动分离）
+- 背景：PRD 验收只要「刷新可见」（PRD.md:23、42、71），主动推送 US-02b 已 P2 延后（PRD.md:96）；课程硬底线要「实时或通知」（CLAUDE.md:52），通知表已满足「通知」这一支。
+- 决策：MVP 做通知表 + 刷新/轮询，不做实时推送；WebSocket 作为教学驱动功能留到 Lec 13，先铺扩展点 #1。这是教学驱动与约束驱动的分离——实时这个功能产品当前不需要（约束驱动），课程后续需要（教学驱动），是两条时间线而非互相打架的需求。
+- 后果：换来 MVP 范围收敛、不背 WebSocket 的连接管理与状态同步复杂度；代价是用户需手动刷新/靠轮询才能看到更新，体验不如实时，轮询有额外请求开销。放弃了 MVP 阶段的即时推送体验。
+
+## ADR-004 · 数据库选 PostgreSQL 而非 MySQL
+- 背景：需要强一致 + 唯一约束（邮箱唯一 PRD.md:148）、以及 user×project×role 多对多关系建模（PRD.md:173）。
+- 决策：选 PostgreSQL 作为主库，配 Prisma 做类型安全 ORM 与 migration。
+- 后果：换来更严谨的约束与关系表达、对复杂查询与未来演进更友好；代价是若团队更熟 MySQL 则有一次性上手成本。放弃了 MySQL 的广泛默认部署便利。
+
+## ADR-005 · 数据校验用 Zod 而非 class-validator
+- 背景：项目目标是前后端共享一份类型（packages/shared 扩展点 #5）；密码等规则需两端一致校验（PRD.md:149）。
+- 决策：用 Zod 写一份 schema 前后端共享复用，而非 NestJS 默认的 class-validator 装饰器。
+- 后果：换来「写一次、两端复用」与从 schema 直接推导 TS 类型；代价是偏离 NestJS 默认范式，需自接 Zod 管道（如 ZodValidationPipe），生态示例不如 class-validator 顺手。放弃了 NestJS 官方默认校验链的开箱即用。
+```
+
+### docs/BACKLOG.md
+
+前七条是当年的原文。文件头改写过，去掉了只属于课程的说法。第 8 条是第 3 章留下的。
+
+```text
+# BACKLOG.md · 跨课待办清单
+
+> 用途：记跨章的待办。当时不做、以后要做的事记在这里，不只留在对话里（反模式 24）。
+> 格式：编号 | 类型 | 一句话 | 何时做
+> 类型：下沉 / 收敛 / 取经 / 加课
+> 维护：每课结束时问一遍，这一课有没有该记进来的。
+
+1 | 取经 | 抄 Superpowers 的 eval 思路，验证规则真不真生效 | 结课收敛
+2 | 取经 | 抄 Spec Kit 的跨工具持久 spec + 自动一致性检查 | 结课收敛
+3 | 取经 | 抄 BMAD 的就绪闸 PASS/CONCERNS/FAIL 做成真机制 | 结课收敛
+4 | 收敛 | 给 harness 加减法机制（规则只增不减的洞） | 结课收敛
+5 | 收敛 | 给规则加验证机制（未验证散文的洞） | 结课收敛
+6 | 加课 | 补一节 plugin 收尾课，把 harness 抽成可移植 plugin | Lec 19 后
+7 | 下沉 | diff<100、提交格式、git status 等做成 hook | Lec 8
+8 | 下沉 | 界面设计还缺五处：写操作的反馈、窄屏、键盘焦点、页面外框、界面走查；另有骨架屏用法和 NN/g 的出入。第 3 课查出的 | 第 11 课前
+```
+
+### 规则书第二层 D
+
+接在第二层 C 后面。第二层 A 那句旧话的改法，见第 9 步。
+
+```markdown
+## 第二层 D：技术选型关键结论（Lec 4）
+> 完整选型见 docs/arch/TECH_STACK.md，完整理由链见 docs/arch/DECISIONS.md（ADR-001~005）。本节只记 CC 每次进项目须知的结论。
+- 全栈 TypeScript；Monorepo 用 pnpm workspaces。
+- 前端 Next.js(App Router) + Tailwind + shadcn/ui；后端 NestJS。
+- 数据 PostgreSQL + Prisma；校验 Zod（前后端共享一份 schema）。
+- 部署 单 VPS + Docker Compose + Nginx。
+- 鉴权 = DB session（不是 JWT）：因 PRD 要登出立即失效 + 角色改后即时生效，需服务端可控状态。
+- Redis MVP 不引入，留可替换接口（扩展点 #2）。
+- 实时通信 MVP 不做（通知表 + 轮询）；WebSocket 留 Lec 13，属教学驱动。
+- 选型方针：MVP 先跑通，扩展留接口；不为「以后可能用」提前堆。
+```
+
+### docs/PROJECT_STRUCTURE.md
+
+```text
+# 项目目录结构
+
+> 记录目录树和每个关键文件一句话职责。每课最后更新。
+
+.
+├── .claude/
+│   └── agents/
+│       ├── architect.md      架构师，约束分析、选型、决策记录
+│       ├── client.md         用户研究员角色
+│       ├── designer.md       产品设计师，出文字设计
+│       ├── persona.md        假设用户角色，AI 设定，未验证
+│       └── pm.md             产品经理，边界守护者
+├── .gitignore
+├── CLAUDE.md                 规则书，第一层加第二层 A、B、C、D
+└── docs/
+    ├── AGENT_SPEC.md         角色文件的标准
+    ├── BACKLOG.md            跨章待办
+    ├── PROJECT_STRUCTURE.md  本文件
+    ├── arch/
+    │   ├── DECISIONS.md      决策记录，每条三行
+    │   └── TECH_STACK.md     选型结论、分叉裁决、扩展点、约束
+    ├── design/
+    │   ├── PRD.md            需求文档，末尾有澄清注记和盲区
+    │   ├── UI_DESIGN.md      界面设计，五节
+    │   ├── USER_RESEARCH.md  研究报告，两栏分开
+    │   └── mockups/          界面样稿，示例数据是编的
+    └── lessons/
+        └── anti-patterns.md  反模式库
+```
+
+### 反模式库新增
+
+```markdown
+## 32 号 · 教学驱动需求混进 PRD 没标来源，看着像矛盾
+现象：PRD 里「实时」这类需求，不是用户研究推出来的（用户验收只要刷新可见），是课程自上而下为教 WebSocket 塞进来的。两者都写成「需求」却没标来源，下游 architect 选型时撞出来，看着像 PRD 自相矛盾。
+根因：E4 架构错。需求来源没标清——「用户研究推导的」和「课程教学塞进的」混在一起，缺一个来源标签。
+修复：凡自上而下/为教学塞进 PRD 的需求，显式标「教学驱动」，与「用户验证」「pm 推导」区分。选型时按时间线拆解：本版兑现哪条（约束驱动）、留到哪节课兑现（教学驱动），不是两个打架的需求。
+教训：看着矛盾的需求，先查来源，常常不是矛盾，是来源没标。
+抽象模式：与 19（AI 编需求当事实）、29（隐性基础需求）、31（新旧措辞不对齐）同族——都是「需求来源没标清」。
+```
+
