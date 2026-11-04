@@ -71,6 +71,7 @@
     ├── design/
     │   ├── PRD.md               产品需求文档
     │   ├── UI_DESIGN.md         UI 设计
+    │   ├── mockups/             界面样稿源文件（示例数据是编的）
     │   └── USER_RESEARCH.md     用户研究报告
     └── lessons/
         ├── 00-full.md ~ 05-full.md          第 0-5 课完整笔记
