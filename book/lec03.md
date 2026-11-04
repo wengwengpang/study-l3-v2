@@ -798,3 +798,38 @@ git status --short
 ```
  M CLAUDE.md
  M docs/PROJECT_STRUCTURE.md
+ M docs/design/PRD.md
+ M docs/lessons/anti-patterns.md
+?? .claude/agents/designer.md
+?? docs/design/UI_DESIGN.md
+?? docs/design/mockups/
+```
+
+一个一个核，然后点名加：
+
+```
+git add .claude/agents/designer.md docs/design/UI_DESIGN.md docs/design/mockups docs/design/PRD.md CLAUDE.md docs/PROJECT_STRUCTURE.md docs/lessons/anti-patterns.md
+git commit -m "feat: 第 3 课界面设计，建 designer 角色与 UI_DESIGN"
+```
+
+**应该看到。** 下面是写书时照这些步骤跑的结果。提交号和行数每人不同，样稿的文件数也可能不同。
+
+```
+[master 755c417] feat: 第 3 课界面设计，建 designer 角色与 UI_DESIGN
+ 16 files changed, 929 insertions(+), 1 deletion(-)
+ create mode 100644 .claude/agents/designer.md
+ create mode 100644 docs/design/UI_DESIGN.md
+ create mode 100644 docs/design/mockups/Main.dc.html
+ create mode 100644 docs/design/mockups/README.md
+ create mode 100644 docs/design/mockups/TaskDetailExecutor.dc.html
+ create mode 100644 docs/design/mockups/TasksEmptyExecutor.dc.html
+ create mode 100644 docs/design/mockups/TasksEmptyOwner.dc.html
+ create mode 100644 docs/design/mockups/TasksError.dc.html
+ create mode 100644 docs/design/mockups/TasksExecutor.dc.html
+ create mode 100644 docs/design/mockups/TasksLoading.dc.html
+ create mode 100644 docs/design/mockups/TasksOwner.dc.html
+ create mode 100644 docs/design/mockups/canvas.json
+```
+
+**出了错怎么办。** 多了不认识的文件，先弄清是什么，不要一起带走。
+
