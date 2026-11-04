@@ -13174,3 +13174,10 @@ HARNESS 第三节：没有答到。问题 3 有一条新实据，见第四点。
   问 720（D8，不给推荐）：client.md、persona.md 不合 AGENT_SPEC。甲照标准改；乙不改，书里写明它们早于标准。
 六，目录树对照改到写完第 1 章再出（规则 52 目录树最后改），R1-664 第五点、R1-667 第四点写的「一起」不再算。book/OUTLINE.md 第 1 课状态到时一起改。
 进 HARNESS：本条为记账，不判。
+
+--- R1-669 · 问 718 A；学生要 719、720 的推荐，CC 应要求给（学生：「718 A；719 要推荐；720 要推荐」）---
+一，问 718 A：第 1 章动手照实写当时没跑，再给一遍真跑的做法，CC 实跑过贴真实结果，不动项目文件（R1-668 第五点）。未选 B（只写当时实际做的）、C（在项目里真跑并写进 USER_RESEARCH.md）。学生没说当时另外跑过。
+二，推荐，应学生要求给，拍板归学生。问 719 推荐甲，写法用更正注记，原文不删：先例是 docs/lessons/00-full.md 的「更正：原写」、PRD 与 UI_DESIGN 的「澄清注记」。扫传播面比 R1-668 多一份：docs/lessons/01-cheatsheet.md 第 5 行，共三份。六条状态不变，仍全是待验证。问 720 推荐甲：搜过决策记录、BACKLOG、规则、体检报告、HARNESS，没有旧裁决。其余四个角色（architect、designer、librarian、pm）都有五段与 Use when，只有这两份不合。client 的职责在 docs/KNOWLEDGE_BASE.md 第 161 到 163 行已有，可照用。
+三，闸门：.claude/agents/ 在 M 节送审清单（docs/SESSION_START.md 第 127、129 行），改它要学生说「帮我改」（规则 78），并记 REVIEW-DEBT（卡 13 第 2 条）。01-full、01-cheatsheet、USER_RESEARCH 不在清单，回「同意」即可。
+四，问 718 A 的传播面：PRD、UI_DESIGN、契约与架构、CLAUDE.md、PROJECT_STRUCTURE 不影响；book/OUTLINE.md 那行写的是读者要做的事，章写完后成立，不改。
+进 HARNESS：问 718 否（已覆盖，骨架第六节第 4 步）；其余为记账。
