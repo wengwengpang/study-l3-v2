@@ -13255,3 +13255,12 @@ HARNESS 第三节：没有答到。问题 3 有一条新实据，见第四点。
 五，问 723（pm 实跑）：A（CC 推荐）照第 1 章在临时目录实跑一次，贴真实结果，不动项目文件；B 不跑，只写转述，读者看不到真实输出。理由：导出里 pm 输出是空的（第三栏第 5 条），骨架第六节第 4 步。
 六，R1-675 的授权只到第 1 章。第 2 章要不要照旧，学生再说。这次 1113 是规则 78，不在任何授权里。
 进 HARNESS：不判。卡 5 第 2 条这次漏了，是执行问题，已有条目。
+
+--- R1-677 · 对照 1113 已落；问 722 A、723 A；第 2 章照第 1 章授权；弹窗的根因与改法（学生：「帮我改 1113；722 A；723 A；第 2 章也照第 1 章；”bash commend"等按你推荐，不要老师要我按“yes"」）---
+一，落盘：1113 进 1d7ae6e，书章连带 a503647，欠账 29 范围 9385d0e。client.md 53 行不变，新标题 1 次，旧标题 0 次。未选：722 B（不找）、723 B（不跑）。
+二，授权：第 2 章照 R1-675 第一点的范围，按 CC 推荐定，事后照实报。规则 78 所管文件与 D8 照旧。反模式那一问学生这次也没答，挂着。
+三，弹窗根因，查 .claude/settings.json：allow 已有 git status、git log、git diff、git add、git commit，这些本不该弹。弹的主要是 CC 自己把命令写成带 python3、$(...)、多行提交信息的复合命令，碰不上放行清单。官方：不在只读集内、也没放行的命令才问。这一轮 CC 改用简单命令提交，三次提交照规则应不弹（是否真没弹，CC 看不到，学生可以说）。改法：提交用 git add 加 git commit -m，两个 -m 带署名；核对用 grep -c、wc -l；要 python3 的核对放进临时目录一次跑完。
+四，还会弹的：docs/**、.claude/**、CLAUDE.md 的改动（学生自己设的 ask 规则）；git push（ask）；claude -p、git fetch（没放行）。CC 不改权限设置：.claude/settings.json 对 CC 是 deny，这是学生定的墙，要改归学生（D3）。官方权限模式页（2026-11-04）：auto 模式全部套餐可用，Shift+Tab 能切到，「Explicit ask rules still force a prompt」「Deny rules block in every mode」。book/appendix-a.md 写了 auto 的取舍，BRIDGE-05-types-w1 第 0 节写权限模式应是 manual。告诉学生可选，不替他切。
+五，问 723 A 的实跑：临时目录 lec2-run，放 lec1-sim3 的 CLAUDE.md（第 0 课规则书加第二层 A）、pm.md、USER_RESEARCH.md。prompt 由第 2 课记录第 732 到 754 行改两处：加第 6 条隐性基础需求检查，输出结构加一节。后台在跑，结果下一条记。
+六，问 722 A：等学生放 docs/web_course_sample8.md。
+进 HARNESS：第三点，命令写法影响弹窗次数，是不是框架层，写完这章一起判。
