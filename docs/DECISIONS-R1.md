@@ -13114,3 +13114,12 @@ HARNESS 第三节：没有答到。问题 3 有一条新实据，见第四点。
 五，传播面：docs/PROJECT_STRUCTURE.md 样本行写「web_course_sample1.md 至 web_course_sample6.md」「六份」，这份入库后要改。规则 52 目录树最后改，和摘要报告一起出对照，这轮不改。
 六，下一步：派只读子代理摘，派单先给学生看，学生说「发」才派（卡 2 第 4 条）。照反模式 38 拆两轮，一轮一份报告：第一轮 1 到 2995 行，第二轮 2996 到 5144 行。报告存 book/notes/sample7-lec1.md。摘完列第 1 课知识点清单三栏。问 716 仍挂着。
 进 HARNESS：本条为记账，不判。
+
+--- R1-665 · 换网后复查：文件对、接上了、没丢东西；答 /model 能不能在本窗口切（学生：「我有问题，现在这个文件是对的，对吗？还有网络突然断了，我换了个网络，现在是否对接上次窗口突然断了的片段。核实不能出错。还有我接来了可以直接在本窗口的/model切换sonnet吗？」）---
+一，上个窗口（babdfc49）怎么断的，取自它的会话记录，时间是本地：10:58 学生贴第 1 课那段问是不是这个课；11:11 Connection lost；11:11 学生重贴；CC 跑两条只读核对；11:18 HTTP 403，网络不被允许。25 个工具调用都有结果。最后一次写项目是 10:54 的 R1-663 提交，之后只在它自己的临时目录放了一份 s7.txt。学生那一问没等到答复，本轮答：是这节课，那段在 docs/web_course_sample7.md 第 169 到 176 行。
+二，文件核对：与 51d5f4c 逐字节相同，修改时间仍是 11:07。贴在里面的 14 个提交号仓库都有；d4aa3d7 贴在第 1353 行，是第 1 课那次提交。文件头 90 条等于 45 加 45，末句完整。核不了的：claude.ai 原页打不开，和网页是否一字不差只能靠这些内部证据。上个窗口算的 sample1 重复 149 行、R1-664 算的 200 行，门槛分别是 30 与 20，不矛盾。
+三，现状：工作区干净，git fsck 退出码 0，换网后 git fetch 成功（FETCH_HEAD 更新），origin/master 是 732e0d5。本窗口助手文字以 API Error 开头 0 条。
+四，CC 漏的：本窗口开头没查上个窗口怎么结束，学生问了才查，这次没丢东西。卡 14 写的触发是同一窗口里回「继续」，新窗口说「开始」碰不到它。照问 675 A 登 BACKLOG 83，下一步出对照。
+五，/model 对官方核（2026-11-04 WebFetch，model-config、commands、prompt-caching 三页）。能在本窗口切：「to switch immediately」。对话还在：切后「the next request reads the entire conversation history with no cache hits」，下一条慢且贵一次。直接敲 /model sonnet 或按 Enter 存成新会话默认；不带参数进选单按 s 只切本窗口。effort 按模型各存：「each model keeps its own saved level」；~/.claude/settings.json 只存了 claude-opus-5-5 的 xhigh，Sonnet 5.5 默认 medium，切过去实际是哪档没实测。Opus 5.5 与 Sonnet 5.5 都默认 1M 窗口。继承主对话模型的子代理也跟着切。
+六，CC 的判断：上一条写的 Sonnet 5.5 是子代理参数，不用学生切。主窗口现行 Opus 5.5 加 xhigh（问 536 A、561 A）。建议不切，学生定。派单与问 716 仍等回话。
+进 HARNESS：本条为记账，不判。
