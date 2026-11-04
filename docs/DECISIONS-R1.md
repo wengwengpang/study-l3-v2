@@ -13405,3 +13405,12 @@ HARNESS 第三节：没有答到。问题 3 有一条新实据，见第四点。
 三，对照 1122 落 68192fa：STANDARDS 57 行，新行 1 次。
 四，下一步：学生在 GitHub 读第 3 章。挂着：问 716；规则 78 那五处（R1-680 第一点）。
 进 HARNESS：不判。
+
+--- R1-687 · 第 3 章认了；第 4 章照第 1 章授权；学生指出前三章没讲角色怎么建，核过基本成立；出问 731（学生：「第 3 章没意见；第 4 章也照第 1 章；补充：我在阅读第1，2 ，3章时发现文档里没有说明 “角色”是怎么创建和谁创建和根据什么创建，还有什么创建标准和限制等，也没有相关创建角色的prompt.」）---
+一，第 3 章学生认了。授权：第 4 章照 R1-675 第一点范围，按 CC 推荐定，事后照实报；规则 78 所管文件、D8、问 716 照旧。
+二，核学生说的。书里有的：第 1 章第三节「把 prompt 变成文件」写了谁建（本书照贴；自己的项目 AI 照标准起草、人看过才落），「样品和标准」写了为什么立标准；第五节收 AGENT_SPEC 全文；第六节有字段表和放哪。第 3 章第 1 步写了对图纸审。书里没有的：一，建角色的 prompt，前三章一条都没有。二，角色内容根据什么。第 2、3 章只写把第五节贴进去，没说 pm、designer 的内容从哪来；项目里的来源是 KNOWLEDGE_BASE 第三节九个角色的定义加 AGENT_SPEC，书里没提。三，什么时候该建一个角色，没专门讲。四，限制没集中。官方的 name 限制、description 要短，第 1 章没写；项目比官方严的（四字段、最小权限、除检查类不默认给 Bash）只在 AGENT_SPEC 原文里。所以「文档里没有说明」不全对，但缺口是真的。
+三，当年实际。client、persona 由网页课讲课方写好，用 cat 落（sample7 第 451-482、902-930 行）。pm 是下一课让 CC 写的，叮嘱原样抄，权限、人称、落盘方式三处走样（sample7 第 3002 行起）。这才立了 AGENT_SPEC。现行规矩是规则 31 与 AGENT_SPEC「落盘方式」：CC 照标准起草，学生看过说「帮我改」才落盘。BACKLOG 15 提醒知识库里 backend 写的是 JWT 与 class-validator，和现在的选型不符，照它建会建错，所以知识库只是起点，要对现状。
+四，官方，code.claude.com/docs/en/sub-agents.md，2026-11-05 取（页长约 11.7 万字符，只读到 10 万）：「Subagents are Markdown files with YAML frontmatter.」「To create one, ask Claude to write it for you, or write the file yourself.」「Only `name` and `description` are required.」name「Unique identifier of at most 256 characters」「Names can't contain `:`」「The filename doesn't have to match.」「Claude uses each subagent's description to decide when to delegate tasks.」「Those descriptions take up context, so keep them short.」tools「Inherits every tool available to subagents if omitted.」「The body becomes the system prompt that guides the subagent's behavior.」
+五，问 731（缺口补在哪）：A（CC 推荐）第 1 章第三节加一小节「角色是谁建的，根据什么建」，给通用的起草 prompt；第六节补限制；第 2、3 章「建角色」那步各加两三句来历。B 放进附录 C（角色一览），各章只指过去。C 只在第 4 章讲，前三章不动。理由：读者第一次碰到角色在第 1 章，问题读到那里就有；附录 C 以后还能汇总。第 1、2、3 章都已认，要动得学生点头，所以出题。未核：那条 prompt 还没跑过。
+六，第 4 章定的（授权内）：architect 这次不贴，让 AI 照 prompt 起草，读者审，再和第五节原文对，以第五节为准，后面各章才对得上。这也是那条 prompt 第一次真跑，跑完才定稿写进第 1 章。AGENT_SPEC 归规则 78，这轮不动，prompt 跑过再说要不要进。
+进 HARNESS：不判。角色产出怎么落文件，HARNESS 第五节「还缺什么」留到上课建角色时定，这次不碰。
