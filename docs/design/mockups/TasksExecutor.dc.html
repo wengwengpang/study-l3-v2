@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>任务页（执行者）</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:#1d4ed8}a:hover{color:#1e40af}
+</style>
+</helmet>
+<div style="box-sizing: border-box; min-height: 100vh; background: #fafafa; color: #18181b; font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif; font-size: 14px; line-height: 1.5">
+
+<header style="background: #ffffff; border-bottom: 1px solid #e4e4e7">
+<div style="box-sizing: border-box; max-width: 1200px; margin: 0 auto; padding: 0 clamp(16px, 3vw, 32px); min-height: 64px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px">
+<a href="#" style="display: inline-flex; align-items: center; gap: 4px; min-height: 44px; color: #52525b; text-decoration: none"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"></path></svg>我的项目</a>
+<span aria-hidden="true" style="color: #a1a1aa">/</span>
+<span style="font-size: 16px; font-weight: 600">官网改版</span>
+<span style="padding: 2px 8px; border-radius: 6px; background: #f4f4f5; color: #3f3f46; font-size: 13px; line-height: 20px">执行者</span>
+</div>
+</div>
+</header>
+
+<main style="box-sizing: border-box; max-width: 1200px; margin: 0 auto; padding: 24px clamp(16px, 3vw, 32px) 40px; display: flex; flex-direction: column; gap: 16px">
+
+<h1 style="margin: 0; font-size: 24px; font-weight: 600; line-height: 32px">我的任务</h1>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px">
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button type="button" style="display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 12px; border: 1px solid #d4d4d8; border-radius: 8px; background: #ffffff; color: #18181b; font: inherit; cursor: pointer"><span style="color: #52525b">状态</span>全部<svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#52525b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 5.5L7 9l3.5-3.5"></path></svg></button>
+<button type="button" style="display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 12px; border: 1px solid #d4d4d8; border-radius: 8px; background: #ffffff; color: #18181b; font: inherit; cursor: pointer"><span style="color: #52525b">截止日期</span>全部<svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#52525b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 5.5L7 9l3.5-3.5"></path></svg></button>
+</div>
+<span style="color: #52525b">共 3 个任务</span>
+</div>
+
+<div style="overflow-x: auto; background: #ffffff; border: 1px solid #e4e4e7; border-radius: 12px">
+<table style="width: 100%; min-width: 760px; border-collapse: collapse">
+<thead>
+<tr style="background: #fafafa">
+<th scope="col" style="padding: 12px 16px; text-align: left; font-weight: 500; color: #52525b">任务</th>
+<th scope="col" style="width: 150px; padding: 12px 16px; text-align: left; font-weight: 500; color: #52525b">状态</th>
+<th scope="col" style="width: 240px; padding: 12px 16px; text-align: left; font-weight: 500; color: #52525b">任务负责人</th>
+<th scope="col" aria-sort="ascending" style="width: 130px; padding: 4px 16px; text-align: left; font-weight: 500"><button type="button" style="display: inline-flex; align-items: center; gap: 4px; min-height: 44px; padding: 0; border: 0; background: none; color: #18181b; font: inherit; font-weight: 500; cursor: pointer">截止日期<svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11V3M3.5 6.5L7 3l3.5 3.5"></path></svg></button></th>
+</tr>
+</thead>
+<tbody>
+
+<tr style="border-top: 1px solid #e4e4e7">
+<td style="padding: 8px 16px"><a href="#" style="display: inline-flex; align-items: center; min-height: 44px; color: #18181b; text-underline-offset: 3px; text-decoration-color: #a1a1aa">注册页文案校对</a></td>
+<td style="padding: 8px 16px"><button type="button" aria-label="更改状态，当前：已完成" style="display: inline-flex; align-items: center; gap: 4px; min-height: 44px; padding: 0; border: 0; background: none; color: #52525b; font: inherit; cursor: pointer"><span style="display: inline-flex; align-items: center; gap: 4px; padding: 0 8px; border: 1px solid #e4e4e7; border-radius: 999px; background: #f4f4f5; color: #3f3f46; font-size: 13px; font-weight: 500; line-height: 22px; white-space: nowrap"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.5L5 9l4.5-5.5"></path></svg>已完成</span><svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 5.5L7 9l3.5-3.5"></path></svg></button></td>
+<td style="padding: 8px 16px; color: #52525b">li.na@example.com</td>
+<td style="padding: 8px 16px; font-variant-numeric: tabular-nums">2026-11-03</td>
+</tr>
+
+<tr style="border-top: 1px solid #e4e4e7">
+<td style="padding: 8px 16px"><a href="#" style="display: inline-flex; align-items: center; min-height: 44px; color: #18181b; text-underline-offset: 3px; text-decoration-color: #a1a1aa">登录页接口联调</a></td>
+<td style="padding: 8px 16px"><button type="button" aria-label="更改状态，当前：进行中" style="display: inline-flex; align-items: center; gap: 4px; min-height: 44px; padding: 0; border: 0; background: none; color: #52525b; font: inherit; cursor: pointer"><span style="display: inline-flex; align-items: center; gap: 4px; padding: 0 8px; border: 1px solid #bfdbfe; border-radius: 999px; background: #eff6ff; color: #1e40af; font-size: 13px; font-weight: 500; line-height: 22px; white-space: nowrap"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="4"></circle><path d="M6 2a4 4 0 0 1 0 8z" fill="currentColor" stroke="none"></path></svg>进行中</span><svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 5.5L7 9l3.5-3.5"></path></svg></button></td>
+<td style="padding: 8px 16px; color: #52525b">li.na@example.com</td>
+<td style="padding: 8px 16px; font-variant-numeric: tabular-nums">2026-11-12</td>
+</tr>
+
+<tr style="border-top: 1px solid #e4e4e7">
+<td style="padding: 8px 16px"><a href="#" style="display: inline-flex; align-items: center; min-height: 44px; color: #18181b; text-underline-offset: 3px; text-decoration-color: #a1a1aa">成员页样式调整</a></td>
+<td style="padding: 8px 16px"><button type="button" aria-label="更改状态，当前：未开始" style="display: inline-flex; align-items: center; gap: 4px; min-height: 44px; padding: 0; border: 0; background: none; color: #52525b; font: inherit; cursor: pointer"><span style="display: inline-flex; align-items: center; gap: 4px; padding: 0 8px; border: 1px solid #d4d4d8; border-radius: 999px; background: #ffffff; color: #3f3f46; font-size: 13px; font-weight: 500; line-height: 22px; white-space: nowrap"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="4"></circle></svg>未开始</span><svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 5.5L7 9l3.5-3.5"></path></svg></button></td>
+<td style="padding: 8px 16px; color: #52525b">li.na@example.com</td>
+<td style="padding: 8px 16px; font-variant-numeric: tabular-nums">2026-11-16</td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":560}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

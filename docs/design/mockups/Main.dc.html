@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>项目主页（负责人）</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:#1d4ed8}a:hover{color:#1e40af}
+</style>
+</helmet>
+<div style="box-sizing: border-box; min-height: 100vh; background: #fafafa; color: #18181b; font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif; font-size: 14px; line-height: 1.5">
+
+<header style="background: #ffffff; border-bottom: 1px solid #e4e4e7">
+<div style="box-sizing: border-box; max-width: 1200px; margin: 0 auto; padding: 0 clamp(16px, 3vw, 32px); min-height: 64px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px">
+<a href="#" style="display: inline-flex; align-items: center; gap: 4px; min-height: 44px; color: #52525b; text-decoration: none"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"></path></svg>我的项目</a>
+<span aria-hidden="true" style="color: #a1a1aa">/</span>
+<span style="font-size: 16px; font-weight: 600">官网改版</span>
+<span style="padding: 2px 8px; border-radius: 6px; background: #f4f4f5; color: #3f3f46; font-size: 13px; line-height: 20px">负责人</span>
+</div>
+<nav aria-label="项目导航" style="display: flex; flex-wrap: wrap; gap: 4px">
+<a href="Main.dc.html" aria-current="page" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; color: #18181b; font-weight: 600; text-decoration: none; border-bottom: 2px solid #1d4ed8">项目主页</a>
+<a href="TasksOwner.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; color: #52525b; text-decoration: none; border-bottom: 2px solid transparent">任务</a>
+<a href="#" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; color: #52525b; text-decoration: none; border-bottom: 2px solid transparent">成员</a>
+</nav>
+</div>
+</header>
+
+<main style="box-sizing: border-box; max-width: 1200px; margin: 0 auto; padding: 24px clamp(16px, 3vw, 32px) 40px; display: flex; flex-direction: column; gap: 24px">
+
+<h1 style="margin: 0; font-size: 24px; font-weight: 600; line-height: 32px">项目进度</h1>
+
+<section aria-labelledby="progress-title" style="box-sizing: border-box; background: #ffffff; border: 1px solid #e4e4e7; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px">
+<h2 id="progress-title" style="margin: 0; font-size: 16px; font-weight: 600">整体完成情况</h2>
+<div style="display: flex; align-items: baseline; gap: 8px"><span style="color: #52525b">完成率</span><span style="font-size: 32px; font-weight: 600; line-height: 40px; font-variant-numeric: tabular-nums">30%</span></div>
+</div>
+<div role="img" aria-label="十个任务：已完成 3 个，进行中 3 个，未开始 4 个" style="display: flex; gap: 2px; height: 12px">
+<div style="flex: 3 1 0; background: #1d4ed8; border-radius: 6px 0 0 6px"></div>
+<div style="flex: 3 1 0; background: #3b82f6"></div>
+<div style="flex: 4 1 0; background: #d4d4d8; border-radius: 0 6px 6px 0"></div>
+</div>
+<dl style="margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 16px">
+<div><dt style="color: #52525b">任务总数</dt><dd style="margin: 0; font-size: 24px; font-weight: 600; line-height: 32px; font-variant-numeric: tabular-nums">10</dd></div>
+<div><dt style="display: flex; align-items: center; gap: 6px; color: #52525b"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 2px; background: #1d4ed8"></span>已完成</dt><dd style="margin: 0; font-size: 24px; font-weight: 600; line-height: 32px; font-variant-numeric: tabular-nums">3</dd></div>
+<div><dt style="display: flex; align-items: center; gap: 6px; color: #52525b"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 2px; background: #3b82f6"></span>进行中</dt><dd style="margin: 0; font-size: 24px; font-weight: 600; line-height: 32px; font-variant-numeric: tabular-nums">3</dd></div>
+<div><dt style="display: flex; align-items: center; gap: 6px; color: #52525b"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 2px; background: #d4d4d8"></span>未开始</dt><dd style="margin: 0; font-size: 24px; font-weight: 600; line-height: 32px; font-variant-numeric: tabular-nums">4</dd></div>
+</dl>
+</section>
+
+<section aria-labelledby="members-title" style="display: flex; flex-direction: column; gap: 12px">
+<h2 id="members-title" style="margin: 0; font-size: 16px; font-weight: 600">成员任务状态</h2>
+<div style="overflow-x: auto; background: #ffffff; border: 1px solid #e4e4e7; border-radius: 12px">
+<table style="width: 100%; min-width: 760px; border-collapse: collapse">
+<thead>
+<tr style="background: #fafafa">
+<th scope="col" style="width: 220px; padding: 12px 16px; text-align: left; font-weight: 500; color: #52525b">成员</th>
+<th scope="col" style="padding: 12px 16px; text-align: left; font-weight: 500; color: #52525b">任务与状态</th>
+</tr>
+</thead>
+<tbody>
+
+<tr style="border-top: 1px solid #e4e4e7">
+<th scope="row" style="padding: 12px 16px; text-align: left; font-weight: 400; vertical-align: top; line-height: 34px">owner@example.com</th>
+<td style="padding: 12px 16px"><div style="display: flex; flex-wrap: wrap; gap: 8px">
+<span style="display: inline-flex; align-items: center; gap: 8px; padding: 4px 8px 4px 12px; border: 1px solid #e4e4e7; border-radius: 8px">权限矩阵回归测试<span style="display: inline-flex; align-items: center; gap: 4px; padding: 0 8px; border: 1px solid #bfdbfe; border-radius: 999px; background: #eff6ff; color: #1e40af; font-size: 13px; font-weight: 500; line-height: 22px; white-space: nowrap"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="4"></circle><path d="M6 2a4 4 0 0 1 0 8z" fill="currentColor" stroke="none"></path></svg>进行中</span></span>
+</div></td>
+</tr>
+
+<tr style="border-top: 1px solid #e4e4e7">
+<th scope="row" style="padding: 12px 16px; text-align: left; font-weight: 400; vertical-align: top; line-height: 34px">li.na@example.com</th>
+<td style="padding: 12px 16px"><div style="display: flex; flex-wrap: wrap; gap: 8px">
+<span style="display: inline-flex; align-items: center; gap: 8px; padding: 4px 8px 4px 12px; border: 1px solid #e4e4e7; border-radius: 8px">注册页文案校对<span style="display: inline-flex; align-items: center; gap: 4px; padding: 0 8px; border: 1px solid #e4e4e7; border-radius: 999px; background: #f4f4f5; color: #3f3f46; font-size: 13px; font-weight: 500; line-height: 22px; white-space: nowrap"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.5L5 9l4.5-5.5"></path></svg>已完成</span></span>
+<span style="display: inline-flex; align-items: center; gap: 8px; padding: 4px 8px 4px 12px; border: 1px solid #e4e4e7; border-radius: 8px">登录页接口联调<span style="display: inline-flex; align-items: center; gap: 4px; padding: 0 8px; border: 1px solid #bfdbfe; border-radius: 999px; background: #eff6ff; color: #1e40af; font-size: 13px; font-weight: 500; line-height: 22px; white-space: nowrap"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="4"></circle><path d="M6 2a4 4 0 0 1 0 8z" fill="currentColor" stroke="none"></path></svg>进行中</span></span>
+<span style="display: inline-flex; align-items: center; gap: 8px; padding: 4px 8px 4px 12px; border: 1px solid #e4e4e7; border-radius: 8px">成员页样式调整<span style="display: inline-flex; align-items: center; gap: 4px; padding: 0 8px; border: 1px solid #d4d4d8; border-radius: 999px; background: #ffffff; color: #3f3f46; font-size: 13px; font-weight: 500; line-height: 22px; white-space: nowrap"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="4"></circle></svg>未开始</span></span>
+</div></td>
+</tr>
+
+<tr style="border-top: 1px solid #e4e4e7">
+<th scope="row" style="padding: 12px 16px; text-align: left; font-weight: 400; vertical-align: top; line-height: 34px">wang.qiang@example.com</th>
+<td style="padding: 12px 16px"><div style="display: flex; flex-wrap: wrap; gap: 8px">
+<span style="display: inline-flex; align-items: center; gap: 8px; padding: 4px 8px 4px 12px; border: 1px solid #e4e4e7; border-radius: 8px">任务表索引调整<span style="display: inline-flex; align-items: center; gap: 4px; padding: 0 8px; border: 1px solid #e4e4e7; border-radius: 999px; background: #f4f4f5; color: #3f3f46; font-size: 13px; font-weight: 500; line-height: 22px; white-space: nowrap"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.5L5 9l4.5-5.5"></path></svg>已完成</span></span>
+<span style="display: inline-flex; align-items: center; gap: 8px; padding: 4px 8px 4px 12px; border: 1px solid #e4e4e7; border-radius: 8px">修复列表排序错误<span style="display: inline-flex; align-items: center; gap: 4px; padding: 0 8px; border: 1px solid #bfdbfe; border-radius: 999px; background: #eff6ff; color: #1e40af; font-size: 13px; font-weight: 500; line-height: 22px; white-space: nowrap"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="4"></circle><path d="M6 2a4 4 0 0 1 0 8z" fill="currentColor" stroke="none"></path></svg>进行中</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 0 8px; border: 1px solid #fde68a; border-radius: 999px; background: #fffbeb; color: #92400e; font-size: 13px; font-weight: 500; line-height: 22px; white-space: nowrap"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="4"></circle><path d="M6 3.8V6l1.5 1"></path></svg>可能卡住</span></span>
+</div></td>
+</tr>
+
+<tr style="border-top: 1px solid #e4e4e7">
+<th scope="row" style="padding: 12px 16px; text-align: left; font-weight: 400; vertical-align: top; line-height: 34px">chen.jie@example.com</th>
+<td style="padding: 12px 16px"><div style="display: flex; flex-wrap: wrap; gap: 8px">
+<span style="display: inline-flex; align-items: center; gap: 8px; padding: 4px 8px 4px 12px; border: 1px solid #e4e4e7; border-radius: 8px">部署环境检查<span style="display: inline-flex; align-items: center; gap: 4px; padding: 0 8px; border: 1px solid #e4e4e7; border-radius: 999px; background: #f4f4f5; color: #3f3f46; font-size: 13px; font-weight: 500; line-height: 22px; white-space: nowrap"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.5L5 9l4.5-5.5"></path></svg>已完成</span></span>
+<span style="display: inline-flex; align-items: center; gap: 8px; padding: 4px 8px 4px 12px; border: 1px solid #e4e4e7; border-radius: 8px">编写部署文档<span style="display: inline-flex; align-items: center; gap: 4px; padding: 0 8px; border: 1px solid #d4d4d8; border-radius: 999px; background: #ffffff; color: #3f3f46; font-size: 13px; font-weight: 500; line-height: 22px; white-space: nowrap"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="4"></circle></svg>未开始</span></span>
+</div></td>
+</tr>
+
+<tr style="border-top: 1px solid #e4e4e7">
+<th scope="row" style="padding: 12px 16px; text-align: left; font-weight: 400; vertical-align: top; line-height: 34px">zhao.min@example.com</th>
+<td style="padding: 12px 16px; color: #52525b; line-height: 34px">暂无任务</td>
+</tr>
+
+</tbody>
+</table>
+</div>
+<p style="margin: 0; color: #52525b">另有 2 个未认领的任务，不属于任何成员。<a href="TasksOwner.dc.html">去任务页分配</a></p>
+</section>
+
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":900}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>
