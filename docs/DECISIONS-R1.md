@@ -13422,3 +13422,10 @@ HARNESS 第三节：没有答到。问题 3 有一条新实据，见第四点。
 四，落点 ef5f499：第 1 章第三节加「角色是谁建的，根据什么建」62 行（含第六节、第九节、第十节），第 2、3 章第 1 步各加「这份文件的来历」。书里 prompt 除要填的五行外与试跑一致（diff 过）。5ee2fde 同时改目录树。授权依据问 731 A；文字没出对照，事后报。
 五，新发现（第 4 课）：记录第 669、1112 行老师写明「6 必问」「四象限」的具体内容是老师补的，知识库只有名字。所以它们是本课程自定的做法，不是行业标准，书里要写明。
 进 HARNESS：不判。
+
+--- R1-689 · 第 4 章开写前的查证与做法，落盘防丢（学生没有新发言，接 R1-688）---
+一，查到的（2026-11-05，WebFetch）。Michael Nygard，Documenting Architecture Decisions（Cognitect，2011-11-15）：「One of the hardest things to track during the life of a project is the motivation behind certain decisions.」；五段 Title、Context、Decision、Status、Consequences；「All consequences should be listed here, not just the "positive" ones.」。adr.github.io：ADR「captures a single AD and its rationale」，页面没有把 ADR 称为正式标准。Microsoft Azure Well-Architected 的 ADR 页（2026-04-10）：「Only include choices that affect the system's structure, key quality attributes, or are difficult to reverse.」；「The ADR serves as an append-only log.」；「Don't go back and edit accepted records.」；「Avoid hiding consequences of decisions intentionally or accidentally.」。Zod 官方：「Zod is a TypeScript-first validation library.」，现行 Zod 4。OWASP 的 JWT 页 JSON_Web_Token_for_Java_Cheat_Sheet.html 取到 404，换地址再核，选 DB session 那段引用前必须核到。
+二，要留意的。课上的 ADR-Lite 三行（背景、决策、后果）比 Nygard 五段少了 Status；微软写只追加不改，项目 DECISIONS 里有「修订」，写时对。书里讲清这是简化。「6 必问」「四象限」是课程自定（R1-688 第五点）。
+三，第 4 章做法。走 book/OUTLINE.md 第六节。来源 docs/web_course_sample2.md，通读报告 book/notes/sample2-lec4.md。段 3 有两版，用第二版（第 1042-1234 行）。prompt 代码块：第 702-723 行 6 必问；第 1171-1200 行选型；第 1731-1754 行 ADR。讲解已读：410-455、642-687、795-806、1064-1074、1093-1144。没读：1322-1377、1577-1629、1666-1715、1934-1942、2044-2073。第五节：architect.md 取现在的（17bfce1 后没改）；TECH_STACK（63 行）、DECISIONS（30 行）、BACKLOG（14 行）、第二层 D、反模式 32 号取 17bfce1。BACKLOG 要带上第 3 章第三节的五处缺口与骨架屏出入（R1-685 第三点第 4 条）。第 1 步用起草 prompt，结果已在 book/notes/lec04-architect-draft-run.md，审完贴第五节（R1-687 第六点）。其余三段在临时目录 claude -p 实跑，文件取 17bfce1 之前的状态。
+四，本窗口用量：会话记录 5.6MB，按上一窗口 6.8MB 时 73% 粗算约六成，写完一章多半过八成，建议收。CC 看不到准确数，以学生 /context 为准。
+进 HARNESS：不判。
