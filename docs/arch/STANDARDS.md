@@ -40,6 +40,7 @@
 | 数据库与 ORM | 框架约定：PostgreSQL 官方文档（citext 一页）；Prisma 官方文档在锁版本时补（BACKLOG 74） | https://www.postgresql.org/docs/current/citext.html | ADR-DB-008（问 572 A）；偏离见「偏离登记」 | 2026-10-17；2026-10-28（18.6 版，LC_CTYPE 一句与 nondeterministic collations 一句） |
 | 界面无障碍（文字对比度、不只靠颜色、点击目标、表格结构） | W3C WCAG 2.2，AA 级；表格写法照 W3C WAI Tables Tutorial | https://www.w3.org/TR/WCAG22/ ；https://www.w3.org/WAI/tutorials/tables/ | 问 727 A | 2026-11-04（SC 1.4.1、1.4.3、1.4.10、1.4.11、2.4.7、2.5.8、3.2.3、3.3.1、4.1.3；Tables Tutorial 2023-02-16 版） |
 | 界面原型 | 主流做法：GOV.UK Service Manual「Making prototypes」；NN/g「UX Prototypes: Low Fidelity vs. High Fidelity」 | https://www.gov.uk/service-manual/design/making-prototypes ；https://www.nngroup.com/articles/ux-prototype-hi-lo-fidelity/ | 问 726 A | 2026-11-04（GOV.UK 2016-10-18 版，约束不到本项目，作参考；NN/g 2016-12-18 版） |
+| 界面状态与走查 | 主流做法：NN/g「Skeleton Screens 101」「Designing Empty States in Complex Applications: 3 Guidelines」「How to Conduct a Heuristic Evaluation」 | https://www.nngroup.com/articles/skeleton-screens/ ；https://www.nngroup.com/articles/empty-state-interface-design/ ；https://www.nngroup.com/articles/how-to-conduct-a-heuristic-evaluation/ | 第 3 章引用；骨架屏的出入见 BACKLOG 86 | 2026-11-04（2023-06-04 版，2026-09-02 复审；2021-09-19 版；2023-06-25 版） |
 
 ## 二、偏离登记
 
