@@ -38,6 +38,7 @@
 | 认证（密码规则） | OWASP Authentication Cheat Sheet | https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html | API-32 补充（问 576 A）；PRD 审定决策 D20（问 649 A、650 A） | 2026-10-20；2026-10-23（Implement Proper Password Strength Controls 一节）；2026-10-28（同一节：最短 15 位、组成规则、最长 64 位） |
 | schema 命名（请求体、列表项） | 框架约定：NestJS 官方 CRUD 生成器；设计规范：Google AIP-133、AIP-132 | https://docs.nestjs.com/recipes/crud-generator ；https://google.aip.dev/133 ；https://google.aip.dev/132 | API-30 补充（问 626 A、628 A、631 A） | 2026-10-26 |
 | 数据库与 ORM | 框架约定：PostgreSQL 官方文档（citext 一页）；Prisma 官方文档在锁版本时补（BACKLOG 74） | https://www.postgresql.org/docs/current/citext.html | ADR-DB-008（问 572 A）；偏离见「偏离登记」 | 2026-10-17；2026-10-28（18.6 版，LC_CTYPE 一句与 nondeterministic collations 一句） |
+| 界面无障碍（文字对比度、不只靠颜色、点击目标、表格结构） | W3C WCAG 2.2，AA 级；表格写法照 W3C WAI Tables Tutorial | https://www.w3.org/TR/WCAG22/ ；https://www.w3.org/WAI/tutorials/tables/ | 问 727 A | 2026-11-04（SC 1.4.1、1.4.3、2.5.8；Tables Tutorial 2023-02-16 版） |
 
 ## 二、偏离登记
 
