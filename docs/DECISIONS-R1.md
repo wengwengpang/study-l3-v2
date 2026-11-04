@@ -13187,3 +13187,13 @@ HARNESS 第三节：没有答到。问题 3 有一条新实据，见第四点。
 二，顺序：落对照 1105 到 1107；对官方文档核子代理用法，对一手出处核 JTBD；出 720 的两份对照，学生说「帮我改」才落，记 REVIEW-DEBT；实跑派单给学生看，说「发」才跑；再写第 1 章。
 三，写「常见的坑」时判：把计划写成已发生，这一类要不要新开反模式（这次第 1 课笔记与报告就是）。到时出问，这轮不问。
 进 HARNESS：问 719、720 否（不是框架层，是本项目一处产物的更正）。
+
+--- R1-671 · 对照 1105 到 1107 已落；官方子代理页与 JTBD 出处核过；出对照 1108 到 1110（学生：「同意 1105 到 1107」）---
+一，落盘：1105 进 6b40402，1106 进 c436308，1107 进 fabc06e。一处一提交，行数、新句、原文都比过预期。
+二，官方子代理页（code.claude.com/docs/en/sub-agents，2026-11-04 WebFetch，页长 116722 字符，读到 100000）。只有 name、description 必填。description 是「When Claude should delegate to this subagent」；页里建议的是「use proactively」，没提 Use when，所以记录第 3038 行「Claude Code 认角色的正经写法」说重了：Use when 是本项目标准（AGENT_SPEC），不是官方要求。正文：「The body becomes the system prompt」。启动时带系统提示、任务、CLAUDE.md、git status。文件落盘后下一次派单就用新版，不用重启；但一个新 agents 目录里的第一个文件要重启。/agents 现在只打印提醒（v2.1.197 及以前才有向导）。模型先后：派单参数、定义文件、环境变量、主对话。子代理默认可再派子代理，可用 SendMessage；client、persona 只给 Read，用不了，访谈要靠主对话转。最后一句是 CC 的推论，实跑时核。
+三，D8 报（不改）：官方说正文就是系统提示，角色文件硬规则第一条「先读本文件」、AGENT_SPEC 第 2 段、项目宪法第一层 B 第 8 条、陷阱 3 号都要求先读。官方没说不许，只是加载上不需要。这次照 AGENT_SPEC 留着。进 BACKLOG 83，对照 1110。
+四，JTBD 出处：Christensen Institute「Jobs to Be Done Theory」页核过，取了四句的意思。HBR 2016 年 9 月那篇（Christensen、Hall、Dillon、Duncan）正文收费，只核到题名与作者，没引。JTBD 是方法论，不是 STANDARDS 管的领域标准，这次不登记；学生要登再说。
+五，没定义的：P0 到 P2 的含义，PRD 与 KNOWLEDGE_BASE 按关键词搜没写；竞品根因分析只有名字。CC 起草了两段，标「本项目约定」，出对照时明说。
+六，对照 1108（client.md）、1109（persona.md）：改后有副本，diff 用命令出。规则 78，要「帮我改」。落后记欠账（卡 13 第 2 条）。对照 1110：BACKLOG 83 加一句，回「同意」。
+七，实跑的发现：官方说子代理启动带 CLAUDE.md 与 git status。本项目 CLAUDE.md 写着九条用户故事，在这里跑，persona 答的会被带偏。实跑要在不含这些的临时目录，派单时写明。
+进 HARNESS：不判；第三点进精简专场一起看。
