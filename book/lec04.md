@@ -1408,3 +1408,50 @@ model: opus
 
 只属于本项目、不往外带的：这十三项具体选了什么，四个分叉的结论，这五条决策记录的内容。
 
+## 十、本章依据
+
+**核对日期。** 2026 年 11 月 5 日。Claude Code 的说法对的是这一天的官方文档，版本 2.1.318。
+
+**命令的输出。** 第 0、1、4、7、8、9、10 步的命令，写书时在一个临时仓库里照这些步骤实跑，照录。第 1 步的起草和第 2、3、4、6、8 步的 prompt 用 `claude -p --model sonnet` 跑，无交互，放在临时目录，里面只有第 3 课结束时的文件和现在的角色文件。第 3、4、6、8 步四段接在同一个会话里，合计 0.46 美元（这个数是累计值）。第 8 步前放进了 TECH_STACK，用的是 17bfce1 那版，没有第五节多的那一节。第 2 步的三种叫法各开新会话，各跑一次，0.09、0.18、0.15 美元。起草 0.12 美元。全部合计约 1 美元。完整记录在 `book/notes/lec04-architect-draft-run.md` 和 `book/notes/lec04-architect-run.md`。交互界面里贴 prompt、`/tasks`、`Ctrl+O` 没有实跑。写书那台机器的全局规则也带上了，所以它的回答里有 [假设] 这种标法，还有「侦察预算」的说法，你的机器上不一定有。
+
+**项目内的出处。**
+
+- 网页版课堂记录 `docs/web_course_sample2.md`，通读报告 `book/notes/sample2-lec4.md`。
+- architect 角色、技术选型、决策记录、规则书第二层 D、待办清单、反模式库，提交 17bfce1。
+- 决策记录 `docs/DECISIONS-R1.md`：R1-690 是这一章的知识点清单和查证，R1-691 记约束落盘和决策记录改法的拍板。
+
+**Claude Code 官方文档，code.claude.com/docs。** 子代理页（Create custom subagents），读到第 10 万字符，页长约 11.7 万。
+
+**外部出处。**
+
+- Michael Nygard，Documenting Architecture Decisions（Cognitect，2011-11-15）。
+- AWS Prescriptive Guidance，Architectural decision record process。
+- Microsoft Azure Well-Architected，Maintain an architecture decision record (ADR)（2026-04-10）。
+- adr.github.io。
+- RFC 7519，JSON Web Token（2015-05）。
+- OWASP，JSON Web Token Cheat Sheet，JWT revocation 一节。
+- Martin Fowler，Yagni（2015-05-26）。
+- Dan McKinley，Choose Boring Technology（2015-03-30）。
+- NN/g，Using Prioritization Matrices to Inform UX Decisions（2018-05-27）。
+- MDN：The WebSocket API 页、EventSource 页。
+- 各项目官方页：TypeScript，Next.js，Node.js，NestJS（First steps、Pipes），PostgreSQL，Prisma，Redis，Zod，pnpm，Docker Compose，nginx，Django；shadcn/ui 安装页，shadcn-vue 首页。
+
+**相对网页版改了什么。**
+
+1. 建 architect 的做法。网页版是课程一方写好，用 `cat` 落盘。本书改成 AI 起草、人审，再和第五节对。
+2. 验证的做法。网页版用 `/agents` 看列表，又用「请以 architect 子代理身份工作」。第 2 章第六节说过 `/agents` 不能这样用了。那句话写书时跑了一次没派出子代理，本书换成第 5 章讲的叫法，并把第 2、3 步分开。
+3. prompt 改了几处：「Michael」改成「我」，「段 1」改成「这个会话」，第 3 步第一句改成「你是 architect」，其余不动。原因是读者的名字不同，本书也没有分段的说法。
+4. 四象限。网页版连着讲了两版，轴不一样：收益对代价，契合度对代价。后面的文件用的是后一版，本书只写它。
+5. architect 的输出。课堂记录里第 4 步的贴回和选型草稿没有导出，看不全。所以本书用写书时跑的结果，当年的情况只在能核的地方提。
+6. TECH_STACK 多一节约束。当年漏了，写书时查出来，项目文件也补了。你的版本标题短一点，也不提补记的事。
+7. 待办清单。文件头改写，加了第 8 条。
+8. 登录方案的理由讲清了主次。文件原文不动。
+9. 「通知表已满足底线」。后来修订了，本书照后来的说，并说明修订。
+10. shadcn/ui「只长在 React 上」。改成官方安装页只列 React 系，Vue 有别人移植的版本。
+11. NestJS「约等于」Django。不这样比。一个 Node.js，一个 Python，本书只说都是后端框架。
+12. 规模的「已确认」。本书说明这是设计假设。
+13. 规则书第二层 A 那句旧话。写书时 AI 指出来，项目文件和本书都改了。
+14. 编号。课堂上把看到「通过」就往下走说成反模式 4 号，库里 4 号是另一件事。本书不带这个号。规则号都不带。
+15. 没有出处的说法不写成事实：「多代理架构的标准产出物」「harness 对照表」。「重思考预算」改成讲 `model` 什么时候算数。
+16. 只属于课程的流程不进书：开课必读、漂移自检、复习题、结课六步、课程规则 65 号、知识库入库。结课六步里和项目有关的，收成第 10 步。
+17. 新补的内容：十几样技术各是什么，ADR 的来历和同行写法，OWASP 与 RFC 的依据，Yagni，Choose Boring Technology，优先级矩阵，没有上一个项目时第 2 问怎么答（这条是本书的判断）。
