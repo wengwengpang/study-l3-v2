@@ -49,6 +49,7 @@
 - 部分更新的媒体类型（API-33）：照 RFC 7396 的规则处理 null 与没传，但请求只收 application/json，不用它登记的 application/merge-patch+json。理由：唯一调用方是自家前端（API-6），换媒体类型要修订 API-27、改前端 api client，收益只是类型名对得上，规则本身照 RFC 7396 走。核对 2026-10-16。
 - 只有一个的子资源用单数（API-57 修订）：本项目的负责人、任务的状态、项目的汇总写单数，偏离 Zalando 第 134 条「The special case of a resource singleton must be modeled as a collection with cardinality 1」（必须）。理由：同一层另一家 Google AIP-156（https://google.aip.dev/156，状态 Approved）「Singleton resources are always singular.」；照复数写，两个写接口的请求体要多一层只含一个元素的数组，改状态还要把 PATCH 改成 PUT，「状态们」会被读成状态的历史；唯一调用方是同仓同发的自家前端（API-6），将来放开多负责人时改路径代价小。核对 2026-10-23。
 - 邮箱不分大小写用 citext（ADR-DB-008）：没照 PostgreSQL 文档 citext 一页「Consider using nondeterministic collations (see Section 23.2.2.4) instead of this module.」改用不区分大小写的排序规则，属建议档。理由：排序规则有性能代价、部分模式匹配用不了、要手写 SQL；citext 写得进 schema，注册查重、登录、按邮箱邀请成员三个入口照常查（问 572 A）。代价是多依赖一个 PostgreSQL 扩展，比较随数据库的 LC_CTYPE（BACKLOG 80）。核对 2026-10-28。
+- 注册时提示邮箱已被使用（PRD「US-A01 用户注册」）：偏离 OWASP Authentication Cheat Sheet「Authentication and Error Messages」一节，该节把「This user ID is already in use.」列为错误例，正确例是「A link to activate your account has been emailed to the address provided.」。理由：PRD 已定提示「该邮箱已被使用」，登录另行防枚举，两处有意分开（DECISIONS-R1 R1-407）；正确例要发激活邮件，首版不发邮件（PRD Out of Scope「邮件/短信通知」），做不到统一回复。代价：别人能探出某邮箱注册过（问 730 A）。核对 2026-11-04。
 
 ## 三、待登记
 
