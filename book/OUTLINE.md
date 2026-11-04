@@ -41,11 +41,11 @@
 | 第 0 课　全局观 | 认清三层工程、三大信仰、全流程、一个请求走的九步 | CLAUDE.md 第一层，反模式库，第一次提交 | 已上，已写 |
 | 第 1 课　用户研究 | 用 client 与 persona 两个角色挖需求，定项目方向 | `docs/design/USER_RESEARCH.md`，两个角色文件，`docs/AGENT_SPEC.md` | 已上，已写 |
 | 第 2 课　需求文档 | 用 pm 角色把研究变成用户故事、验收标准、不做清单 | `docs/design/PRD.md` | 已上，已写 |
-| 第 3 课　界面设计 | 用 designer 角色定页面、流程、三态 | `docs/design/UI_DESIGN.md` | 已上，未写 |
+| 第 3 课　界面设计 | 用 designer 角色定页面、流程、三态 | `docs/design/UI_DESIGN.md` | 已上，已写 |
 | 第 4 课　技术选型 | 用 architect 角色做约束分析、取舍、决策记录 | `docs/arch/TECH_STACK.md`，`docs/arch/DECISIONS.md` | 已上，未写 |
 | 第 5 课　数据库设计 | 定六张表、主键、删除策略、枚举 | `prisma/schema.prisma` | 已上，已写 |
 | 补课 05-ARCH　系统架构 | 模块划分、分层、数据流、部署拓扑 | `docs/arch/ARCHITECTURE.md` | 已上，已写 |
-| 补课 05-API　接口契约 | 接口层约定、接口清单 | `docs/arch/API_CONTRACT.md` | 正在上；上半已写，下半草稿 |
+| 补课 05-API　接口契约 | 接口层约定、接口清单 | `docs/arch/API_CONTRACT.md` | 已上，已写 |
 | 补课 05-类型　共享类型 | 前后端共用的类型与校验 | 待定 | 未上 |
 | 补课 05-环境　环境设计 | 开发与生产环境 | 待定 | 未上 |
 | 第 6 课　决策边界与权限 | 什么事 AI 必须停下来问；机器强制的权限墙 | CLAUDE.md 第三层，`.claude/settings.json` | 已上，旧稿待重写 |
