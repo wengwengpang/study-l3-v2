@@ -13327,3 +13327,18 @@ HARNESS 第三节：没有答到。问题 3 有一条新实据，见第四点。
 六，传播面：R1-679 清单第二栏第 5 条、第三栏第 4、5 条随问 726 改。BACKLOG 85 不动，框架决策没动。拍板后 GOV.UK、NN/g 补登 docs/arch/STANDARDS.md（卡 5 第 7 条）。
 七，下一步：问 724 A 实跑不受问 726 影响，学生回话后开始。
 进 HARNESS：不判，框架决策在 BACKLOG 85。卡 4 第 3 条这次漏了，是执行问题，已有条目。
+
+--- R1-681 · 画了项目主页与任务页三张；查了界面相关标准；学生要求每章每节都查标准；出问 727、对照 1115、1116（学生先敲 /design 没带要求，后回：「画任务页和项目主页，照现在的 UI_DESIGN;补充：记得在做任何章节或整个课程都要查相关的行业标准」）---
+一，学生选画三张，照现行 UI_DESIGN。未选：十页都画、第 3 课结束那一版、自写要求。这次画只是看样子，问 726 没答，挂着。/design 在 WSL 的命令行认得，走的是 Design 类型。
+二，画布 https://claude.ai/artifact/9WMjnG5qyvuWRKXerRbwbe（私有，三张都发布成功）：页 5 项目主页（负责人）、页 6 任务页（负责人）、页 6 任务页（执行者）。示例数据是编的，邮箱用 example.com。只画正常态，三态没画。CC 没看到渲染结果，Design 类型的说明也写不主动打开核对，好不好看、有没有错位归学生看。负责人两张的导航能在 Play 里点；页 3、7、9 没画，指向它们的链接点了不跳转。
+三，照的口径：界面一律显示邮箱（PRD 注记 4）；页 5 不设风险提示区（UI_DESIGN 05-API 注记）；任务上的「负责人」写「任务负责人」（PRD 注记 10）；成员状态区按任务负责人分组，没有任务的成员也列出（API-42 补充）；登出只在页 3（UI_DESIGN 05-ARCH 注记）；执行者不显示未认领、可能卡住（权限矩阵）；可能卡住照 D13；不标过期（BACKLOG 77 没定）。
+四，查到的标准（2026-11-04，WebFetch 原文）。WCAG 2.2，W3C Recommendation，2024-12-12。1.4.3（AA）「has a contrast ratio of at least 4.5:1」。1.4.1（A）「Color is not used as the only visual means of conveying information」。2.5.8（AA）「at least 24 by 24 CSS pixels」。Conformance 一节「It is not recommended that Level AAA conformance be required as a general policy for entire sites」。W3C WAI Tables Tutorial（2023-02-16 更新）「Header cells must be marked up with <th>, and data cells with <td>」。Tailwind 官方颜色页：默认调色板含 zinc、blue、amber，v4 写的是 oklch；样稿用的是这些颜色对应的十六进制，CC 记得的旧版值，没逐个和 oklch 换算，精确值本来留到第 11 课。shadcn Badge 官方有 Default、Secondary、Destructive、Outline、Ghost。
+五，照标准画的：13 组文字配色算过，最低 6.70:1（scratchpad 的 contrast.py，公式照 WCAG 相对亮度），都过 4.5:1；状态与标记都带文字和不同图标，不只靠颜色；按钮高 44px，过 24px；表格用 th 与 scope。进度条相邻两段 1.82:1、未开始一段对白底 1.48:1，不到图形对比度要求的 3:1，旁边有数字，靠数字读（1.4.11 这条是 CC 记得的，没当场核原文）。
+六，画的时候发现的（只报，UI_DESIGN、PRD 不改）：
+  1. 执行者任务页每行「任务负责人」都是本人。UI_DESIGN 流程二第 3 步要显示，PRD 注记 2 也写可查看，所以照画。
+  2. US-01 写「展示每位成员当前任务及状态（未开始/进行中/已完成）」且「全员状态同屏可见，无需翻页」，假设账本写任务几百条以内。示例 10 条放得下，几百条放不下。「当前任务」PRD 没定义，CC 照括号里三态，把已完成也画上了。
+  3. 汇总四个数含未认领任务，成员行里没有，加不到一起。CC 在成员表下加了一句「另有 2 个未认领的任务」，带去任务页的链接。UI_DESIGN 页 5 没写这句，是 CC 加的。
+  4. 项目页的页头放了项目名与自己的角色（D11 许可），没放当前身份。US-A02 写需要展示时能取到，页 5、页 6 的核心元素没列。
+七，学生要求落点。原话已进自动记忆「尽量按行业标准」。对照 1115：book/OUTLINE.md 第六节第 1 条加一句，docs/CHECKPOINTS.md 卡 1 加第 2 条；改前原文各 1 次。两份都不在 M 节清单，回「同意」即可。SESSION_START J 节归规则 78，不动，卡 1 开课时读得到。
+八，问 727（本项目界面的无障碍主参考）：A（CC 推荐）W3C WCAG 2.2 AA 级，第 11 课照它实现；B 只守对比度、不只靠颜色两条，不定档；C 不定，第 11 课再说。理由：标准方针先照行业标准；1.4.1、1.4.3、2.5.8 都在 AA 以内，样稿已照它；W3C 自己不建议把 AAA 定成全站要求。代价：第 11 课要按 AA 做验收。属决策边界 D4 一类，归学生。对照 1116（按 A 写，选别的就重出）：docs/arch/STANDARDS.md 登记表末尾加一行界面无障碍。
+进 HARNESS：不判。「每章查标准」是否进框架，全书写完随 BACKLOG 83 一起看。
