@@ -6,6 +6,7 @@
 ## 学到的能力
 - 能建 subagent（带 YAML frontmatter 的独立角色文件）。
 - 能让两个角色协作：client 问，persona 答，边界干净。
+- 更正（问 719 甲，DECISIONS-R1 R1-668 第三点）：上面这条是原定要学的。两个角色当时只建好，没有实际运行。USER_RESEARCH.md 的六条出自 AI 写的张伟草稿，不是 persona 访谈产出。
 - 能用假设账本区分「真人确认的需求」和「AI 假设的需求」。
 
 ## 核心设计 · 纪律版双 agent
