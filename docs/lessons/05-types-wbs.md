@@ -35,7 +35,7 @@ awk '/^## 一、全局约定/,/^## 三、本节裁决汇总/' docs/arch/API_CONT
 | S15 | 共享枚举：MemberRole、TaskStatus | 拍定写法，与 prisma/schema.prisma 的枚举对得上（docs/arch/TECH_STACK.md 共享类型包一条）；枚举名不在文件头命令的范围内，人工核 | 进行中（进度表在待执行文件） |
 | S16 | 校验管道：自写还是官方内置 | 报学生裁。ARCHITECTURE 第二节写自写、不用内置 ValidationPipe（T1）；NestJS Pipes 页现在建议生产用内置 StandardSchemaValidationPipe，要哪个版本、接不接得住 API-31 未核 | 已完（问 744 B，TYPE-5） |
 | S17 | 其余未决项 N1 到 N23 | 逐条拍，进度在 docs/arch/PENDING-TYPES-DRAFT.md（architect 核对轮新报，含 NotificationType 进不进共享层） | 进行中（进度表在待执行文件） |
-| S18 | docs/arch/SHARED_TYPES.md：零、管辖范围；一、全局约定（1. 落点、2. 命名、3. 版本、4. 校验管道）；二、本节裁决汇总 | 规则与裁决都落进去，不写字段（问 743 B） | 进行中（已建，余下裁决随拍随加） |
+| S18 | docs/arch/SHARED_TYPES.md：零、管辖范围；一、全局约定（1. 落点、2. 命名、3. 版本、4. 校验管道、5. 按角色不同的形状）；二、本节裁决汇总 | 规则与裁决都落进去，不写字段（问 743 B） | 进行中（已建，余下裁决随拍随加） |
 
 ## 二、schema 以外的本节交付
 
