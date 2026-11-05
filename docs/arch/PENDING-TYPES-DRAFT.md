@@ -1,7 +1,7 @@
 # 待执行：共享类型（补课 05-类型 第一窗口）
 
 > 去留：一次性。未决项拍完、schema 落完、学生认过后删；删除走学生亲跑与 CONFIRM。
-> 执行时机：本窗口起。先拍下面核对报告第四块的未决项，每轮至多三题，顺序见报告末尾；拍完派 architect 起草轮，起草稿也存进本文件；之后按组给学生读、落盘，一组一提交。
+> 执行时机：本窗口起。先拍下面核对报告第四块的未决项，每轮至多三题，顺序见报告末尾；拍完派 architect 起草轮，起草稿存在 docs/arch/PENDING-TYPES-SCHEMA-DRAFT.md；之后按组给学生读、落盘，一组一提交。
 > 执行铁律：
 > - 下面的核对报告原样存档，一字不改；要改的写进对照，不改这里。
 > - 报告里的行号是 2026-11-05 写报告那天的；落前一律按内容重核，不按行号改。
@@ -51,7 +51,7 @@
 | N19 | 子形状要不要公开名字 | 已拍：A（问 764，TYPE-18） |
 | N20 | 后端出参过不过 schema | 已拍：A（问 748，TYPE-9） |
 | N21 | 允不允许改变类型的转换 | 已拍：A（问 765，TYPE-19） |
-| N22 | 枚举线上字面值 | 已拍：C，全链路大写，待 architect 确认（问 765，TYPE-19） |
+| N22 | 枚举线上字面值 | 已拍：C，全链路大写，architect 已确认（问 765，TYPE-19） |
 | N23 | API 字段名跟不跟 Prisma | 已拍：A（问 761，TYPE-15） |
 
 ## 回写清单（段 3 拍完一次改，规则 70）
@@ -93,8 +93,9 @@
 | H31 | API_CONTRACT 第一节第 5 小节、第二节第 3 小节 | 列表数组字段 items（TYPE-18）；枚举名 MemberRole、TaskStatus 写进 schema 名字一节 | 问 764 | 待做 |
 | H32 | ARCHITECTURE 第二节 Service「未认领判定」 | 改成任务负责人为空（TYPE-18） | 问 764 | 待做 |
 | H33 | BACKLOG 74 | 加一句：Prisma 官方页写 contract.prisma 取代 schema.prisma（未核），锁版本时核 | R1-716 第六点 | 待做 |
-| H34 | prisma/schema.prisma 枚举与默认值、DECISIONS 枚举一行、ARCHITECTURE 第三节默认值一行、CLAUDE.md 第二层 E（规则 78） | 枚举值改大写蛇形（TYPE-19）；等 architect 确认后走 D2 | 问 765 | 待做 |
+| H34 | prisma/schema.prisma 枚举与默认值、DECISIONS 枚举一行与 ADR-DB-006「role 为 owner」、ARCHITECTURE 第一节 stuck_task 一行与第三节默认值一行、CLAUDE.md 第二层 E（规则 78） | 枚举值改大写蛇形（TYPE-19）；architect 已确认（R1-718） | 问 765 | 待做 |
 | H35 | 书章 book/lec05.md | 枚举引文不动，补一句后来改大写 | 问 765 | 待做 |
+| H36 | BACKLOG 新加一条（同 H16） | 写明后端出参必须用 OwnerTask 或 ExecutorTask，不能用 Task（TYPE-22） | 问 768 | 待做 |
 
 ## 甲、核对报告（原样存档，一字不改）
 
