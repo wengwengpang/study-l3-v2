@@ -713,3 +713,98 @@ git restore --staged notes.txt
 rm notes.txt
 ```
 
+### 第 8 步　看一眼墙的缝
+
+**目的。** 第三节讲的缝，亲眼看一次，以后不会高估这道墙。这一步用假值，不要用真密钥。
+
+在你自己的终端建一个假的 `.env`，看 `.gitignore` 里有没有它：
+
+```text
+echo FAKE_SECRET=lec6-test-value > .env
+grep -n '^\.env' .gitignore
+```
+
+第 0 课的 `.gitignore` 写了它，应该看到 `.env` 和 `.env.local` 两行。没有的话先加上。
+
+然后在 Claude Code 里分别试下面几条，每条都写「跑不了就说跑不了，不要换别的办法」，弹窗都选 No。要试 `.env` 不在 `.gitignore` 里那一行，先把 `.gitignore` 里的 `.env` 那行删掉，试完加回来。写书时的结果：
+
+| 试什么 | 结果 |
+|---|---|
+| 用 Read 工具读 `.env` | 拒绝 |
+| `cat .env` | 拒绝 |
+| `echo test >> .claude/settings.json` | 拒绝 |
+| `grep -r FAKE_SECRET .`，`.env` 在 `.gitignore` 里 | 没拒绝，没弹窗，没搜到 |
+| `grep -r FAKE_SECRET .`，`.env` 不在 `.gitignore` 里 | 没拒绝，没弹窗，**打出了假值** |
+| `/usr/bin/grep -r FAKE_SECRET .` | 要批准 |
+| `python3 -c "print(open('.env').read())"` | 弹窗要批准 |
+| `/bin/rm notes.txt` | 拒绝 |
+| `sh -c 'rm notes.txt'` | 弹窗，写着有规则禁止这段脚本里的命令 |
+
+`grep` 那两行要细看。不在 `.gitignore` 时打出来的是这样：
+
+```text
+.env:FAKE_SECRET=lec6-test-value
+```
+
+禁止一档写着 `Read(./.env)`，假值还是出来了，这就是官方写的那条缝。
+
+在 `.gitignore` 里时没搜到，靠的不是权限规则。Claude Code 的命令环境里，`grep` 被包了一层，背后是 ugrep，带着 `--ignore-files`，所以跳过了 `.gitignore` 里的文件。写书那台机器上，敲 `type grep` 能看到这个函数。这是顺带挡住的，不是谁承诺的；你的版本未必如此。
+
+python 那一行也要看。弹窗不是因为红牌，是因为这条命令没有放行，手动模式下要问。它打开文件的事规则看不见。你要是在弹窗里点了 Yes，假值就出来了。
+
+**应该记住的。** 三件事：`.env` 一定进 `.gitignore`，同名的 `.env.*` 也一样；弹窗里要看清命令；真有要紧的密钥，靠沙箱这种操作系统层面的办法。
+
+**出了错怎么办。** 结果和表不一样很正常，这些行为随版本变。要带走的是做法：拿假值真撞一次，别猜。
+
+撤掉假文件，在你自己的终端跑：
+
+```text
+rm .env
+```
+
+### 第 9 步　记坑，更新目录树，提交
+
+**目的。** 把这一课的两个坑记进反模式库，文件都提交。
+
+打开 `docs/lessons/anti-patterns.md`，翻到文件末尾，把第五节的 35、36 号贴进去。
+
+打开 `docs/PROJECT_STRUCTURE.md`，在 `.claude/` 那一段加一行：
+
+```text
+│   └── settings.json        权限设置：放行、先问、禁止三档，人亲手写（第 6 课）
+```
+
+看一眼改了哪些：
+
+```text
+git status --short
+```
+
+**应该看到。**
+
+```text
+ M CLAUDE.md
+ M docs/PROJECT_STRUCTURE.md
+ M docs/lessons/anti-patterns.md
+?? .claude/settings.json
+```
+
+点名加，再提交。`git add` 和 `git commit` 现在走放行，让 Claude Code 跑不会弹窗；你自己敲也一样：
+
+```text
+git add CLAUDE.md .claude/settings.json docs/lessons/anti-patterns.md docs/PROJECT_STRUCTURE.md
+git commit -m "feat: 规则书第三层决策边界与权限设置"
+```
+
+**应该看到。** 差不多是这样，提交号和行数以你的为准：
+
+```text
+[master 21c51c7] feat: 规则书第三层决策边界与权限设置
+ 4 files changed, 85 insertions(+)
+ create mode 100644 .claude/settings.json
+```
+
+**出了错怎么办。** 多了 `notes.txt` 或 `.env`，是第 7、8 步没撤干净，先撤。`.claude/settings.local.json` 也别提交，它是你这台机器自己的，见第六节。
+
+到这里第一篇就走完了。权限墙立好以后，第 0 课说的「每一步都要自己看过再批」可以放松成只盯先问那几样。这个放松的前提，就是刚才真撞过。
+
