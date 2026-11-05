@@ -13734,3 +13734,13 @@ HARNESS 第三节：没有答到。问题 3 有一条新实据，见第四点。
 五，段 3 结束：35 条未决全部定了（S13 已确认）。冲突 C1 到 C9 对应：C1 问 743；C2 问 744；C3 问 745；C4 问 752；C5 问 753、757；C6 问 758；C7 问 760；C8 对照 1137；C9 问 761。
 六，段 4 派单（卡 2 四样）。这次照问 751 A：查到的已写进 SHARED_TYPES，它读得到；Zod 行为要它列出来，CC 实跑。要它每个 schema 给该过与该拒的样例，CC 拿去实跑，这样「完成」有机器验。要它列字段名清单，字段名是它起的就摆出来，不默默定（33 号）。派单写明回写还没做，契约与架构那几句以 SHARED_TYPES 为准。
 七，对照 1172（SHARED_TYPES TYPE-19）、1173（进度表）、1174（回写清单 H34、H35）。这三处先落，TYPE-19 落了才派，否则它读不到。
+
+--- R1-718 · 对照 1172 到 1174 已落；起草轮回来，实跑全过，反向核对抓得到；存档；N22 architect 确认；出分组问 766 到 768（学生：「发；同意 1172 到 1174」）---
+一，对照 1172 落 d646a53（SHARED_TYPES 120 行）；1173、1174 落 fd5d96e（待执行文件 569 行，待拍 0）。闸过了才派，派单与给学生看的一字不差。
+二，核对记录 ~/.claude/projects/-home-michael-projects-study-l3-v2/5351a4ce-8273-4874-b904-31acd678975b/subagents/agent-a868bc5b1623a5a8f.jsonl。按 id 去重 9 次 Read，全只读，与报告自述一致；契约 1 到 510、511 到 795 相接，没有读丢；约 25 分钟、20 万 token。系统通知里的 &lt; 是转义，记录里是原文，取的是记录。
+三，实跑（Zod 4.6.7、tsc 7.0.2，脚本在会话临时目录）。tsc --strict：nodenext、bundler 都过。样例 23 个 schema、206 条，不符 0 条。名字：19 个加 MemberRole、TaskStatus、OwnerTask、ExecutorTask 都有，多导出 idField、emailField（内部片段）；NotificationType 没进。请求全 strict。过 ExecutorTask 丢 possiblyStuck，过 Task 留。Z1 到 Z10 都成立。反向核对（46 号）：改坏并集顺序报 2 条，改坏 trim 顺序报 2 条，去掉 strict 报 1 条，枚举改小写报 13 条，这把尺子量得出错。N34：tsc 下 in 收窄通过，直接读报 TS2339。
+四，存档：新建 docs/arch/PENDING-TYPES-SCHEMA-DRAFT.md，997 行，一次提交（卡 6 第 3 条）；报告 896 行与记录取出的 cmp 相同；文件头、进度表与跑样例脚本 101 行。不追加进 PENDING-TYPES-DRAFT：大段 Edit 要过两遍上下文，新建文件可直接做。那份文件头「起草稿也存进本文件」下一批对照改。
+五，抽查（卡 3 第 2 条）。枚举确认「可以」，prisma/ 下只有 schema.prisma，没有迁移目录，对得上。C12 属实：ARCHITECTURE 第一节 stuck_task 那行（H34 漏）；ADR-DB-006「role 为 owner」也漏，CC 的 grep 用 'owner' 这类写法没搜到，architect 提醒才看见（47 号）。C10 不成立：TECH_STACK 已写版本（对照 1140，grep 1 次），它没读 TECH_STACK，报告里自己也说不知道。C11、C13 属实。字段依据抽查 6 处都对得上。新引的 JSON:API source.parameter，网页代理只拿到工具摘要，标未核。
+六，CC 的错两样。一，第一次跑核对的命令里误夹 rm -f /dev/null，被 Bash(rm *) 拦下，整条没执行，没有影响；这句本不该出现。改成脚本放临时目录。二，tsc bundler 第一次 TS5112，是 CC 命令没加 --ignoreConfig，不是稿子的问题（46 号）。
+七，N22：architect 确认可以，H34 补两处，下一批对照。N35 命令已判，不占题（自动记忆「少让学生手动」）。
+八，本批沿用问 742 A 的分组（问 742 A 写了只限那批，这里写明是延用，学生可说一题一题）。组五字段名（N27、N28、N29 与第三块）问 766；组六规则（N25、N30、N31、N32、N33）问 767；组七结构（N24、N34）问 768。C11、C13（N26）是 D8，下一批不给推荐。这轮不出对照。
