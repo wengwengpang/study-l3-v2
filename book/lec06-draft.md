@@ -961,3 +961,93 @@ D8 文档口径冲突：CC 发现两份已决文档、或同一文档的新旧�
 抽象模式：与 35 号互补——35 是「写了但引擎不查」，36 是「压根没写所以由别人替你写」。同属「机械层的实质状态没被验证」。
 ```
 
+## 六、Claude Code 知识点
+
+### 配置文件的几层
+
+**是什么。** 权限规则可以写在好几个地方：`.claude/settings.json` 是项目的，进 git，大家共用；`.claude/settings.local.json` 是你这台机器的，不进 git；`~/.claude/settings.json` 是你个人的，所有项目都生效；公司管理员还能发一份管理配置。
+
+**原理。** 同一个键在几层都有时，官方的顺序从高到低是：管理配置，命令行，本机，项目，个人。权限规则的清单不是谁盖谁，而是合到一起，再按禁止、先问、放行的顺序看。所以禁止跨层有效：「if user settings allow a permission and project settings deny it, the deny rule blocks it.」
+
+**怎么用。** 约束 AI 的规则放项目这层，随 git 走。`settings.local.json` 由 Claude Code 自己建时，它会把这个文件排除在 git 之外；官方写「if you create it by hand, add it to `.gitignore` yourself」。想确认读了哪几个文件，官方给的办法是输入 `/status`，看 `Setting sources` 一行。
+
+**什么时候不用。** 只是你个人的习惯，别放项目这层。
+
+### `/permissions`
+
+**是什么。** 看和改权限规则的对话框。官方写「The dialog lists all permission rules and the `settings.json` file each rule comes from.」
+
+**原理。** 它显示程序解析出来的结果，不是文件原文。死规则也列着，所以它只能证明读到了。
+
+**怎么用。** 改完权限文件，重启后看一次。里面还有一页 `Recently blocked`，查最近拦了什么。也可以在这里加规则，但本项目约定权限文件人亲手写。
+
+**什么时候不用。** 不要拿它代替实测。
+
+### 权限模式
+
+**是什么。** 规则没提到的动作怎么办，由这个总开关定。官方的表：
+
+| 模式 | 不问就能做的 | 适合 |
+|---|---|---|
+| `default`，界面上叫 manual | 只有读 | 每一步自己看，敏感的活 |
+| `acceptEdits` | 读、改文件、常见的文件命令 | 改的代码你会逐个看 |
+| `plan` | 读；自动模式可用时，加分类器放过的命令 | 改之前先摸清楚 |
+| `auto` | 全部，后台有安全检查 | 长任务，少被打断 |
+| `dontAsk` | 只有预先放行的，其余拒绝 | 自动化脚本 |
+| `bypassPermissions` | 全部 | 只用于隔离的容器和虚拟机 |
+
+**原理。** 模式定底，规则叠在上面。官方写「Deny rules block in every mode, including `bypassPermissions`.」有范围的先问规则，比如 `Bash(git push *)`，自动模式下也照样弹窗。
+
+**怎么用。** 启动时的模式按这个顺序定：命令行参数，配置文件的 `defaultMode`，内置默认。会话里按 `Shift+Tab` 切换。官方写内置默认是：交互会话 `auto`（2.1.283 起），`claude -p` 是 `default`。还有一条限制：`auto` 和 `bypassPermissions` 写在项目或本机配置里不算数，要写在个人或管理配置里，或者用启动参数。别人的仓库不能替你把这两个开关打开。
+
+**什么时候不用。** `bypassPermissions` 不要在自己的电脑上开。
+
+### 弹窗里的几个选项
+
+**是什么。** 撞到要问的动作时弹出来的选择。写书时看到两种：
+
+```text
+❯ 1. Yes
+  2. Yes, and switch to accept edits (auto-approve file edits and common file commands) for this session (shift+tab)
+  3. No
+```
+
+```text
+This command requires approval
+Do you want to proceed?
+❯ 1. Yes
+  2. Yes, and don’t ask again for: python3 *
+  3. Yes, and switch to auto mode · auto mode handles these prompts for you
+  4. No
+```
+
+**原理。** 选 Yes 只放这一次。带「don't ask again」的那项，官方写批准会存进 `.claude/settings.local.json`，以后这类命令都不问。带「switch to」的那项，直接切掉整个会话的模式。
+
+**怎么用。** 看清命令再选。`Yes, and don’t ask again for: python3 *` 看着顺手，选了等于放行所有 python 脚本，它们能干任何事。官方的自动模式进去时，都会先拿掉这种放解释器的规则。不想要了，用 `/permissions` 删。
+
+**什么时候不用。** 测权限的时候，只选 No。
+
+### 信任弹窗和 `claude -p`
+
+**是什么。** 第一次在一个目录启动时的那个弹窗。
+
+**原理。** 项目里的放行规则是别人也能写的，所以要你点头才生效。官方写：「`deny` and `ask` rules aren't affected, since they only restrict.」它只在交互会话里出现。`claude -p` 不弹，也不用项目的放行规则，错误输出里写：
+
+```text
+Ignoring 9 permissions.allow entries from .claude/settings.json: this workspace has not been trusted.
+```
+
+**怎么用。** 写脚本跑 `claude -p` 时，别以为放行生效了。写书时的 `-p` 段里，要批准的动作都被直接拒绝。
+
+**什么时候不用。** 没看过的仓库，不要点信任。
+
+### 受保护路径
+
+**是什么。** 一小批路径，不管规则怎么写，写入都不会被自动放行。官方写「Writes to a small set of paths are never auto-approved」，目录有 `.git`、`.husky`、`.claude` 等。
+
+**原理。** 防止弄坏仓库状态和 Claude Code 自己的配置。放行规则也打不开：这项检查在放行规则之前。
+
+**怎么用。** 知道有这一层就行。`Edit(.claude/**)` 写进放行不会让它免问。
+
+## 七、常见的坑
+
