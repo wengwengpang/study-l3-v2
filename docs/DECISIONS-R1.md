@@ -13657,3 +13657,13 @@ HARNESS 第三节：没有答到。问题 3 有一条新实据，见第四点。
 六，实跑（lab_scripts/zod_shape.mjs）。一个对象加可选项：执行者数据多带「可能卡住」照样放行。两份形状合成并集：负责人在前，两种数据都对；执行者在前，负责人那份专属项被丢，这是坑，起草时写死负责人在前。过执行者形状：专属项被丢。加判别字段也能跑。问 629 A 否掉的是对外分两个名字（OwnerTask、ExecutorTask），依据 R1 那条；内部两个形状不进契约，不算推翻，题里写明。
 七，进 HARNESS：问 742、743、744 判否（不是框架层）。分别是本节出题方式、本项目文档分工、本项目选型。
 八，出问 745（N2）、746（S9）、747（S8），都是决策边界 D3。对照 1142 到 1144（清单）、1145、1146（待执行文件）。
+
+--- R1-710 · 问 745 A、746 A、747 B；对照 1142 到 1146 已落；查出内置出参拦截器、TS 不拦多余字段、密码上限原文；出问 748 到 750、对照 1147 到 1151（学生：「745 A；746 A；747 B；同意 1142 到 1146」）---
+一，问 745 A（N2，裁 C3）：执行者那份 Project 带项目 id，D11、D17 读作业务信息只有名称和角色；放宽字面读法，学生知情；PRD 加注记，原文不改。未选 B 不透明入口、C 不带。问 746 A（S9）：两份同形，id、名称、我的角色；未选 B、C。问 747 B（S8）：两份内部形状合成对外一个名字，后端按角色选，并集负责人在前；未选 A 可选项、C 判别字段。又是三题都照推荐选，判丙第三样时看。
+二，对照 1142 到 1144 落 747bf37（清单 84 行）；1145、1146 落 87ca97b（待执行文件 545 行，待拍 29，报告部分与记录 cmp 相同）。两条覆盖核对都无输出。闸写进命令。
+三，传播面（卡 5 第 2 条，文件打开核过）。问 745、746：契约第二节项目详情与 API-34 补充要改，PRD D11、D17 要加注记，都进回写清单（H12、H13）；UI_DESIGN 不影响（页面不显示 id）；CLAUDE.md 第二层 B 的关键决策不提 id，不影响；ARCHITECTURE grep 这句 0 次，不影响；PROJECT_STRUCTURE 不影响。问 747：契约第二节第 3 小节与 API-30 补充要加指针（H14）；PRD、UI_DESIGN、CLAUDE.md 第二层 C、PROJECT_STRUCTURE 不影响。
+四，进 HARNESS：问 745、746、747 判否（不是框架层）。本项目接口形状。
+五，N20 查证，实物证据。tsc 7.0.2 实跑（lab_scripts/excess_check.ts）：从变量返回多余字段不报错，只有现写对象字面量才报 TS2353。所以靠类型检查挡不住 Prisma 整行返回。@nestjs/common 12.3.3 源码：有内置 StandardSchemaSerializerInterceptor，12.0.0 起有，11.2.8 没有；schema 经 @SerializeOptions 按类或按路由固定，分不了调用者角色；校验失败抛普通 Error。报告没提它，architect 读不了网页与包。并集挂路由时负责人形状在前，执行者数据多带专属项照样过（R1-709 第六点），所以 Task 的角色那一步只能在 Service。
+六，N11 查证（网页代理取回，页面有截断，引文在已读部分）。NIST SP 800-63B Rev 4「Verifiers and CSPs SHOULD permit a maximum password length of at least 64 characters.」「Each Unicode code point SHALL be counted as a single character when evaluating password length.」，第二句正好对上 Zod 按码点算（R1-708 第五点）。OWASP Authentication「Maximum password length should be at least 64 characters to allow passphrases.」「Note that certain implementations of hashing algorithms may cause long password denial of service.」。OWASP Password Storage：bcrypt「should only be used for password storage in legacy systems where Argon2 and scrypt are not available.」「so you should enforce a maximum password length of 72 bytes」，没给防拒绝服务的具体上限。所以 128 是 architect 的假设，没有标准出处。CC 不跟它的推荐，改推 64：有出处的数，以后放宽不伤已有账号，收紧才伤。题里写明 CC 与它不同；BACKLOG 82 第三样时间栏写上限 Lec 10 定，选 A、C 都提前，写明。
+七，N18 依据 AIP-132 那句（API-30 补充）说的是列表项不做部分形状，资源本身带什么由本项目定，不冲突。
+八，出问 748（N20）、749（N11）、750（N18）。对照 1147、1148（SHARED_TYPES）、1149（清单 S18）、1150、1151（待执行文件）。
