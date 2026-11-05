@@ -43,6 +43,7 @@
 | 28 | 05-API 结课送审之后：M 节送审触发与审查包写法、规则 77 与 78 对齐、原则 13 补一层（DECISIONS-R1 R1-657、R1-658；问 714 A、715 B） | 4aeee95#2638..042a208#2643，对照 1091 到 1094、1096；另 d6ca57e、b396cbd、977c57f，对照 1099 到 1101 | SESSION_START、COURSE_RULES、HARNESS、KNOWLEDGE_BASE | 下一节（05-类型）结课送审时一并送 | 待审（05-类型结课送审包） |
 | 29 | 写书第 1 章前：client、persona 照 AGENT_SPEC 补齐（DECISIONS-R1 R1-670 问 720 甲、R1-671） | 89ab4f1#2674..349f252#2675，对照 1108、1109；另一处 client.md 痛点分级，对照 1113（DECISIONS-R1 R1-677 记提交号） | .claude/agents/client.md、.claude/agents/persona.md | 下一节（05-类型）结课送审时一并送 | 待审（05-类型结课送审包） |
 | 30 | 写书第 4 章时：CLAUDE.md 第二层 A 一句写明第二栏当时状态（DECISIONS-R1 R1-691、R1-692，问 734 A） | e4f38f3#2769，对照 1126 | CLAUDE.md | 下一节（05-类型）结课送审时一并送 | 待审（05-类型结课送审包） |
+| 31 | 写书第 6 章时：KNOWLEDGE_BASE 第七节第 6 课一行加实际去向（DECISIONS-R1 R1-696、R1-698，问 735 A） | e06f070#2814，对照 1131 | docs/KNOWLEDGE_BASE.md | 下一节（05-类型）结课送审时一并送 | 待审（05-类型结课送审包） |
 
 说明：
 - 推断四处：欠账 1 的 E 段与返修已审终点、欠账 3 与 10 的已审终点、欠账 12 的范围（DECISIONS-R1 R1-224）。
