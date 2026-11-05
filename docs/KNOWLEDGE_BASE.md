@@ -313,7 +313,7 @@ Phase 0 · 立项准备（不写代码）· Lec 0-6
 - Lec 3：designer 角色，UI 设计（页面结构 / 主流程 / 异常流程 / 三态 UI / 视觉规范）。
 - Lec 4：architect 角色，技术选型 + 决策（约束分析 / 6 必问 / 四象限 / ADR）。
 - Lec 5：architect 角色，架构 + 数据库 + API 契约 + 共享类型 + 环境设计。实际拆成补课链，见 PROJECT_STRUCTURE「补课链进度」。
-- Lec 6：CLAUDE.md 宪法（灵魂课）+ 会话简报 + prompt 模板 + 剩余五角色。
+- Lec 6：CLAUDE.md 宪法（灵魂课）+ 会话简报 + prompt 模板 + 剩余五角色。实际只做决策边界与权限；其余三样去向见 BACKLOG 87（问 735 A）。
 
 Phase 1 · 环境搭建 · Lec 7-9 —— SG-1 在 Lec 7
 - Lec 7：Monorepo 初始化（前端 + 后端 + 共享类型 + workspace + Makefile + 首次 commit / SG-1）。
