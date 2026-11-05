@@ -118,3 +118,14 @@
   共享枚举：packages/shared 一份字面值列表，后端加类型对照，Prisma 枚举一变就编译失败（tsc 实跑，用等价类型模拟）。没选：从 Prisma 生成，Prisma 类型不进共享层。
   schema 里不许改变类型的转换，只许 trim 这类，z.infer 一种类型就够（取舍 4）。
   枚举值全链路大写蛇形，数据库枚举一起改（N22 选 C）。依据 Zalando #240「Enum values (using `enum`, ...) need to consistently use the upper-snake case format」；库没建，没数据要迁。先回 architect 确认（项目 CLAUDE.md 第二层 E）。没选：保持小写、登偏离；接口大写后端转换，违反全链路不转换。
+- TYPE-20 字段名（问 766）。能同名就同名（TYPE-15）。项目的「我的角色」叫 role；负责人专属项叫 possiblyStuck；汇总四个叫 total、completed、inProgress、notStarted。全部字段以 packages/shared/src/ 为准。
+  没选：myRole；isStuck、stuck；totalCount 等。
+- TYPE-21 规则（问 767）。
+  多余查询参数逐项写 parameter，请求体的写 pointer，两种形状；不用伪指针。
+  登录邮箱：去空白、非空、上限 254，不校格式（TYPE-14）。
+  用户 id 是 32 位正整数，超范围回 400。
+  响应只校类型，不带长度和邮箱格式，老数据不会让响应变 500。
+  ValidationProblemDetails 的 status 写死 400，errors 至少一项。
+- TYPE-22 结构（问 768）。
+  六个文件：enums、fields、problem、auth、project、task；fields 放内部片段，第 7 课的入口不导出。相对导入写 .js（两种模块解析实跑都过）。
+  前端只用 Task，读专属项先判断有没有这个字段。后端出参必须用 OwnerTask 或 ExecutorTask，不能用 Task，并集会放行（TYPE-9）。
