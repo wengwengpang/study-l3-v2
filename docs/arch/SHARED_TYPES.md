@@ -113,3 +113,8 @@
   Task 里的任务负责人是子对象（id、邮箱），未分配时整个为空；执行者调不了成员列表，邮箱要随任务来。
   未认领不单设，任务负责人为空就是未认领。
   子形状不公开名字，对外是 19 个名字加 MemberRole、TaskStatus；内部形状给后端用，不进契约（TYPE-8）。
+- TYPE-19 写法（问 765）。
+  请求用 z.strictObject，响应用 z.object；新请求漏写 strict 会放行，第 7、8 课加机器检查。
+  共享枚举：packages/shared 一份字面值列表，后端加类型对照，Prisma 枚举一变就编译失败（tsc 实跑，用等价类型模拟）。没选：从 Prisma 生成，Prisma 类型不进共享层。
+  schema 里不许改变类型的转换，只许 trim 这类，z.infer 一种类型就够（取舍 4）。
+  枚举值全链路大写蛇形，数据库枚举一起改（N22 选 C）。依据 Zalando #240「Enum values (using `enum`, ...) need to consistently use the upper-snake case format」；库没建，没数据要迁。先回 architect 确认（项目 CLAUDE.md 第二层 E）。没选：保持小写、登偏离；接口大写后端转换，违反全链路不转换。
