@@ -13,7 +13,7 @@
 
 工程
 - pnpm workspaces（Monorepo）—— 甜区（兼服务 Lec 5 共享类型）。比 Turborepo/Nx 轻，无额外构建编排。
-- Zod（数据校验）—— 甜区。前后端共享一份 schema，写一次两端复用（密码规则 PRD.md:149）。
+- Zod（数据校验）—— 甜区。前后端共享一份 schema，写一次两端复用（密码规则 PRD.md:149）。版本：主版本 4，下限 4.6；精确版本第 7 课建包时由锁文件定，到时重核（问 741 A）。
 
 前端
 - Next.js（App Router）—— 甜区。10 个页面（UI_DESIGN.md:14）、受保护路由满足未登录重定向（PRD.md:168）、SSR 利于首屏。
