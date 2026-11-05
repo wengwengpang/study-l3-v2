@@ -25,6 +25,7 @@
 - AI 代理，OWASP LLM06:2025，根因三样：excessive functionality、excessive permissions、excessive autonomy。「Limit the extensions that LLM agents are allowed to call to only the minimum necessary.」「Implement authorization in downstream systems rather than relying on an LLM to decide if an action is allowed or not.」「Utilise human-in-the-loop control to require a human to approve high-impact actions before they are taken.」日志归在「will not prevent Excessive Agency, but can limit the level of damage caused」一类。
 - Claude Code 官方：省略 tools 时「Inherits every tool available to subagents if omitted.」；isolation「Set to `worktree` to run the subagent in a temporary git worktree, giving it an isolated copy of the repository」；「Rules are evaluated in order: deny, then ask, then allow.」；钩子「the input carries the `agent_id` and `agent_type` common input fields that identify the subagent.」；「The sandbox covers shell commands only.」；「Note that using WebFetch alone doesn't prevent network access.」
 - 主流文章，不是标准，Willison「lethal trifecta」：「Access to your private data」「Exposure to untrusted content」「The ability to externally communicate in a way that could be used to steal your data」，三样齐了最危险。
+- 借鉴非 AI 的成熟做法（主流，不是 AI 专用标准；HARNESS 原则 23）：权限挂在角色上，NIST RBAC「Each user is assigned one or more roles, and each role is assigned one or more privileges」（该项目 NIST 已标不再维护）。放权有上限，AWS IAM「A permissions boundary is an advanced feature for using a managed policy to set the maximum permissions」「it limits the user's permissions but does not provide permissions on its own.」，还能用来委派放权。不能给出自己没有的，Kubernetes RBAC 防提权（工具摘要，未逐字核）。指定文件归谁审，GitHub「Code owners are automatically requested for review when someone opens a pull request that modifies code that they own.」
 
 ## 三、学生问的，逐条答
 
@@ -77,7 +78,7 @@
 
 | 内容 | 正本 | 别处 |
 |---|---|---|
-| 权限表、放权流程 | 随问 755 | 知识库第三块开头那句现在抄了权限表，改指针 |
+| 权限表、放权流程 | AGENT_SPEC 权限表（问 755 A） | 知识库第三块开头那句现在抄了权限表，改指针 |
 | 框架原则 | HARNESS 第四节，按规则 77 判，并答第三节问题 14、15 | 不抄 |
 | 标准 | docs/arch/STANDARDS.md「AI 代理的权限与人工审批」一行扩写，不新开 | 只写指针 |
 | 机制（tools、worktree、钩子） | book/appendix-a.md | 第 8、13 课章实操 |
@@ -86,6 +87,12 @@
 | 反模式 | 不新开，39 号补案例：它没想到的标不了 | 无 |
 
 重复怎么处理：一处正本（原则 1）；指针按用途选两种写法（规则 74 追加）；入库前逐条对已有的（规则 77 判据三）；删前核第二个家（规则 75）；资料管理员每次体检查重复。
+
+谁能放权（问 756 A）：一张封闭清单，由学生定，CC 不能扩；清单外一律喊学生。「核心不核心」由清单定，不由 CC 当场判断。
+绿档，CC 自批，事后记一笔：把文件取来放到角色能读的地方；派单里指定只读角色读哪些文件；让子代理在隔离副本跑；收回或收窄权限。共同点：不让任何角色多一种能力。
+黄档，学生一句话批，CC 走对照改：给角色加工具（如 architect 限域名的 WebFetch）；建新角色（规则 31）。
+红档，学生批并亲写：settings.json 与钩子（规则 66）；给文档类角色 Bash；不可逆操作走 D5 双确认。
+硬规则：CC 不能批给自己；放出去的不超过清单；每次自批进决策记录；每节结课学生看一次账。现在这些靠 CC 自觉，第 8 课钩子能焊一部分。
 
 ## 八、不做什么
 
