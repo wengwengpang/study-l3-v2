@@ -13667,3 +13667,12 @@ HARNESS 第三节：没有答到。问题 3 有一条新实据，见第四点。
 六，N11 查证（网页代理取回，页面有截断，引文在已读部分）。NIST SP 800-63B Rev 4「Verifiers and CSPs SHOULD permit a maximum password length of at least 64 characters.」「Each Unicode code point SHALL be counted as a single character when evaluating password length.」，第二句正好对上 Zod 按码点算（R1-708 第五点）。OWASP Authentication「Maximum password length should be at least 64 characters to allow passphrases.」「Note that certain implementations of hashing algorithms may cause long password denial of service.」。OWASP Password Storage：bcrypt「should only be used for password storage in legacy systems where Argon2 and scrypt are not available.」「so you should enforce a maximum password length of 72 bytes」，没给防拒绝服务的具体上限。所以 128 是 architect 的假设，没有标准出处。CC 不跟它的推荐，改推 64：有出处的数，以后放宽不伤已有账号，收紧才伤。题里写明 CC 与它不同；BACKLOG 82 第三样时间栏写上限 Lec 10 定，选 A、C 都提前，写明。
 七，N18 依据 AIP-132 那句（API-30 补充）说的是列表项不做部分形状，资源本身带什么由本项目定，不冲突。
 八，出问 748（N20）、749（N11）、750（N18）。对照 1147、1148（SHARED_TYPES）、1149（清单 S18）、1150、1151（待执行文件）。
+
+--- R1-711 · 问 748 A、749 C、750 A；对照 1147 到 1151 已落；答「架构师读不了网页和包这个怎么处理」；认 D8 漏；出问 751 到 753、对照 1152 到 1156（学生：「748 A；749 C；750 A；同意 1147 到 1151；补充：”架构师读不了网页和包“这个怎么处理」）---
+一，问 748 A（N20）：响应一律过 schema，Task 由后端按角色选形状，机制第 10 课定；未选 B、C。问 749 C（N11）：密码上限 64，CC 的推荐，与 architect 的 128 不同；未选 A、B。问 750 A（N18）：只带页面和接口要的；未选 B、C。
+二，对照 1147 到 1149 落 28581a9（SHARED_TYPES 74 行、清单 84 行）；1150、1151 落 30eb332（待执行文件 548 行，待拍 26，报告部分与记录 cmp 相同）。覆盖核对两条都无输出。
+三，传播面（卡 5 第 2 条，文件打开核过）。问 748：ARCHITECTURE 第二节「返回 DTO」那句要改（H15）；BACKLOG 新加一条第 10 课的事（H16）；PRD、UI_DESIGN、PROJECT_STRUCTURE 不影响；CLAUDE.md 随 H10。问 749：BACKLOG 82 第三样要改（H17）；PRD D20 加注记（H18）；STANDARDS 认证一行补 NIST 与 OWASP Password Storage（H19，卡 5 第 7 条，随回写批）；CLAUDE.md 第二层 B 写「最长不少于 64 位」仍成立，不影响；UI_DESIGN 第 231 行注册失败那条不写上限，不影响。问 750：契约 API-41 不改字，SHARED_TYPES 写明；PRD、UI_DESIGN、ARCHITECTURE、PROJECT_STRUCTURE 不影响。
+四，进 HARNESS：问 748、749、750 判否（不是框架层）。本项目接口与密码规则。
+五，补充问题的答案。限制的来历：AGENT_SPEC 权限表与知识库第三块，文档类角色只给 Read，是最小权限，不是漏配。搜旧裁决：没有人拍过给角色加网页工具；R1 第 10708 行（2026-10-15）起就是 CC 经 WebFetch 核 architect 标「未核」的，问 751 A 只是把现成做法写明。缺口：它标「未核」的主对话能核（N12 翻了），它没想到的标不了（内置出参拦截器它没提）。出问 751。
+六，CC 的错：问 743 碰冲突 C1、问 745 碰冲突 C3，都给了推荐。决策边界 D8 与卡 4 第 4 条要的是只报不给结论，学生要推荐才给（问 647 A）。学生选的都是推荐项，这两题的选择可能受了影响。照实告诉学生，要重看就重出不带推荐的版本。这次问 752（C4）、问 753（C5）照 D8 不给推荐。
+七，出问 751、752（N3）、753（N4）。N5 排下一批（N4 压 N5）。对照 1152、1153（SHARED_TYPES）、1154、1155（待执行文件）、1156（BACKLOG 83，按 751 A 写，选别的就重出）。
