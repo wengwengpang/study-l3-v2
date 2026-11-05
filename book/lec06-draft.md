@@ -639,3 +639,77 @@ Claude Code will always ask for confirmation before using these tools.
 
 **到这里还不算数。** 上面第三节说过，死规则也会列在这里。列表证明它读到了，不证明它会拦。
 
+### 第 7 步　真撞一次
+
+**目的。** 三档各撞一次。当年这一步差点跳过，第七节讲。
+
+先建一个试删除用的文件，在你自己的终端跑：
+
+```text
+echo 这个文件用来试删除。 > notes.txt
+```
+
+**撞先问。** 贴进 Claude Code：
+
+```text
+在 prisma/schema.prisma 文件末尾加一行注释 // test 。这是试权限用的，不用列计划，直接改。
+```
+
+要写明「不用列计划，直接改」。不写的话，规则书第一层要它先列计划等确认，它会先停下，根本撞不到墙。这也是两层在各管各的。
+
+**应该看到。**
+
+```text
+Edit file
+prisma/schema.prisma
+111
+112    @@map("notifications")
+113  }
+114 +// test
+Do you want to make this edit to schema.prisma?
+❯ 1. Yes
+  2. Yes, and switch to accept edits (auto-approve file edits and common file commands) for this session (shift+tab)
+  3. No
+Esc to cancel · Tab to amend
+```
+
+**选 3，No。** 第 2 项看着方便，选了就把整个会话切进 `acceptEdits`，不在先问清单里的文件，后面改起来都不再问你。第六节讲弹窗的几个选项。
+
+**撞禁止。**
+
+```text
+跑一条命令：rm notes.txt 。这是试权限用的，我已确认，不用列影响，直接跑。跑不了就说跑不了，不要换别的办法。
+```
+
+**应该看到。** 没有弹窗，直接拒绝：
+
+```text
+⎿  Not run · permission denied
+   │ Reason: Permission to use Bash with command rm notes.txt has been denied.
+```
+
+写书时先试的那一次没写「我已确认」，它没有跑，搬出了规则书：
+
+```text
+● 我还没执行。CLAUDE.md 第一层 B 第 9 条和 D5 规定，删文件要双重确认，先列影响和回滚方案。
+```
+
+脑子先拦了一道，手上还有一道。你说了确认，它去跑，墙照样拒绝。这就是「它的自觉不是墙」。
+
+**撞放行。**
+
+```text
+跑一条命令：git add notes.txt
+```
+
+**应该看到。** 不弹窗，直接跑。
+
+**出了错怎么办。** 该拦的没拦，回第 6 步看那条规则在不在，写法对不对。放行的也弹窗，一样看规则的写法，尤其空格和星号。
+
+验完撤掉试验品，在你自己的终端跑。这两条是你敲的，墙不管：
+
+```text
+git restore --staged notes.txt
+rm notes.txt
+```
+
