@@ -94,3 +94,22 @@
   依据：PRD「US-A02 用户登录」统一提示；API-16。
   后果：登录用另一份宽松 schema，注册规则改了也不影响已有账号登录。
   没选：套注册规则，短密码回 400；不校内容，空值也走 401。
+- TYPE-15 API 字段名能同名就同名，没有对应列的另起（问 761 A，裁 ARCHITECTURE 第二节命名规范与共享层边界之间的冲突）。改数据库字段名时前端跟着动，靠同仓同发接住。
+  没选：API 按业务词起，中间多一层映射。
+- TYPE-16 错误外壳（问 762）。
+  type 写成 urn:study-l3-v2:problem:性质名，about:blank 照旧。RFC 9457「The type URI is allowed to be a non-resolvable URI.」；RFC 8141 写命名空间要登记，这个没登记，见 docs/arch/STANDARDS.md「偏离登记」。没选：tag: 开头，不偏离，但要写域名或邮箱，现在只能用 GitHub 名。
+  type、title、status、instance 必填，detail 可省。RFC 9457 没规定必填。
+  逐项问题：errors 数组，每项 detail 与 pointer，照 RFC 9457 第 3 节的例子（例子，不是规定）；Zod 内部结构不透出，一条多余键的 issue 要拆开。多余查询参数指针指不到，起草轮定写法。
+  校验管道拦下的 400 用 ValidationProblemDetails；请求体不是合法 JSON、Service 的业务 400 用 ProblemDetails。
+- TYPE-17 请求字段（问 763）。
+  最大长度：项目名 100、标题 200、描述 5000，假设值，标准不管做多少。
+  去首尾空白放共享 schema，先 trim 再判长度；反过来写全空白能通过（实跑）。密码除外。
+  长度按 Unicode 码点，Zod 4.6.7 默认如此（实跑）。
+  邮箱用 Zod 预设 z.regexes.unicodeEmail，先 trim，上限 254（RFC 5321 的 256 字节减尖括号，推算）。没选 Zod 默认格式，它拒中文地址（实跑）；没选自写轻校验，OWASP「Use well-tested libraries instead of custom regex」。
+  截止日期只校合法日期，不限过去；「今天」的时区没定（BACKLOG 77）。
+  改任务传空对象回 200 不改；改状态必须带状态，否则回 400。
+- TYPE-18 响应形状（问 764）。
+  列表数组字段都叫 items。依据不硬：Zalando 只在 #241 例子见到，Google AIP-132 例子用资源复数；两家不一，学生拍。
+  Task 里的任务负责人是子对象（id、邮箱），未分配时整个为空；执行者调不了成员列表，邮箱要随任务来。
+  未认领不单设，任务负责人为空就是未认领。
+  子形状不公开名字，对外是 19 个名字加 MemberRole、TaskStatus；内部形状给后端用，不进契约（TYPE-8）。
