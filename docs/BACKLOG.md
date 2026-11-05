@@ -5,10 +5,10 @@
 > 格式：编号 | 类型 | 一句话 | 何时做
 > 类型：下沉 / 收敛 / 取经 / 加课
 > 维护：本文件是开课必读 7 个之一（唯一清单见规则 55）；结课逐条问有无新待办（规则 54 配套）。
-> 号段：1-88。
+> 号段：1-89。
 > 留空：无。
-> 实际条数：88 条。
-> 下一个可用号：89。
+> 实际条数：89 条。
+> 下一个可用号：90。
 
 1 | 取经 | 抄 Superpowers 的 eval 思路，验证规则真不真生效 | 结课收敛
 2 | 取经 | 抄 Spec Kit 的跨工具持久 spec + 自动一致性检查 | 结课收敛
@@ -98,3 +98,4 @@
 86 | 下沉 | 界面设计缺五处，UI_DESIGN 与 PRD 都没写：写操作反馈（提交中、成功、失败，WCAG 4.1.3）；窄屏（WCAG 1.4.10，做不做归主人，D1）；键盘焦点（WCAG 2.4.7）；页面外框，全局导航与当前身份放哪（WCAG 3.2.3）；界面走查（NN/g 启发式评估）。另有一处出入：UI_DESIGN 与宪法第二层 C 写统一用骨架屏，NN/g 写只用于整页加载，单个模块用转圈更合适；这是主流文章，不是标准。问 729 A，详见 DECISIONS-R1 R1-682 第六点 | 第 11 课前定
 87 | 下沉 | 第 6 课范围里没做的三样，课上选范围 B 时说「留 Lec 7」，第 7 课桥梁没带上，这里接住：五个角色（backend、frontend、reviewer、tester、devops）各在第 10、11、12、14、15 课建；会话简报在第 13 课与附录 B；prompt 模板在附录 B。问 735 A，详见 DECISIONS-R1 R1-696 第五点 | 各自那一课
 88 | 下沉 | 权限墙的缝与空转：.gitignore 有 .env、.env.local，没有 .env.*，而 deny 写了 Read(./.env.*)，grep -r 在文件不被忽略时读得到（实跑见 book/notes/lec06-permissions-run.md）；settings.json 里 Edit(docs/arch/**) 被 Edit(docs/**) 盖住，git status、log、diff 本来不弹，都空转；要不要开沙箱。settings.json 归学生亲写（规则 66）。详见 DECISIONS-R1 R1-697 第六点 | 05-环境（定环境文件时）
+89 | 下沉 | 第 7 课建 packages/shared 时要接上 05-类型 的三件：一，packages/shared/src/ 已有 schema 文件，包壳围着它建，不覆盖（问 739 A）；二，Zod 精确版本由锁文件定，主版本 4、下限 4.6，到时重核（问 741 A）；三，tsconfig 开 strictNullChecks（NestJS Pipes 页「The `zod` library requires the `strictNullChecks` compiler option to be enabled in your `tsconfig.json` file.」，网页代理取回，到时再核）。来源 DECISIONS-R1 R1-708 | Lec 7 建 packages/shared 时
