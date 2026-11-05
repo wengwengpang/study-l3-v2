@@ -577,3 +577,65 @@ OK
 
 **出了错怎么办。** 它报错时会带行号和列号，比如写书时故意多加一个括号，报的是 `Extra data: line 38 column 2`。多半是少了逗号、多了括号。官方写这个文件是严格的 JSON，注释和末尾多余的逗号都算错，下次启动会报 Settings Error。这条命令只证明格式对，离生效还差两步。
 
+### 第 6 步　重启，看解析结果
+
+**目的。** 看程序读到了什么。
+
+退出 Claude Code，重新启动，要从项目根目录启动。官方写改权限规则运行中就会生效，但会话的模式是启动时定的，重启一次最干净。先看状态栏：
+
+```text
+⏸ manual mode on · ? for shortcuts · ← for agents
+```
+
+如果是第一次在这个目录启动，会先有信任弹窗。目录里有放行规则时，它会列出来：
+
+```text
+Accessing workspace:
+<临时仓库>
+Quick safety check: Is this a project you created or one you trust? (Like your own code, a well-known open source
+project, or work from your team). If not, take a moment to review what's in this folder first.
+Claude Code'll be able to read, edit, and execute files here.
+⚠ This folder pre-approves 9 tool permissions in .claude/settings.json:
+  Bash(pnpm test *), Bash(pnpm run *), Bash(npm run test *), Bash(npm run lint *), Bash(git status), Bash(git log *),
+Bash(git diff *), Bash(git add *), and 1 more
+These will apply without asking. Only proceed if you trust this configuration.
+Security guide
+❯ No, exit
+  Yes, I trust this folder
+Enter to confirm · Esc to cancel
+```
+
+**光标默认停在 `No, exit`。** 直接回车就退出了。要先按下方向键，选 `Yes`，再回车。写书的脚本就在这里摔过一次。这是自己的项目才这样选；别人的仓库，先看过它的规则再说。
+
+然后输入：
+
+```text
+/permissions
+```
+
+**应该看到。** 这个对话框有好几个页签，Allow、Ask、Deny 就是三档。屏幕底下写的是用左右方向键切换。Ask 那一页是这样：
+
+```text
+Permissions  Recently blocked   Allow   Ask   Deny   Auto mode   Workspace
+Claude Code will always ask for confirmation before using these tools.
+╭────────────────────────────────────────────────────────────────────╮
+│ ⌕ Search…                                                          │
+╰────────────────────────────────────────────────────────────────────╯
+  1. Add a new rule…
+  2. Bash(git push *)
+  3. Bash(npx prisma migrate *)
+  4. Bash(pnpm prisma migrate *)
+  5. Edit(.claude/**)
+  6. Edit(CLAUDE.md)
+  7. Edit(docs/**)
+  8. Edit(docs/arch/**)
+  9. Edit(prisma/**)
+←/→ to switch · ↓ to select · Esc to cancel
+```
+
+数一下：Allow 9 条，Ask 8 条，Deny 9 条。按 `Esc` 退出。
+
+**出了错怎么办。** 一条都没有，先看文件是不是在 `.claude/settings.json`，名字错一个字母、放错目录，程序都不会告诉你。启动时界面上有 `⚠` 开头的警告，照它说的改。
+
+**到这里还不算数。** 上面第三节说过，死规则也会列在这里。列表证明它读到了，不证明它会拦。
+
