@@ -19,7 +19,7 @@ awk '/^## 一、全局约定/,/^## 三、本节裁决汇总/' docs/arch/API_CONT
 |---|---|---|---|
 | S1 | 落点与产物形式 | schema 放哪、第 7 课建 packages/shared 之前以什么形式存在；architect 核对后学生拍（桥梁第 5 节） | 待做 |
 | S2 | 命名规则：写不写 Schema 后缀 | 拍定，19 个名字都照它（API-30） | 待做 |
-| S3 | Zod 版本 | 学生拍（D4）；docs/arch/TECH_STACK.md 写 Zod 的三行都没写版本 | 待做 |
+| S3 | Zod 版本 | 学生拍（D4）；docs/arch/TECH_STACK.md 写 Zod 的两行都没写版本 | 待做 |
 | S4 | 错误外壳：ProblemDetails、ValidationProblemDetails、ProblemType | 有字段，对得上 API-17、API-30 与第一节第 7 小节 | 待做 |
 | S5 | auth：CreateUserRequest、CreateSessionRequest、User | 有字段，对得上第二节第 4 小节 | 待做 |
 | S6 | projects：CreateProjectRequest、CreateMemberRequest、ReplaceProjectOwnerRequest、Project、Member、ListProjectsResponse、ListMembersResponse | 有字段，对得上第二节第 5 小节 | 待做 |
@@ -31,8 +31,9 @@ awk '/^## 一、全局约定/,/^## 三、本节裁决汇总/' docs/arch/API_CONT
 | S12 | 去掉首尾空白放哪一层 | 拍定，API-32 与 API-55 放同一层（BACKLOG 79） | 待做 |
 | S13 | 转让负责人请求体 | 字段是 userId，不包数组（API-57 修订推翻原文的数组写法） | 待做 |
 | S14 | 请求拒绝多余字段、响应容忍多余字段的写法 | 落到 schema 写法上（API-31） | 待做 |
-| S15 | 共享枚举：角色、任务状态 | 拍定写法，与 prisma/schema.prisma 的枚举对得上（docs/arch/TECH_STACK.md 共享类型包一条） | 待做 |
+| S15 | 共享枚举：MemberRole、TaskStatus | 拍定写法，与 prisma/schema.prisma 的枚举对得上（docs/arch/TECH_STACK.md 共享类型包一条）；枚举名不在文件头命令的范围内，人工核 | 待做 |
 | S16 | 校验管道：自写还是官方内置 | 报学生裁。ARCHITECTURE 第二节写自写、不用内置 ValidationPipe（T1）；NestJS Pipes 页现在建议生产用内置 StandardSchemaValidationPipe，要哪个版本、接不接得住 API-31 未核 | 待做 |
+| S17 | 其余未决项 N1 到 N23 | 逐条拍，进度在 docs/arch/PENDING-TYPES-DRAFT.md（architect 核对轮新报，含 NotificationType 进不进共享层） | 待做 |
 
 ## 二、schema 以外的本节交付
 
@@ -77,3 +78,4 @@ awk '/^## 一、全局约定/,/^## 三、本节裁决汇总/' docs/arch/API_CONT
 | 编号 | 事 | 出处 | 状态 |
 |---|---|---|---|
 | 1 | 存量行号引用批量清：本节结课时清，还是留到 05-环境 结课或专开一轮，学生定。开课时又见一例：ARCHITECTURE 第二节出处写 TECH_STACK.md:15、:57，现在 Zod 在第 16 行、共享类型包在第 59 行 | BACKLOG 31 时间栏 | 待做 |
+| 2 | 反模式候选（补案例）：42 号，写「三行」前用的 grep 把 packages/shared 也算进去，数错；40 号，列 schema 全集时漏了枚举，它们不在扫的那两节里 | R1-707，报告第一块、C8 | 待做 |
