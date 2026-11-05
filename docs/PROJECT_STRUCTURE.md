@@ -31,8 +31,7 @@
 │   ├── lec05-arch.md        补课 05-ARCH 系统架构，照全书骨架十节写（学生已认，DECISIONS-R1 R1-361、R1-362、R1-383）
 │   ├── lec05-api-1.md       补课 05-API 接口契约（上），照全书骨架十节写（学生已认，DECISIONS-R1 R1-366 到 R1-371、R1-373）
 │   ├── lec05-api-2.md       补课 05-API 接口契约（下），照全书骨架十节写，分三批写、每批推一次读（问 696 A、697 A），学生已认（DECISIONS-R1 R1-622、R1-638、R1-644）；课程做法类的问题进 appendix-h.md（问 491 A、515 A、525 甲）
-│   ├── lec06.md             第 6 课旧稿（问 243A 认的样章；问 716 A 定重写，新稿认了就删）
-│   ├── lec06-draft.md       第 6 课 决策边界与权限，新稿，照全书骨架十节写，等学生认（DECISIONS-R1 R1-697、R1-698）
+│   ├── lec06.md             第 6 课 决策边界与权限，照全书骨架十节写（学生已认，DECISIONS-R1 R1-697、R1-698、R1-701 到 R1-703；问 716 A 重写，旧稿在 git 8effa2c）
 │   ├── appendix-a.md        附录 A Claude Code 速查：现收「设置与权限」里的权限模式一项，每项写是什么、原理、怎么用、本书哪一章用到（第十五窗口建，问 513 A、643 A，学生在 GitHub 读过认了）
 │   ├── appendix-h.md        附录 H 问题与解法：课上提出的课程做法类问题，一个问题一个案例，每个案例十一节；现收五个案例（第八窗口建，问 515 A 到 517 A；第二十一窗口加三个，问 672 A、707 A；学生在 GitHub 读过认了，DECISIONS-R1 R1-648）
 │   ├── notes/               网页版样本的摘要报告，一份样本一份（第七、八份各分两轮，sample7-lec1.md、sample7-part2.md、sample8-lec2.md、sample8-part2.md），写书参考用；另有 lec05-api-subagents.md，补课 05-API 十一份子代理记录的派单与回报原文（问 703 B）；lec01-interview-run.md、lec01-interview-run2.md，第 1 课两次实跑访谈的记录（问 718 A）；lec02-pm-run.md、lec02-pm-run2.md，第 2 课两次实跑 pm 的记录（问 723 A）；lec03-designer-run.md，第 3 课实跑 designer 的记录（问 724 A）；lec04-architect-draft-run.md，让 AI 起草 architect 的试跑记录（问 731 A）；lec04-architect-run.md，第 4 课实跑 architect 的记录（R1-690）；lec06-permissions-run.md，第 6 课实跑决策边界与权限的记录（R1-697）。去留：一次性，教科书写完后删
