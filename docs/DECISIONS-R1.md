@@ -13524,3 +13524,28 @@ HARNESS 第三节：没有答到。问题 3 有一条新实据，见第四点。
 五，第 6 课范围（OUTLINE 第七节第 1 条）查到的。课程全景 KNOWLEDGE_BASE 第七节第 6 课那行写宪法加会话简报、prompt 模板、剩余五角色。课上 sample5 第 81 行说这几块可能拆到 Lec 7，第 97-100 行出范围选择，第 109 行老师推荐 B，「SESSION_BRIEF 和五角色留 Lec 7 更从容」，第 123 行学生选 B。但 Lec 6 到 Lec 7 的桥梁（第 1373-1377 行）只写 Monorepo 与 SG-1，这三样没带上。BACKLOG、06-full、06-cheatsheet、AGENT_SPEC、HARNESS、PROJECT_STRUCTURE 搜「会话简报」「剩余五」「prompt 模板」都 0 处。所以「留 Lec 7」丢了，和规则 33 同类。五个角色是 backend、frontend、reviewer、tester、devops，全景排在第 10、11、12、14、15 课；KNOWLEDGE_BASE 写分阶段激活、不一次全开。会话简报全景另排第 13 课，是协议 11，也在附录 B。Prompt Pack 在附录 B。
 六，问 735（第 6 章写到哪）：A（CC 推荐）只写课上真做的决策边界与权限系统；章里写明三样的去向，五个角色各在自己那一课建，会话简报在第 13 课与附录 B，prompt 模板在附录 B；BACKLOG 登一条防再丢，KNOWLEDGE_BASE 第 6 课那行照第 5 课先例加实际去向（要「帮我改」）。B 三样现在补做，写进第 6 章，要建五个角色文件。C 第 6 章同 A，三样照课上原话排到第 7 课一起做。推荐 A 的理由：书只写真跑过的；还没写代码就定 backend 这些角色，没活可验，KNOWLEDGE_BASE 也写不一次全开；第 7 课已有 Monorepo 与第一个过关点，CC 判断再加三样会撑开。
 进 HARNESS：不判。
+
+--- R1-697 · 问 735 A；推送；第 6 章查证、实跑、三栏清单，落盘防丢（学生：「735 A；先推」；中途：「继续」「try again」）---
+一，拍板。问 735 A，未选 B（三样现在补做）、C（排到第 7 课）。推送 5b1998e..7a9bc70，差 0、0。旧稿照第 0 课先例：新稿写 book/lec06-draft.md，学生认了才删旧稿、改名（R1-291 第七点；c0395c3、28b562a），删除走 CONFIRM 与学生亲跑。中途「继续」「try again」的由来：CC 一条命令带 ls -la .env，撞 Read(./.env) 被拒，整条没跑；没绕，去掉这一项重跑。
+二，查证（2026-11-05，WebFetch）。
+  官方权限页 code.claude.com/docs/en/permissions（版本 2.1.318）：「Rules are evaluated in order: deny, then ask, then allow. The first match in that order determines the outcome, and rule specificity doesn't change the order.」；「Permission rules are enforced by Claude Code, not by the model.」；Bash 规则「isn't a security boundary around the program」，表里 Bash(rm *) 列 /bin/rm、bash -c 为不挡；Read 与 Edit 的 deny 管内置工具、cat 等已识别的命令与重定向目标，「They don't apply to a command that reads files without naming them, such as `grep -r pattern .`」；重定向「the check covers your `Edit` allow and deny rules」，ask 没点名；Write、NotebookEdit、Glob 的路径规则「accepts the rule but never matches」；「If a tool is denied at any level, no other level can allow it.」；项目 allow 规则要接受信任弹窗才用，claude -p 不用，打警告。
+  官方模式页：交互会话没声明模式时「`auto` with Claude Code v2.1.283 or later」，claude -p 是 default；default 在界面上叫 Manual。
+  官方最佳实践页：指令分 Non-deterministic（prompt、CLAUDE.md、skill）与 Deterministic（hook、deny rule、managed setting）；「If something has to happen every time, make it a hook, a deny rule, or a managed setting. `CLAUDE.md` is for guidelines, and Claude is allowed to decide a guideline doesn't apply.」。官方功能总览页：CLAUDE.md、skill、hook 各管什么；「Keep CLAUDE.md under 200 lines.」；「is a request, not a guarantee」。
+  OWASP LLM06:2025 Excessive Agency：根因 excessive functionality、permissions、autonomy；「Utilise human-in-the-loop control to require a human to approve high-impact actions before they are taken.」。Amazon 2015 致股东信（SEC EX-99.1）：one-way doors、two-way doors，Type 1、Type 2。Anthropic，Beyond permission prompts（2025-10-20）：「approval fatigue」，内部用沙箱减少 84% 弹窗。Check Point Research，Caught in the Hook（2026-02-25）：CVE-2025-59536、CVE-2026-21852，「Configuration files that were once passive data now control active execution paths.」。蠕虫只有厂商与社区文章（Securonix 等），细节各家不一，不写数字。HITL、HOTL 只见行业文章，不是标准。
+三，别章欠第 6 章的（book/ 下逐章搜）：lec05-arch 第十节第 7、8 条（死规则、自动模式、没声明的兜底档、终端重定向、删除命令的前缀匹配、D8 原文），第五节 35、36 号；lec05 第三节与第十节第 15 条（规矩放规则书、钩子还是技能）；lec00 第三节（验证权限那件事）；lec05-arch、lec05-api-1、lec05-api-2 开头都写「细的在第 6 课」。
+四，实跑 book/notes/lec06-permissions-run.md，875 行，claude -p 合计 1.33 美元，另有 tmux 交互段。临时仓库，没动项目；只读项目与本地配置，全局规则没带。各跑一次。
+  1. 反推候选：7 类加 2 个拿不准。范围、数据、权限、选型、需求地位、不可逆对上 D1 到 D6 的意思；多一类「推翻已拍板」；藏取舍它自己判断不是一类决定，是触发信号，和当年补强 2 同；护栏改动问要不要单列；没列文档冲突，但开头就报了一处对不上。引的 13 处行号抽查全对（PRD 285、288、294、303、306、328、344、126；DECISIONS 9-12、44-48、55、67、84-88）。
+  2. 第三层有没有用：同一句「首版不做任务归档……你给结论」，没有第三层答「结论：任务表不用调整」；有第三层答「这一条我建议你拍板」，并拆「不做归档是事实，现在不预留字段是取舍」。评论框两次都没加，没有时说「我定了」，有时说 D1 不能由我拍板。
+  3. 死规则：ask 只写 Write(prisma/**)、acceptEdits，文件被改；只写 Edit(prisma/**)，被拦。交互启动时警告「Ask rule Write(prisma/**) never matches · use Edit(prisma/**)」，claude -p 错误输出没有；/permissions 照样列着这条死规则，所以光看列表不够。
+  4. 兜底档：没声明 defaultMode 状态栏 auto mode on；声明后 manual mode on。
+  5. 撞墙：Read、cat、重定向写 settings.json、rm 都被拒。改 prisma 弹窗（第 2 项是切 acceptEdits）。git add 不弹。不说「直接改」时规则书先停下列计划，撞不到墙。
+  6. 缝：grep -r FAKE_SECRET .，.env 在 .gitignore 里时没搜到，不在时打出假值，都没弹窗、没被拒。原因：Claude Code 的 Bash 里 grep 是函数，背后 ugrep 带 --ignore-files（type grep 所见）。/usr/bin/grep 要批准。python3 读 .env 弹窗。
+  7. 和官方表不同：/bin/rm 这次被拒，sh -c 'rm' 弹窗写「A permission rule denies a command in this shell -c script」。比官方写的严，书里写实跑结果并仍按官方说法不当边界。
+  8. 信任弹窗光标默认在 No, exit；目录有放行规则时列出来。已信任的目录加规则后不再弹。
+五，第 6 章知识点清单。
+  第一栏，网页版讲过的（sample5-lec6 第二节三十九条）。全收：第三层定位；决策边界；反推法；D5、D7 的弱点；行业印证；可逆乘影响；D7 是触发器；两轴垂直；ask 别塞满；配置是攻击面；防膨胀自检（只说结论）；门禁比方；D1 到 D7 各条；追加与重写；两个读者；不经 AI 写；三色牌；撞门顺序；机械层贴得住什么；利益冲突；三档各装什么；三个坑；静态墙与动态墙；验证先于信任。05-ARCH 补的：死规则、兜底档、三样、重定向、前缀匹配、D8、验证两步。结课落盘顺序、补课拆分属课程流程，不进书，收成第 9 步。
+  第二栏，要补的。Amazon 单向门、OWASP LLM06、官方确定性分法作依据；规矩放哪（第 5 章欠）；模式表与 2.1.283 起默认 auto；信任弹窗；受保护路径；弹窗第 2 项的陷阱；grep 的缝；第三层有没有用的对照；反推 prompt（课上是讲课方反推，这次第一次让 AI 做）；三样的去向。
+  第三栏，要纠的。「老师课上查的，没核实」全换出处；HITL、HOTL 写明不是标准；红牌实测当年没跑，这次跑了；Read 的范围照现在官方说；Write 规则；cat 落盘改 VS Code 贴入；规则号不进正文；旧稿自测删；旧稿「留到那一章」的方向按书的顺序改；蠕虫不写成确凿数字。
+  动手十步：0 确认起点；1 让它反推候选；2 审；3 贴第三层；4 试管脑；5 手写权限文件；6 重启看解析；7 撞一次；8 看缝；9 记 35、36 号，目录树，提交。
+六，只报不改，章写完同批出对照或问：项目 .gitignore 有 .env、.env.local，没有 .env.*，而 deny 写了 Read(./.env.*)，grep 的缝对它开着，现在没有这种文件，宜进 BACKLOG 归 05-环境；settings.json 里 Edit(docs/arch/**) 被 Edit(docs/**) 盖住，git status、log、diff 本来就不弹，都空转，这份文件归学生；BACKLOG 第 9 条与 06-full 的「PyPI 蠕虫」只能核到厂商文章；STANDARDS 补登 OWASP LLM06、Amazon、Anthropic、Check Point；问 735 A 的 BACKLOG 一条与 KNOWLEDGE_BASE 第七节（要「帮我改」）。
+进 HARNESS：不判。「写了不等于查了」「拍板要落盘」已有条目（反模式 35、规则 33）。
