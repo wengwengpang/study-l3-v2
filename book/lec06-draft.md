@@ -212,6 +212,8 @@ D8 是后来补的，管文件之间打架，下面单讲。
 
 **禁止 `deny`。** 门焊死了，按多少次铃都没用。比如读密钥文件。
 
+接着门禁的比方，这三档也叫绿牌、黄牌、红牌，颜色好记，本章两种叫法都用。
+
 每条规则的写法是工具名，加括号里的条件。工具名首字母大写。
 
 ```text
@@ -222,7 +224,7 @@ Read(./.env)         读当前目录的 .env 文件
 
 程序不是三张清单一起看。官方写：「Rules are evaluated in order: deny, then ask, then allow. The first match in that order determines the outcome, and rule specificity doesn't change the order.」先看禁止，再看先问，最后看放行，撞上第一条对得上的就照办。写得再细的放行也救不了。
 
-结果就是**禁止永远赢**。先问清单里有 `Edit(.claude/**)`，禁止清单里有 `Edit(.claude/settings.json)`。改 `settings.json` 时两条都对得上，程序先看禁止，直接拒绝，连问都不问。你想点头也没有地方点。
+结果就是**禁止永远赢**。先问清单里有 `Edit(.claude/**)`，禁止清单里有 `Edit(.claude/settings.json)`。改 `settings.json` 时两条都对得上，程序先看禁止，直接拒绝，连问都不问。你想点头也没有地方点。第一版的放行里写过 `Read(**)`，什么都能读，可禁止里有 `Read(./.env)`，读 `.env` 还是被拒。一条针对 `.env` 的红牌，挡得住再宽的绿牌。
 
 这也跨文件。配置文件有好几层，你个人的、项目的、本机的。官方写：「If a tool is denied at any level, no other level can allow it.」所以放行可以给得大方一点，禁止才是安全网。
 
@@ -237,7 +239,7 @@ Read(./.env)         读当前目录的 .env 文件
 
 星号代表后面什么都行。星号前面的空格是规则的一部分，表示 `ls` 到这里是一个完整的词。
 
-没有星号就要一字不差。`Bash(git status)` 只对得上 `git status`，后面多一个参数就对不上。
+没有星号就要一字不差。`Bash(git status)` 只对得上 `git status`，后面多一个参数就对不上。第一版因此给 `git status` 写了两条，一条不带星号，一条带。官方现在写 `Bash(ls *)` 也对得上光秃秃的 `ls`，带星号的那一条就够了。
 
 文件规则用的是 `.gitignore` 那种写法，起头不同，意思不同：
 
@@ -305,13 +307,21 @@ Read(./.env)         读当前目录的 .env 文件
 
 **换个写法的缝。** 官方写 Bash 规则只对命令的文字，「isn't a security boundary around the program」。它的表里，`Bash(rm *)` 挡 `rm -rf build/`，不挡 `/bin/rm -rf build/` 和 `bash -c 'rm -rf build/'`。写书时跑的结果比官方写的严一点：`/bin/rm` 被拒了，`sh -c 'rm 文件'` 弹窗问你，写着有一条规则禁止这段脚本里的命令。这是这个版本的表现，官方没有承诺，不要当成边界来靠。
 
-**读文件的缝。** `Read(./.env)` 比早先管得宽：内置工具、`cat`、`head` 这类它认得的命令，还有重定向的目标，都算。官方写它不管的有两种：「a command that reads files without naming them, such as `grep -r pattern .`」，还有自己开文件的脚本。第 8 步会用一个假密钥真撞一次。
+**读文件的缝。** `Read(./.env)` 比早先管得宽：内置工具、`cat`、`head` 这类它认得的命令，还有重定向的目标，都算。官方写它不管的有两种：「a command that reads files without naming them, such as `grep -r pattern .`」，还有自己开文件的脚本。第 8 步会用一个假密钥真撞一次。顺带说一句，`Read` 的禁止也挡写，官方写「A `Read` deny rule also blocks the Edit and Write tools on the same path」，只有 NotebookEdit 例外。
 
 **重定向的缝。** `echo test >> 文件` 这种写法走的是 Bash，不是 Edit。官方写重定向的目标「the check covers your `Edit` allow and deny rules」，点名的是放行和禁止，先问没有点名。所以禁止一档的路径，重定向也写不进去，写书时试过；先问一档的路径，就不能全靠它。手动模式下这条 Bash 命令本来要弹窗，看清弹窗里的命令。本项目给 AI 的 prompt 里常写死一句「用 Edit 工具，不要用 sed、不要用 heredoc、不要用 bash 重定向」，道理就在这：靠机制才守得住的东西，要先保证走的是有机制的那条路。
 
 **墙外的事。** 权限规则管的是 Claude Code。你自己在终端敲的命令，它不管。别的程序改文件，它也不管。
 
 要操作系统层面的拦截，官方给的是沙箱：「For OS-level enforcement that blocks all processes from accessing a path, enable the sandbox」。这一版本项目没开，知道有这一层就行。
+
+### 静态的墙和动态的墙
+
+这份文件是静态的墙。规则写死了，程序只看命令的文字和文件的路径，看不懂内容。
+
+还有一种动态的墙，就是钩子。它能在动作发生前跑你写的脚本，按内容判断。比如一个 `PreToolUse` 钩子，可以在命令执行前读完整条命令，拦下危险的 `rm -rf`，再把理由告诉模型。官方写「A `PreToolUse` hook that blocks the edit is enforcement.」
+
+两者配合。钩子放行也越不过规则：官方写「PreToolUse hook decisions don't bypass permission rules.」本书第 8 课建钩子，这一章先把静态这半立好。
 
 ### 一个管脑，一个管手
 
@@ -342,9 +352,15 @@ Read(./.env)         读当前目录的 .env 文件
 
 ### 先问别塞满
 
-什么都放进先问，你会被铃声烦死，最后看都不看就点同意，这道墙就白立了。Anthropic 自己的工程文章写：「Constantly clicking "approve" slows down development cycles and can lead to ‘approval fatigue’,」，然后人就不再细看自己批了什么。
+最难的不是给高风险动作加审批，是做到高风险时有意义，日常时看不见。
 
-所以先问只留给风险高、但有时确实该做的事。只读的、能撤销的，放行。本项目先问一档只有两类：往外推和迁移，改规则书、表结构、配置和文档。
+什么都放进先问，你会被铃声烦死，最后看都不看就点同意，这道墙就白立了。Anthropic 自己的工程文章写：「Constantly clicking "approve" slows down development cycles and can lead to ‘approval fatigue’,」，然后人就不再细看自己批了什么。前面 Amazon 那封信提醒的是同一件事。
+
+所以三档这样分。读文件、看状态、跑测试，这些日常动作放行，你根本看不到它们。风险高、但有时确实该做的事进先问：往外推、迁移、改规则书、改表结构、改配置和文档。绝不该发生的进禁止。
+
+判断一条该不该留在先问，有个简单的办法：这个弹窗你要是十次有十次都点同意，它就该换档。
+
+这也是建这道墙的回报。第一篇到这里，每一步都要自己看过再批。墙立好、验过以后，人工可以放松成只盯先问那几样。
 
 ### 这道墙谁来写
 
@@ -534,7 +550,11 @@ sed -n '294p' docs/design/PRD.md
 
 打开 VS Code，打开 `CLAUDE.md`，翻到**文件末尾**，把第五节的第三层 A 贴进去，保存。
 
-**只能追加，不能重写。** 规则书已经写了两层。追加是接着往后写。要是在终端用 `cat > CLAUDE.md`，一个大于号就是把整份文件清空重写，前面的全没了。前几章都用 VS Code 贴，也是为了躲这个。
+**只能追加，不能重写。** 把规则书想成一本已经写了两章的书。第一章是通用协议，第二章是项目事实，一个字都不动。这一步是翻到最后一页，往后续写第三章。
+
+当年用的是终端命令 `cat >> CLAUDE.md`，两个大于号，只往文件尾巴上加。少打一个，`cat > CLAUDE.md`，就是整本书撕掉重印，前两章全没了。这个项目后来真差点出过这种事，反模式库的 44 号记的就是一条过期命令险些擦掉规则书。前几章都用 VS Code 贴，也是为了躲这个。
+
+**这一步也是人贴，不经过 Claude Code。** 规则书是给 AI 定规矩的，定规矩的文字人要自己过目。贴进去的文字分三块：开头的说明，五道门，验货台、感应器和文档打架。
 
 ```text
 grep -n -o '^D[1-8] [^：]*' CLAUDE.md
@@ -879,6 +899,15 @@ git commit -m "feat: 规则书第三层决策边界与权限设置"
 ```
 
 **出了错怎么办。** 多了 `notes.txt` 或 `.env`，是第 7、8 步没撤干净，先撤。`.claude/settings.local.json` 也别提交，它是你这台机器自己的，见第六节。
+
+**提交完才发现漏了一个文件。** 还没推的话，补上，再修补上一条提交：
+
+```text
+git add 漏的文件
+git commit --amend --no-edit
+```
+
+`--amend` 是修补上一条提交，`--no-edit` 是提交信息不变，提交的条数也不变。已经推上去的不要这样做，单独再提一条。第 6 课当年就是把待办写在了提交之后，这样补上的。记住一句：要进这次提交的动作，都排在 `git add` 之前。
 
 到这里第一篇就走完了。权限墙立好以后，第 0 课说的「每一步都要自己看过再批」可以放松成只盯先问那几样。这个放松的前提，就是刚才真撞过。
 
@@ -1268,4 +1297,5 @@ Ignoring 9 permissions.allow entries from .claude/settings.json: this workspace 
 12. 三样的去向。课程全景写第 6 课有会话简报、模板、五个角色，当年范围选了只做两件，说是留到第 7 课，但第 7 课的交接没带上。本书写明各自的去向。
 13. 顺序。网页版讲这一课时补课还没上，所以说「后面」。本书按全书的顺序，这一章在补课之后，改了相应的说法。
 14. 规则号、课程流程不进正文：漂移自检、复习题、结课清单、一节课一个窗口。和项目有关的，收成第 9 步。
-15. 防膨胀自检只留结论：数量别膨胀，见第 2 步。
+15. 防膨胀自检写成一段，放在第三节尺子后面。
+16. 决定类型那几节，每条照课上的四拍写：大白话，真实例子，量两个数，默认。例子里加了后来发生的：任务描述字段、项目数量上限、六处文档冲突。
