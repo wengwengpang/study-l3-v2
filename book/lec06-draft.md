@@ -808,3 +808,156 @@ git commit -m "feat: 规则书第三层决策边界与权限设置"
 
 到这里第一篇就走完了。权限墙立好以后，第 0 课说的「每一步都要自己看过再批」可以放松成只盯先问那几样。这个放松的前提，就是刚才真撞过。
 
+## 五、产出物
+
+这一章留下的文件，取的都是现在的样子。第三层 A 和权限设置都比第 6 课当年多了东西，下面写明。
+
+规则书条文里的「反模式 33」「协议 12」「问 647 A」，是这门课自己的编号，「老师」是当时的叫法，这里照原样收。你贴的时候，D8 后面那几段「为什么不并进 D7」「由来」可以不贴，它们是给人看的来历，AI 执行用不着。
+
+### 规则书第三层 A
+
+第 6 课写的是 D1 到 D7，D8 是补课 05-ARCH 加的。贴在 `CLAUDE.md` 文件末尾。
+
+```markdown
+## 第三层 A：决策边界 D1-D8（哪些决策必须主人拍板）
+
+> 宪法封顶层。回答一件事：CC 什么时候必须停下来喊主人。
+> 两条轴别混：D1-D8 管「决策类型」（语义层，什么时候喊主人）；
+> .claude/settings.json 管「动作类型」（机械层，CC 的手能伸到哪）。两条垂直，不是一件事的两半。
+> 判据：每类决策不只看「属于哪类」，还要量两把尺——
+>   能不能撤销？错了影响多大？
+>   可逆且影响小 → CC 自行处理。不可逆或影响大 → 停下喊主人。
+
+D1 范围取舍：功能做不做、进不进 MVP、In/Out of Scope 变动 → 喊主人。
+D2 数据结构演进：建表 / 加删字段 / 改约束 → 按判据量两把尺。
+   可空加列不必喊主人（改表结构前仍先回 architect，见第二层 E）；drop 有数据的表、删字段，必喊主人。
+   含「现在不做所以不预留」这类合并判断，拆开看：不做是事实，不预留是取舍，取舍归主人（反模式 33）。
+D3 权限与安全口径：谁能看 / 谁能改 / 角色权限边界 → 喊主人。是安全边界，错了影响大。
+D4 技术选型与锁定：选框架 / 库 / 架构，尤其换起来贵的 → 喊主人。可逆性低，砸墙贵。
+D5 不可逆操作：drop 表 / 数据迁移 / 删文件 / 上线 → 喊主人 + 双确认，先列影响与回滚方案（协议 12 CONFIRM-RISK）。
+D6 需求来源验货：每条需求先验出身——已验证 / AI 假设 / 教学驱动，三者物理分开，永不混淆（反模式 19、32）。横切所有需求，不属于单一领域。
+D7 元触发器（罩在 D1-D6 之上）：CC 一旦没把握、缺上下文，或给出的「技术结论」里藏着该主人拍的取舍 → 停下上报，禁止自己猜个合理答案填上。
+   口令：这里面有没有藏着一个该我拍的取舍？（反模式 33 探针）
+
+D8 文档口径冲突：CC 发现两份已决文档、或同一文档的新旧措辞互相矛盾时 → 只报不改，由主人裁决以谁为准。
+   禁止自行挑一份「看起来更新的」为准，也禁止顺着写下去当没看见。
+   报的时候要给出双方出处（文件路径:行号）与冲突点，不给结论。
+   例外：主人明确要推荐时可以给，标明是应要求给的；拍板仍归主人（问 647 A）。
+   为什么不并进 D7：D7 触发条件是「没把握、缺上下文、藏着取舍」。发现文档冲突时 CC 往往很有把握（能一眼看出哪份更新），有把握就不触发 D7，于是直接挑一边改了。
+   由来：补课 05-ARCH，architect 两轮共指出六处文档冲突（PRD 要姓名但 schema 无 name、US-04 要项目 deadline 但 projects 表无该字段、notifications 表本版无生产者、TECH_STACK 措辞与 schema 对不上、UI_DESIGN 含已延后的 US-05、前端角色来源未定义）。这些能被暴露出来，是因为老师在 prompt 里写了「发现冲突先指出再继续」——是 prompt 兜住的，不是宪法兜住的（反模式 25：制度只保证本次执行，不保证传承）。
+   相关反模式：26（新旧制度没说清衔接）、31（新旧措辞不对齐）、34（落点没对权威源核实）同族。
+```
+
+### .claude/settings.json
+
+```json
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "defaultMode": "default",
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)",
+      "Bash(rm *)",
+      "Bash(sudo *)",
+      "Bash(curl *)",
+      "Bash(wget *)",
+      "Edit(.claude/settings.json)",
+      "Edit(.claude/settings.local.json)"
+    ],
+    "ask": [
+      "Bash(git push *)",
+      "Bash(npx prisma migrate *)",
+      "Bash(pnpm prisma migrate *)",
+      "Edit(prisma/**)",
+      "Edit(CLAUDE.md)",
+      "Edit(.claude/**)",
+      "Edit(docs/arch/**)",
+      "Edit(docs/**)"
+    ],
+    "allow": [
+      "Bash(pnpm test *)",
+      "Bash(pnpm run *)",
+      "Bash(npm run test *)",
+      "Bash(npm run lint *)",
+      "Bash(git status)",
+      "Bash(git log *)",
+      "Bash(git diff *)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ]
+  }
+}
+```
+
+### 第 6 课那一版，和后来改的三次
+
+```json
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)",
+      "Bash(rm -rf *)",
+      "Bash(sudo *)",
+      "Bash(curl *)",
+      "Bash(wget *)"
+    ],
+    "ask": [
+      "Bash(git push *)",
+      "Bash(npx prisma migrate *)",
+      "Bash(pnpm prisma migrate *)",
+      "Write(prisma/**)",
+      "Edit(prisma/**)",
+      "Write(CLAUDE.md)",
+      "Edit(CLAUDE.md)",
+      "Write(.claude/**)",
+      "Edit(.claude/**)"
+    ],
+    "allow": [
+      "Read(**)",
+      "Bash(git status)",
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(ls *)",
+      "Bash(pnpm test *)",
+      "Bash(pnpm run *)",
+      "Bash(npm run test *)",
+      "Bash(npm run lint *)"
+    ]
+  }
+}
+```
+
+- **补课 05-ARCH。** 拿掉三条 `Write` 死规则。`Bash(rm -rf *)` 换成 `Bash(rm *)`。加 `Edit(docs/arch/**)`。写明 `defaultMode`。放行里拿掉 `Read(**)`、`Bash(ls *)` 和只读 git 命令，它们本来就不弹窗。
+- **9 月 21 日。** 禁止里加两条改权限文件的规则，规矩变成墙。先问里加 `Edit(docs/**)`。只读 git 命令放回放行。
+- **9 月 23 日。** 放行里加 `git add`、`git commit`，删掉本机的 `settings.local.json`。
+
+### 反模式库第 35、36 号
+
+`docs/lessons/anti-patterns.md`。这两条是补课 05-ARCH 加的，讲权限，所以放在这一章。条目里的「老师」「学生」是当时的叫法。
+
+```markdown
+## 35 号 · 权限规则写了不代表被查询（死规则）
+现象：Lec 6 建 settings.json 时，按「工具名 + 路径」的直觉写了 Write(prisma/**)、Write(CLAUDE.md)、Write(.claude/**)。但 Claude Code 的文件权限检查只匹配 Edit(path) 和 Read(path)；Write / NotebookEdit / MultiEdit / Glob 的路径规则会被接受、解析通过，却永不查询，v2.1.210 起还会打启动警告。三条规则从建立当天起就是死的，真正生效的一直是同路径的 Edit 规则。
+根因：E2 工具错。按工具名的字面直觉推断匹配关系，没核官方文档；建完只 cat 看内容，没用 /permissions 或 /doctor 验证规则是否真被加载查询。
+修复：
+- 文件类护栏一律写 Edit(path)（它覆盖所有改文件的内置工具）与 Read(path)。不写 Write(path)。
+- 权限文件每次改动后必须两步验证：一，/permissions 看解析结果；二，实测一次（让 CC 尝试改受管路径，确认弹窗，然后答 No）。
+教训：配置文件里「写了」和「生效」是两件事。JSON 解析通过不等于规则被引擎查询。
+抽象模式：反模式 3（表象成功≠实质生效）在配置层的实例。与 21 号互补——21 是人立了规则不执行，35 是机器压根没在查。
+附带教训（老师侧）：老师在未核实的猜测上继续推导了两段分析。标注「这是猜测」不等于可以在猜测上盖楼。前提未核实时，停在前提，不往下推。
+
+## 36 号 · 未声明的档位由厂商默认值填
+现象：CLAUDE.md 第三层定了 D1-D7 决策边界，settings.json 定了 allow/ask/deny 三档，但从未声明 defaultMode。项目跑了七节课，实际运行在 auto mode（自动批准 + 后台分类器）下，师生双方都不知道。这一档由 Claude Code 按套餐给的内置默认值填，且随版本变化而无通知。
+根因：E4 架构错。护栏设计只覆盖了「枚举得出的规则」，没覆盖「没枚举到的东西怎么办」。兜底档是护栏的一部分，漏了它等于把最大的一片交给厂商默认值。
+修复：凡有默认值/兜底档的配置项，必须显式声明，不许留空靠继承。settings.json 显式写 defaultMode。开课自检追加一项：确认当前会话运行在哪个权限模式。
+教训：护栏的完整性 = 枚举的规则 + 兜底档。只看规则清单会漏掉最大的那一块。
+补充（本课查证）：deny 与 ask 规则的评估顺序在权限模式之前，所以内容有范围的 ask 规则在 auto mode 下依然强制弹窗。这是本课实测确认的。但 allow 档之外的一切仍由默认档决定。
+抽象模式：与 35 号互补——35 是「写了但引擎不查」，36 是「压根没写所以由别人替你写」。同属「机械层的实质状态没被验证」。
+```
+
