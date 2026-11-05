@@ -13637,3 +13637,13 @@ HARNESS 第三节：没有答到。问题 3 有一条新实据，见第四点。
 七，估重修正（41 号）：开课数 12 项，核对轮报 35 项。桥梁「一到两个窗口」的依据要改；每轮三题要十二轮，批量过的办法下一批问。
 八，出问 739（S1）、740（S2）、741（S3），对照 1137、1138、1139（交付物清单）。C1 到 C9 列给学生看，照 D8 不给结论，C8 除外。
 进 HARNESS：不判（记账与出题）。
+
+--- R1-708 · 问 739 A、740 A、741 A；对照 1137 到 1139 已落；实跑 Zod、读 NestJS 源码核 S16；出对照 1140、1141 与问 742 到 744（学生：「739 A；740 A；741 A；同意 1137 到 1139」）---
+一，问 739 A（S1 落点）：真 .ts 放 packages/shared/src/，只放 schema，不建包壳，在临时目录实跑；未选 B 文档代码块、C 现在建包、D 只写语义。「不写代码」那句学生看过再选；知识库第七块与 book/OUTLINE.md 第一篇不改字，schema 算声明，同 prisma/schema.prisma（CC 的判断，题里写明了）。问 740 A（S2）：不带后缀，schema 与类型同名；未选 B、C。问 741 A（S3）：主版本 4、下限 4.6，精确版本第 7 课由锁文件定；未选 B 写死 4.6.7、C 等第 7 课（BACKLOG 74、75 的做法）。三题都照推荐选，没要讲细，判丙第三样时看。
+二，对照 1137 到 1139 落 be1af1d：新句各 1 次，旧句 0 次，内容与对照一字不差。CC 的错：上一条写「清单改后 80 行」，实际 79 加 2 是 81，预期没用命令数（卡 6 第 5 条）；计数和提交写在同一条命令里，没比预期就提交了（卡 7 第 2 条，46 号）。内容没错，81 是对的。登挂账第 3 行，随下一批对照。往后闸写进命令，数不等不提交。
+三，传播面（卡 5 第 2 条，文件打开核过）。问 739：PRD、UI_DESIGN 不影响（grep packages/shared 0 次）；ARCHITECTURE 第二节「共享层边界」要改，契约零节要加指针，都随问 743；CLAUDE.md 第二层要改（清单 B4，规则 78）；PROJECT_STRUCTURE 要改（W2）；BACKLOG 新加一条，对照 1141。问 740：契约三处写「照 05-类型 的命名规则」要改（第一节第 7 小节、第二节第 3 小节、API-30），随问 743；PRD、UI_DESIGN、PROJECT_STRUCTURE 不影响；CLAUDE.md 随 B4。问 741：TECH_STACK 要改，对照 1140；BACKLOG 同上；PRD、UI_DESIGN、契约、PROJECT_STRUCTURE 不影响；CLAUDE.md 随 B4。PENDING 进度表与清单 S1 到 S3 状态，下一批对照一起跟上（先例对照 775、781）。
+四，S16 三问核了，证据是 npm 包源码（@nestjs/common 12.3.3、12.1.0、12.0.0、11.2.8，下进临时目录只读），没在 Nest 里实跑。一，版本：12.0.0 起有 pipes/standard-schema-validation.pipe.js，11.2.8 没有；API-11 要 12.1，兼容。二，错误：选项 exceptionFactory?: (issues) => any，拿得到 path 与 message；Zod 的 keys 运行时在（实跑见下），类型 StandardSchemaV1.Issue 上没有，要加一小段判断。三，transform 默认 true，把解析后的值传下去；@Query({ schema }) 支持。官方页「Arguments without a schema pass through unchanged.」漏挂 schema 会放行，自写管道漏绑同样。页上没写版本与选项，这两样只来自源码。T1 的理由（book/lec05-arch.md：自带管道认的是另一套校验库）说的是 ValidationPipe。
+五，实跑 Zod 4.6.7（临时目录，脚本 lab_scripts/zod_check.mjs、zod_len.mjs，不进仓库）。多余键：strictObject 回 code unrecognized_keys、keys 列出键、path 空；object 默认剔除；对上 API-31。先后：trim().min(1) 拦全空白、两边空白存 a；min(1).trim() 放过全空白、存空串，这是坑，起草时写死先 trim。Standard Schema：~standard 在，vendor zod，同步返回，通过时 value 是去空白后的。日期：iso.date 拒 2026-02-30；iso.datetime 拒带偏移，对上 API-41。判别并集：执行者多带负责人字段被拒。长度：min、max 按 Unicode 码点算，一个 emoji 算 1（min(2) 不过、max(1) 过），组合字符按码点算多个，翻了报告 N12「Zod 默认按 JS 长度」的前提（它标了未核）。
+六，进 HARNESS：问 739、740、741 判否（不是框架层）。只属本项目的落点、命名、版本，判据四不中。
+七，出问 742（其余 21 条怎么过，A 偏离卡 4 第 5 条「不捆题」，只限这批）、问 743（N1，顺带裁 C1）、问 744（S16，B 推翻 T1 与问 468 A，题里写明）；对照 1140（TECH_STACK）、1141（BACKLOG 89）。
+进 HARNESS：本条余下为记账与出题，不判。
