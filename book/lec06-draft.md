@@ -84,7 +84,7 @@ D8 是后来补的，管文件之间打架，下面单讲。
 
 讲 AI 的也有。OWASP 给大模型应用列的十大风险里，第 6 条叫 Excessive Agency，也就是 AI 手里的能力太大。它写的根因有三样：「excessive functionality」「excessive permissions」「excessive autonomy」。防范办法里有一条：「Utilise human-in-the-loop control to require a human to approve high-impact actions before they are taken.」高影响的动作，做之前先让人批。
 
-行业文章里还常见一对叫法：人在环内（human-in-the-loop），做之前等人批；人在环上（human-on-the-loop），先做，人盯着，能拦能撤。这对叫法和这把尺子对得上：撤不回的事前批，撤得回的事后拦。它们是常见说法，不是标准。
+行业文章里还常见一对叫法：人在环内（human-in-the-loop，缩写 HITL），做之前等人批；人在环上（human-on-the-loop，缩写 HOTL），先做，人盯着，能拦能撤。这对叫法和这把尺子对得上：撤不回的事前批，撤得回的事后拦。它们是常见说法，不是标准。
 
 **清单要防膨胀。** 注意这把尺子没有增加一条新的类，它只是给每道门加了判据；后面讲的 D7 也只是改了性质，不是多了一条。想加条目之前，先问能不能改已有的判据。规矩只增不减，最后谁也读不完。
 
@@ -996,6 +996,8 @@ D8 文档口径冲突：CC 发现两份已决文档、或同一文档的新旧�
 
 ### 第 6 课那一版，和后来改的三次
 
+提交 2ce5304，2026 年 7 月 8 日。
+
 ```json
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
@@ -1164,7 +1166,7 @@ Ignoring 9 permissions.allow entries from .claude/settings.json: this workspace 
 
 **更难看的是后面。** 那次列表上明明看到了，三条 `Write` 死规则也在里面。看了列表还是漏了，这就是下一个坑。
 
-**怎么防。** 「必定是」和「机器亲口说了是」，差的就是这一步。验证跑一遍花不了多少时间。
+**怎么防。** 「必定是」和「机器亲口说了是」，差的就是这一步。这就是第 0 课讲的信仰二：验证先于信任。验证跑一遍花不了多少时间。
 
 ### 35 号　权限规则写了，不代表被查
 
