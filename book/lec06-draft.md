@@ -481,3 +481,99 @@ grep -n -o '^D[1-8] [^：]*' CLAUDE.md
 
 **出了错怎么办。** 行数不对，多半是贴的时候少了或重了一段，和第五节对一遍。
 
+### 第 4 步　试一次管脑
+
+**目的。** 规矩写了，到底有没有用？用一个项目里没发生过的新例子试。写书时跑了对照：同一句话，开新会话，一次没有第三层，一次有。你已经贴好了，试后者就行，对照放在这里给你看。
+
+在 Claude Code 里输入 `/clear` 开新会话，贴这句：
+
+```text
+首版不做任务归档。任务表这边要不要因此做什么调整？你给结论，并把结论写进 docs/arch/DECISIONS.md。
+```
+
+**没有第三层时，开头是这样：**
+
+```text
+**结论：任务表不用调整。**
+
+- **不加字段。** 不加 `archived_at`，不加 `is_archived`。
+- **不加枚举值。** `TaskStatus` 不加 `archived`。
+- **不加索引。** 也不改任何 onDelete。
+- `prisma/schema.prisma` 的 `Task` 模型保持原样，不用回 architect 确认表结构。
+```
+
+**有第三层时，开头和中间是这样：**
+
+```text
+**结论：tasks 表不做任何调整。** 这一条我建议你拍板，不由我定，原因在后面。
+
+**需要你拍板的取舍**
+- 「不做归档」是事实，「现在不预留字段」是取舍。CLAUDE.md 第三层 A 的 D2 说取舍归主人。
+- 我的建议是不预留。理由是将来加可空列的代价很小。
+- 代价是已完成的任务会一直留在任务列表里，列表变长后只能靠筛选缓解。
+```
+
+两次的建议是一样的：不加字段。差别在谁说了算。没有第三层，它把取舍当结论交给你；有第三层，它拆开了，告诉你这是你要拍的。这正是 `deleted_at` 那件事想要的结果。
+
+再试一句范围题，同样先 `/clear`：
+
+```text
+任务详情页我觉得空了点。你看要不要顺手加个评论框，你定，定了就把它写进 docs/design/UI_DESIGN.md。
+```
+
+**没有第三层时：**
+
+```text
+我定了：**不加评论框，所以没有往 UI_DESIGN.md 里写评论框。**
+```
+
+**有第三层时：**
+
+```text
+先不写。评论框我不能替你定，也不建议加。
+```
+
+这一题两次都没加评论框，因为第二层的不做清单里本来就有它。差别还是在第一句：一个说「我定了」，一个说这要你定。
+
+**出了错怎么办。** 它还是替你定了，先看规则书里第三层在不在，再开新会话试一次。这一层没有保证，这是它的本性，不是你写错了。能变成命令的，下面交给墙。
+
+### 第 5 步　亲手写权限文件
+
+**目的。** 建墙。这一步不经过 Claude Code，理由第三节讲了。
+
+在 VS Code 里新建文件 `.claude/settings.json`，把第五节的原文贴进去，保存。三档各装什么：
+
+| 档 | 规则 | 挡什么、放什么 |
+|---|---|---|
+| 禁止 | `Read(./.env)`、`Read(./.env.*)`、`Read(./secrets/**)` | 读密钥 |
+| 禁止 | `Bash(rm *)` | 所有删除，要删自己在终端敲 |
+| 禁止 | `Bash(sudo *)` | 用管理员权限跑命令 |
+| 禁止 | `Bash(curl *)`、`Bash(wget *)` | 从命令行联网，这是数据往外走的口子 |
+| 禁止 | `Edit(.claude/settings.json)`、`Edit(.claude/settings.local.json)` | AI 改自己的权限文件 |
+| 先问 | `Bash(git push *)` | 往远端推代码 |
+| 先问 | `Bash(npx prisma migrate *)`、`Bash(pnpm prisma migrate *)` | 跑数据库迁移 |
+| 先问 | `Edit(prisma/**)` | 改表结构 |
+| 先问 | `Edit(CLAUDE.md)`、`Edit(.claude/**)` | 改规则书、角色文件 |
+| 先问 | `Edit(docs/arch/**)`、`Edit(docs/**)` | 改文档 |
+| 放行 | `Bash(pnpm test *)`、`Bash(pnpm run *)`、`Bash(npm run test *)`、`Bash(npm run lint *)` | 跑测试和检查 |
+| 放行 | `Bash(git status)`、`Bash(git log *)`、`Bash(git diff *)` | 只读的 git 命令 |
+| 放行 | `Bash(git add *)`、`Bash(git commit *)` | 本地提交 |
+
+开头的 `$schema` 一行不影响运行，只是让 VS Code 能补全和校验。`defaultMode` 那一行就是上面说的兜底档。
+
+有两处是空转的，写着不坏事，你可以知道：`Edit(docs/**)` 已经盖住了 `Edit(docs/arch/**)`，后者是早先留下的；`git status` 这些内置只读命令本来就不弹窗。
+
+先查 JSON 写对没有：
+
+```text
+python3 -m json.tool .claude/settings.json > /dev/null && echo OK
+```
+
+**应该看到。**
+
+```text
+OK
+```
+
+**出了错怎么办。** 它报错时会带行号和列号，比如写书时故意多加一个括号，报的是 `Extra data: line 38 column 2`。多半是少了逗号、多了括号。官方写这个文件是严格的 JSON，注释和末尾多余的逗号都算错，下次启动会报 Settings Error。这条命令只证明格式对，离生效还差两步。
+
