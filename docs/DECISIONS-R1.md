@@ -13803,3 +13803,13 @@ HARNESS 第三节：没有答到。问题 3 有一条新实据，见第四点。
 七，编号（规则 71）：落 SHARED_TYPES，走 TYPE 序列。进 HARNESS：否（不是框架层）。只管本项目的字段长度与错误类型写法。
 八，769 B 的代码改动不改报告（起草稿文件头铁律），写进进度表下的注，第二段拆稿后照改：fields.ts 加字节检查函数，注册与邀请的 emailField、登录的 email 去掉 .max(254)，换成字节检查；样例加 4 条，字节数用命令算过（254、257、254、255），两条该拒的码点是 129、87，只有按字节算才拒。去掉 .max(254) 是 CC 自定的写法：字节不超 254，码点必然不超，留着会对同一个超长地址报两条。TextEncoder 的类型库认不认，第二段 tsc 核。
 九，出对照 1185 到 1192，副本已拼在会话临时目录 copies/：SHARED_TYPES 131 变 139 行，STANDARDS 66 变 67 行，起草稿 997 变 1004 行；原文各恰好 1 次；起草稿进度表「待拍」0 次。
+
+--- R1-727 · 对照 1185 到 1192 已落；第二段实跑：原稿复现、定稿全过、五处改坏全抓到；Node 类型实测（学生：「同意 1185 到 1192」）---
+一，落盘：落前核过三份自出对照后没动。SHARED_TYPES 8e17959（139 行）、STANDARDS 681f0a3（67 行）、起草稿 1976df6（1004 行，进度表「待拍」0 格）；三份与副本 cmp 相同。
+二，实跑环境（会话临时目录 lab/；脚本 split.py、setup_lab.sh、run_one.sh、make_final.py、run_all.sh 也在临时目录，不进仓库）：zod 4.6.7、typescript 7.0.2，装时 --save-exact。拆出六个 .ts，样例 23 组 206 条。nodenext 用 tsconfig 编译；bundler 用命令行加 --ignoreConfig，只检查。
+三，按报告原稿：两种模块解析都过，206 条不符 0；名字核对与 Z 项输出和 R1-708 记的一致。Z5 预设本地 65 个字符为 false，即本地部分最多 64；新样例本地部分 64 个 a，没碰这条线。
+四，定稿（照起草稿表下的注）：两种都过，210 条不符 0；多的导出 emailField、idField、withinEmailBytes。
+五，反向核对五处，全抓到：m1 字节检查换回 .max(254)，不符 2 条，正是两条新「该拒」；m2 Task 并集换序，输出不等 2 条；m3 项目名 trim 挪到判长度之后，不符 2 条；m4 注册请求去掉 strict，样例 1 条加 strict 核对 1 条；m5 MemberRole 改小写，不符 6 条以上。
+六，TextEncoder 的类型：tsc 不设 lib 时默认带 DOM。补测只带 es2022：fields.ts 报找不到 TextEncoder，Zod 自己的声明也报 4 处找不到 URL；es2022 加 dom 过；es2022 加 @types/node 22.20.5 过（实测，原先凭记忆）。所以 TextEncoder 不添新要求：能编 Zod 的类型环境本来就要有 DOM 或 Node 类型，两种都声明了 TextEncoder。唯一例外是开 skipLibCheck 又两种都不带，那时 tsc 直接报错。
+七，第三步准备：定稿里五处注释含「假设」或「待确认」。fields.ts idField 一处（TYPE-21 已定）、problem.ts 两处（写法 TYPE-24 已定；查询参数项与收窄 TYPE-21 已定）过时，随各组出改法；project.ts、task.ts 两处说上限是假设值，照 TYPE-17 仍准，不改。
+八，下一步：第三步第一组 enums、fields 给学生看。
