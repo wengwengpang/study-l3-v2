@@ -13879,3 +13879,10 @@ HARNESS 第三节：没有答到。问题 3 有一条新实据，见第四点。
 一，乙批：ARCHITECTURE 7 处 6acdfb7（644 行）、DECISIONS f286bb3（89 行）、TECH_STACK e056b7d（73 行）、回写清单 011421b（570 行）；Edit 与对照一字不差，四份与副本 cmp 相同。
 二，答「做到哪」（卡 9 第 1 项）：三条覆盖核对没有输出。回写清单已完 22（甲批 13、乙批 9），待做 14：丙批 12（H9、H11、H13、H16、H17、H18、H19、H27、H29、H33、H35、H36，外加 R1-736 记的 book/lec05-api-2.md 一处）、丁批 2（H10、H34）。本窗口五段：前三段已完，回写 22/36，书章草稿待做。清单其余各节与 R1-735 第二点相同，没变。
 三，窗口：上次 /context 37%（R1-733），之后八轮，没再跑；卡 11 第 1 条七八成收，请学生再跑一次再定丙批。
+
+--- R1-738 · 窗口 54%；丙批分两半，出丙一对照 1231 到 1239；核 OWASP Password Storage、RFC 8141（学生：「/context」结果 54%）---
+一，窗口：学生跑 /context，540k / 1m，54%。照上条消息的分界（六成以下做完丙批），进丙批。丙批分两半：丙一 STANDARDS、PRD、BACKLOG 10 行；丙二书章 H11、H35 与 book/lec05-api-2.md 一处（R1-736 第四点）。
+二，读了：BACKLOG 文件头与第 84 到 102 行；STANDARDS 第 24 到 40 行；PRD 第 284 到 361 行。判断依据重核：TYPE-5、6、9、10、16、17、22、24 原文读过；R1-716 第六点 contract.prisma 一句亲眼核过；问 763 记在 R1-716。BACKLOG 关条目的写法照第 16、17、20 条：最后一栏写「已做：……。本条关闭」。PRD 澄清注记跨节连号，05-API 那节编到 16，照老写法另起「补课 05-类型 补」一节，接 17、18。
+三，核标准（卡 4 第 3 条；网页代理，6 次 WebFetch，全只读）：OWASP Password Storage（https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html）bcrypt 一节「The bcrypt password hashing function should only be used for password storage in legacy systems」「where Argon2 and scrypt are not available.」，Input Limits of bcrypt「so you should enforce a maximum password length of 72 bytes」「(or less if the bcrypt implementation in use has smaller limits).」。RFC 8141（April 2017）第 1 节「In order for the name to be a valid URN, the namespace identifier (NID) needs to be registered」「in accordance with the rules defined here,」。NIST SP 800-63B 两个网址（pages.nist.gov、csrc.nist.gov）当天各试两次都是 Socket is closed；第一窗口子代理记录（5351a4ce，agent-ae0bf5bcf0508cb1f）里 https://pages.nist.gov/800-63-4/sp800-63b.html 回过 HTTP 200，两句原文在 TYPE-10，登记表照实写当天连不上。
+四，H 清单之外顺带的：H17 原写 bcrypt 72 字节「未核」，R1-710 已取回 OWASP Password Storage 原句，本批再核过，去掉未核；BACKLOG 89 加第四件（类型环境要带 DOM 或 Node 类型，R1-727 第六点），卡 9 第 3 条，说「留到第 7 课」当场登。H16、H36 合成新条 91，号段与条数跟着改。
+五，出对照 1231 到 1239，副本在会话临时目录 copies7/：STANDARDS 67 变 68 行，PRD 361 变 367 行，BACKLOG 102 变 103 行（编号行 91 条），交付物清单 88 行不变，回写清单 570 行不变（丙一 10 行标已完，剩待做 H10、H11、H34、H35）；十一处原文各恰好 1 次。
