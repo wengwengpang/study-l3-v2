@@ -8,18 +8,18 @@ generator client {
 }
 
 enum MemberRole {
-  owner
-  executor
+  OWNER
+  EXECUTOR
 }
 
 enum TaskStatus {
-  not_started
-  in_progress
-  completed
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
 }
 
 enum NotificationType {
-  stuck_task
+  STUCK_TASK
 }
 
 model User {
@@ -84,7 +84,7 @@ model Task {
   description     String
   assigneeUserId  Int?       @map("assignee_user_id")
   assignedAt      DateTime?  @map("assigned_at") @db.Timestamptz(6)
-  status          TaskStatus @default(not_started)
+  status          TaskStatus @default(NOT_STARTED)
   statusUpdatedAt DateTime   @default(now()) @map("status_updated_at") @db.Timestamptz(6)
   dueDate         DateTime?  @map("due_date") @db.Date
   createdAt       DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
