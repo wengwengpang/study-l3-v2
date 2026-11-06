@@ -13777,3 +13777,9 @@ HARNESS 第三节：没有答到。问题 3 有一条新实据，见第四点。
 五，查标准（卡 1 第 2 条）：C11 牵涉邮件地址长度，TYPE-17 自写「推算」。网页代理取回四页，引文是它的报告，CC 没另核，用到时再核。RFC 5321 第 4.5.3.1 节「This section therefore specifies lengths in octets where absolute lengths, rather than character counts, are intended.」，本地部分 64、域名 255、路径 256 octets「(including the punctuation and element separators).」，没提尖括号。RFC 6531 读到第 5 节，没写国际化地址的长度怎么算；第 3.1 节第 5 项只把 MAIL 命令行加长 10 个字符。RFC 3696 勘误 1690，Verified，改后「the upper limit on address lengths should normally be considered to be 254.」。TypeScript Modules Reference（2026-11-05 更新）「Extensionless relative paths are not supported in `import` paths in Node.js,」；bundler 省略与不省略扩展名都支持。两样没登，出对照 1183 补登。
 六，第 5 件：交付物清单沿用，覆盖核对没有输出；出对照 1181（本窗口目标句）、1182（B2 一行）。改后副本已拼在会话临时目录，清单 86 行、STANDARDS 66 行。大纲照桥梁 w2 第 5 节五步。
 七，出问 771（精力）、772（S6 新增六份进不进送审命令清单；先例问 322 A、621 A、567 A）。769、770 留给 C11、C13（R1-720 第一点）。规则 78 那五处（R1-680 第一点）、第 1 章新加那节仍挂着。
+
+--- R1-724 · 问 771 A、772 A；对照 1181 到 1183 已落；两次断线后复查；出对照 1184（学生：「是 manual mode；771 A；772 A；同意 1181 到 1183」，之后「继续」「？」）---
+一，状态栏 manual mode，学生写了。问 771 A，正常节奏；未选 B 一般、C 有点累、D 只做一小段。问 772 A，新增六份都不进送审命令清单；未选 B 只进 SHARED_TYPES、C 都进。理由：送审清单只收约束 CC 的说明书、宪法、权限、角色文件，六份是项目文档、笔记与一次性文件，同问 322 A、621 A。
+二，对照 1181、1182 落 6fab9a3，1183 落 d32b376；两份与会话临时目录副本 cmp 相同。
+三，断线两次：会话记录里各一条「API Error: Connection lost mid-response. The response above may be incomplete.」（UTC 00:28:34、00:28:57），第一次停在 cmp 之后、提交之前，第二次停在复查命令之后。E1，与反模式 48 号第十九窗口那条实据同形。两次都照卡 14 复查：工作区只有两处改动，与副本相同，没有提交，本机领先 2 条。
+四，出对照 1184：体检报告栏 6 照学生原话填（先例对照 1046、1054）。下一步出问 769、770。
