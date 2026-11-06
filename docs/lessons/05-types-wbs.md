@@ -4,12 +4,13 @@
 > 用途：本节课要交的全部东西，照工作分解结构的 100% 规则拆到最小，一项不漏；每项写完成的定义与状态。报「做到哪、还剩多少」一律从本文件导出（规则 87）。
 > 与 BACKLOG 的分工：BACKLOG 装跨课、本节课不做的事（规则 65）；本文件装本节课要交的全部东西，含已经做完的。本节决定不做的项，移进 BACKLOG 并在这里标「移出」。
 > 状态五种：已完、进行中、待做、随做、移出。
-> 覆盖核对：每次报进度前、每个窗口收尾时跑下面这条命令。没有输出，才算契约点名的每个 schema 都在本清单里；有输出，先补清单再报进度。主产物的规则文件是 docs/arch/SHARED_TYPES.md，下面第二条命令查它的全部标题；packages/shared/src/ 写起来后，再加一条查 schema 文件（规则 87）。
+> 覆盖核对：每次报进度前、每个窗口收尾时跑下面这条命令。没有输出，才算契约点名的每个 schema 都在本清单里；有输出，先补清单再报进度。主产物的规则文件是 docs/arch/SHARED_TYPES.md，下面第二条命令查它的全部标题；第三条命令查 packages/shared/src/ 的全部导出名，内部片段登在 S19（规则 87）。
 > 本窗口目标（第二窗口，桥梁 w2 第 5 节）：走完开课；拍完 C11、C13；重建实跑环境，反向核对抓得到；六个 schema 文件分组落进 packages/shared/src/，与定稿逐字节相同；回写清单 H1 到 H36 能落多少落多少；收尾写书章草稿（挂账第 4 行）。
 
 ```
 awk '/^## 一、全局约定/,/^## 三、本节裁决汇总/' docs/arch/API_CONTRACT.md | /usr/bin/grep -oE '\b[A-Z][a-z]+([A-Z][a-z]+)+\b|\b(User|Project|Member|Task)\b' | sort -u | /usr/bin/grep -vE '^(AuthGuard|AuthzGuard|SameSite|HttpOnly)$' | while IFS= read -r n; do /usr/bin/grep -qF -- "$n" docs/lessons/05-types-wbs.md || echo "清单里缺：$n"; done
 /usr/bin/grep -E "^#{2,3} " docs/arch/SHARED_TYPES.md | sed -E 's/^#+ //' | while IFS= read -r h; do /usr/bin/grep -qF -- "$h" docs/lessons/05-types-wbs.md || echo "清单里缺：$h"; done
+/usr/bin/grep -ohE '^export const \w+' packages/shared/src/*.ts | sed 's/^export const //' | while IFS= read -r n; do /usr/bin/grep -qF -- "$n" docs/lessons/05-types-wbs.md || echo "清单里缺：$n"; done
 ```
 
 ## 一、共享 schema（契约点名的接缝）
@@ -21,10 +22,10 @@ awk '/^## 一、全局约定/,/^## 三、本节裁决汇总/' docs/arch/API_CONT
 | S1 | 落点与产物形式 | schema 放哪、第 7 课建 packages/shared 之前以什么形式存在；architect 核对后学生拍（桥梁第 5 节） | 已完（问 739 A，TYPE-1） |
 | S2 | 命名规则：写不写 Schema 后缀 | 拍定，19 个名字都照它（API-30） | 已完（问 740 A，TYPE-2） |
 | S3 | Zod 版本 | 学生拍（D4）；docs/arch/TECH_STACK.md 写 Zod 的两行都没写版本 | 已完（问 741 A，TYPE-3） |
-| S4 | 错误外壳：ProblemDetails、ValidationProblemDetails、ProblemType | 有字段，对得上 API-17、API-30 与第一节第 7 小节 | 待做 |
+| S4 | 错误外壳：ProblemDetails、ValidationProblemDetails、ProblemType | 有字段，对得上 API-17、API-30 与第一节第 7 小节 | 已完（问 773 A；1a27878） |
 | S5 | auth：CreateUserRequest、CreateSessionRequest、User | 有字段，对得上第二节第 4 小节 | 待做 |
 | S6 | projects：CreateProjectRequest、CreateMemberRequest、ReplaceProjectOwnerRequest、Project、Member、ListProjectsResponse、ListMembersResponse | 有字段，对得上第二节第 5 小节 | 待做 |
-| S7 | tasks：CreateTaskRequest、UpdateTaskRequest、UpdateTaskStatusRequest、Task、ListTasksResponse、ProjectSummary | 有字段，对得上第二节第 6 小节 | 待做 |
+| S7 | tasks：CreateTaskRequest、UpdateTaskRequest、UpdateTaskStatusRequest、Task、ListTasksResponse、ProjectSummary；内部形状 OwnerTask、ExecutorTask（TYPE-22） | 有字段，对得上第二节第 6 小节 | 待做 |
 | S8 | 一个资源按角色给不同形状怎么写 | 拍定写法（API-30 补充，问 629 A） | 进行中（进度表在待执行文件） |
 | S9 | 负责人那份 Project 带什么、两份是否同形 | 拍定（API-34 补充） | 进行中（进度表在待执行文件） |
 | S10 | 列表外壳里放数组的字段名 | 拍定（API-18） | 进行中（进度表在待执行文件） |
@@ -32,10 +33,11 @@ awk '/^## 一、全局约定/,/^## 三、本节裁决汇总/' docs/arch/API_CONT
 | S12 | 去掉首尾空白放哪一层 | 拍定，API-32 与 API-55 放同一层（BACKLOG 79） | 进行中（进度表在待执行文件） |
 | S13 | 转让负责人请求体 | 字段是 userId，不包数组（API-57 修订推翻原文的数组写法） | 进行中（进度表在待执行文件） |
 | S14 | 请求拒绝多余字段、响应容忍多余字段的写法 | 落到 schema 写法上（API-31） | 进行中（进度表在待执行文件） |
-| S15 | 共享枚举：MemberRole、TaskStatus | 拍定写法，与 prisma/schema.prisma 的枚举对得上（docs/arch/TECH_STACK.md 共享类型包一条）；枚举名不在文件头命令的范围内，人工核 | 进行中（进度表在待执行文件） |
+| S15 | 共享枚举：MemberRole、TaskStatus | 拍定写法，与 prisma/schema.prisma 的枚举对得上（docs/arch/TECH_STACK.md 共享类型包一条）；枚举名不在文件头命令的范围内，人工核 | 进行中（enums.ts 已落 e6476d3；Prisma 枚举待回写 H34） |
 | S16 | 校验管道：自写还是官方内置 | 报学生裁。ARCHITECTURE 第二节写自写、不用内置 ValidationPipe（T1）；NestJS Pipes 页现在建议生产用内置 StandardSchemaValidationPipe，要哪个版本、接不接得住 API-31 未核 | 已完（问 744 B，TYPE-5） |
 | S17 | 其余未决项 N1 到 N23 | 逐条拍，进度在 docs/arch/PENDING-TYPES-DRAFT.md（architect 核对轮新报，含 NotificationType 进不进共享层） | 进行中（进度表在待执行文件） |
 | S18 | docs/arch/SHARED_TYPES.md：零、管辖范围；一、全局约定（1. 落点、2. 命名、3. 版本、4. 校验管道、5. 按角色不同的形状）；二、本节裁决汇总 | 规则与裁决都落进去，不写字段（问 743 B） | 进行中（已建，余下裁决随拍随加） |
+| S19 | fields.ts 内部片段：idField、emailField、withinEmailBytes | 第 7 课的入口不导出（TYPE-22）；与定稿逐字节相同 | 已完（e6476d3） |
 
 ## 二、schema 以外的本节交付
 
