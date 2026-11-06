@@ -119,18 +119,18 @@ AuthGuard 属 auth 模块，负责会话有效性，只能调 auth 模块暴露�
 AuthzGuard 属 authz 模块，负责项目内角色级放行判定，只能调 authz 模块暴露的能力读 project_memberships（经 ProjectsService，表仍归 projects），并把角色放入请求上下文（第三节决策 A）。
 两个 Guard 都不做：读 tasks 等业务记录、判记录归属、解析请求体。
 
-#### 2. Pipe（项目自写 Zod 管道 + 共享 Zod schema）
-负责：请求体与查询参数的形状与类型校验。这是服务端唯一可信的形状校验点。
+#### 2. Pipe（NestJS 内置 StandardSchemaValidationPipe + 共享 Zod schema）
+负责：请求体的形状与类型校验，项目只写 exceptionFactory，把校验失败翻成错误外壳（TYPE-5，推翻第三节 T1 的自写）。这是服务端唯一可信的形状校验点。没定义的查询参数由后端一处统一检查，不按共享 schema（TYPE-13）。
 不经过管道：路径参数。路径参数不做格式校验（第三节 T3）；查库前转数字的容错见第三节决策 B，转不成视为查不到，按「看不见」退回（API-21）。
 不做：业务规则、权限判断。
 
 #### 3. Controller（TasksController）
-负责：取参、调本模块 Service、返回 DTO。
+负责：取参、调本模块 Service、返回响应。响应一律过共享 schema，没声明的字段丢掉；用内置拦截器还是 Service 手工过，第 10 课写骨架时定（TYPE-9）。
 不做：业务判断、碰 Prisma、判数据归属。
 只能调：本模块 Service。
 
 #### 4. Service（TasksService）
-负责：业务规则（未认领判定、「可能卡住」判定（API-43）、项目内汇总；状态三态任意互转，不设流转规则，PRD 审定决策 D12）；数据级权限判定（这条记录归不归当前用户）。
+负责：业务规则（「可能卡住」判定（API-43）、项目内汇总；状态三态任意互转，不设流转规则，PRD 审定决策 D12）；数据级权限判定（这条记录归不归当前用户）；Task 按调用者角色选负责人形状或执行者形状（TYPE-8、TYPE-9）。未认领不单设，任务负责人为空就是未认领（TYPE-18）。
 不做：解析 HTTP、直接写 Prisma 查询、伸手进别的模块的 Repository。
 只能调：本模块 Repository；别的模块的 Service（如 ProjectsService 校验 assignee 是本项目成员，第三节 T5）。
 
@@ -156,10 +156,12 @@ AuthzGuard 属 authz 模块，负责项目内角色级放行判定，只能调 a
 
 ### 共享层边界（packages/shared）
 
+落点：schema 是真的 .ts 文件，放在 packages/shared/src/；第 7 课建包之前只放 schema，不放包壳。怎么写、放哪、为什么见 docs/arch/SHARED_TYPES.md（TYPE-1、TYPE-4）。
+
 允许进：
 - Zod schema —— 前后端共享一份，写一次两端复用（TECH_STACK.md:15）。
 - 由 z.infer 从 Zod schema 推导出的请求/响应类型（TECH_STACK.md:57）。
-- 枚举 MemberRole / TaskStatus / NotificationType —— 两端都要渲染和判断。
+- 枚举 MemberRole / TaskStatus —— 两端都要渲染和判断。NotificationType 本版只有后端用，不进；第 13 课加通知接口时一起进（TYPE-12）。
 - 无 IO 的纯常量与纯函数（如状态展示顺序）。
 
 明确不许进：
@@ -180,7 +182,7 @@ AuthzGuard 属 authz 模块，负责项目内角色级放行判定，只能调 a
 
 Zod 执行三处，各拦不同的东西：
 1. 前端提交前 —— 拦格式错，给即时反馈。UI_DESIGN 要求「阻止提交」，阻止只能发生在前端。
-2. 服务端 Zod 管道（项目自写，实现 PipeTransform 调共享 schema，不用内置 ValidationPipe，第三节 T1）—— 拦请求体与查询参数的形状与类型错。这是唯一可信的一道。
+2. 服务端校验管道（NestJS 内置 StandardSchemaValidationPipe 调共享 schema，项目只写 exceptionFactory；TYPE-5，推翻第三节 T1 的自写）—— 拦请求体的形状与类型错；没定义的查询参数由后端一处统一检查（TYPE-13）。这是唯一可信的一道。
 3. Service 内业务不变量 —— 如 assignee 必须是本项目成员（第三节 T5）。状态流转不设白名单，三态任意互转（PRD 审定决策 D12）。
 为什么不能只在一处：只在前端，绕过界面直接打接口就穿了（US-R01 要求强制触发被拒）；只在后端，用户每个错字都要一次往返，且做不到「阻止提交」。
 
@@ -244,6 +246,7 @@ Zod 执行三处，各拦不同的东西：
 - 数据库列名：snake_case（如 assignee_user_id、created_at）。仅存在于 Postgres 内部。
 - Prisma 字段名与 TypeScript：camelCase（如 assigneeUserId、createdAt）。写代码用这一套。
 - API 请求与响应字段、查询参数名：camelCase。与 Prisma 和共享层一致，全链路不做命名转换。
+- 读法：API 字段名能同名就同名，照 Prisma 字段名；没有对应列的另起。改数据库字段名时前端跟着动，靠同仓同发接住（TYPE-15）。具体字段名以 packages/shared/src/ 为准（TYPE-20）。
 依据：prisma/schema.prisma 全表使用 @map / @@map，snake_case 被封闭在数据库层。
 偏离：主参考 Zalando 要求字段名与查询参数名用 snake_case（第 118、130 条）。本项目保留 camelCase，理由登记在 docs/arch/STANDARDS.md「偏离登记」（API-22）。
 后果：字段名不一致（前端 userId / 后端 user_id）这类联调错误在本项目结构上不会发生。协议 9 一致性报告在字段名这一层由 schema 写法保证。
@@ -311,7 +314,7 @@ Zod 执行三处，各拦不同的东西：
 - 表：读 project_memberships
 
 #### R2-3 Zod 管道
-- 层：Pipe（T1 项目自写管道）
+- 层：Pipe（内置管道，TYPE-5，推翻 T1 的自写）
 - 校验：无。无请求体。本路径不设查询参数（假设，以 API 契约为准）。路径 id 不经过管道（T3）。
 - 鉴权：无
 - 退回：无
@@ -381,7 +384,7 @@ Zod 执行三处，各拦不同的东西：
 - 表：读 project_memberships
 
 #### W1-3 Zod 管道校验请求体
-- 层：Pipe（T1 项目自写管道，内部调用共享 Zod schema）
+- 层：Pipe（内置管道调共享 Zod schema，TYPE-5，推翻 T1 的自写）
 - 校验：请求体形状与类型。标题、描述为字符串（prisma/schema.prisma:83-84），assignee 为整数或空（:85），截止日期为日期或空（:88）。本路径不设查询参数（假设，以 API 契约为准）。路径 id 不经过管道（T3）。
 - 鉴权：无。assignee 是否本项目成员不在此判：该判断需读请求体内容，按 T6 归 Service。
 - 退回：形状或类型不符，本步退回「参数不合法」。
@@ -422,10 +425,12 @@ Zod 执行三处，各拦不同的东西：
 ### 本节裁决汇总
 
 - T1 服务端校验用项目自写 Zod 管道（实现 PipeTransform 调共享 schema），不用内置 ValidationPipe，不引第三方集成库。
+  修订（补课 05-类型，问 744 B）：推翻上面的自写。服务端校验用 NestJS 内置 StandardSchemaValidationPipe，项目只写 exceptionFactory；仍不引第三方集成库。依据是 NestJS 官方 Pipes 页建议生产用内置的，见 docs/arch/SHARED_TYPES.md TYPE-5。上面原文不改。
 - T2 任务类接口路由嵌套项目 id；Service 取到记录后必须比对 projectId 与路径项目 id。
 - T3 路径参数不做格式校验，非法值落入鉴权失败；查询参数走 Zod 管道。两类分开处理。
   修订（补课 05-API，问 461 B）：「非法值落入鉴权失败」一句已不成立。现行口径：路径 id 转不成数字视为查不到，按「看不见」退回（决策 B、API-21）；项目 id 在 AuthzGuard 退回，任务 id 在 Service 退回。上面原文不改。
   补充（补课 05-API 第十三窗口）：契约 API-59 带来的成员用户 id（移出成员的路径）同样在 Service 退回：转不成数字视为查不到，按「看不见」退回（决策 B）。上面原文不改。
+  修订（补课 05-类型，问 757 B）：「查询参数走 Zod 管道」一句已不成立。本版没有接口收查询参数；没定义的查询参数由后端一处统一检查，不按共享 schema（TYPE-13）。上面原文不改。
 - T4 会话固定 30 天，不滑动续期，纯读不写 sessions。
 - T5 assignee 必须是本项目成员，允许分配给负责人自己。
 - T6 两级权限界线：只用「会话 + 路径参数 + project_memberships」能判的归 Guard；需读业务表记录或读请求体内容才能判的归 Service。
