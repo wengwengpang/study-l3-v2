@@ -980,7 +980,7 @@ git commit -m "feat: 第 4 课技术选型，建 architect 角色与 TECH_STACK�
 - Docker 的「环境一致」，同一节补课写明指镜像和运行时一致，配置按环境不同。
 - 扩展点 4「任务表预留外键挂载位」，同一节补课改了措辞。
 - 「通知表已满足通知这一支」，补课 05-API 加了修订：这一版通知模块是空壳，这一支到第 13 课才兑现。
-- ADR-005 的「如 ZodValidationPipe」，同一节补课加了更正：只是举个类名，本项目不装那个第三方库，自己写管道。
+- ADR-005 的「如 ZodValidationPipe」，同一节补课加了更正：只是举个类名，本项目不装那个第三方库，自己写管道。补课 05-类型又改了：不自己写，改用 NestJS 内置的 StandardSchemaValidationPipe，见 docs/arch/SHARED_TYPES.md TYPE-5。
 - ADR-004 邮箱唯一，同一节补课定了不分大小写。
 - 文件里引的「密码规则」，当时是至少 8 位，后来改成最短 15 位。
 
