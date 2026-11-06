@@ -57,6 +57,7 @@
 3. 成员-角色多对多表：(user, project, role) 关系表（PRD.md:173），为未来多负责人（D4 首版单负责人 PRD.md:268）预留，不把负责人写成项目表单一外键。
 4. 任务实体可挂载：tasks 主键稳定，后续子任务/附件/评论（PRD.md:114）以 task_id 外键挂载到任务，外键长在子表一侧，tasks 表本身无需预留字段；首版不建这些子表。（措辞修订于补课 05-ARCH：原措辞「任务表预留外键挂载位」易被读成 tasks 表上要有预留字段，architect 据此报过一次冲突，核查为措辞歧义，schema 无缺失。）
 5. 共享类型包：packages/shared 承载 SHARED_TYPES，前后端引用同一份 DTO/枚举（任务状态 PRD.md:51、角色 PRD.md:206）。
+   修订（补课 05-类型，问 739 A、743 B）：「承载 SHARED_TYPES」「DTO」两处说法不准。schema 是真的 .ts 文件，放在 packages/shared/src/，第 7 课建包之前不建包壳；docs/arch/SHARED_TYPES.md 只写规则与裁决，不写字段；类型由 z.infer 推导，不手写 DTO。见 SHARED_TYPES TYPE-1、TYPE-4。上面原文不改。
 6. Schema 演进走 EMC：Prisma migration 先扩展兼容、迁移、再收缩（信仰 3，CLAUDE.md:13）。
 
 ## 四、驱动来源小结
