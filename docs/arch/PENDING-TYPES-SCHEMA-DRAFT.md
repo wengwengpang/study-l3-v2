@@ -17,7 +17,7 @@
 |---|---|---|
 | N24 | 文件怎么分 | 已拍：A（问 768，TYPE-22） |
 | N25 | 多余查询参数怎么逐项列 | 已拍：A（问 767，TYPE-21） |
-| N26 | ProblemType 性质名的写法（连 C13） | 已拍：A（问 770，TYPE-24）；具体的词没拍过，第三步 problem 组一起看 |
+| N26 | ProblemType 性质名的写法（连 C13） | 已拍：A（问 770，TYPE-24）；用词问 773 A，problem.ts 已落 1a27878 |
 | N27 | Project 的「我的角色」 | 已拍：role（问 766，TYPE-20） |
 | N28 | 「可能卡住」 | 已拍：possiblyStuck（问 766，TYPE-20） |
 | N29 | 汇总的四个字段 | 已拍：total 等（问 766，TYPE-20） |
