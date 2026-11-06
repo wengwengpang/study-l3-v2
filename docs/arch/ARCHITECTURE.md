@@ -60,7 +60,7 @@
 覆盖：US-02b（P2 延后）
 依赖：tasks、users
 决策 4：本版保留模块位，标注为空壳，不写实现。
-状态：表已建，MVP 内无生产者。唯一通知类型 stuck_task 依赖 US-02b，P2 延后。Lec 13 上 WebSocket 时填充。
+状态：表已建，MVP 内无生产者。唯一通知类型 STUCK_TASK（补课 05-类型改大写，TYPE-19）依赖 US-02b，P2 延后。Lec 13 上 WebSocket 时填充。
 理由：写没人调用的代码违反 TECH_STACK「MVP 先跑通，不为以后可能用提前堆」；但表已在 schema 内，架构图不列会造成归属缺口。
 
 ### 归属自检
@@ -409,7 +409,7 @@ Zod 执行三处，各拦不同的东西：
 - 校验：无
 - 鉴权：T2 的项目比对针对「已取到的记录」，创建时无旧记录可比。
 - 规则（决策 D，明文）：新任务的 projectId 只从路径参数取，禁止从请求体取。理由：W1-2 的角色鉴权依据的是路径项目 id，若写入时改用请求体中的 projectId，鉴权对象与写入对象将不一致，负责人可借此在自己无权限的项目中创建任务。鉴权用哪个 id 判，写入就必须用哪个 id。
-- 其他：status 用默认值 not_started，statusUpdatedAt 用默认值当前时间（prisma/schema.prisma:86-87）。
+- 其他：status 用默认值 NOT_STARTED（补课 05-类型改大写，TYPE-19），statusUpdatedAt 用默认值当前时间（prisma/schema.prisma:86-87）。
 - 退回：写入出错属内部错误，不暴露内部信息（PRD.md:199 同一思路）。对外形态属 API 契约。
 - 表：写 tasks。不写 notifications，该模块本版为空壳（本文第一节决策 4）。
 
