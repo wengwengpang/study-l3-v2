@@ -3,7 +3,7 @@
 > 记录目录树 + 每个关键文件一句话职责。每节课结课更新（规则 50/52）。
 > 文末另记开发环境，带核对日期，发现对不上时更新。
 
-## 当前目录树（补课 05-类型 第一窗口）
+## 当前目录树（补课 05-类型 第二窗口）
 .
 ├── .claude/
 │   ├── agents/
@@ -36,6 +36,9 @@
 │   ├── appendix-h.md        附录 H 问题与解法：课上提出的课程做法类问题，一个问题一个案例，每个案例十一节；现收五个案例（第八窗口建，问 515 A 到 517 A；第二十一窗口加三个，问 672 A、707 A；学生在 GitHub 读过认了，DECISIONS-R1 R1-648）
 │   ├── notes/               网页版样本的摘要报告，一份样本一份（第七、八份各分两轮，sample7-lec1.md、sample7-part2.md、sample8-lec2.md、sample8-part2.md），写书参考用；另有 lec05-api-subagents.md，补课 05-API 十一份子代理记录的派单与回报原文（问 703 B）；lec01-interview-run.md、lec01-interview-run2.md，第 1 课两次实跑访谈的记录（问 718 A）；lec02-pm-run.md、lec02-pm-run2.md，第 2 课两次实跑 pm 的记录（问 723 A）；lec03-designer-run.md，第 3 课实跑 designer 的记录（问 724 A）；lec04-architect-draft-run.md，让 AI 起草 architect 的试跑记录（问 731 A）；lec04-architect-run.md，第 4 课实跑 architect 的记录（R1-690）；lec06-permissions-run.md，第 6 课实跑决策边界与权限的记录（R1-697）。去留：一次性，教科书写完后删
 │   └── out/                 导出的网页，git 不跟踪
+├── packages/
+│   └── shared/
+│       └── src/             共享 Zod schema 六个文件：enums、fields、problem、auth、project、task（05-类型第二窗口落；第 7 课建包前只放 schema、不建包壳，TYPE-1）
 ├── prisma/
 │   └── schema.prisma       Prisma 数据模型，6 model + 3 enum + onDelete（Lec 5 建）
 ├── scripts/
@@ -56,7 +59,7 @@
     ├── LIBRARIAN_REPORT.md      资料管理员体检报告，整份覆盖写，历史在 git 里，末栏记学生选择（复课前第 3 步首跑建，DECISIONS-R1 R1-102、R1-107）
     ├── REFACTOR-HANDBOOK.md     重构手册：从本次重构提炼、换项目可用的做法（学生复制到 ~/.claude/templates/）
     ├── REVIEW-DEBT.md           审查欠账表：没送审的改动，每条记处置方式与处置状态（BACKLOG 57 反方审建，DECISIONS-R1 R1-226）
-    ├── BRIDGE-05-types-w2.md    05-类型第二窗口桥梁（第一窗口收尾产出，下个窗口以它为准）
+    ├── BRIDGE-05-types-w3.md    05-类型第三窗口桥梁（第二窗口收尾产出，下个窗口以它为准）
     ├── PENDING-ROLE-PERMISSIONS.md 角色权限系统设计稿，学生定之前不生效。去留：一次性，定稿落进各正本后删（问 754 A，BACKLOG 90）
     ├── web_course_sample1.md 至 web_course_sample8.md  网页版课堂记录样本八份（依次是 Lec 3、4、2、05-API 第一窗口、6、0、1，第八份是 Lec 2 再次导出加需求补充窗口），教科书参考用，不是正本。去留：一次性，教科书写完后删（BACKLOG 73，DECISIONS-R1 R1-279 问 238A）
     ├── web_course5_sample1.md 至 web_course5_sample5.md  网页版课堂记录样本五份（依次是 Lec 5、05-ARCH 第一、二、三、四窗口），教科书参考用，不是正本。去留：一次性，教科书写完后删（BACKLOG 73，DECISIONS-R1 R1-336 问 290 A）
@@ -88,7 +91,7 @@
         ├── 05-arch-cheatsheet.md 补课 05-ARCH 速查卡
         ├── 05-api-full.md      补课 05-API 完整笔记（第一窗口；第二到二十一窗口补记追加在末尾）
         ├── 05-api-cheatsheet.md 补课 05-API 速查卡（第十八窗口改成一页，800 字内；各窗口细节见完整笔记，问 691 B）
-        ├── 05-types-full.md     补课 05-类型 完整笔记（第一窗口；后面窗口补记追加在末尾）
+        ├── 05-types-full.md     补课 05-类型 完整笔记（第一、二窗口；后面窗口补记追加在末尾）
         ├── 05-types-wbs.md      补课 05-类型 交付物清单。去留：一次性
         └── anti-patterns.md     反模式库，号段见 anti-patterns 文件头
 
