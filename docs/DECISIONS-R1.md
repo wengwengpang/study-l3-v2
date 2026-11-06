@@ -13768,3 +13768,12 @@ HARNESS 第三节：没有答到。问题 3 有一条新实据，见第四点。
 --- R1-722 · 学生亲跑删除旧桥梁；提交、推送；窗口收完（学生用「! 」跑了 rm，没回字）---
 一，git status 只有 D docs/BRIDGE-05-types-w1.md，提交。清单 W4「已完」现在对上了。目录树已是 w2（对照 1180）。docs/ 下只剩 BRIDGE-05-types-w2.md。
 二，学生没回「删了」，CC 读作第 4 步放行：命令是他亲手跑的，上一条消息写了跑完后提交并推送，推送他已授权，弹窗照弹。
+
+--- R1-723 · 05-类型第二窗口开课；同步直连通、两边差 0；体检一次过、两项一致存档 08beb4d；查标准；出对照 1181 到 1183 与问 771、772（学生：「开始」）---
+一，同步：git fetch 直连成功（FETCH_HEAD 08:05:46），本机与远端差 0 和 0，工作区干净。上一份记录（5351a4ce）末尾是完整的收尾消息，没有悬空调用，末尾事件晚于最后一次提交；中途 UTC 02:42 有一次 403 断线，后面还有七百多个事件，不在末尾。开课提交号沿用 8aa3524（桥梁 w2 第 0 节）。
+二，读了什么：自动记忆两份；桥梁 w2；R1-720 到 R1-722；检查单卡 1 到 4、6、7、9、12、14；SESSION_START 全文；知识库全文；七个必读全文（COURSE_RULES、反模式库各分两次读）；另读交付物清单、STANDARDS 全文、起草稿进度表与 C11、C13、N26 原文、SHARED_TYPES 第 96 到 131 行、report-check.sh。超五份的理由是规则 65 与 J 节第 2 件点名。七文件与开课资料互相核过（规则 57 第 15 项）：没有新的打架；已知的几处都挂在 BACKLOG 15、40、41、52、83。
+三，体检闸门：第一次指纹 394147badd6e4e35540a33ba7a54995d90dfe43eeb5eaaf4aa729531dcb59e43；固定派单照 J 节直接派，模型照定义文件；第二次指纹相同。核对记录 ~/.claude/projects/-home-michael-projects-study-l3-v2/d348ab4d-3d46-4e31-858c-41c8ec10f32b/subagents/agent-aab9761e4f17855bc.jsonl，ls 恰好一份，以后重跑带上。按 id 去重 4 次调用，全只读：Read 定义文件与上一份报告；Bash 两次，git log、doc-check.sh、sed、grep、git diff --stat。报告从记录取最后一条返回，存档与它 cmp 相同，核对脚本两项一致，提交 08beb4d，第十九次。
+四，抽查（卡 3 第 2 条）：规则 8、9、13、26、30、38、40，BACKLOG 89、90，PROJECT_STRUCTURE 第 59、60、73、74、75、91、92 行，读全文时都对得上；另核 CLAUDE.md 第 23 行、librarian.md 第 27 行、SHARED_TYPES.md 第 4 行，对得上。一处小偏差：发现 2 写「5 份非桥梁文件」，实列 6 份（交付物清单另起一行列）。上一份栏 6 为空不是漏填：R1-705、R1-706 没出体检题。试行期第一条：这次没报出主对话不知道的新问题。
+五，查标准（卡 1 第 2 条）：C11 牵涉邮件地址长度，TYPE-17 自写「推算」。网页代理取回四页，引文是它的报告，CC 没另核，用到时再核。RFC 5321 第 4.5.3.1 节「This section therefore specifies lengths in octets where absolute lengths, rather than character counts, are intended.」，本地部分 64、域名 255、路径 256 octets「(including the punctuation and element separators).」，没提尖括号。RFC 6531 读到第 5 节，没写国际化地址的长度怎么算；第 3.1 节第 5 项只把 MAIL 命令行加长 10 个字符。RFC 3696 勘误 1690，Verified，改后「the upper limit on address lengths should normally be considered to be 254.」。TypeScript Modules Reference（2026-11-05 更新）「Extensionless relative paths are not supported in `import` paths in Node.js,」；bundler 省略与不省略扩展名都支持。两样没登，出对照 1183 补登。
+六，第 5 件：交付物清单沿用，覆盖核对没有输出；出对照 1181（本窗口目标句）、1182（B2 一行）。改后副本已拼在会话临时目录，清单 86 行、STANDARDS 66 行。大纲照桥梁 w2 第 5 节五步。
+七，出问 771（精力）、772（S6 新增六份进不进送审命令清单；先例问 322 A、621 A、567 A）。769、770 留给 C11、C13（R1-720 第一点）。规则 78 那五处（R1-680 第一点）、第 1 章新加那节仍挂着。
