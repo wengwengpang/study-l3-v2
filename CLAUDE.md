@@ -136,6 +136,7 @@ pm 推导的基础需求（Lec 3 前置补充 · Michael 已审定）：
 - 标准方针：先照行业标准，没有才照主流做法，再没有才自定。标准管怎么做，不管做多少；称「标准」要给原文出处；几家不一或和已定约束冲突，列出来请主人拍。各领域认哪份、按层定先后、偏离登记，见 docs/arch/STANDARDS.md（问 339 A、343 A、349 A）。
 - 部署容器构成（05-ARCH 第四节定）：四容器 Nginx / 前端 Next.js 服务进程 / 后端 NestJS / PostgreSQL。Nginx 只做反向代理 + TLS 终止，同域名按路径前缀分流。数据库端口开发暴露、生产不暴露。迁移人工触发，不随容器启动跑（D5）。详见 docs/arch/ARCHITECTURE.md 第四节。
 - 接口契约口径（05-API 定）：字段的唯一真相是共享 Zod schema。docs/arch/API_CONTRACT.md 只写接口层与全局约定，每个接口点名所用 schema，不写字段本体。
+- 共享类型口径（05-类型 定）：Zod schema 是真 .ts 文件，放 packages/shared/src/；第 7 课建包之前只放 schema，不建包壳。schema 与类型同名，不带后缀。Zod 主版本 4，下限 4.6，精确版本第 7 课由锁文件定。服务端校验用 NestJS 内置 StandardSchemaValidationPipe，项目只写 exceptionFactory，不自写管道。详见 docs/arch/SHARED_TYPES.md TYPE-1、TYPE-2、TYPE-3、TYPE-5。
 
 ### 第二层 E：数据模型关键结论（Lec 5）
 
@@ -143,7 +144,7 @@ pm 推导的基础需求（Lec 3 前置补充 · Michael 已审定）：
 - 主键自增整数；时间点用 timestamptz，截止日期（tasks.due_date）是纯日期，用 date；MVP 硬删除（无 deleted_at，软删除见 BACKLOG 8）。
 - onDelete：会话 Cascade、任务 assignee SetNull、其余 Restrict。
 - 约束：每项目至多一个负责人（部分唯一索引，写法随 Prisma 锁版本定，见 docs/arch/DECISIONS.md ADR-DB-006）；邮箱不分大小写唯一（users.email 用 citext，扩展怎么启用随 Prisma 锁版本定，见 ADR-DB-008）。
-- 枚举：MemberRole(owner/executor)、TaskStatus(not_started/in_progress/completed)、NotificationType(stuck_task)。
+- 枚举：MemberRole(OWNER/EXECUTOR)、TaskStatus(NOT_STARTED/IN_PROGRESS/COMPLETED)、NotificationType(STUCK_TASK)。值一律大写蛇形，数据库、接口、前端同一写法（补课 05-类型改，docs/arch/SHARED_TYPES.md TYPE-19）。
 - schema 落点：prisma/schema.prisma。CC 改表结构前先回 architect 确认，不擅自改。
 
 ## 第三层 A：决策边界 D1-D8（哪些决策必须主人拍板）
