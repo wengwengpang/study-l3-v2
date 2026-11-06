@@ -63,35 +63,35 @@
 | H1 | API_CONTRACT 第零节 | 字段落点加指针：packages/shared/src/ 与 SHARED_TYPES | 问 739、743 | 已完（对照 1205 到 1219） |
 | H2 | API_CONTRACT 第一节第 7 小节、第二节第 3 小节、API-30 | 写不写后缀的三句，改成不带后缀（TYPE-2） | 问 740 | 已完（对照 1205 到 1219） |
 | H3 | API_CONTRACT 第一节第 4 小节 | 「后端自写的 Zod 管道」改成内置管道（TYPE-5） | 问 744 | 已完（对照 1205 到 1219） |
-| H4 | ARCHITECTURE 第二节 Pipe 小标题与校验分层第 2 条、第三节两处「层：Pipe」 | 自写改内置 | 问 744 | 待做 |
-| H5 | ARCHITECTURE 第三节 T1 | 原文不动，下面加修订 | 问 744 | 待做 |
-| H6 | ARCHITECTURE 第二节「共享层边界」 | 加落点与指向 SHARED_TYPES 的指针 | 问 739、743 | 待做 |
-| H7 | DECISIONS ADR-005 | 原文与更正行不动，下面加修订 | 问 744 | 待做 |
-| H8 | TECH_STACK 共享类型包一条 | SHARED_TYPES 与 DTO 的说法，改成 schema 放 packages/shared/src/、规则见 SHARED_TYPES（裁 C1） | 问 743 | 待做 |
+| H4 | ARCHITECTURE 第二节 Pipe 小标题与校验分层第 2 条、第三节两处「层：Pipe」 | 自写改内置 | 问 744 | 已完（对照 1221 到 1229） |
+| H5 | ARCHITECTURE 第三节 T1 | 原文不动，下面加修订 | 问 744 | 已完（对照 1221 到 1229） |
+| H6 | ARCHITECTURE 第二节「共享层边界」 | 加落点与指向 SHARED_TYPES 的指针 | 问 739、743 | 已完（对照 1221 到 1229） |
+| H7 | DECISIONS ADR-005 | 原文与更正行不动，下面加修订 | 问 744 | 已完（对照 1221 到 1229） |
+| H8 | TECH_STACK 共享类型包一条 | SHARED_TYPES 与 DTO 的说法，改成 schema 放 packages/shared/src/、规则见 SHARED_TYPES（裁 C1） | 问 743 | 已完（对照 1221 到 1229） |
 | H9 | STANDARDS 共享校验 schema 一行、后端框架行为一行 | 拍板格加 TYPE-1 到 TYPE-5；后端框架行为加 Pipes 页 | 问 744 | 待做 |
 | H10 | CLAUDE.md 第二层 D | 摘落点、命名、版本、内置管道（清单 B4，规则 78 要「帮我改」） | 问 739 到 744 | 待做 |
 | H11 | 书章 book/lec05-arch.md、book/lec04.md | T1 与问 468 A 那几段补一句后来的修订，收录的原文不动 | 问 744 | 待做 |
 | H12 | API_CONTRACT 第二节项目详情、API-34 补充 | 「只带名称与自己的角色」「归 05-类型」两处，改成指向 TYPE-6、TYPE-7 | 问 745、746 | 已完（对照 1205 到 1219） |
 | H13 | PRD 澄清注记 | 加一条：D11、D17 读作业务信息，id 是路径编号（TYPE-6）；原文不改 | 问 745 | 待做 |
 | H14 | API_CONTRACT 第二节第 3 小节、API-30 补充 | 「几种形状怎么写归 05-类型」加指针 TYPE-8 | 问 747 | 已完（对照 1205 到 1219） |
-| H15 | ARCHITECTURE 第二节分层「返回 DTO」那句 | 写明响应过 schema，Task 按角色选形状（TYPE-8、TYPE-9） | 问 747、748 | 待做 |
+| H15 | ARCHITECTURE 第二节分层「返回 DTO」那句 | 写明响应过 schema，Task 按角色选形状（TYPE-8、TYPE-9） | 问 747、748 | 已完（对照 1221 到 1229） |
 | H16 | BACKLOG 新加一条 | 第 10 课定出参机制（内置拦截器或 Service）；内置管道与 exceptionFactory 实跑；多余键 keys 的判断 | 问 744、748 | 待做 |
 | H17 | BACKLOG 82 第三样 | 上限已定 64（TYPE-10），算法仍第 10 课定；加一句 bcrypt 的 72 字节放不下 64 个中文 | 问 749 | 待做 |
 | H18 | PRD 审定决策 D20 | 加澄清注记：上限 64（TYPE-10）；原文不改 | 问 749 | 待做 |
 | H19 | STANDARDS 认证一行 | 加 NIST SP 800-63B、OWASP Password Storage，拍板格加 TYPE-10（卡 5 第 7 条） | 问 749 | 待做 |
-| H20 | ARCHITECTURE 第二节「共享层边界」枚举一行 | 去掉 NotificationType，第 13 课加接口时再进（TYPE-12） | 问 752 | 待做 |
+| H20 | ARCHITECTURE 第二节「共享层边界」枚举一行 | 去掉 NotificationType，第 13 课加接口时再进（TYPE-12） | 问 752 | 已完（对照 1221 到 1229） |
 | H21 | API_CONTRACT 第二节第 2 小节、登出与移出成员两个接口的退回 | 写明全部方法都拒绝没定义的查询参数（API-56 补充，问 753 A） | 问 753 | 已完（对照 1205 到 1219） |
 | H22 | API_CONTRACT 第一节第 4 小节「请求体与查询参数」一句 | 查询参数的拒绝改成后端一处统一检查，不按共享 schema（TYPE-13） | 问 757 | 已完（对照 1205 到 1219） |
 | H23 | API_CONTRACT 第二节第 2 小节「参数不合法」、登录接口 | 写明登录不套注册规则，太短的走未登录（TYPE-14） | 问 758 | 已完（对照 1205 到 1219） |
 | H24 | API_CONTRACT API-36、API-57 修订 | 加一句「字段定义以 schema 为准」 | 问 760 | 已完（对照 1205 到 1219） |
-| H25 | ARCHITECTURE 第二节命名规范 | 写明读法：能同名就同名（TYPE-15） | 问 761 | 待做 |
+| H25 | ARCHITECTURE 第二节命名规范 | 写明读法：能同名就同名（TYPE-15） | 问 761 | 已完（对照 1221 到 1229） |
 | H26 | API_CONTRACT 第一节第 7 小节 | 写明哪些 400 带逐项问题（TYPE-16） | 问 762 | 已完（对照 1205 到 1219） |
 | H27 | STANDARDS「偏离登记」、错误响应格式一行 | 登 ProblemType 用未登记的 URN（RFC 8141）；拍板格加 TYPE-16 | 问 762 | 待做 |
 | H28 | API_CONTRACT API-32、API-55 | 去空白的层与最大长度加指针 TYPE-17 | 问 763 | 已完（对照 1205 到 1219） |
 | H29 | BACKLOG 79 | 关闭，清单 B5 跟上（TYPE-17） | 问 763 | 待做 |
 | H30 | API_CONTRACT 第一节第 4 小节更新规则、改状态接口 | 写明空对象的处理（TYPE-17） | 问 763 | 已完（对照 1205 到 1219） |
 | H31 | API_CONTRACT 第一节第 5 小节、第二节第 3 小节 | 列表数组字段 items（TYPE-18）；枚举名 MemberRole、TaskStatus 写进 schema 名字一节 | 问 764 | 已完（对照 1205 到 1219） |
-| H32 | ARCHITECTURE 第二节 Service「未认领判定」 | 改成任务负责人为空（TYPE-18） | 问 764 | 待做 |
+| H32 | ARCHITECTURE 第二节 Service「未认领判定」 | 改成任务负责人为空（TYPE-18） | 问 764 | 已完（对照 1221 到 1229） |
 | H33 | BACKLOG 74 | 加一句：Prisma 官方页写 contract.prisma 取代 schema.prisma（未核），锁版本时核 | R1-716 第六点 | 待做 |
 | H34 | prisma/schema.prisma 枚举与默认值、DECISIONS 枚举一行与 ADR-DB-006「role 为 owner」、ARCHITECTURE 第一节 stuck_task 一行与第三节默认值一行、CLAUDE.md 第二层 E（规则 78） | 枚举值改大写蛇形（TYPE-19）；architect 已确认（R1-718） | 问 765 | 待做 |
 | H35 | 书章 book/lec05.md | 枚举引文不动，补一句后来改大写 | 问 765 | 待做 |
