@@ -578,6 +578,7 @@
 - API-18 成功响应不加统一外包装。单个资源直接返回对象；列表接口顶层也返回对象，数组放在其中一个字段里，
   字段名归 schema（05-类型定）。分页留第 3 组。
   依据：主参考 Zalando #167、#110（顶层用对象，为以后扩展）。
+  补充（05-类型，问 764）：数组放在 items 字段里，所有列表接口都一样，见 docs/arch/SHARED_TYPES.md TYPE-18。
 - API-19 给用户看的中文提示由前端按 type 出；后端 title、detail 只作开发排查与兜底。
   依据：Zalando #176「clients must be robust and not rely on a Problem JSON object being returned」；
   网关错误不带本项目外壳；前端提交前的校验提示本来就在前端。
@@ -650,6 +651,8 @@
   补充（第十三窗口，问 626 A）：第二节其余 schema 同样只定主体。请求体照方法起名：POST 写 Create，PATCH 写 Update，PUT 写 Replace，后接资源名，再加 Request，如 CreateUserRequest。依据：NestJS 官方 CRUD 生成器给的是 CreateUserDto、UpdateUserDto；Google AIP-133「The request message must match the RPC name, with a `Request` suffix.」。PUT 写 Replace 是推导，AIP 没有对应的标准方法。没选：照业务词起，如 RegisterRequest、LoginRequest，名字与路径对不上。
   补充（第十三窗口，问 628 A、629 A）：列表的每一项与这个资源的详情同一形状、同一个名字；一个资源按调用者角色给不同形状时仍用一个名字，几种形状怎么写归 05-类型（API-1）。依据：Google AIP-132「The response should usually include fully-populated resources unless there is a reason to return a partial response」；改状态回整个任务（API-35 补充），前端可直接替换列表那一行。没选：列表另设摘要形状；按角色分两个名字。
   补充（第十三窗口，问 631 A）：列表接口响应的外壳也照方法起名，写「List + 资源复数 + Response」，如 ListProjectsResponse、ListMembersResponse、ListTasksResponse。依据：Google AIP-132「The request and response messages must match the RPC name, with `Request` and `Response` suffixes.」，与问 626 A 同一家同一思路。没选：照起草稿写「资源名 + List」（ProjectList、MemberList、TaskList），请求按动作、列表按资源，两套规则。
+  补充（05-类型，问 740 A）：全部 schema 不带后缀，schema 与类型同名，见 docs/arch/SHARED_TYPES.md TYPE-2。
+  补充（05-类型，问 747 B）：几种形状的写法见 TYPE-8：两份内部形状合成对外一个名字，后端按调用者角色选；内部形状不进本文件。本版只有 Task 这样。
 - API-31 请求体出现 schema 没列的字段，一律拒绝，回「参数不合法」（400），外壳逐项列出多出来的键（ValidationProblemDetails）。
   请求体里多带的项目 id 同样拒绝；新任务归哪个项目仍只从路径取（决策 D）。响应方向反过来：前端解析响应时容忍多出来的字段。
   依据：主参考 Zalando #109「Unknown input fields in payload or URL should not be ignored;」「servers should provide error feedback to clients via an HTTP 400 response code.」；
@@ -662,6 +665,7 @@
   没选：描述可为空串；都允许空串。
   补充（第十窗口，问 481 A）：第一节只写必填的规则，适用哪些字段归 schema（API-1），见第一节第 4 小节「必填与空白」。
   补充（第十窗口，问 576 A）：密码不照上面的规则：原样收，不去首尾空白，也不截断，见第一节第 4 小节。依据：OWASP Authentication Cheat Sheet「Allow usage of all characters including unicode and whitespace.」「Do not silently truncate passwords.」
+  补充（05-类型，问 763）：去首尾空白放在共享 schema，先去空白再判长度；最大长度项目名 100、标题 200、描述 5000，是假设值。见 docs/arch/SHARED_TYPES.md TYPE-17。
 - API-33 更新接口照 JSON Merge Patch（RFC 7396）的规则：没传的字段不改，传 null 表示清空。null 只对可空字段有效（任务的负责人、截止日期），对不可空字段传 null 回「参数不合法」。
   负责人把任务改回未分配（PRD 审定决策 D16），就是把负责人传 null。媒体类型仍只收 application/json（API-27），偏离理由见 docs/arch/STANDARDS.md「偏离登记」。
   依据：RFC 7396「Null values in the merge patch are given special meaning to indicate the removal of existing values in the target.」；
@@ -676,6 +680,7 @@
   已落（第一节第 3 小节）。路径、所属模块与 schema 名照旧随接口清单定。
   补充（第十二窗口，问 606 A）：路径为 GET /api/users/self，照 Zalando #134、#143 的 self 例外，不算偏离；代码放 auth 模块：注册已在 auth，/api/users 下的路由在同一个模块，auth 依赖 users 这条线本来就有，不加新依赖。schema 名照旧随接口清单定。
   补充（第十三窗口，问 632 A）：项目详情与项目列表的每一项都叫 Project；执行者那份只带名称与自己的角色（PRD 审定决策 D11、D17），负责人那份带什么、两份是否同形，归 05-类型（API-1）。没选：第二节写定「两种角色同一形状」，D17 只管执行者，那是推导。
+  补充（05-类型，问 745 A、746 A）：两种角色同一形状，都带 id、名称、我的角色；执行者那份带的 id 是路径编号，不算业务信息，D11、D17 照旧成立。见 docs/arch/SHARED_TYPES.md TYPE-6、TYPE-7。
 - API-35 改任务拆两个接口。负责人专用的「改任务」接口管标题、描述、截止日期、负责人，执行者调用时由 AuthzGuard 按角色回「不许做」；
   「改状态」接口两种角色都能调，执行者只能改分给自己的任务，归属在 Service 里判，先判「看不见」（ARCHITECTURE 第三节 R2-6、R2-7 同一顺序）。两个接口的请求体都照 API-31、API-33。
   理由：PRD 审定决策 D15、D16 与权限矩阵把内容与分配划给负责人，状态两种角色都能改；按 T6，只凭角色能判的归 Guard，字段级权限变成路由级。
@@ -692,6 +697,7 @@
   已定：转给非成员、转给自己见 API-39；路径写法随接口清单定。
   已定（第六窗口，问 477 A）：成功回什么见 API-52。
   补充（第十二窗口，问 604 A）：「本项目的负责人」是只有一个的子资源，照 API-57 修订写单数；请求体照上面原话，放新负责人的 userId。
+  补充（05-类型，问 760）：请求体是 userId，不包数组；字段定义以共享 schema ReplaceProjectOwnerRequest 为准。
 - API-37 唯一负责人移出自己，回 409「冲突」，配一个专门的 type，前端据此提示「需先转让负责人身份」（PRD「US-P04 移出项目成员」与错误规则）。
   首版单负责人，且没有通用的改角色接口（API-36），「把唯一负责人直接降为执行者」从接口上触发不了，本条只管移出这一种。
   依据：RFC 9110 第 15.5.10 节「This code is used in situations where the user might be able to resolve the conflict and resubmit the request.」：先转让即可化解。
@@ -773,10 +779,12 @@
   依据：OWASP Email Validation and Verification Cheat Sheet「Domain part: always case-insensitive」，本地部分「technically case-sensitive under SMTP, though many providers do not enforce this in practice」，并要求「Define an explicit comparison policy for the local part」「Preserve the original email address as entered by the user」。
   没选：只把域名转小写，本地部分大小写不同就是两个账号；整个地址转小写再存，不保留原样。
   修订（第十窗口，问 574 甲）：选 citext 后（ADR-DB-008，问 572 A），不分大小写的唯一约束写得进 Prisma schema（@db.Citext）；「Prisma schema 写不出」只对 lower(email) 唯一索引那条路成立。扩展怎么启用随 BACKLOG 74 定。上面原文不改。
+  补充（05-类型，问 763、769 B）：去首尾空白放在共享 schema（TYPE-17）；邮箱上限 254 字节，注册、邀请、登录同一口径（TYPE-23）。见 docs/arch/SHARED_TYPES.md。
 - API-56 查询参数里出现 schema 没定义的参数，同样拒绝，回「参数不合法」（400），外壳照 API-31 逐项列出多出来的参数名（问 578 A）。
   依据：主参考 Zalando #109「Unknown input fields in payload or URL should not be ignored;」，URL 含查询参数；本版列表不收参数（API-40），选它几乎没有代价。
   没选：忽略没定义的查询参数，前端把参数名拼错时，错误被藏住。
   落点：第一节第 4 小节「多余字段」。
+  补充（05-类型，问 753 A、757 B）：全部方法都拒绝没定义的查询参数，不只 GET，含没有请求体的接口；查询参数不点名 schema，由后端一处统一检查（TYPE-13）。已落第一节第 4 小节、第二节第 2 小节。
 - API-57 只有一个的子资源，也照 Zalando #134 写成复数集合，规定集合里恰好一个。「本项目的负责人」就是这样：转让用 PUT 整个替换这个集合（API-50），请求体是一个对象，里面一个字段放只含一个元素的数组；字段名与「恰好一个」归 schema（05-类型，API-1）。被换下的原负责人变回执行者，仍是 API-36 那个事务里改两行。
   依据：主参考 Zalando #134（必须）「The special case of a resource singleton must be modeled as a collection with cardinality 1 including definition of maxItems = minItems = 1 for the returned array structure to make the cardinality constraint explicit.」。例外只有 self：编号从登录信息里来时，用它作伪编号（#134、#143）。负责人的编号不从登录信息里来，套不上。
   理由：照主参考做，不添偏离；代价只落在这一个接口的请求体上；首版单负责人（PRD 审定决策 D10），将来放开时路径不用改。
@@ -787,6 +795,7 @@
   已定（第十二窗口，问 606 A）：「当前用户」接口的路径与所属模块，见 API-34 补充。
   已定（第十三窗口，问 607 A）：转让负责人 PUT /api/projects/{projectId}/owner，见第二节第 5 小节。
   已定（第十四窗口，问 607 A）：改状态 PATCH /api/projects/{projectId}/tasks/{taskId}/status，项目汇总 GET /api/projects/{projectId}/summary，见第二节第 6 小节。
+  补充（05-类型，问 760）：转让负责人的请求体字段以共享 schema ReplaceProjectOwnerRequest 为准，见 API-36 补充。
 - API-58 路径只写名词，不带动词；动作只用 HTTP 方法表达。全部接口适用，写进第一节第 2 小节。登录、登出、注册这类口语里是动词的接口，按资源来写，具体名字随接口清单定。
   依据：主参考 Zalando #141（必须）「The API describes resources, so the only place where actions should appear is in the HTTP methods.」「In URLs, use only nouns.」。同一行登记的 #129、#134 已是全局约定（API-51 第六点）；API-36、API-50 已引 #141。
   参考：NestJS 官方认证一页的例子在 auth 下写 sign-in、sign-up，页内没说这是约定，只当教程例子，不压过主参考（判断）。
