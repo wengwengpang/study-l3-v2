@@ -137,3 +137,4 @@
   理由：值是整条 URI，前缀与 about:blank 改不了，整值做不到大写蛇形；Zalando #240 的理由是「This approach allows to clearly distinguish enum values from properties or other elements.」，urn: 开头本来就分得开；和路径段写法一致（API-51 第六点）；RFC 9457 的例子也这样写（例子，不是规定）。
   照字面 #240 管所有 enum，例外只管 API 外部来源的值：about:blank 在例外里，自起的性质名不在，登进 docs/arch/STANDARDS.md「偏离登记」。不推翻 N22。
   没选：大写蛇形，如 NOT_FOUND，只改末段，#240 仍不满足，起草稿与样例要改；小写下划线，如 not_found，同样要改，没有标准撑。
+  用词（问 773 A）：12 个性质名以 packages/shared/src/problem.ts 为准。和 RFC 9110 状态码短语一致的照短语：not-found、forbidden、conflict、unsupported-media-type。401 用 unauthenticated：短语 Unauthorized 字面是没授权，RFC 9110 第 15.5.2 节原句说的是缺有效的认证凭据。400 用 invalid-request，管的比校验失败宽。没选：别名，如 not-visible、member-exists；401、400、500 照短语写，如 unauthorized。
