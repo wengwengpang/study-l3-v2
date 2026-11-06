@@ -33,7 +33,7 @@ awk '/^## 一、全局约定/,/^## 三、本节裁决汇总/' docs/arch/API_CONT
 | S12 | 去掉首尾空白放哪一层 | 拍定，API-32 与 API-55 放同一层（BACKLOG 79） | 已完（问 763，TYPE-17） |
 | S13 | 转让负责人请求体 | 字段是 userId，不包数组（API-57 修订推翻原文的数组写法） | 已完（7f80bca） |
 | S14 | 请求拒绝多余字段、响应容忍多余字段的写法 | 落到 schema 写法上（API-31） | 已完（问 765，TYPE-19） |
-| S15 | 共享枚举：MemberRole、TaskStatus | 拍定写法，与 prisma/schema.prisma 的枚举对得上（docs/arch/TECH_STACK.md 共享类型包一条）；枚举名不在文件头命令的范围内，人工核 | 进行中（enums.ts 已落 e6476d3；Prisma 枚举待回写 H34） |
+| S15 | 共享枚举：MemberRole、TaskStatus | 拍定写法，与 prisma/schema.prisma 的枚举对得上（docs/arch/TECH_STACK.md 共享类型包一条）；枚举名不在文件头命令的范围内，人工核 | 已完（问 765，TYPE-19；enums.ts e6476d3，Prisma 枚举对照 1242、1243，两边的值逐个核过） |
 | S16 | 校验管道：自写还是官方内置 | 报学生裁。ARCHITECTURE 第二节写自写、不用内置 ValidationPipe（T1）；NestJS Pipes 页现在建议生产用内置 StandardSchemaValidationPipe，要哪个版本、接不接得住 API-31 未核 | 已完（问 744 B，TYPE-5） |
 | S17 | 其余未决项 N1 到 N23 | 逐条拍，进度在 docs/arch/PENDING-TYPES-DRAFT.md（architect 核对轮新报，含 NotificationType 进不进共享层） | 已完（N1 到 N23 全部已拍，进度表在待执行文件） |
 | S18 | docs/arch/SHARED_TYPES.md：零、管辖范围；一、全局约定（1. 落点、2. 命名、3. 版本、4. 校验管道、5. 按角色不同的形状）；二、本节裁决汇总 | 规则与裁决都落进去，不写字段（问 743 B） | 进行中（已建，余下裁决随拍随加） |
