@@ -13892,3 +13892,13 @@ HARNESS 第三节：没有答到。问题 3 有一条新实据，见第四点。
 二，丙二准备：自动记忆「教科书写法口径」的「骨架没认之前不改章」不拦，骨架 book/OUTLINE.md 2026-10-12 已认（R1-291）。定位：lec05-arch 有讲解、收录原文与命令输出共十余处提自写管道，lec04 三处，lec05-api-2 两处（第 1007 行收录契约旧句、第 1677 行收录 ADR-005 更正行），lec05 的枚举小写引文二十余处。
 三，顺序：H35 要在 lec05 补「后来改大写」，Prisma 枚举还是小写，要等丁批 H34；先补会写成还没发生的事。所以先丁批（H10、H34），再丙二。三章提自写管道的地方比 H 清单多，要逐处判讲解、收录原文、命令输出哪类补，活不小。
 四，下一步由学生定：先丁批，或先收尾。
+
+--- R1-740 · 新会话开场复查；问 774 A 轻量续接、775 A 先丁批；出丁批对照 1240 到 1250（学生：「开始」；「774 A；775 A」）---
+一，复查：上个会话 006cf992 以完整消息收尾（用量上限截停），不是半路断，卡 14 不触发，照它末条的交代做轻量复查。末次提交 a3dee68 即 R1-739；记录里五处「API Error」字样都是请求体与读文件结果里的引文，没有断线标记；git status 干净。同步：第一次 git fetch 报「Please make sure you have the correct access rights」，随后两次直连都通，FETCH_HEAD 本地 12:33:33，本机与远端差 0 和 0，没用代理。自动记忆「接续点」那句还停在第一窗口，收尾时改。
+二，问 774 A（学生回「774 A」，按推荐）：照问 705 A 先例轻量续接，不重读七份必读、不重新体检，到时刻读卡，用到哪条规则先读哪条。未选：B 全走开课。理由：今天开窗刚体检过（R1-723），之后只有 CC 的提交，离上个会话结束不到一小时；上次被用量截停，省约 14% 开课额度（R1-640 估）。代价：规则全文不在上下文。进 HARNESS：否，一次性取舍，同问 705 A。
+三，问 775 A（学生回「775 A」，按推荐；R1-739 第四点留下的题）：先丁批，收尾放本会话末尾一次做，管整个第二窗口。未选：B 先补第二窗口收尾。理由：上下文是新的，现在写桥梁很快过时；接续靠 R1-739 与桥梁 w2 已够，本会话就是靠它们接上的。
+四，传播面（卡 5 第 2 条）：两题都是本窗口做法上的一次性取舍。PRD、UI_DESIGN、契约与架构、CLAUDE.md、PROJECT_STRUCTURE 不影响；HARNESS 不改。
+五，丁批准备。读了：交付物清单 S15、B4 两行；SHARED_TYPES TYPE-1 到 TYPE-5、TYPE-19；packages/shared/src/enums.ts；prisma/schema.prisma 枚举与 Task 模型；DECISIONS ADR-DB-005、006；ARCHITECTURE 第 61 到 64、410 到 413、464 到 466 行。小写枚举值扫 docs/arch、docs/design、CLAUDE.md、packages/shared/src：命中与 H34 所列一致，没有新点；API_CONTRACT 的 /owner 是路径，problem.ts 的 sole-owner-removal 是性质名（TYPE-24），不改。architect 确认见 R1-718 第五、七点，prisma/ 下没有迁移目录。写法照两份文件的老规矩：DECISIONS 已定原文不动、下面加修订行；ARCHITECTURE 正文与走查行直接改。
+六，新发现已有家：ARCHITECTURE 第 412 行引「prisma/schema.prisma:86-87」，现在 status、statusUpdatedAt 在第 87、88 行，第 464、465 行同类；BACKLOG 31 已登（跨文件行号引用批量改写为小节名，05-类型或 05-环境结课时），本批不动。schema.prisma 不加注释行，免得行号再挪。
+七，验法：照 R1-460、R1-461 先例，本机没装 Prisma、版本未锁，prisma validate 写代码时跑。另写 check_enums.py（会话临时目录）：Prisma 枚举与 enums.ts 的值逐个比，查大写蛇形，查默认值在枚举里。先验这把尺子：副本「枚举一致」；原文件报两类不一致加六个小写值；造一份默认值仍小写的坏样本，报「status 默认值 not_started 不在 TaskStatus 里」。
+八，出对照 1240 到 1250，副本在会话临时目录 copies8/，原文按行号由脚本从文件取：CLAUDE.md 175 变 176 行，prisma/schema.prisma 113 行不变，DECISIONS 89 变 91 行，ARCHITECTURE 644 行不变，PENDING-TYPES-DRAFT 570 行不变（H10、H34 标已完，剩待做 H11、H35），交付物清单 88 行不变（S15 标已完）；十一处原文各恰好 1 次。CLAUDE.md 两处照规则 78 要学生说「帮我改」。
