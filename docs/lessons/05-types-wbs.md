@@ -5,7 +5,7 @@
 > 与 BACKLOG 的分工：BACKLOG 装跨课、本节课不做的事（规则 65）；本文件装本节课要交的全部东西，含已经做完的。本节决定不做的项，移进 BACKLOG 并在这里标「移出」。
 > 状态五种：已完、进行中、待做、随做、移出。
 > 覆盖核对：每次报进度前、每个窗口收尾时跑下面这条命令。没有输出，才算契约点名的每个 schema 都在本清单里；有输出，先补清单再报进度。主产物的规则文件是 docs/arch/SHARED_TYPES.md，下面第二条命令查它的全部标题；packages/shared/src/ 写起来后，再加一条查 schema 文件（规则 87）。
-> 本窗口目标（第一窗口，桥梁 w1 第 5 节）：走完开课；architect 核对轮报出接缝；拍定落点、命名规则与版本；字段未决能拍多少拍多少。
+> 本窗口目标（第二窗口，桥梁 w2 第 5 节）：走完开课；拍完 C11、C13；重建实跑环境，反向核对抓得到；六个 schema 文件分组落进 packages/shared/src/，与定稿逐字节相同；回写清单 H1 到 H36 能落多少落多少；收尾写书章草稿（挂账第 4 行）。
 
 ```
 awk '/^## 一、全局约定/,/^## 三、本节裁决汇总/' docs/arch/API_CONTRACT.md | /usr/bin/grep -oE '\b[A-Z][a-z]+([A-Z][a-z]+)+\b|\b(User|Project|Member|Task)\b' | sort -u | /usr/bin/grep -vE '^(AuthGuard|AuthzGuard|SameSite|HttpOnly)$' | while IFS= read -r n; do /usr/bin/grep -qF -- "$n" docs/lessons/05-types-wbs.md || echo "清单里缺：$n"; done
@@ -42,7 +42,7 @@ awk '/^## 一、全局约定/,/^## 三、本节裁决汇总/' docs/arch/API_CONT
 | 编号 | 交付件 | 完成的定义 | 状态 |
 |---|---|---|---|
 | B1 | 接缝清单给学生看 | 开课消息里列出（桥梁第 5 节第一步） | 已完 |
-| B2 | 标准补登 | docs/arch/STANDARDS.md 加共享校验 schema 一行（检查单卡 1 第 2 条） | 已完（对照 1134，bc1f2a2） |
+| B2 | 标准补登 | docs/arch/STANDARDS.md 加共享校验 schema 一行（检查单卡 1 第 2 条）；第二窗口开课补邮件地址长度、模块解析两行 | 已完（对照 1134，bc1f2a2；对照 1183） |
 | B3 | 回写契约与架构 | 拍定的口径回写 API_CONTRACT、ARCHITECTURE、TECH_STACK，逐类扫传播面（规则 69） | 随做 |
 | B4 | 项目宪法第二层 | 写代码时必须知道的结论摘进 CLAUDE.md（规则 64；规则 78 要「帮我改」） | 随做 |
 | B5 | BACKLOG 79 关闭 | S12 拍定后 | 待做 |
