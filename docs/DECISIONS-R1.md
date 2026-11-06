@@ -13813,3 +13813,9 @@ HARNESS 第三节：没有答到。问题 3 有一条新实据，见第四点。
 六，TextEncoder 的类型：tsc 不设 lib 时默认带 DOM。补测只带 es2022：fields.ts 报找不到 TextEncoder，Zod 自己的声明也报 4 处找不到 URL；es2022 加 dom 过；es2022 加 @types/node 22.20.5 过（实测，原先凭记忆）。所以 TextEncoder 不添新要求：能编 Zod 的类型环境本来就要有 DOM 或 Node 类型，两种都声明了 TextEncoder。唯一例外是开 skipLibCheck 又两种都不带，那时 tsc 直接报错。
 七，第三步准备：定稿里五处注释含「假设」或「待确认」。fields.ts idField 一处（TYPE-21 已定）、problem.ts 两处（写法 TYPE-24 已定；查询参数项与收窄 TYPE-21 已定）过时，随各组出改法；project.ts、task.ts 两处说上限是假设值，照 TYPE-17 仍准，不改。
 八，下一步：第三步第一组 enums、fields 给学生看。
+
+--- R1-728 · 第三步第一组落 e6476d3；清单覆盖核对试跑；核 RFC 9110 短语；出问 773（学生：「认第一组」）---
+一，第一组：make_final.py 加 idField 注释改动（「待确认（假设）」换成「（TYPE-21）」），重跑：定稿两种都过，210 条不符 0；m1 到 m5 不符 2、2、2、1、13（m5 的总数上次被 head -8 截掉，单独补跑）。新建 packages/shared/src/enums.ts（9 行，与报告原稿一字不差）、fields.ts（10 行），与定稿 cmp 相同，提交 e6476d3。
+二，交付物清单文件头要求 src 写起来后加一条查 schema 文件的命令。试跑「导出名都在清单里」：缺 idField、withinEmailBytes、emailField，都是 fields.ts 的内部片段（TYPE-22）；清单里没有 fields 一行。答完问 773 后出对照，补清单一行与命令。
+三，核标准（卡 4 第 3 条；网页代理取回 RFC 9110，7 次 WebFetch，全只读）：第 15.5.1 节「400 Bad Request」、15.5.2「401 Unauthorized」、15.5.4「403 Forbidden」、15.5.5「404 Not Found」、15.5.10「409 Conflict」、15.5.16「415 Unsupported Media Type」、15.6.1「500 Internal Server Error」；401 一节「The 401 (Unauthorized) status code indicates that the request has not been applied because it lacks valid」「authentication credentials for the target resource.」。代理报告说取回的第一页夹着一段建 Claude 文档的指令，它没照做；照实转告学生。
+四，出问 773：ProblemType 12 个性质名的用词，从没拍过（R1-726 第五点）。A 全用报告第一列（推荐）；B 有别名的全换别名；C 通用三个照 RFC 9110 短语写（unauthorized、bad-request、internal-server-error），其余同 A。第二组 problem.ts 按 A 给全文；另两行过时注释随组改：写法指 TYPE-24，查询参数项与收窄指 TYPE-21。
