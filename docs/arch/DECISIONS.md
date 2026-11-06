@@ -33,6 +33,7 @@
 - 决策：用 Zod 写一份 schema 前后端共享复用，而非 NestJS 默认的 class-validator 装饰器。
 - 后果：换来「写一次、两端复用」与从 schema 直接推导 TS 类型；代价是偏离 NestJS 默认范式，需自接 Zod 管道（如 ZodValidationPipe），生态示例不如 class-validator 顺手。放弃了 NestJS 官方默认校验链的开箱即用。
 - 更正（补课 05-API，问 468 A）：上一行「如 ZodValidationPipe」只是举一个类名。第三方库 nestjs-zod 导出的类正叫这个名字，本项目不装它，照 ARCHITECTURE 第三节 T1 自己写管道。上面原文不改。
+- 修订（补课 05-类型，问 744 B）：推翻上一行「照 ARCHITECTURE 第三节 T1 自己写管道」。改用 NestJS 内置 StandardSchemaValidationPipe，项目只写 exceptionFactory；仍不装 nestjs-zod。见 docs/arch/SHARED_TYPES.md TYPE-5。上面原文不改。
 
 ---
 
