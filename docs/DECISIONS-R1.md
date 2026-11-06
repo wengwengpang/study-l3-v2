@@ -13886,3 +13886,9 @@ HARNESS 第三节：没有答到。问题 3 有一条新实据，见第四点。
 三，核标准（卡 4 第 3 条；网页代理，6 次 WebFetch，全只读）：OWASP Password Storage（https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html）bcrypt 一节「The bcrypt password hashing function should only be used for password storage in legacy systems」「where Argon2 and scrypt are not available.」，Input Limits of bcrypt「so you should enforce a maximum password length of 72 bytes」「(or less if the bcrypt implementation in use has smaller limits).」。RFC 8141（April 2017）第 1 节「In order for the name to be a valid URN, the namespace identifier (NID) needs to be registered」「in accordance with the rules defined here,」。NIST SP 800-63B 两个网址（pages.nist.gov、csrc.nist.gov）当天各试两次都是 Socket is closed；第一窗口子代理记录（5351a4ce，agent-ae0bf5bcf0508cb1f）里 https://pages.nist.gov/800-63-4/sp800-63b.html 回过 HTTP 200，两句原文在 TYPE-10，登记表照实写当天连不上。
 四，H 清单之外顺带的：H17 原写 bcrypt 72 字节「未核」，R1-710 已取回 OWASP Password Storage 原句，本批再核过，去掉未核；BACKLOG 89 加第四件（类型环境要带 DOM 或 Node 类型，R1-727 第六点），卡 9 第 3 条，说「留到第 7 课」当场登。H16、H36 合成新条 91，号段与条数跟着改。
 五，出对照 1231 到 1239，副本在会话临时目录 copies7/：STANDARDS 67 变 68 行，PRD 361 变 367 行，BACKLOG 102 变 103 行（编号行 91 条），交付物清单 88 行不变，回写清单 570 行不变（丙一 10 行标已完，剩待做 H10、H11、H34、H35）；十一处原文各恰好 1 次。
+
+--- R1-739 · 丙一对照 1231 到 1239 已落；丙二先不出，H35 要等 H34（学生：「同意 1231 到 1239」）---
+一，丙一：STANDARDS ea73c6a（68 行）、PRD 5403394（367 行）、BACKLOG 03cc7aa（103 行）、交付物清单 f6ab6d3、回写清单 fb54f40；Edit 与对照一字不差，五份与副本 cmp 相同。回写清单剩待做 H10、H11、H34、H35。
+二，丙二准备：自动记忆「教科书写法口径」的「骨架没认之前不改章」不拦，骨架 book/OUTLINE.md 2026-10-12 已认（R1-291）。定位：lec05-arch 有讲解、收录原文与命令输出共十余处提自写管道，lec04 三处，lec05-api-2 两处（第 1007 行收录契约旧句、第 1677 行收录 ADR-005 更正行），lec05 的枚举小写引文二十余处。
+三，顺序：H35 要在 lec05 补「后来改大写」，Prisma 枚举还是小写，要等丁批 H34；先补会写成还没发生的事。所以先丁批（H10、H34），再丙二。三章提自写管道的地方比 H 清单多，要逐处判讲解、收录原文、命令输出哪类补，活不小。
+四，下一步由学生定：先丁批，或先收尾。
