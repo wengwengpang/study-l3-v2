@@ -17,7 +17,7 @@
 |---|---|---|
 | N24 | 文件怎么分 | 已拍：A（问 768，TYPE-22） |
 | N25 | 多余查询参数怎么逐项列 | 已拍：A（问 767，TYPE-21） |
-| N26 | ProblemType 性质名的写法（连 C13） | 待拍 |
+| N26 | ProblemType 性质名的写法（连 C13） | 已拍：A（问 770，TYPE-24）；具体的词没拍过，第三步 problem 组一起看 |
 | N27 | Project 的「我的角色」 | 已拍：role（问 766，TYPE-20） |
 | N28 | 「可能卡住」 | 已拍：possiblyStuck（问 766，TYPE-20） |
 | N29 | 汇总的四个字段 | 已拍：total 等（问 766，TYPE-20） |
@@ -28,9 +28,16 @@
 | N34 | 内部形状给不给前端用 | 已拍：A（问 768，TYPE-22） |
 | N35 | 相对导入写不写 .js | 已判：写（两种模块解析实跑都过） |
 | C10 | Zod 精确版本的指针 | 不成立 |
-| C11 | 邮箱上限的单位 | 待拍 |
+| C11 | 邮箱上限的单位 | 已拍：B（问 769，TYPE-23）；定稿改动见表下 |
 | C12 | H34 的范围 | 走对照改 |
-| C13 | 枚举大写的范围 | 随 N26 |
+| C13 | 枚举大写的范围 | 已拍：不含 ProblemType（问 770，TYPE-24） |
+
+> 定稿相对报告的改动（问 769 B，TYPE-23）。第二段拆稿后照改，再实跑：
+> - fields.ts：emailField 上面加 `// TYPE-23：邮箱上限按 UTF-8 字节算，注册、邀请、登录共用` 与 `export const withinEmailBytes = (s: string) => new TextEncoder().encode(s).length <= 254;`；emailField 改成 `z.string().trim().regex(z.regexes.unicodeEmail).refine(withinEmailBytes)`，注释改成 `// TYPE-17、TYPE-23：先 trim，再判格式与字节上限，预设 unicodeEmail`。
+> - auth.ts：从 ./fields.js 多导入 withinEmailBytes；CreateSessionRequest 的 email 改成 `z.string().trim().min(1).refine(withinEmailBytes)`，注释改成 `// TYPE-14（不套注册规则，空值回 400）；TYPE-21、TYPE-23（上限 254 字节，不校格式）`。
+> - samples.json：CreateUserRequest 加一过一拒：64 个 a、@、63 个「测」，共 254 字节，该过；「测」改 64 个，共 257 字节、129 个码点，该拒。CreateSessionRequest 加一过一拒：84 个「测」接 ab，共 254 字节，该过；接 abc，共 255 字节、87 个码点，该拒。
+> - 反向核对加一样：把 refine 换回 .max(254)，两条该拒的要报「该拒没拒」。
+> - 去掉 .max(254)：字节不超 254，码点必然不超，留着会对同一个超长地址报两条。TextEncoder 前后端运行时都有（凭记忆），类型库认不认，tsc 实跑核。
 
 ## 实跑脚本
 
