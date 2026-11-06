@@ -104,8 +104,8 @@
 - TYPE-17 请求字段（问 763）。
   最大长度：项目名 100、标题 200、描述 5000，假设值，标准不管做多少。
   去首尾空白放共享 schema，先 trim 再判长度；反过来写全空白能通过（实跑）。密码除外。
-  长度按 Unicode 码点，Zod 4.6.7 默认如此（实跑）。
-  邮箱用 Zod 预设 z.regexes.unicodeEmail，先 trim，上限 254（RFC 5321 的 256 字节减尖括号，推算）。没选 Zod 默认格式，它拒中文地址（实跑）；没选自写轻校验，OWASP「Use well-tested libraries instead of custom regex」。
+  长度按 Unicode 码点，Zod 4.6.7 默认如此（实跑）；邮箱除外，按字节算（TYPE-23）。
+  邮箱用 Zod 预设 z.regexes.unicodeEmail，先 trim，上限 254 字节（TYPE-23）。没选 Zod 默认格式，它拒中文地址（实跑）；没选自写轻校验，OWASP「Use well-tested libraries instead of custom regex」。
   截止日期只校合法日期，不限过去；「今天」的时区没定（BACKLOG 77）。
   改任务传空对象回 200 不改；改状态必须带状态，否则回 400。
 - TYPE-18 响应形状（问 764）。
@@ -117,15 +117,23 @@
   请求用 z.strictObject，响应用 z.object；新请求漏写 strict 会放行，第 7、8 课加机器检查。
   共享枚举：packages/shared 一份字面值列表，后端加类型对照，Prisma 枚举一变就编译失败（tsc 实跑，用等价类型模拟）。没选：从 Prisma 生成，Prisma 类型不进共享层。
   schema 里不许改变类型的转换，只许 trim 这类，z.infer 一种类型就够（取舍 4）。
-  枚举值全链路大写蛇形，数据库枚举一起改（N22 选 C）。依据 Zalando #240「Enum values (using `enum`, ...) need to consistently use the upper-snake case format」；库没建，没数据要迁。先回 architect 确认（项目 CLAUDE.md 第二层 E）。没选：保持小写、登偏离；接口大写后端转换，违反全链路不转换。
+  枚举值全链路大写蛇形，数据库枚举一起改（N22 选 C）；ProblemType 不在此列（TYPE-24）。依据 Zalando #240「Enum values (using `enum`, ...) need to consistently use the upper-snake case format」；库没建，没数据要迁。先回 architect 确认（项目 CLAUDE.md 第二层 E）。没选：保持小写、登偏离；接口大写后端转换，违反全链路不转换。
 - TYPE-20 字段名（问 766）。能同名就同名（TYPE-15）。项目的「我的角色」叫 role；负责人专属项叫 possiblyStuck；汇总四个叫 total、completed、inProgress、notStarted。全部字段以 packages/shared/src/ 为准。
   没选：myRole；isStuck、stuck；totalCount 等。
 - TYPE-21 规则（问 767）。
   多余查询参数逐项写 parameter，请求体的写 pointer，两种形状；不用伪指针。
-  登录邮箱：去空白、非空、上限 254，不校格式（TYPE-14）。
+  登录邮箱：去空白、非空、上限 254 字节（TYPE-23），不校格式（TYPE-14）。
   用户 id 是 32 位正整数，超范围回 400。
   响应只校类型，不带长度和邮箱格式，老数据不会让响应变 500。
   ValidationProblemDetails 的 status 写死 400，errors 至少一项。
 - TYPE-22 结构（问 768）。
   六个文件：enums、fields、problem、auth、project、task；fields 放内部片段，第 7 课的入口不导出。相对导入写 .js（两种模块解析实跑都过）。
   前端只用 Task，读专属项先判断有没有这个字段。后端出参必须用 OwnerTask 或 ExecutorTask，不能用 Task，并集会放行（TYPE-9）。
+- TYPE-23 邮箱上限按 UTF-8 字节算，254 字节；注册、邀请、登录三处同一口径（问 769 B，裁 TYPE-17 里长度单位与邮箱上限两句的冲突）。
+  依据：RFC 5321 第 4.5.3.1 节「This section therefore specifies lengths in octets where absolute lengths, rather than character counts, are intended.」；第 4.5.3.1.3 节路径上限 256 octets，含标点；第 4.1.2 节 Path 的写法含一对尖括号，减掉是 254。RFC 3696 勘误 1690（Verified）备注「This limits the Mailbox (i.e. the email address) to 254 characters.」。
+  写法：只判长短、不改类型的检查（TYPE-19）。数据库 users.email 是 citext，不限长，不改表。
+  没选：按码点算，schema 不改，要登偏离；254 是按字节量出的数，配码点的尺两头都不是。
+- TYPE-24 ProblemType 不算 TYPE-19 管的枚举，性质名用小写加连字符，如 urn:study-l3-v2:problem:not-found（问 770 A，裁 TYPE-16 与 TYPE-19 的冲突）。
+  理由：值是整条 URI，前缀与 about:blank 改不了，整值做不到大写蛇形；Zalando #240 的理由是「This approach allows to clearly distinguish enum values from properties or other elements.」，urn: 开头本来就分得开；和路径段写法一致（API-51 第六点）；RFC 9457 的例子也这样写（例子，不是规定）。
+  照字面 #240 管所有 enum，例外只管 API 外部来源的值：about:blank 在例外里，自起的性质名不在，登进 docs/arch/STANDARDS.md「偏离登记」。不推翻 N22。
+  没选：大写蛇形，如 NOT_FOUND，只改末段，#240 仍不满足，起草稿与样例要改；小写下划线，如 not_found，同样要改，没有标准撑。
