@@ -69,7 +69,7 @@
 | H7 | DECISIONS ADR-005 | 原文与更正行不动，下面加修订 | 问 744 | 已完（对照 1221 到 1229） |
 | H8 | TECH_STACK 共享类型包一条 | SHARED_TYPES 与 DTO 的说法，改成 schema 放 packages/shared/src/、规则见 SHARED_TYPES（裁 C1） | 问 743 | 已完（对照 1221 到 1229） |
 | H9 | STANDARDS 共享校验 schema 一行、后端框架行为一行 | 拍板格加 TYPE-1 到 TYPE-5；后端框架行为加 Pipes 页 | 问 744 | 已完（对照 1231 到 1238） |
-| H10 | CLAUDE.md 第二层 D | 摘落点、命名、版本、内置管道（清单 B4，规则 78 要「帮我改」） | 问 739 到 744 | 待做 |
+| H10 | CLAUDE.md 第二层 D | 摘落点、命名、版本、内置管道（清单 B4，规则 78 要「帮我改」） | 问 739 到 744 | 已完（对照 1240） |
 | H11 | 书章 book/lec05-arch.md、book/lec04.md | T1 与问 468 A 那几段补一句后来的修订，收录的原文不动 | 问 744 | 待做 |
 | H12 | API_CONTRACT 第二节项目详情、API-34 补充 | 「只带名称与自己的角色」「归 05-类型」两处，改成指向 TYPE-6、TYPE-7 | 问 745、746 | 已完（对照 1205 到 1219） |
 | H13 | PRD 澄清注记 | 加一条：D11、D17 读作业务信息，id 是路径编号（TYPE-6）；原文不改 | 问 745 | 已完（对照 1231 到 1238） |
@@ -93,7 +93,7 @@
 | H31 | API_CONTRACT 第一节第 5 小节、第二节第 3 小节 | 列表数组字段 items（TYPE-18）；枚举名 MemberRole、TaskStatus 写进 schema 名字一节 | 问 764 | 已完（对照 1205 到 1219） |
 | H32 | ARCHITECTURE 第二节 Service「未认领判定」 | 改成任务负责人为空（TYPE-18） | 问 764 | 已完（对照 1221 到 1229） |
 | H33 | BACKLOG 74 | 加一句：Prisma 官方页写 contract.prisma 取代 schema.prisma（未核），锁版本时核 | R1-716 第六点 | 已完（对照 1231 到 1238） |
-| H34 | prisma/schema.prisma 枚举与默认值、DECISIONS 枚举一行与 ADR-DB-006「role 为 owner」、ARCHITECTURE 第一节 stuck_task 一行与第三节默认值一行、CLAUDE.md 第二层 E（规则 78） | 枚举值改大写蛇形（TYPE-19）；architect 已确认（R1-718） | 问 765 | 待做 |
+| H34 | prisma/schema.prisma 枚举与默认值、DECISIONS 枚举一行与 ADR-DB-006「role 为 owner」、ARCHITECTURE 第一节 stuck_task 一行与第三节默认值一行、CLAUDE.md 第二层 E（规则 78） | 枚举值改大写蛇形（TYPE-19）；architect 已确认（R1-718） | 问 765 | 已完（对照 1241 到 1247） |
 | H35 | 书章 book/lec05.md | 枚举引文不动，补一句后来改大写 | 问 765 | 待做 |
 | H36 | BACKLOG 新加一条（同 H16） | 写明后端出参必须用 OwnerTask 或 ExecutorTask，不能用 Task（TYPE-22） | 问 768 | 已完（对照 1231 到 1238） |
 
